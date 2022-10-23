@@ -1,9 +1,9 @@
 const express = require('express');
 const Admin = require('../Models/adminModel');
-const { postInstructor } = require('../Controllers/adminController');
+const { postAdmin } = require('../Controllers/adminController');
 
 const router = express.Router();
 
-router.post('/add', postInstructor);
+router.post('/add', postAdmin);
 
 module.exports = router;
