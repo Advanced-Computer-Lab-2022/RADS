@@ -1,30 +1,22 @@
 const express = require('express');
 const Instructor = require('../Models/instructorModel');
-const { postInstructor } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, postInstructor, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
 
 const router = express.Router();
 
 
 // GET all instructors info
-router.get('/', (req, res) => {
-    res.json({ mssg: "GET all instructors" });
-});
+router.get('/', getInstructors);
 
 // GET a single instructor's info 
-router.get('/:id', (req, res) => {
-    res.json({ mssg: "GET a single instructor" })
-})
+router.get('/:id', getInstructor)
 
 // POST a new workout
 router.post('/', postInstructor);
 
 // DELETE a workout
-router.delete('/:id', (req, res) => {
-    res.json({ mssg: "DELETE an instructor" })
-})
+router.delete('/:id', deleteInstructor)
 
-router.patch('/:id', (req, res) => {
-    res.json({ mssg: "UPDATE a new instructor info" })
-})
+router.patch('/:id', updateInstructor)
 
 module.exports = router;
