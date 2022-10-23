@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const instructorSchema = new Schema({
+const corpTraineeSchema = new Schema({
     firstName: {
         type: String,
         required: true
@@ -35,6 +35,4 @@ const instructorSchema = new Schema({
 }, { timestamps: true })
 
 
-module.exports = mongoose.model('Instructor', instructorSchema);
-
-//Instructor.find()
+module.exports = mongoose.model('corpTrainee', corpTraineeSchema);
