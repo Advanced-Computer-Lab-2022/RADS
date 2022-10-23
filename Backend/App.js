@@ -10,9 +10,6 @@ const app = express();
 const port = process.env.PORT || "8000";
 const MongoURI = process.env.MONGO_URI;
 
-
-
-
 // Middle-ware
 // Log requests
 app.use(express.json());
@@ -21,10 +18,8 @@ app.use((req, res, next) => {
     next();
 })
 
-
 // instructor route
 const instructorRoute = require('./Routes/instructor');
-
 
 // routes
 app.use('/instructor', instructorRoute);
