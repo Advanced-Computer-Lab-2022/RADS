@@ -22,7 +22,7 @@ const instructorSchema = new Schema({
     address: {
         type: String,
         required:true
-    }n
+    }
 
 }, { timestamps: true })
 
