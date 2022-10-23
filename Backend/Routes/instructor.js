@@ -11,11 +11,13 @@ router.get('/', getInstructors);
 // GET a single instructor's info 
 router.get('/:id', getInstructor)
 
-// POST a new workout
-router.post('/', postInstructor);
+// POST a new instructor
+router.post('/add', postInstructor);
 
-// DELETE a workout
-router.delete('/:id', deleteInstructor)
+// DELETE an instructor
+router.delete('/:id', (req, res) => {
+    res.json({ mssg: "DELETE an instructor" })
+})
 
 router.patch('/:id', updateInstructor)
 
