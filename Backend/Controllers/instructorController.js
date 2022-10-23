@@ -47,9 +47,6 @@ const newInstructor = (req, res) => {
             })
         })
 }
-module.exports = {
-    newInstructor
-}
 // delete an instructor
 
 const deleteInstructor = async(req, res) => {
@@ -82,7 +79,7 @@ const updateInstructor = async(req, res) => {
 module.exports = {
     getInstructors,
     getInstructor,
-    postInstructor,
+    newInstructor,
     deleteInstructor,
     updateInstructor
 }
