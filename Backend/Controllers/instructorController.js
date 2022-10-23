@@ -34,9 +34,3 @@ module.exports = {
 
 // update an instructor
 
-
-
-//export the functions
-module.exports = {
-    postInstructor
-}
