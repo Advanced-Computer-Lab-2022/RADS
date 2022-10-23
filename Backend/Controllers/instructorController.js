@@ -1,12 +1,6 @@
 const express = require('express');
 const Instructor = require('../Models/instructorModel');
 
-
-// get all instructors
-
-
-// get a single instructor
-
 // post a new instructor
 const newInstructor = (req, res) => {
     instructor = new Instructor({
@@ -17,20 +11,20 @@ const newInstructor = (req, res) => {
     country: req.body.country,
     phoneNumber: req.body.phoneNumber,
     address: req.body.address
-})
-instructor.save()
-    .then(result => {
-        res.status(200).json({
-            message: "Instructor added successfully",
-            instructor: result
-        })
     })
-    .catch(err => {
-        res.status(500).json({
-            message: "Instructor could not be added",
-            error: err
+    instructor.save()
+        .then(result => {
+            res.status(200).json({
+                message: "Instructor added successfully",
+                instructor: result
+            })
         })
-    })
+        .catch(err => {
+            res.status(500).json({
+                message: "Instructor could not be added",
+                error: err
+            })
+        })
 }
 module.exports = {
     newInstructor

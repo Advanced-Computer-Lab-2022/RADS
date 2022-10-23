@@ -15,10 +15,10 @@ router.get('/:id', (req, res) => {
     res.json({ mssg: "GET a single instructor" })
 })
 
-// POST a new workout
-router.post('/', postInstructor);
+// POST a new instructor
+router.post('/add', postInstructor);
 
-// DELETE a workout
+// DELETE an instructor
 router.delete('/:id', (req, res) => {
     res.json({ mssg: "DELETE an instructor" })
 })
