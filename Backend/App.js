@@ -40,3 +40,7 @@ mongoose.connect(MongoURI)
         })
     })
     .catch(err => console.log(err));
+
+app.get("/", async (req, res) => {
+    res.status(200).send("You're good to go!");
+});
