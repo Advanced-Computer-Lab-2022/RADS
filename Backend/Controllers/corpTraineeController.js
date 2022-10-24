@@ -15,7 +15,7 @@ const newCTrainee = (req, res) => {
         .then(result => {
             res.status(200).json({
                 message: "Corp Trainee added successfully",
-                message: "your username is" + corpTrainee.userName + "and your password is" + corpTrainee.password, 
+                message: "your username is " + corpTrainee.userName + " and your password is " + corpTrainee.password, 
                 corpTrainee: result
             })
         })

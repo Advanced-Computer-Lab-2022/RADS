@@ -36,7 +36,7 @@ const newInstructor = (req, res) => {
         .then(result => {
             res.status(200).json({
                 message: "Instructor added successfully",
-                message: "your username is" + instructor.userName + "and your password is" + instructor.password, 
+                message: "your username is " + instructor.userName + " and your password is " + instructor.password, 
                 instructor: result
             })
         })
