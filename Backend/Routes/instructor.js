@@ -1,6 +1,6 @@
 const express = require('express');
 const Instructor = require('../Models/instructorModel');
-const { getInstructor, getInstructors, newtInstructor, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, newInstructor, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
 
 const router = express.Router();
 
