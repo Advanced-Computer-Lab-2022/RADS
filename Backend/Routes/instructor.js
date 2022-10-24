@@ -12,7 +12,9 @@ router.get('/', getInstructors);
 router.get('/:id', getInstructor)
 
 // POST a new instructor
-router.post('/add', postInstructor);
+router.post('/add', function(req, res){
+    postInstructor
+});
 
 // DELETE an instructor
 router.delete('/:id', (req, res) => {
