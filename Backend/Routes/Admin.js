@@ -4,6 +4,8 @@ const { postAdmin } = require('../Controllers/adminController');
 
 const router = express.Router();
 
-router.post('/add', postAdmin);
+router.post('/add', function(req, res) {
+    postAdmin
+});
 
 module.exports = router;

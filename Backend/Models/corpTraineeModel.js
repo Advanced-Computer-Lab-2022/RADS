@@ -34,5 +34,4 @@ const corpTraineeSchema = new Schema({
 
 }, { timestamps: true })
 
-
 module.exports = mongoose.model('corpTrainee', corpTraineeSchema);

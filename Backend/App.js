@@ -1,31 +1,31 @@
-// External variables
+// External Variables
 const express = require("express");
 const mongoose = require('mongoose');
 
 // Require the dotenv to attach environment variables to the process object
 require('dotenv').config();
 
-//App variables
+//App Variables
 const app = express();
 const port = process.env.PORT || "8000";
 const MongoURI = process.env.MONGO_URI;
 
-// Middle-ware
-// Log requests
+// Middle-Ware
+// Log Requests
 app.use(express.json());
 app.use((req, res, next) => {
     console.log(req.path, res.path);
     next();
 })
 
-// instructor route
-const instructorRoute = require('./Routes/instructor');
+// Instructor Route
+const instructorRoute = require('./Routes/Instructor');
 
-// routes
+// Routes
 app.use('/instructor', instructorRoute);
 
 // Configurations
-// Mongo DB
+// MongoDB
 mongoose.connect(MongoURI)
     .then(() => {
         console.log("MongoDB is now connected!")
