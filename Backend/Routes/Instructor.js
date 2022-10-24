@@ -1,5 +1,4 @@
 const express = require('express');
-const Instructor = require('../Models/instructorModel');
 const { getInstructor, getInstructors, postInstructor, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
 
 const router = express.Router();
@@ -11,9 +10,7 @@ router.get('/', getInstructors);
 router.get('/:id', getInstructor)
 
 // POST a new instructor
-router.post('/add', function(req, res) {
-    postInstructor
-});
+router.post('/add', postInstructor);
 
 // DELETE an instructor
 router.delete('/:id', (req, res) => {
