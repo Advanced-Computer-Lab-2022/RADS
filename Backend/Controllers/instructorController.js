@@ -2,13 +2,13 @@ const express = require('express');
 const Instructor = require('../Models/instructorModel');
 const mongoose = require('mongoose');
 
-// get all instructors
+// GET all instructors
 const getInstructors = async(req, res) => {
     const instructors = await Instructor.find({}).sort({ createdAt: -1 });
     res.status(200).json(instructors);
 }
 
-// get a single instructor
+// GET a single instructor
 const getInstructor = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -21,7 +21,7 @@ const getInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-// post a new instructor
+// POST a new instructor
 const newInstructor = (req, res) => {
     instructor = new Instructor({
     firstName: req.body.firstName,
@@ -48,7 +48,7 @@ const newInstructor = (req, res) => {
         })
 }
 
-// delete an instructor
+// DELETE an instructor
 const deleteInstructor = async(req, res) => {
     const { id } = req.params;
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -61,7 +61,7 @@ const deleteInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-// update an instructor
+// UPDATE an instructor
 const updateInstructor = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -76,7 +76,7 @@ const updateInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-//export the functions
+// Export the functions
 module.exports = {
     getInstructors,
     getInstructor,
