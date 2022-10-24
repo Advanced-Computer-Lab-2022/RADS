@@ -1,4 +1,3 @@
-const express = require('express');
 const Instructor = require('../Models/instructorModel');
 const mongoose = require('mongoose');
 
@@ -21,32 +20,17 @@ const getInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-// POST a new instructor
-const newInstructor = (req, res) => {
-    instructor = new Instructor({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    userName: req.body.firstName + req.body.lastName,
-    password: Math.floor(Math.random() * 100000000),
-    country: req.body.country,
-    phoneNumber: req.body.phoneNumber,
-    address: req.body.address
-    })
-    instructor.save()
-        .then(result => {
-            res.status(200).json({
-                message: "Instructor added successfully",
-                message: "Your username is " + instructor.userName + " and your password is " + instructor.password, 
-                instructor: result
-            })
-        })
-        .catch(err => {
-            res.status(500).json({
-                message: "Instructor could not be added",
-                error: err
-            })
-        })
-}
+//post new instructor
+const postInstructor = async (req, res) => {
+    const {firstName, lastName, country, phoneNumber, address} = req.body;
+      try {
+      const instructor = await Instructor.create({ firstName, lastName, country, phoneNumber, address, userName: req.body.firstName + req.body.lastName,
+        password: Math.floor(Math.random() * 100000000) });
+      res.status(200).json({ message: "Instructor added successfully", message: "Your username is " + instructor.userName + " and your password is " + instructor.password});
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
 
 // DELETE an instructor
 const deleteInstructor = async(req, res) => {
@@ -80,7 +64,7 @@ const updateInstructor = async(req, res) => {
 module.exports = {
     getInstructors,
     getInstructor,
-    newInstructor,
+    postInstructor,
     deleteInstructor,
     updateInstructor
 }
