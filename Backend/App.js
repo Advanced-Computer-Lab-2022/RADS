@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 // Require the dotenv to attach environment variables to the process object
 require('dotenv').config();
 
-//App Variables
+// App Variables
 const app = express();
 const port = process.env.PORT || "8000";
 const MongoURI = process.env.MONGO_URI;
