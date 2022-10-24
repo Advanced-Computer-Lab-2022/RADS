@@ -34,7 +34,4 @@ const instructorSchema = new Schema({
 
 }, { timestamps: true })
 
-
 module.exports = mongoose.model('Instructor', instructorSchema);
-
-//Instructor.find()
