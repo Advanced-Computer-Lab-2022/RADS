@@ -10,7 +10,7 @@ const newAdmin = (req, res) => {
         .then(result => {
             res.status(200).json({
                 message: "Admin added successfully",
-                message: "your username is" + admin.userName + "and your password is" + admin.password, 
+                message: "your username is " + admin.userName + " and your password is " + admin.password, 
                 admin: result
             })
         })
