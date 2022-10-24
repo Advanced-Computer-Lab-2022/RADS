@@ -24,12 +24,12 @@ const instructorRoute = require('./Routes/instructor');
 // routes
 app.use('/instructor', instructorRoute);
 
-// configurations
+// Configurations
 // Mongo DB
 mongoose.connect(MongoURI)
     .then(() => {
         console.log("MongoDB is now connected!")
-            // Starting server
+        // Starting server
         app.listen(port, () => {
             console.log(`Listening to requests on http://localhost:${port}`);
         })

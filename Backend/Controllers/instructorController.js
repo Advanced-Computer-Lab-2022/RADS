@@ -47,8 +47,8 @@ const newInstructor = (req, res) => {
             })
         })
 }
-// delete an instructor
 
+// delete an instructor
 const deleteInstructor = async(req, res) => {
     const { id } = req.params;
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -60,6 +60,7 @@ const deleteInstructor = async(req, res) => {
         }
     res.status(200).json(instructor);
 }
+
 // update an instructor
 const updateInstructor = async(req, res) => {
     const { id } = req.params;
