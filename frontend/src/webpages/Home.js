@@ -2,6 +2,7 @@ import { useEffect,useState } from "react"
 
 // Components
 import InstructorDetails from '../webcomponents/InstructorDetails'
+import InstructorForm from "../webcomponents/InstructorForm";
 
 // To fetch all instructor from the backend
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
                 setInstructors(json)
             }
         }
-
+        
         fetchInstructors();
     }, [])
 
@@ -27,6 +28,7 @@ const Home = () => {
                     <InstructorDetails key = {instructor._id} instructor={instructor}/>
                 ))}
             </div>
+            <InstructorForm />
         </div>
     )
 }
