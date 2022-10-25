@@ -12,8 +12,7 @@ const instructorSchema = new Schema({
         required: true
     },
     userName: {
-        type: String,
-        required: true
+        type: String
     },
     password: {
         type: Number,
@@ -29,7 +28,7 @@ const instructorSchema = new Schema({
     },
     address: {
         type: String,
-        required:true
+        required: true
     }
 
 }, { timestamps: true })
