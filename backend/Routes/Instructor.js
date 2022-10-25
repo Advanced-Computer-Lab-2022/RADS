@@ -13,10 +13,8 @@ router.get('/:id', getInstructor)
 router.post('/add', postInstructor);
 
 // DELETE an instructor
-router.delete('/:id', (req, res) => {
-    res.json({ mssg: "DELETE an instructor" })
-})
+router.delete('/:id', deleteInstructor);
 
-router.patch('/:id', updateInstructor)
+router.patch('/:id', updateInstructor);
 
 module.exports = router;
