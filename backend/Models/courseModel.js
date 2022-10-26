@@ -17,7 +17,7 @@ const courseSchema = new Schema({
         required: true
     },
     shortSummary: {
-        type: Number,
+        type: String,
         required: true
     }
 
