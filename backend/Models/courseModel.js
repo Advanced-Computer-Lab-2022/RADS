@@ -23,4 +23,4 @@ const courseSchema = new Schema({
 
 }, { timestamps: true })
 
-//module.exports = mongoose.model('corpTrainee', corpTraineeSchema);
+module.exports = mongoose.model('Course', courseSchema)
