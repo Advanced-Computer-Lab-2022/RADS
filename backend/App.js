@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 // Require the dotenv to attach environment variables to the process object
 require('dotenv').config();
 
@@ -46,4 +48,11 @@ mongoose.connect(MongoURI)
 
 app.get("/", async(req, res) => {
     res.status(200).send("You're good to go!");
+});
+
+
+var requestURL = 'https://api.exchangerate.host/convert?from=USD&to=EUR';
+app.post("/curr", async (req, res) => {
+    const response = await fetch(requestURL).then(res => res.json());
+    console.log(response);
 });
