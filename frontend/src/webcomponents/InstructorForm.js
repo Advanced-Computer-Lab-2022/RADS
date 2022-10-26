@@ -41,7 +41,7 @@ const InstructorForm = () => {
     }    
 
     return (
-        <form className="create" onSubmit={handleSubmit}>
+        <form className="create-instructor" onSubmit={handleSubmit}>
             <h3>Insert Your Information</h3>
            
             <label>First name:</label>
