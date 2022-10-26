@@ -19,6 +19,9 @@ const courseSchema = new Schema({
     shortSummary: {
         type: String,
         required: true
+    },
+    instructor: {
+        type: String
     }
 
 }, { timestamps: true })
