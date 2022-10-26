@@ -7,24 +7,24 @@ const getCourses = async(req, res) => {
     res.status(200).json(courses);
 }
 
-// GET a single instructor
+// GET a single course
 const getCourse = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist an instructor with the corresponding id.' });
+        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
     }
     const course = await Course.findById(id)
     if (!course) {
-        return res.status(404).json({ error: 'No such instructor' });
+        return res.status(404).json({ error: 'No such course' });
     }
     res.status(200).json(course);
 }
 
-//post new instructor
+// POST new course
 const postCourse = async(req, res) => {
     const { courseTitle, subtitles, price, shortSummary } = req.body;
     try {
-        const course = await Instructor.create({
+        const course = await Course.create({
             courseTitle,
             subtitles,
             price,
@@ -36,7 +36,7 @@ const postCourse = async(req, res) => {
     }
 }
 
-// DELETE an instructor
+// DELETE a course
 const deleteCourse = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -49,7 +49,7 @@ const deleteCourse = async(req, res) => {
     res.status(200).json(course);
 }
 
-// UPDATE an instructor
+// UPDATE a course
 const updateCourse = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {

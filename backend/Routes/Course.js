@@ -10,7 +10,7 @@ router.get('/', getCourses);
 router.get('/:id', getCourse)
 
 // POST a new instructor
-router.post('/addcourse', postCourse);
+router.post('/add', postCourse);
 
 // DELETE an instructor
 router.delete('/:id', deleteCourse);
