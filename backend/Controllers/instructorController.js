@@ -20,24 +20,6 @@ const getInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-//post new instructor
-const postInstructor = async(req, res) => {
-    const { firstName, lastName, password, country, phoneNumber, address } = req.body;
-    try {
-        const instructor = await Instructor.create({
-            firstName,
-            lastName,
-            userName: req.body.firstName + req.body.lastName,
-            password,
-            country,
-            phoneNumber,
-            address
-        });
-        res.status(200).json({ message: "Instructor added successfully", message: "Your username is " + instructor.userName + " and your password is " + instructor.password });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
 
 // DELETE an instructor
 const deleteInstructor = async(req, res) => {
@@ -71,7 +53,6 @@ const updateInstructor = async(req, res) => {
 module.exports = {
     getInstructors,
     getInstructor,
-    postInstructor,
     deleteInstructor,
     updateInstructor
 }
