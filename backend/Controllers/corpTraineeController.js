@@ -1,16 +1,25 @@
 const CorpTrainee = require('../Models/corpTraineeModel');
 const mongoose = require('mongoose');
 
-const postCTrainee = async (req, res) => {
-    const {firstName, lastName, country, phoneNumber, address} = req.body;
-      try {
-      const corpTrainee = await CorpTrainee.create({ firstName, lastName, country, phoneNumber, address, userName: req.body.firstName + req.body.lastName,
-        password: Math.floor(Math.random() * 100000000) });
-      res.status(200).json({ message: "Corporate trainee added successfully", message: "Your username is " + corpTrainee.userName + " and your password is " + corpTrainee.password});
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
+const getCTrainees = async(req, res) => {
+    const corpTrainees = await CorpTrainee.find({}).sort({ createdAt: -1 });
+    res.status(200).json(corpTrainees);
+}
+
+const getCTrainee = async(req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'There does not exist a CT with the corresponding id.' });
   }
+  const corpTrainee = await CorpTrainee.findById(id)
+  if (!corpTrainee) {
+      return res.status(404).json({ error: 'No such CT' });
+  }
+  res.status(200).json(corpTrainee);
+}
+
+
 module.exports = {
-    postCTrainee
+  getCTrainees,
+  getCTrainee
 }
