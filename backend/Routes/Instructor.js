@@ -1,6 +1,6 @@
 const express = require('express');
-const { getInstructor, getInstructors, postInstructor, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
-
+const { getInstructor, getInstructors, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
+const { postInstructor } = require('../Controllers/adminController');
 const router = express.Router();
 
 // GET all instructors info
