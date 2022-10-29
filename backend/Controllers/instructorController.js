@@ -1,4 +1,5 @@
 const Instructor = require('../Models/instructorModel');
+const Course = require('../Models/courseModel');
 const mongoose = require('mongoose');
 
 // GET all instructors
@@ -67,11 +68,18 @@ const updateInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
+//View course titles given by instructor
+const viewCourse = async(req, res) =>{
+    const courses = await Course.find({}).sort({ createdAt: -1 });
+    res.status(200).json(courses);
+}
+
 // Export the functions
 module.exports = {
     getInstructors,
     getInstructor,
     postInstructor,
     deleteInstructor,
-    updateInstructor
+    updateInstructor,
+    viewCourse
 }

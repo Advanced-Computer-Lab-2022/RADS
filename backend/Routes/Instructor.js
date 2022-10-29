@@ -1,5 +1,5 @@
 const express = require('express');
-const { getInstructor, getInstructors, postInstructor, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, postInstructor, deleteInstructor, updateInstructor, viewCourse } = require('../Controllers/instructorController');
 
 const router = express.Router();
 
@@ -7,7 +7,10 @@ const router = express.Router();
 router.get('/', getInstructors);
 
 // GET a single instructor's info 
-router.get('/:id', getInstructor)
+router.get('/:id', getInstructor);
+
+// GET all courses the instructors give
+router.get('/:id/viewcourse', viewCourse);
 
 // POST a new instructor
 router.post('/add', postInstructor);
