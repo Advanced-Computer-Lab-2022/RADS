@@ -1,8 +1,12 @@
 const express = require('express');
-const { postAdmin } = require('../Controllers/adminController');
+const { postAdmin, postCTrainee, postInstructor, editAdmin, getAdmins } = require('../Controllers/adminController');
 
 const router = express.Router();
 
-router.post('/add', postAdmin);
+router.get('/', getAdmins);
+router.post('/addAdmin', postAdmin);
+router.post('/addCTrainee', postCTrainee);
+router.post('/addInstructor', postInstructor);
+router.post('/editAdmin/:id', editAdmin);
 
 module.exports = router;

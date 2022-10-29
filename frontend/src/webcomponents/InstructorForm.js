@@ -13,7 +13,7 @@ const InstructorForm = () => {
         
         const instructor = {firstName,lastName,country,phoneNumber,address};
         
-        const response = await fetch('/Instructor/add',{
+        const response = await fetch('/Admin/addInstructor',{
             method:'POST',
             body: JSON.stringify(instructor),
             headers:{
@@ -35,6 +35,8 @@ const InstructorForm = () => {
             setAddress('');
             setError(null);
             console.log("New Instructor Added", json);
+            //refresh page on successful submission
+            window.location.reload();
         }
     }    
 
