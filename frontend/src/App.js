@@ -11,7 +11,7 @@ function App() {
           <Routes>
             <Route
             path="/"
-            element={<Admin/>}
+            element={<InstructorLobby/>}
             />
           </Routes>
         </div>

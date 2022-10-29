@@ -21,7 +21,7 @@ const SearchCourse = () => {
 
     const searchMethod = (courseData) =>{
         return courseData.filter((item)=>
-        keys.some((key)=>item[key].toLowerCase().includes(query.toLowerCase()))
+        keys.some((key)=>item[key].toString().toLowerCase().includes(query.toLowerCase()))
         );
     } 
 
