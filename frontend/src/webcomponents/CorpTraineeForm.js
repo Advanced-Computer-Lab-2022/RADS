@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const InstructorForm = () => {
+const CorpTraineeForm = () => {
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [country,setCountry] = useState('');
@@ -11,11 +11,11 @@ const InstructorForm = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const instructor = {firstName,lastName,country,phoneNumber,address};
+        const corpTrainee = {firstName,lastName,country,phoneNumber,address};
         
-        const response = await fetch('/Instructor/add',{
+        const response = await fetch('/corpTrainee/add',{
             method:'POST',
-            body: JSON.stringify(instructor),
+            body: JSON.stringify(corpTrainee),
             headers:{
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
@@ -34,13 +34,13 @@ const InstructorForm = () => {
             setPhoneNumber('');
             setAddress('');
             setError(null);
-            console.log("New Instructor Added", json);
+            console.log("New Corp Trainee Added", json);
         }
     }    
 
     return (
-        <form className="create-instructor" onSubmit={handleSubmit}>
-            <h3>Instructor: Insert Your Information</h3>
+        <form className="create-corpTrainee" onSubmit={handleSubmit}>
+            <h3>CorpTrainee: Insert Your Information</h3>
            
             <label>First name:</label>
             <input type="text" onChange={(e) => setFirstName(e.target.value)}
@@ -76,4 +76,4 @@ const InstructorForm = () => {
 
 
 
-export default InstructorForm;
+export default CorpTraineeForm;

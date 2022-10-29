@@ -2,6 +2,7 @@ import{BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './webcomponents/Navbar';
 import Home from './webpages/Home';
 import InstructorLobby from './webpages/InstructorLobby';
+import Admin from './webpages/Admin';
 import InstructorProfile from './webcomponents/InstructorProfile';
 function App() {
   return (
