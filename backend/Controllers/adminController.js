@@ -1,11 +1,12 @@
 const Admin = require('../Models/adminModel');
+var randomstring = require("randomstring");
 const Instructor = require('../Models/instructorModel');
 const CorpTrainee = require('../Models/corpTraineeModel');
 const mongoose = require('mongoose');
 
 const postAdmin = async (req, res) => {
       try {
-      const admin = await Admin.create({ userName: randomSring(10), password: Math.floor(Math.random() * 100000000) });
+      const admin = await Admin.create({ userName: randomstring.generate(7), password: Math.floor(Math.random() * 100000000) });
       res.status(200).json({ message: "Admin added successfully", message: "Your username is " + admin.userName + " and your password is " + admin.password});
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -31,8 +32,32 @@ const postCTrainee = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 }
+
+const editAdmin = async(req, res) => {
+    
+  const id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'There does not exist an admin with the corresponding id.' });
+  }
+  const admin = await Admin.findByIdAndUpdate({ _id: id }, {
+      userName: req.body.userName,
+      password: req.body.password
+  });
+  if (!admin) {
+      return res.status(404).json({ error: 'No such admin' });
+  }
+  res.status(200).json(admin);
+
+}
+
+const getAdmins = async(req, res) => {
+  const admins = await Admin.find({}).sort({ createdAt: -1 });
+  res.status(200).json(admins);
+}
 module.exports = {
     postAdmin,
     postCTrainee,
-    postInstructor
+    postInstructor,
+    editAdmin,
+    getAdmins
 }
