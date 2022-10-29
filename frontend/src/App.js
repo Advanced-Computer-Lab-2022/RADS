@@ -16,6 +16,12 @@ function App() {
             element={<Home/>}
             />
           </Routes>
+          <Routes>
+            <Route
+            path="/instructor"
+            element={<InstructorLobby/>}
+            />
+          </Routes>
 
           <Routes>
             <Route

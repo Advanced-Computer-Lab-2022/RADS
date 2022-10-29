@@ -1,5 +1,5 @@
 const express = require('express');
-const { getInstructor, getInstructors, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, deleteInstructor, updateInstructor, viewCourse } = require('../Controllers/instructorController');
 const { postInstructor } = require('../Controllers/adminController');
 const router = express.Router();
 
@@ -7,10 +7,10 @@ const router = express.Router();
 router.get('/', getInstructors);
 
 // GET a single instructor's info 
-router.get('/:id', getInstructor);
+router.get('instructor/:id', getInstructor);
 
 // GET all courses the instructors give
-router.get('/:id/viewcourse', viewCourse);
+router.get('/:id', viewCourse);
 
 // POST a new instructor
 router.post('/add', postInstructor);
@@ -19,5 +19,7 @@ router.post('/add', postInstructor);
 router.delete('/:id', deleteInstructor);
 
 router.patch('/:id', updateInstructor);
+
+router.get('/:id', viewCourse);
 
 module.exports = router;

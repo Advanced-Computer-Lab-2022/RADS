@@ -20,24 +20,9 @@ const Home = () => {
         }
         
         fetchInstructors();
-    }, [])
+    }, []) 
 
-    return (
-        <div className="home">
-            <div className="instructors">
-                {instructors && instructors.map((instructor)=>(
-                    // <p key = {instructor._id}>{instructor.userName}</p>
-                    <>
-                        <p key = {instructor._id}>{instructor.userName}</p>
-                        <InstructorDetails key={instructor._id} instructor={instructor}/>
-                        <Link to="/instructor/{instructors._id}">      
-                            {instructors.userName}
-                        </Link></>
-                    ))}
-            </div>
-            <InstructorForm />
-        </div>
-    )
+  
 }
 
 
