@@ -37,7 +37,7 @@ useEffect(() => {
 }, [])
 
 return (
-    <div className="home">
+    <div className="admin-lobby">
         <div className="instructors">
             <h2>corpTrainees:</h2>
         {corpTrainees && corpTrainees.map((corpTrainee)=>(

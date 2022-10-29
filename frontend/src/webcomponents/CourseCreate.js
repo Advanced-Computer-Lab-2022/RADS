@@ -6,13 +6,14 @@ const CourseCreate = () => {
     const [price,setPrice] = useState('');
     const [shortSummary,setShortSummary] = useState('');
     const [subject,setSubject] = useState('');
+    const [totalHours,setTotalHours] = useState('');
     const [instructor,setInstructor] = useState('');
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const course = {courseTitle,subtitles,price,shortSummary,subject,instructor};
+        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor};
         
         const response = await fetch('/course/add',{
             method:'POST',
@@ -34,6 +35,7 @@ const CourseCreate = () => {
             setPrice('');
             setShortSummary('');
             setSubject('');
+            setTotalHours('');
             setInstructor('');
             setError(null);
             console.log("New Course Added", json);
@@ -67,6 +69,11 @@ const CourseCreate = () => {
             <label>Subject of the course: </label>
             <input type="text" onChange={(e) => setSubject(e.target.value)}
             value= {subject}
+            />
+
+            <label>Total Hourse of the course: </label>
+            <input type="number" onChange={(e) => setSubject(e.target.value)}
+            value= {totalHours}
             />
 
             <label>Instructor of the course: </label>

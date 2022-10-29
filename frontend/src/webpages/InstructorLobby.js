@@ -5,9 +5,7 @@ import SearchCourse from "../webcomponents/SearchCourse"
 const InstructorLobby = () => {
     return (
         <div className="lobby">
-        <div className="course-search">
-            <SearchCourse />
-        </div>
+             <SearchCourse />
         <div className="course-add">
            <CourseCreate />
         </div>

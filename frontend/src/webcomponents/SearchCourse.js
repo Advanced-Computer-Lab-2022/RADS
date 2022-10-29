@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect,useState } from "react"
 import CourseTable from './CourseTable';
 
+
 const SearchCourse = () => {
     const [query, setQuery] = useState("");
     const [courses, setCourses] = useState([]);
@@ -28,7 +29,7 @@ const SearchCourse = () => {
     return (
         <div className='search-component'>
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQuery(e.target.value)}/>
-               <CourseTable data={searchMethod(courses)} />
+               <CourseTable data={searchMethod(courses)} />    
         </div>
 
     )

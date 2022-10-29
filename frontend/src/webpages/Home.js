@@ -1,34 +1,28 @@
-import { useEffect,useState } from "react"
-
-// Components
-import InstructorDetails from '../webcomponents/InstructorDetails'
-import InstructorForm from "../webcomponents/InstructorForm";
-
-// To fetch all instructor from the backend
+import { useEffect, useState } from "react"
 const Home = () => {
-    const [instructors, setInstructors] = useState(null);
-    useEffect(()=>{
-        const fetchInstructors = async () => {
-            const response = await fetch('/Instructor');
-            const json = await response.json();
+    const [courses, setCourses] = useState(null);
+useEffect(() => {
+    const fetchCourses = async () => {
+        const response = await fetch('/course');
+        const json = await response.json();
 
-            if(response.ok){
-                setInstructors(json)
-            }
+        if(response.ok){
+            setCourses(json)
+            
         }
-        
-        fetchInstructors();
-    }, [])
+    }
+    fetchCourses();
+}, [])
 
     return (
-        <div className="home">
+        <div className="home-lobby">
+            Welcome to RADS Online Course Provider
             <div className="instructors">
-                {instructors && instructors.map((instructor)=>(
-                    // <p key = {instructor._id}>{instructor.userName}</p>
-                    <InstructorDetails key = {instructor._id} instructor={instructor}/>
+                {courses && courses.map((course)=>(
+                     <p key = {course._id}>Course: {course.courseTitle}, Total Hours: {course.totalHours}
+                     ,Rating = {course.rating} Out of 5</p>
                 ))}
             </div>
-            <InstructorForm />
         </div>
     )
 }

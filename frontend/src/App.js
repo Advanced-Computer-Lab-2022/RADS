@@ -1,6 +1,7 @@
 import{BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './webcomponents/Navbar';
 import InstructorLobby from './webpages/InstructorLobby';
+import Home from './webpages/Home';
 import Admin from './webpages/Admin';
 function App() {
   return (
@@ -10,7 +11,15 @@ function App() {
         <div className='webpages'>
           <Routes>
             <Route
-            path="/"
+            path="/instructorlobby"
+            element={<InstructorLobby/>}
+            />
+            <Route
+            path="/homelobby"
+            element={<Home/>}
+            />
+            <Route
+            path="/adminlobby"
             element={<Admin/>}
             />
           </Routes>
