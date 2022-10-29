@@ -5,13 +5,17 @@ import { Link, useNavigate } from "react-router-dom"
 import CourseCreate from "../webcomponents/CourseCreate"
 import InstructorDetails from '../webcomponents/InstructorDetails'
 import InstructorProfile from '../webcomponents/InstructorProfile'
+import ViewProfileButton from "../webcomponents/ViewProfileButton"
 
 // To fetch all instructor from the backend
 const InstructorLobby = () => {
     const navigate = useNavigate();
 
+//get all courses taught by instructor
+   
+
     const navigateInstructor = () => {
-      navigate('/instructor/635ae0cddbd2637f3105dfb7');
+      navigate('/instructor');
     };
     const [instructors, setInstructors] = useState(null);
     useEffect(()=>{
@@ -27,24 +31,21 @@ const InstructorLobby = () => {
         fetchInstructors();
     }, [])
     
-    return (
+     return (
         <><div className="home">
             <div className="instructors">
-                {instructors && instructors.map((instructor) => (
-                    // <p key = {instructor._id}>{instructor.userName}</p>
-                    <>
-                         <p key={instructor._id}>{instructor.userName}</p>
-                        <InstructorDetails key={instructor._id} instructor={instructor} />
-                        <Link to='/instructor/635ae0cddbd2637f3105dfb7'>{instructors.userName}
-                            <button onClick={navigateInstructor}>View Details</button>         
-                        </Link></>         
-                ))}
+            <h2>Instructors:</h2>
+           {instructors && instructors.map((instructor)=>(
+                // <p key = {instructor._id}>{instructor.userName}</p>
+                <>
+                   <InstructorDetails key={instructor._id} instructor={instructor} /><ViewProfileButton /></>
+            ))}  
             </div>
         </div>
         
         <div className="course-add">
                 <CourseCreate />
-            </div>//</>
+            </div></>
     )
 }
 

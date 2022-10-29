@@ -21,7 +21,10 @@ const courseSchema = new Schema({
         required: true
     },
     instructor: {
-        type: String
+
+        type: mongoose.Types.ObjectId,
+        ref:'Instructor'
+
     }
 
 }, { timestamps: true })

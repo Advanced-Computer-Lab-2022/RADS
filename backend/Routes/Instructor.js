@@ -1,5 +1,5 @@
 const express = require('express');
-const { getInstructor, getInstructors, deleteInstructor, updateInstructor } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, deleteInstructor, updateInstructor, viewCourses } = require('../Controllers/instructorController');
 const router = express.Router();
 
 // GET all instructors info
@@ -9,7 +9,7 @@ router.get('/', getInstructors);
 router.get('/:id', getInstructor)
 
 // GET all courses the instructors give
-router.get('/viewCourse/:id', viewCourse);
+router.get('/viewcourses/:id', viewCourses);
 
 
 
