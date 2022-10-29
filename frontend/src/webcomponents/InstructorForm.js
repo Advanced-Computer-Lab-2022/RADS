@@ -1,6 +1,8 @@
 import { useState } from "react"
+//import { useInstructorContext } from "../hooks/useInstructorsContext";
 
 const InstructorForm = () => {
+    //const { dispatch } = useInstructorContext();
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [password,setPassword] = useState('');
@@ -37,6 +39,7 @@ const InstructorForm = () => {
             setAddress('');
             setError(null);
             console.log("New Instructor Added", json);
+            //dispatch({type:'INSTRUCTOR_CREATED', payload: json})
         }
     }    
 

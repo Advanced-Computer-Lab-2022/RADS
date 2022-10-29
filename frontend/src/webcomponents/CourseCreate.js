@@ -5,12 +5,14 @@ const CourseCreate = () => {
     const [subtitles,setSubtitles] = useState('');
     const [price,setPrice] = useState('');
     const [shortSummary,setShortSummary] = useState('');
+    const [subject,setSubject] = useState('');
+    const [instructor,setInstructor] = useState('');
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const course = {courseTitle,subtitles,price,shortSummary};
+        const course = {courseTitle,subtitles,price,shortSummary,subject,instructor};
         
         const response = await fetch('/course/add',{
             method:'POST',
@@ -31,6 +33,8 @@ const CourseCreate = () => {
             setSubtitles('');
             setPrice('');
             setShortSummary('');
+            setSubject('');
+            setInstructor('');
             setError(null);
             console.log("New Course Added", json);
         }
@@ -58,6 +62,16 @@ const CourseCreate = () => {
             <label>Short summary about the course: </label>
             <input type="text" onChange={(e) => setShortSummary(e.target.value)}
             value= {shortSummary}
+            />
+
+            <label>Subject of the course: </label>
+            <input type="text" onChange={(e) => setSubject(e.target.value)}
+            value= {subject}
+            />
+
+            <label>Instructor of the course: </label>
+            <input type="text" onChange={(e) => setInstructor(e.target.value)}
+            value= {instructor}
             />
 
             <button>Submit</button>
