@@ -20,7 +20,15 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
+    subject: {
+        type: String,
+        required: true
+    },
     instructor: {
+        type: String,
+        required: true
+    },
+    rating: {
         type: String
     }
 
