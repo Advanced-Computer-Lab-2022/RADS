@@ -33,9 +33,9 @@ const InstructorLobby = () => {
                 {instructors && instructors.map((instructor) => (
                     // <p key = {instructor._id}>{instructor.userName}</p>
                     <>
-                        <p key={instructor._id}>{instructor.userName}</p>
+                         <p key={instructor._id}>{instructor.userName}</p>
                         <InstructorDetails key={instructor._id} instructor={instructor} />
-                        <Link to="/instructor/635ae0cddbd2637f3105dfb7">{instructors.userName}
+                        <Link to='/instructor/635ae0cddbd2637f3105dfb7'>{instructors.userName}
                             <button onClick={navigateInstructor}>View Details</button>         
                         </Link></>         
                 ))}
