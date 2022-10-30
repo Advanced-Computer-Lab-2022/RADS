@@ -32,8 +32,13 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
-    rating: {
-        type: String
+    courseRating: {
+        type: Number,
+        required: true
+    },
+    courseExercises: {
+        type: String,
+        required: true
     }
 
 }, { timestamps: true })
