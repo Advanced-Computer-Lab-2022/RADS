@@ -27,15 +27,15 @@ const SearchCourse = () => {
     }, [])
 
     // GET all course subjects
-    const getCourseSubjects = (arr) =>{
-       const newArray = [];
-       for(let i =0;i<arr.length;i++){
-        if(!newArray.includes(arr[i].subject)){
-        newArray[i] = arr[i].subject;
-        }
-       }
-       return newArray;
-    }
+    // const getCourseSubjects = (arr) =>{
+    //    const newArray = [];
+    //    for(let i =0;i<arr.length;i++){
+    //     if(!newArray.includes(arr[i].subject)){
+    //     newArray[i] = arr[i].subject;
+    //     }
+    //    }
+    //    return newArray;
+    // }
 
     // to Perform the intersection between the search elements and filter elements
     const performIntersection = (arr1, arr2, arr3) => {
