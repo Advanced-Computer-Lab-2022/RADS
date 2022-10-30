@@ -51,9 +51,21 @@ useEffect(() => {
     }
     fetchAdmins();
 }, [])
+useEffect(() => {
+    const fetchAdmins = async () => {
+        const response = await fetch('/Admin');
+        const json = await response.json();
+
+        if(response.ok){
+            editAdmin(json)
+            
+        }
+    }
+    fetchAdmins();
+}, [])
 
 return (
-    <div className="home">
+    <div className="admin-lobby">
         <div className="instructors">
         <h2>Admins:</h2>
         {admin && admin.map((admin)=>(

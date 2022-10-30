@@ -1,28 +1,55 @@
-import { useEffect,useState } from "react"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import CourseDetails from '../webcomponents/CourseDetails';
+import SelectCountry from '../webcomponents/SelectCountry';
+import HomeSearch from "../webcomponents/HomeSearch";
 
-// Components
-import InstructorDetails from '../webcomponents/InstructorDetails'
-import InstructorForm from "../webcomponents/InstructorForm";
-import InstructorProfile from "../webcomponents/InstructorProfile";
 
-// To fetch all instructor from the backend
 const Home = () => {
-    const [instructors, setInstructors] = useState(null);
-    useEffect(()=>{
-        const fetchInstructors = async () => {
-            const response = await fetch('/Instructor');
-            const json = await response.json();
+    const [courses, setCourses] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+useEffect(() => {
+    const fetchCourses = async () => {
+        const response = await fetch('/course');
+        const json = await response.json();
 
-            if(response.ok){
-                setInstructors(json)
-            }
+        if(response.ok){
+            setCourses(json)
+            setOpenModal(false);
+            
         }
-        
-        fetchInstructors();
-    }, []) 
+    }
+    fetchCourses();
+}, [])
 
+
+    // const renderDetails = (key,course) =>{
+    //     console.log(course)
+    //     return (  
   
+    //         <CourseDetails key={key} course = {course} />
+          
+    //     )
+
+    // }
+    return (
+        <div className="home-lobby">
+            Welcome to RADS Online Course Provider
+            <div className="selectCountry">
+                <SelectCountry />
+            </div>
+            {/* <div className="instructors">
+                {courses && courses.map((course)=>(
+                     <div>
+                     <p key = {course._id}>Course: {course.courseTitle}, Total Hours: {course.totalHours}
+                     ,Rating = {course.courseRating} Out of 5, Price = {course.price}</p>
+                     <button  className={course._id} onClick={()=>{setOpenModal(true)}}>View Course</button>
+                    {openModal && <CourseDetails key={course._id} course = {course} />}
+                     </div>
+                ))}
+            </div> */}
+            {<HomeSearch />}
+        </div>
+    )
 }
 
 

@@ -1,15 +1,20 @@
 import {Link } from 'react-router-dom'
+import CountriesSelect from './CountriesComboBox'
 
 const Navbar = () =>{
     return(
         <header>
             <div className="container">
               <Link to="/">
-                <h1>website</h1>
+                <h1>Home</h1>
               </Link>
-              <Link to="/instructor">
-                <h2>List of instructor</h2>
+              <Link to="/instructorlobby">
+                <h1>Instructor Lobby</h1>
               </Link>
+              <Link to="/adminlobby">
+                <h1>Admin Lobby</h1>
+              </Link>
+              <CountriesSelect />
             </div>
         </header>
     )

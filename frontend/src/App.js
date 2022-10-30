@@ -1,32 +1,26 @@
 import{BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './webcomponents/Navbar';
-import Home from './webpages/Home';
 import InstructorLobby from './webpages/InstructorLobby';
+import Home from './webpages/Home';
 import Admin from './webpages/Admin';
-import InstructorProfile from './webcomponents/InstructorProfile';
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar/>
+        <Navbar />
         <div className='webpages'>
           <Routes>
+            <Route
+            path="/instructorlobby"
+            element={<InstructorLobby/>}
+            />
             <Route
             path="/"
             element={<Home/>}
             />
-          </Routes>
-          <Routes>
             <Route
-            path="/instructor"
-            element={<InstructorLobby/>}
-            />
-          </Routes>
-
-          <Routes>
-            <Route
-            path="/instructor/:id"
-            element={<InstructorProfile/>}
+            path="/adminlobby"
+            element={<Admin/>}
             />
           </Routes>
         </div>
