@@ -1,13 +1,34 @@
-// import * as React from 'react';
-// import { TextField } from '@material-ui/core';
-// import { Autocomplete } from '@material-ui/lab';
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
-export default function SelectCountry() {
-   // return ( <Autocomplete id = "country-select-demo" style = {{ width: 300 }} options = { countries } autoHighlight getOptionLabel = {(option) => option.country + ' ' + option.currency_code}/>);
+
+export default function CountriesSelect() {
+    return (
+        <Autocomplete
+          id="country-select-demo"
+          style={{ width: 300 }}
+          options={countries}
+          autoHighlight
+          getOptionLabel={(option) => option.country +' '+ option.currency_code}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Choose a country"
+              variant="outlined"
+              inputProps={{
+                ...params.inputProps,
+                autoComplete: 'new-password', // disable autocomplete and autofill
+              }}
+            />
+          )}
+        />
+      );
 }
 
 // List of all countries with their currencies, source: https://github.com/samayo/country-json/blob/master/src/country-by-currency-code.json 
-const countries = [{
+const countries = [
+    {
         country: "Afghanistan",
         currency_code: "AFN"
     },
@@ -980,4 +1001,3 @@ const countries = [{
         currency_code: "ZWD"
     },
 ];
-
