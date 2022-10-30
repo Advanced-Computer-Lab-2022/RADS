@@ -8,12 +8,14 @@ const CourseCreate = () => {
     const [subject,setSubject] = useState('');
     const [totalHours,setTotalHours] = useState('');
     const [instructor,setInstructor] = useState('');
+    const [courseRating, setCourseRating] = useState('');
+    const [courseExercises,setCourseExercises] = useState('');
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor};
+        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseRating,courseExercises};
         
         const response = await fetch('/course/add',{
             method:'POST',
@@ -37,6 +39,8 @@ const CourseCreate = () => {
             setSubject('');
             setTotalHours('');
             setInstructor('');
+            setCourseRating('');
+            setCourseExercises('');
             setError(null);
             console.log("New Course Added", json);
         }
@@ -72,13 +76,23 @@ const CourseCreate = () => {
             />
 
             <label>Total Hours of the course: </label>
-            <input type="number" onChange={(e) => setSubject(e.target.value)}
+            <input type="number" onChange={(e) => setTotalHours(e.target.value)}
             value= {totalHours}
             />
 
             <label>Instructor of the course: </label>
             <input type="text" onChange={(e) => setInstructor(e.target.value)}
             value= {instructor}
+            />
+            
+            <label>Course Rating: </label>
+            <input type="text" onChange={(e) => setCourseRating(e.target.value)}
+            value= {courseRating}
+            />
+
+            <label>Course Exercises: </label>
+            <input type="text" onChange={(e) => setCourseExercises(e.target.value)}
+            value= {courseExercises}
             />
 
             <button>Submit</button>
