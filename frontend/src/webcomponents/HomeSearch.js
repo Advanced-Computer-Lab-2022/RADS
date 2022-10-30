@@ -5,6 +5,7 @@ import Slider from '@mui/material/Slider';
 import CourseDetails from './CourseDetails';
 
 
+
 const HomeSearch = () => {
     const [queryS, setQueryS] = useState("");
     const [queryF1, setQueryF1] = useState("");
