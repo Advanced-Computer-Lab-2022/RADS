@@ -13,7 +13,7 @@ const CorpTraineeForm = () => {
         
         const corpTrainee = {firstName,lastName,country,phoneNumber,address};
         
-        const response = await fetch('/corpTrainee/add',{
+        const response = await fetch('/Admin/addCTrainee',{
             method:'POST',
             body: JSON.stringify(corpTrainee),
             headers:{
@@ -35,6 +35,9 @@ const CorpTraineeForm = () => {
             setAddress('');
             setError(null);
             console.log("New Corp Trainee Added", json);
+            
+            //refresh page on successful submission
+            window.location.reload();
         }
     }    
 
