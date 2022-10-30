@@ -35,8 +35,8 @@ useEffect(() => {
                 {courses && courses.map((course)=>(
                      <div>
                      <p key = {course._id}>Course: {course.courseTitle}, Total Hours: {course.totalHours}
-                     ,Rating = {course.rating} Out of 5</p>
-                     <button  className={course._id} onClick={()=>{setOpenModal(true);}}>View Course</button>
+                     ,Rating = {course.courseRating} Out of 5</p>
+                     <button  className={course._id} onClick={()=>{setOpenModal(true)}}>View Course</button>
                     {openModal && <CourseDetails key={course._id} course = {course} />}
                      </div>
                 ))}
