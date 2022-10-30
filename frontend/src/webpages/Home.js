@@ -47,7 +47,7 @@ useEffect(() => {
                      </div>
                 ))}
             </div> */}
-            {<HomeSearch />}
+            <HomeSearch />
         </div>
     )
 }

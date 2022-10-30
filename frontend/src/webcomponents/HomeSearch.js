@@ -1,6 +1,7 @@
-import React from 'react'
+import * as React from 'react';
 import { useEffect,useState } from "react"
-import Slider from '@material-ui/core/Slider';
+import CourseTable from './CourseTable';
+import Slider from '@mui/material/Slider';
 import CourseDetails from './CourseDetails';
 
 
@@ -86,11 +87,11 @@ const HomeSearch = () => {
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>
             <div className='filter-component1'>
                 <p>Price Filter</p>
-                <Slider className='price-slider' max = {7000} step={500} min = {-500} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF1(v)}}/> 
+                <Slider className='price-slider' size= "small" max = {7000} step={500} min = {-500} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF1(v)}}/> 
             </div>
             <div className='homefilter-component2'>
                 <p>Rating Filter</p>
-                <Slider className='rating-slider' max = {5} step={0.5} min = {-0.5} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
+                <Slider className='rating-slider' size= "small" max = {5} step={0.5} min = {-0.5} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
             </div>         
              <div className="home-search">
                 {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses)) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses)).map((course)=>(
