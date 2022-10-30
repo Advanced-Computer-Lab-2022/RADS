@@ -1,9 +1,10 @@
-// import * as React from 'react';
-// import { TextField } from '@material-ui/core';
-// import { Autocomplete } from '@material-ui/lab';
+import * as React from 'react';
+import { TextField } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 
 export default function SelectCountry() {
-   // return ( <Autocomplete id = "country-select-demo" style = {{ width: 300 }} options = { countries } autoHighlight getOptionLabel = {(option) => option.country + ' ' + option.currency_code}/>);
+   //return ( <Autocomplete id = "country-select-demo" style = {{ width: 300 }} options = { countries } autoHighlight getOptionLabel = {(option) => option.country + ' ' + option.currency_code}/>);
+    // return ( <Autocomplete id = "country-select-demo" style = {{ width: 300 }} options = { countries } autoHighlight getOptionLabel = {(option) => option.country + ' ' + option.currency_code}/>);
 }
 
 // List of all countries with their currencies, source: https://github.com/samayo/country-json/blob/master/src/country-by-currency-code.json 
