@@ -1,4 +1,5 @@
 import {Link } from 'react-router-dom'
+import CountriesSelect from './CountriesComboBox'
 
 const Navbar = () =>{
     return(
@@ -13,6 +14,7 @@ const Navbar = () =>{
               <Link to="/adminlobby">
                 <h1>Admin Lobby</h1>
               </Link>
+              <CountriesSelect />
             </div>
         </header>
     )

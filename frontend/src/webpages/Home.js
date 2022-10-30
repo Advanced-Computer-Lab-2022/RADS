@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import CourseDetails from '../webcomponents/CourseDetails';
+import SelectCountry from '../webcomponents/SelectCountry';
+import HomeSearch from "../webcomponents/HomeSearch";
+
 
 const Home = () => {
     const [courses, setCourses] = useState(null);
@@ -31,17 +34,20 @@ useEffect(() => {
     return (
         <div className="home-lobby">
             Welcome to RADS Online Course Provider
-            <div className="instructors">
+            <div className="selectCountry">
+                <SelectCountry />
+            </div>
+            {/* <div className="instructors">
                 {courses && courses.map((course)=>(
                      <div>
                      <p key = {course._id}>Course: {course.courseTitle}, Total Hours: {course.totalHours}
-                     ,Rating = {course.courseRating} Out of 5</p>
+                     ,Rating = {course.courseRating} Out of 5, Price = {course.price}</p>
                      <button  className={course._id} onClick={()=>{setOpenModal(true)}}>View Course</button>
                     {openModal && <CourseDetails key={course._id} course = {course} />}
                      </div>
                 ))}
-                
-            </div>
+            </div> */}
+            {<HomeSearch />}
         </div>
     )
 }
