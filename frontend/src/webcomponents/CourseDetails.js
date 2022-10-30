@@ -7,8 +7,9 @@ const CourseDetails = ({course}) =>{
             <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
             <p><strong>Subject of the course: </strong>{course.subject}</p>
             <p><strong>Instructor of the course: </strong>{course.instructor}</p>
-            <p><strong>Rating of the course</strong>{course.rating}</p>
-            <p><strong>=========================================================================================</strong></p>
+            <p><strong>Rating of the course: </strong>{course.courseRating} Out of 5</p>
+            <p><strong>Course Exercises: </strong>{course.courseExercises}</p>
+            <p><strong>============================================================================================================</strong></p>
         </div>
     )
 }
