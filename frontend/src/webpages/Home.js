@@ -35,6 +35,7 @@ useEffect(() => {
         <div className="home-lobby">
             Welcome to RADS Online Course Provider
             <div className="selectCountry">
+                <p> </p>
                 <SelectCountry />
             </div>
             {/* <div className="instructors">
@@ -47,6 +48,7 @@ useEffect(() => {
                      </div>
                 ))}
             </div> */}
+            <p> </p>
             <HomeSearch />
         </div>
     )
