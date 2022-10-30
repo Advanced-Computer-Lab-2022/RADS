@@ -29,6 +29,11 @@ const instructorSchema = new Schema({
     address: {
         type: String,
         required: true
+    },
+    courses:
+    {
+        type: mongoose.Types.ObjectId,
+        ref:'Course'
     }
 
 }, { timestamps: true })
