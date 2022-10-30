@@ -71,7 +71,7 @@ const CourseCreate = () => {
             value= {subject}
             />
 
-            <label>Total Hourse of the course: </label>
+            <label>Total Hours of the course: </label>
             <input type="number" onChange={(e) => setSubject(e.target.value)}
             value= {totalHours}
             />
