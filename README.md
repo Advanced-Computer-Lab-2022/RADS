@@ -1,3 +1,0 @@
-# RADS
-
-Sprint 1
