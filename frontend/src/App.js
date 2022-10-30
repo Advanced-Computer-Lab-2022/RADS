@@ -15,7 +15,7 @@ function App() {
             element={<InstructorLobby/>}
             />
             <Route
-            path="/homelobby"
+            path="/"
             element={<Home/>}
             />
             <Route
