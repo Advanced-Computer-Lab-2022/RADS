@@ -1,7 +1,7 @@
-import React from 'react'
+import * as React from 'react';
 import { useEffect,useState } from "react"
 import CourseTable from './CourseTable';
-import Slider from '@material-ui/core/Slider';
+import Slider from '@mui/material/Slider';
 
 
 
@@ -57,7 +57,7 @@ const SearchCourse = () => {
     // Price filter method
     const filterMethodOnPrice = (courseData) =>{
         console.log(queryF1);
-        if(!queryF1 ||  queryF1 === 0){
+        if((!queryF1 ||  queryF1 === -500) && queryF1 !== 0){
             return courseData;
         }
         else{
@@ -68,7 +68,7 @@ const SearchCourse = () => {
     // Rating filter method
     const filterMethodOnRating = (courseData) =>{
         console.log(queryF2);
-        if(!queryF2 ||  queryF2 === 0){
+        if((!queryF2 ||  queryF2 === -0.5) && queryF2 !== 0){
             return courseData;
         }
         else{
@@ -85,11 +85,11 @@ const SearchCourse = () => {
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>
             <div className='filter-component1'>
                 <p>Price Filter</p>
-                <Slider className='price-slider' max = {10000} step={1000} min = {0} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF1(v)}}/> 
+                <Slider className='price-slider' size= "small" max = {7000} step={500} min = {-500} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF1(v)}}/> 
             </div>
             <div className='filter-component2'>
                 <p>Rating Filter</p>
-                <Slider className='rating-slider' max = {5} step={0.5} min = {0} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
+                <Slider className='rating-slider' size= "small" max = {5} step={0.5} min = {-0.5} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
             </div>         
              <CourseTable data={performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses))} />   
         </div>
