@@ -1,46 +1,51 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
+import InstructorProfileDetails from '../webcomponents/InstructorProfileDetails'
+import InstructorDetails from '../webcomponents/InstructorDetails'
 
 const ViewProfileButton = () => {
-    
+
     const [error,setError] = useState(null);
+    const [modal,setModal] = useState(false);
+    const [instructors,setInstructor] = useState('');
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault() //prevent form submission
-        
-
-        const response = await fetch('/Instructor/635ae0cddbd2637f3105dfb7',{
-            method:'GET',
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
+    useEffect(()=>{
+        const fetchInstInfo = async () => {
+            const response = await fetch('/Instructor');
+            const json = await response.json();
+            if(!response.ok){
+                setError(json.error);
             }
-        })
-        
-        const json = await response.json();
+            if(response.ok){
+                setError(null);
+                setModal(false);
+                console.log(json);
+                setInstructor(json)
 
-        if(!response.ok){
-            setError(json.error);
+
+            }
         }
-        if(response.ok){    
-            setError(null);
-            console.log(json);
-            
-            
-        }
-    }    
+        fetchInstInfo();
+    }, [])
 
     return (
-        <form className="view-profile" onSubmit={handleSubmit}>
-            
-            <button>View Profile</button>
-            {error && <div className="error">{error}</div>}
-            <Link to="/InstructorProfile.js" />
-        </form>
+        <div className="view-profile">
+        <div>
+            {instructors && instructors.map((instructor)=>(
+                     <div>
+                     <InstructorDetails key={instructor._id} instructor={instructor} />
+                     <button  className={instructor._id} onClick={()=>{setModal(true)}}>View Profile</button>
+                     {modal && <InstructorProfileDetails key = {instructor._id} instructor = {instructor}  />}
+                     </div>
+                ))}
+
+        </div>
+        </div>
     )
 }
 
 
 
 export default ViewProfileButton;
+
 
