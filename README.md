@@ -6,7 +6,7 @@ An Online Learning System web application through which individuals can attend p
 
 # Team members:
 
-1. Scrum master: Ahmed Khaled Ahmed, ID: 49-4211
+1. *Scrum master: Ahmed Khaled Ahmed, ID: 49-4211
 2. Misk Mohamed Abdullah, ID: 49-19599
 3. Ali Elserafy, ID:
 4. Hassan Sherif Haridy, ID: 49-5516
