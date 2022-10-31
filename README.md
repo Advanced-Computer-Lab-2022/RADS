@@ -6,11 +6,11 @@ An Online Learning System web application through which individuals can attend p
 
 # Team members:
 
-1. Scrum master: Ahmed Khaled
-2. Misk
-3. Ali
-4. Hassan
-5. Khaled 
+1. Scrum master: Ahmed Khaled Ahmed, ID: 49-4211
+2. Misk Mohamed Abdullah, ID: 49-19599
+3. Ali Elserafy, ID:
+4. Hassan Sherif Haridy, ID: 49-5516
+5. Khaled Ayman Anwar, ID: 49-3005
 
 # Sprint 1 Requirements are the following:
 
