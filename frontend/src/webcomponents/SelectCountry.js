@@ -2,8 +2,10 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { useEffect,useState } from "react"
 
 export default function SelectCountry() {
+    //const [selected, setSelected] = useState([]);
   return (
     <Autocomplete
       id="country-select-demo"
@@ -16,6 +18,7 @@ export default function SelectCountry() {
           {option.country} 
         </Box>
       )}
+      onChange={(event, value) => fetchCurrency(value.currency_code)}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -28,6 +31,19 @@ export default function SelectCountry() {
       )}
     />
   );
+}
+
+const fetchCurrency = async (currency) => {
+    const response = await fetch('http://localhost:8000/currency', {
+        method:'POST',
+        body: JSON.stringify(currency),
+        headers:{
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json'
+        }
+    });
+    const jsonRes = await response.json();
+    console.log(jsonRes);
 }
     // List of all countries with their currencies, source: https://github.com/samayo/country-json/blob/master/src/country-by-currency-code.json 
     const countries = [{

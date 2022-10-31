@@ -25,12 +25,14 @@ const instructorRoute = require('./Routes/Instructor');
 const courseRoute = require('./Routes/Course');
 const adminRoute = require('./Routes/Admin');
 const corpTraineeRoute = require('./Routes/corpTrainee');
+const currencyRoute = require('./Routes/Currency');
 
 // Routes
 app.use('/instructor', instructorRoute);
 app.use('/course', courseRoute);
 app.use('/admin', adminRoute);
 app.use('/corpTrainee', corpTraineeRoute);
+app.use('/currency', currencyRoute);
 
 // Configurations
 // MongoDB
