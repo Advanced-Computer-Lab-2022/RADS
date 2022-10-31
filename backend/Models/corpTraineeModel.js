@@ -12,11 +12,10 @@ const corpTraineeSchema = new Schema({
         required: true
     },
     userName: {
-        type: String,
-        required: true
+        type: String
     },
     password: {
-        type: Number,
+        type: String,
         required: true
     },
     country: {
