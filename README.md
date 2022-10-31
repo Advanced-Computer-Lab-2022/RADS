@@ -79,8 +79,6 @@ An Online Learning System web application through which individuals can attend p
 
 # Set Up and Installation Process:
 
-DELETE ALL node_modules FILES
-
 >RADS>backend>
 1) npm install
 
