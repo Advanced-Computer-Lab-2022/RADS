@@ -1,4 +1,4 @@
-export const InstructorProfile = ({instructor, course}) => {
+export const InstructorProfile = ({instructor}) => {
   return  <div className="instructor-profile">
             <h4>The information of user: {instructor.userName}</h4>
             <p><strong>First Name: </strong>{instructor.firstName}</p>
@@ -6,7 +6,7 @@ export const InstructorProfile = ({instructor, course}) => {
             <p><strong>Country: </strong>{instructor.country}</p>
             <p><strong>Phone Number: </strong>{instructor.phoneNumber}</p>
             <p><strong>address: </strong>{instructor.address}</p>
-            <p><strong>Courses taught:</strong>{course.courseTitle}</p>
+            <p><strong>Courses taught:</strong>{instructor.courses}</p>
         </div>
 }
 
