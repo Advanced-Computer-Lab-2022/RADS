@@ -196,8 +196,7 @@ const HomeSearch = () => {
              <div className="home-search">
                 {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses)) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses)).map((course)=>(
                      <div>
-                     <p key = {course._id}>Course: {course.courseTitle}, Total Hours: {course.totalHours}
-                     ,Rating = {course.courseRating} Out of 5, Price = {course.price}</p>
+                     <p key = {course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {course.price}</p>
                      <button  className={course._id} onClick={()=>{setOpenModal(true)}}>View Course</button>
                     {openModal && <CourseDetails key={course._id} course = {course} />}
                      </div>
