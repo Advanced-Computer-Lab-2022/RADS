@@ -15,7 +15,7 @@ const instructorSchema = new Schema({
         type: String
     },
     password: {
-        type: Number,
+        type: String,
         required: true
     },
     country: {
