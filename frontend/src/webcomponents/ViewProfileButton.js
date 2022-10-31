@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom";
-import InstructorProfile from '../webpages/InstructorProfile'
 import InstructorProfileDetails from '../webcomponents/InstructorProfileDetails'
 import InstructorDetails from '../webcomponents/InstructorDetails'
 
