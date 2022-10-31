@@ -35,7 +35,7 @@ const ViewProfileButton = () => {
             
             <button>View Profile</button>
             {error && <div className="error">{error}</div>}
-            <Link to="/InstructorProfile.js" />
+            <Link to="/instructorlobby/viewcourses/{instructors.id}" />
         </form>
     )
 }

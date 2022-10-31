@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import CourseDetails from '../webcomponents/CourseDetails';
+//import CourseDetails from '../webcomponents/CourseDetails';
 import SelectCountry from '../webcomponents/SelectCountry';
 import HomeSearch from "../webcomponents/HomeSearch";
 
