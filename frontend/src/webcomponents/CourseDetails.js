@@ -1,7 +1,7 @@
 const CourseDetails = ({course}) =>{
     return(
         <div className="course-details">
-            <h4>The information of course:{course.courseTitle}</h4>
+            <h4>The information of course: {course.courseTitle} </h4>
             <p><strong>Course Subtitles: </strong>{course.subtitles}</p>
             <p><strong>Price: </strong>{course.price}</p>
             <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
