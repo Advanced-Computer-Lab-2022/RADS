@@ -21,11 +21,11 @@ An Online Learning System web application through which individuals can attend p
 
 * Assignments:
 
-1. Hassan is assignned with requirements 6, 7 and 8.
-2. Ahmed is assignned with requirements 9, 10 and 11.
-3. Ali is assignned with requirements 12 and 18.
-4. Khaled is assignned with requirements 19, 20 and 23.
-5. Misk is assignned with requirements 55, 56 and 57.
+1. Hassan is assigned with requirements 6, 7 and 8.
+2. Ahmed is assigned with requirements 9, 10 and 11.
+3. Ali is assigned with requirements 12 and 18.
+4. Khaled is assigned with requirements 19, 20 and 23.
+5. Misk is assigned with requirements 55, 56 and 57.
 
 - And here is a screen shot regarding the team task assignment:
 ![f1](https://user-images.githubusercontent.com/105018459/199100089-380cd74d-5722-42c9-b877-4bd822bf94c3.PNG)
