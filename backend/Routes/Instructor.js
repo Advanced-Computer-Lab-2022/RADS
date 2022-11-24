@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', getInstructors);
 
 // GET a single instructor's info 
-router.get('/:id', getInstructor)
+router.get('/:id', getInstructor);
 
 // GET all courses the instructors give
 router.get('/viewcourses/:id', viewCourses);
@@ -16,7 +16,7 @@ router.get('/viewcourses/:id', viewCourses);
 // DELETE an instructor
 router.delete('/:id', deleteInstructor);
 
-router.patch('/:id', updateInstructor);
+router.post('/changeInfo/:id', updateInstructor);
 
 
 

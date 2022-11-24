@@ -2,10 +2,12 @@ import { useEffect, useState } from "react"
 //import CourseDetails from '../webcomponents/CourseDetails';
 import SelectCountry from '../webcomponents/SelectCountry';
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
+import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
 
 
 const CorpTraineeLobby = () => {
     const [courses, setCourses] = useState(null);
+    const [corpTrainee, setPassword] = useState(null);
    useEffect(() => {
     const fetchCourses = async () => {
         const response = await fetch('/course');
@@ -13,6 +15,18 @@ const CorpTraineeLobby = () => {
 
         if(response.ok){
             setCourses(json)
+            
+        }
+    }
+    fetchCourses();
+}, [])
+useEffect(() => {
+    const fetchCourses = async () => {
+        const response = await fetch('/CorpTrainee/password/:id');
+        const json = await response.json();
+
+        if(response.ok){
+            setPassword(json)
             
         }
     }
@@ -35,6 +49,7 @@ const CorpTraineeLobby = () => {
             <div className="selectCountry">
                 <p> </p>
                 <SelectCountry />
+                <CorpTraineePassword />
             </div>
             {/* <div className="instructors">
                 {courses && courses.map((course)=>(
