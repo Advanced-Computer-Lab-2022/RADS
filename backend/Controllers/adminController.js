@@ -5,18 +5,19 @@ const CorpTrainee = require('../Models/corpTraineeModel');
 const mongoose = require('mongoose');
 
 const postAdmin = async (req, res) => {
+  const {firstName, lastName} = req.body;
       try {
-      const admin = await Admin.create({ userName: randomstring.generate(7), password: randomstring.generate(7) });
+      const admin = await Admin.create({ firstName, lastName, userName: req.body.firstName + req.body.lastName, password: randomstring.generate(7) });
       res.status(200).json({ message: "Admin added successfully", message: "Your username is " + admin.userName + " and your password is " + admin.password});
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
   const postInstructor = async (req, res) => {
-    const {firstName, lastName, country, phoneNumber, address} = req.body;
+    const {firstName, lastName, country, phoneNumber, address,email,bio} = req.body;
       try {
       const instructor = await Instructor.create({ firstName, lastName, country, phoneNumber, address, userName: req.body.firstName + req.body.lastName,
-        password: randomstring.generate(7) });
+        password: randomstring.generate(7),email,bio });
       res.status(200).json({ message: "Instructor added successfully", message: "Your username is " + instructor.userName + " and your password is " + instructor.password});
     } catch (error) {
       res.status(400).json({ error: error.message });

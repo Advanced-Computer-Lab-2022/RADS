@@ -17,9 +17,24 @@ const getCTrainee = async(req, res) => {
   }
   res.status(200).json(corpTrainee);
 }
+const updatePassword = async(req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'There does not exist an CT with the corresponding id.' });
+  }
+  const corpTrainee = await CorpTrainee.findByIdAndUpdate({ _id: id }, {
+      password: req.body.password
+  });
+  if (!corpTrainee) {
+      return res.status(404).json({ error: 'No such CT' });
+  }
+  res.status(200).json(corpTrainee);
+}
+
 
 
 module.exports = {
   getCTrainees,
-  getCTrainee
+  getCTrainee,
+  updatePassword
 }
