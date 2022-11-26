@@ -16,7 +16,7 @@ router.get('/viewcourses/:id', viewCourses);
 // DELETE an instructor
 router.delete('/:id', deleteInstructor);
 
-router.post('/changeInfo/:id', updateInstructor);
+router.patch('/changeInfo/:id', updateInstructor);
 
 
 

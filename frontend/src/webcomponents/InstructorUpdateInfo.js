@@ -14,7 +14,7 @@ const InstructorUpdateInfo = () => {
         const instructor = {email,bio,password};
 
         const response = await fetch('/Instructor/changeInfo/:id',{
-            method:'POST',
+            method:'PATCH',
             body: JSON.stringify(instructor),
             headers:{
                 "Access-Control-Allow-Origin": "*",
