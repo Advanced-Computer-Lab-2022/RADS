@@ -13,7 +13,7 @@ const CorpTraineePassword = () => {
         const corpTrainee = {password};
 
         const response = await fetch('/CorpTrainee/password/:id',{
-            method:'POST',
+            method:'PATCH',
             body: JSON.stringify(corpTrainee),
             headers:{
                 "Access-Control-Allow-Origin": "*",
