@@ -14,7 +14,7 @@ const postAdmin = async(req, res) => {
     }
 }
 const postInstructor = async(req, res) => {
-    const { firstName, lastName, country, phoneNumber, address, email, bio } = req.body;
+    const { firstName, lastName, country, phoneNumber, address, rating, email, bio } = req.body;
     try {
         const instructor = await Instructor.create({
             firstName,

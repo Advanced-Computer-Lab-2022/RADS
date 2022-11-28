@@ -7,6 +7,7 @@ const instructorSchema = new Schema({
         type: String,
         required: true
     },
+
     lastName: {
         type: String,
         required: true
@@ -32,6 +33,13 @@ const instructorSchema = new Schema({
     },
     rating: {
         type: Number
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    bio: {
+        type: String
     }
 
 }, { timestamps: true })
