@@ -229,6 +229,9 @@ const SearchCourse = (props) => {
     
     return (
         <div>
+          <div className='instructor-welcome' >
+            <p>Welcome, <strong>{instructorName}</strong></p>
+          </div>
         <div className='search-component'>
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>
             </div>  

@@ -2,9 +2,7 @@ import { useEffect, useState } from "react"
 // Components
 import CourseCreate from "../webcomponents/CourseCreate"
 import SearchCourse from "../webcomponents/SearchCourse"
-import InstructorDetails from '../webcomponents/InstructorDetails'
-import InstructorUpdateInfo from "../webcomponents/InstructorUpdateInfo"
-import ViewProfileButton from "../webcomponents/ViewProfileButton";
+
 const InstructorLobby = (props) => {
     const{
         rateVal,
