@@ -62,4 +62,4 @@ return(
 }
 
 
-export default CourseView;c
+export default CourseView;

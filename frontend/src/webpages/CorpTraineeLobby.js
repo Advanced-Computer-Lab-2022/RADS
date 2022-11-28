@@ -49,11 +49,6 @@ useEffect(() => {
     return (
         <div className="home-lobby">
             Welcome to RADS Online Course Provider (CorpTraineeLobby side)
-            <div className="selectCountry">
-                <p> </p>
-                <SelectCountry />
-            </div>
-            <p> </p>
             <CorpTraineeSearch rateVal = {props.rateVal} currencyVal={props.currencyVal}/>
         </div>
     )
