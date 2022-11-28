@@ -20,8 +20,6 @@ const ViewProfileButton = () => {
                 setModal(false);
                 console.log(json);
                 setInstructor(json)
-
-
             }
         }
         fetchInstInfo();

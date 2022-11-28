@@ -1,20 +1,25 @@
 const express = require('express');
-const { getCourses, getCourse, postCourse, deleteCourse, updateCourse } = require('../Controllers/courseController');
+const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCourseByInstructor } = require('../Controllers/courseController');
+
 
 const router = express.Router();
 
-// GET all instructors info
+// GET all Course info
 router.get('/', getCourses);
 
-// GET a single instructor's info 
-router.get('/:id', getCourse)
+// GET a single Course's info 
+router.get('/:id', getCourse);
 
-// POST a new instructor
+// GET all Courses by a specific instructor
+router.get('/find/:id', getCourseByInstructor);
+
+// POST a new Course
 router.post('/add', postCourse);
 
-// DELETE an instructor
+// DELETE a Course
 router.delete('/:id', deleteCourse);
 
+// UPDATE Course
 router.patch('/:id', updateCourse);
 
 module.exports = router;

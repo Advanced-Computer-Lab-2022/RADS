@@ -30,10 +30,8 @@ const instructorSchema = new Schema({
         type: String,
         required: true
     },
-    courses:
-    {
-        type: mongoose.Types.ObjectId,
-        ref:'courseModel'
+    rating: {
+        type: Number
     }
 
 }, { timestamps: true })

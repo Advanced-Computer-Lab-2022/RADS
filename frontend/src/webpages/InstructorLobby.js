@@ -4,7 +4,11 @@ import CourseCreate from "../webcomponents/CourseCreate"
 import SearchCourse from "../webcomponents/SearchCourse"
 import InstructorDetails from '../webcomponents/InstructorDetails'
 import ViewProfileButton from "../webcomponents/ViewProfileButton";
-const InstructorLobby = () => {
+const InstructorLobby = (props) => {
+    const{
+        rateVal,
+        currencyVal
+    } = props;
     const [instructors, setInstructors] = useState(null);
     useEffect(() => {
         const fetchInstructors = async () => {
@@ -21,13 +25,14 @@ const InstructorLobby = () => {
 
     return (
         <div className="lobby">
-             <SearchCourse />
+             <SearchCourse rateVal ={props.rateVal}  currencyVal={props.currencyVal}/>
         <div className="course-add">
-           <CourseCreate />
+           <CourseCreate rateVal ={props.rateVal}  currencyVal={props.currencyVal}/>
         </div>
-        <div className="instructor-list"></div>
+        {/* <div className="instructor-list">
                         <ViewProfileButton />
-            <p> </p>
+                        </div> */}
+    
         </div>
         
     )

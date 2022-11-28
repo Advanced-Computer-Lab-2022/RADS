@@ -3,13 +3,49 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const subTitleSchema = mongoose.Schema({
+    subTitle: {
+        type: String
+    },
+    description: {
+        type: String
+    },
+    videoLink: {
+        type: String
+    },
+    hours: {
+        type: Number
+    }
+});
+
+const exerciseSchema = mongoose.Schema({
+    question: {
+        type: String
+    },
+    firstChoice: {
+        type: String
+    },
+    secondChoice: {
+        type: String
+    },
+    thirdChoice: {
+        type: String
+    },
+    fourthChoice: {
+        type: String
+    },
+    answer: {
+        type: String
+    }
+});
+
 const courseSchema = new Schema({
     courseTitle: {
         type: String,
         required: true
     },
     subtitles: {
-        type: String,
+        type: [subTitleSchema],
         required: true
     },
     price: {
@@ -29,16 +65,15 @@ const courseSchema = new Schema({
         required: true
     },
     instructor: {
-        type: String,
-        required: true
+        type: mongoose.Types.ObjectId,
+        ref: 'instructorModel'
     },
     courseRating: {
         type: Number,
         required: true
     },
     courseExercises: {
-        type: String,
-        required: true
+        type: [exerciseSchema]
     }
 
 }, { timestamps: true })

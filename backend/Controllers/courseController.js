@@ -1,4 +1,5 @@
 const Course = require('../Models/courseModel');
+const Instructor = require('../Models/instructorModel');
 const mongoose = require('mongoose');
 
 // GET all courses
@@ -19,6 +20,30 @@ const getCourse = async(req, res) => {
     }
     res.status(200).json(course);
 }
+
+
+const getCourseByInstructor = async(req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a course that has an Instructor with the corresponding id.' });
+    }
+    const course = await Course.find({ instructor: id }).sort({ createdAt: -1 });
+    if (!course) {
+        return res.status(404).json({ error: 'No such course' });
+    }
+    res.status(200).json(course);
+}
+
+// const filterCourse = async(req, res) => {
+//     const courseId = req.query.courseId;
+//     if (courseId) {
+//         const result = await Course.find({ _id: mongoose.Types.ObjectId(courseId) }).populate('_id');
+//         res.status(200).json(result)
+//     } else {
+//         res.status(400).json({ error: "courseId is required" })
+//     }
+// }
+
 
 // POST new course
 const postCourse = async(req, res) => {
@@ -75,5 +100,6 @@ module.exports = {
     getCourse,
     postCourse,
     deleteCourse,
-    updateCourse
+    updateCourse,
+    getCourseByInstructor
 }
