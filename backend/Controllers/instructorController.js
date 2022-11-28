@@ -66,7 +66,9 @@ const updateInstructor = async(req, res) => {
         return res.status(404).json({ error: 'There does not exist an instructor with the corresponding id.' });
     }
     const instructor = await Instructor.findByIdAndUpdate({ _id: id }, {
-        ...req.body
+        email: req.body.email,
+        bio: req.body.bio,
+        password: req.body.password
     });
     if (!instructor) {
         return res.status(404).json({ error: 'No such instructor' });

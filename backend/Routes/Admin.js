@@ -7,6 +7,6 @@ router.get('/', getAdmins);
 router.post('/addAdmin', postAdmin);
 router.post('/addCTrainee', postCTrainee);
 router.post('/addInstructor', postInstructor);
-router.post('/editAdmin/:id', editAdmin);
+router.patch('/editAdmin/:id', editAdmin);
 
 module.exports = router;

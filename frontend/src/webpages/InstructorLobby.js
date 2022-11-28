@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import CourseCreate from "../webcomponents/CourseCreate"
 import SearchCourse from "../webcomponents/SearchCourse"
 import InstructorDetails from '../webcomponents/InstructorDetails'
+import InstructorUpdateInfo from "../webcomponents/InstructorUpdateInfo"
 import ViewProfileButton from "../webcomponents/ViewProfileButton";
 const InstructorLobby = (props) => {
     const{
@@ -10,6 +11,7 @@ const InstructorLobby = (props) => {
         currencyVal
     } = props;
     const [instructors, setInstructors] = useState(null);
+    const [instructorsinfo, changeInfo] = useState(null);
     useEffect(() => {
         const fetchInstructors = async () => {
             const response = await fetch('/Instructor');
@@ -17,6 +19,19 @@ const InstructorLobby = (props) => {
     
             if(response.ok){
                 setInstructors(json)
+                
+            }
+        }
+        fetchInstructors();
+    }, [])
+    useEffect(() => {
+        const fetchInstructors = async () => {
+            const response = await fetch('/Instructor/changeInfo/:id');
+            const json = await response.json();
+    
+            if(response.ok){
+                changeInfo(json)
+                
                 
             }
         }

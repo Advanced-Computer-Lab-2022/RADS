@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 //import CourseDetails from '../webcomponents/CourseDetails';
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
+import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
 
 
 const CorpTraineeLobby = (props) => {
@@ -9,6 +10,7 @@ const CorpTraineeLobby = (props) => {
         currencyVal
     } = props;
     const [courses, setCourses] = useState(null);
+    const [corpTrainee, setPassword] = useState(null);
    useEffect(() => {
     const fetchCourses = async () => {
         const response = await fetch('/course');
@@ -16,6 +18,18 @@ const CorpTraineeLobby = (props) => {
 
         if(response.ok){
             setCourses(json)
+            
+        }
+    }
+    fetchCourses();
+}, [])
+useEffect(() => {
+    const fetchCourses = async () => {
+        const response = await fetch('/CorpTrainee/password/:id');
+        const json = await response.json();
+
+        if(response.ok){
+            setPassword(json)
             
         }
     }
@@ -37,6 +51,7 @@ const CorpTraineeLobby = (props) => {
             Welcome to RADS Online Course Provider (CorpTraineeLobby side)
             <div className="selectCountry">
                 <p> </p>
+                <SelectCountry />
             </div>
             <p> </p>
             <CorpTraineeSearch rateVal = {props.rateVal} currencyVal={props.currencyVal}/>

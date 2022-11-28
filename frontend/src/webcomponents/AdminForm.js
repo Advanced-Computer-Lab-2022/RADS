@@ -2,6 +2,7 @@ import { useState } from "react"
 import {  } from "react-router-dom";
 
 const AdminForm = () => {
+
     const [userName,setUserName] = useState('');
     const [password,setPassword] = useState('');
     const [error,setError] = useState(null);
@@ -11,8 +12,8 @@ const AdminForm = () => {
         
         const admin = {userName,password};
 
-        const response = await fetch('/Admin/editAdmin/635d20b5fd2a0783a27501b8',{
-            method:'POST',
+        const response = await fetch('/Admin/editAdmin/:id',{
+            method:'PATCH',
             body: JSON.stringify(admin),
             headers:{
                 "Access-Control-Allow-Origin": "*",
