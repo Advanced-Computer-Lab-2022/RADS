@@ -41,7 +41,6 @@ const instructorSchema = new Schema({
     bio: {
         type: String
     }
-
 }, { timestamps: true })
 
 module.exports = mongoose.model('Instructor', instructorSchema);
