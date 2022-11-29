@@ -69,7 +69,8 @@ const courseSchema = new Schema({
         ref: 'instructorModel'
     },
     courseRating: {
-        type: Number,
+        type: mongoose.Types.ObjectId,
+        ref: 'courseRatingModel',
         required: true
     },
     courseExercises: {

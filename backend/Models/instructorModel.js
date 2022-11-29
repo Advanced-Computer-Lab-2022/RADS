@@ -40,6 +40,11 @@ const instructorSchema = new Schema({
     },
     bio: {
         type: String
+    },
+    instructorRating: {
+        type: mongoose.Types.ObjectId,
+        ref: 'instructorRatingModel',
+        required: true
     }
 
 }, { timestamps: true })
