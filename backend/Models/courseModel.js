@@ -3,6 +3,23 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const reviewSchema = mongoose.Schema({
+    traineeRating: {
+        type: Number
+    },
+    traineeReview: {
+        type: String
+    },
+    traineeId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'traineeModel'
+    },
+    corpTraineeId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'corpTraineeModel'
+    }
+});
+
 const subTitleSchema = mongoose.Schema({
     subTitle: {
         type: String
@@ -68,14 +85,16 @@ const courseSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'instructorModel'
     },
-    courseRating: {
-        type: mongoose.Types.ObjectId,
-        ref: 'courseRatingModel',
-        required: true
-    },
     courseExercises: {
         type: [exerciseSchema]
-    }
+    },
+    courseRating: {
+        rating: Number,
+        ratersCount: Number
+    },
+    reviews: {
+        type: [reviewSchema]
+    },
 
 }, { timestamps: true })
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCourseByInstructor } = require('../Controllers/courseController');
+const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCourseByInstructor, postCourseReview, getCourseRating } = require('../Controllers/courseController');
 
 
 const router = express.Router();
@@ -21,5 +21,11 @@ router.delete('/:id', deleteCourse);
 
 // UPDATE Course
 router.patch('/:id', updateCourse);
+
+// POST a new Review
+router.post('/review/:id', postCourseReview);
+
+// GET a single Course's rating 
+router.get('/rating/:id', getCourseRating);
 
 module.exports = router;
