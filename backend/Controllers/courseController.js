@@ -47,7 +47,7 @@ const getCourseByInstructor = async(req, res) => {
 
 // POST new course
 const postCourse = async(req, res) => {
-    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises } = req.body;
+    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, coursePreview } = req.body;
     try {
         const course = await Course.create({
             courseTitle,
@@ -58,7 +58,8 @@ const postCourse = async(req, res) => {
             totalHours,
             instructor,
             courseRating: {rating:0,ratersCount:0},
-            courseExercises
+            courseExercises,
+            coursePreview
         });
         res.status(200).json({ message: "Course added successfully", message: "Course info" + course });
     } catch (error) {

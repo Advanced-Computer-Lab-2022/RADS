@@ -11,6 +11,7 @@ const CourseCreate = (props) => {
     const [instructor,setInstructor] = useState('');
     const [courseRating, setCourseRating] = useState('');
     const [courseExercises,setCourseExercises] = useState([{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}]);
+    const [coursePreview,setCoursePreview] = useState('');
     const [error,setError] = useState(null);
     const{
         rateVal,
@@ -18,7 +19,7 @@ const CourseCreate = (props) => {
     } = props;
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission   
-        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseRating,courseExercises};
+        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseRating,courseExercises,coursePreview};
         const response = await fetch('/course/add',{
             method:'POST',
             body: JSON.stringify(course),
@@ -35,14 +36,15 @@ const CourseCreate = (props) => {
         }
         if(response.ok){    
             setCourseTitle('');
-            setSubtitles([]);
+            setSubtitles([{subTitle:"",description:"",videoLink:"",hours:""}]);
             setPrice('');
             setShortSummary('');
             setSubject('');
             setTotalHours('');
             setInstructor('');
             setCourseRating('');
-            setCourseExercises([]);
+            setCourseExercises([{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}]);
+            setCoursePreview('');
             setError(null);
             console.log("New Course Added", json);
             window.location.reload();
@@ -131,12 +133,18 @@ const CourseCreate = (props) => {
     }
    
     return (
+        <div>
         <form className="create-course" onSubmit={handleSubmit}>
             <h3>Insert Course Information</h3>
            
             <label>Course Title:</label>
             <input type="text" onChange={(e) => setCourseTitle(e.target.value)}
             value= {courseTitle}
+            />
+
+            <label>Course Preview Video Link: </label>
+            <input type="text" onChange={(e) => setCoursePreview(e.target.value)}
+            value= {coursePreview}
             />
 
             <label>Price: </label>
@@ -168,6 +176,7 @@ const CourseCreate = (props) => {
             <input type="text" onChange={(e) => setCourseRating(e.target.value)}
             value= {courseRating}
             />
+            
             
             <br></br>
 
@@ -243,6 +252,9 @@ const CourseCreate = (props) => {
             <button>Submit</button>
             {error && <div className="error">{error}</div>}
         </form>
+
+        <p> <strong>____________________________________________________________________________________________</strong></p>
+        </div>
     )
 }
 

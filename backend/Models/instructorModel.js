@@ -71,7 +71,6 @@ const instructorSchema = new Schema({
     reviews: {
         type: [ratingReviewSchema]
     }
-
 }, { timestamps: true })
 
 module.exports = mongoose.model('Instructor', instructorSchema);

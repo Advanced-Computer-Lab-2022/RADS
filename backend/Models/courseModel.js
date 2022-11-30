@@ -88,6 +88,9 @@ const courseSchema = new Schema({
     courseExercises: {
         type: [exerciseSchema]
     },
+    coursePreview: {
+        type: String
+    },
     courseRating: {
         rating: Number,
         ratersCount: Number
