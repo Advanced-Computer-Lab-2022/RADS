@@ -18,7 +18,7 @@ const CourseCreate = (props) => {
         currencyVal
     } = props;
     const handleSubmit = async (e) =>{
-        e.preventDefault() //prevent form submission
+        e.preventDefault() //prevent form submission   
         const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseRating,courseExercises,coursePreview};
         const response = await fetch('/course/add',{
             method:'POST',
@@ -53,7 +53,7 @@ const CourseCreate = (props) => {
 
     const handleSubtitleAdd = () =>{
         setSubtitles([...subtitles,{subTitle:"",description:"",videoLink:"",hours:""}])
-        }
+    }
     const setCourseSubTitle  = (e,index) =>{
         const {name,value} = e.target;
         console.log(e.target);
@@ -130,8 +130,8 @@ const CourseCreate = (props) => {
         const list = [...subtitles];
         list[index][name] = value;
         setCourseExercises(list);
-    }    
-
+    }
+   
     return (
         <div>
         <form className="create-course" onSubmit={handleSubmit}>
@@ -176,7 +176,7 @@ const CourseCreate = (props) => {
             <input type="text" onChange={(e) => setCourseRating(e.target.value)}
             value= {courseRating}
             />
-
+            
             
             <br></br>
 
