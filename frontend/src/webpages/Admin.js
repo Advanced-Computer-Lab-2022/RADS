@@ -10,7 +10,11 @@ import AdminForm from "../webcomponents/AdminForm"
 import NewAdminButton from "../webcomponents/NewAdminButton"
 import AdminDetails from "../webcomponents/AdminDetails"
 
-const Admin = () => {
+const Admin = (props) => {
+    const{
+        rateVal,
+        currencyVal
+    } = props;
     const [instructors, setInstructors] = useState(null);
     const [corpTrainees, setCorpTrainees] = useState(null);
     const [admin, editAdmin] = useState(null);

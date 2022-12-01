@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react"
 //import CourseDetails from '../webcomponents/CourseDetails';
-import SelectCountry from '../webcomponents/SelectCountry';
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
 
 
-const CorpTraineeLobby = () => {
+const CorpTraineeLobby = (props) => {
+    const{
+        rateVal,
+        currencyVal
+    } = props;
     const [courses, setCourses] = useState(null);
+    const [corpTrainee, setPassword] = useState(null);
    useEffect(() => {
     const fetchCourses = async () => {
         const response = await fetch('/course');
@@ -13,6 +17,18 @@ const CorpTraineeLobby = () => {
 
         if(response.ok){
             setCourses(json)
+            
+        }
+    }
+    fetchCourses();
+}, [])
+useEffect(() => {
+    const fetchCourses = async () => {
+        const response = await fetch('/CorpTrainee/password/:id');
+        const json = await response.json();
+
+        if(response.ok){
+            setPassword(json)
             
         }
     }
@@ -32,22 +48,7 @@ const CorpTraineeLobby = () => {
     return (
         <div className="home-lobby">
             Welcome to RADS Online Course Provider (CorpTraineeLobby side)
-            <div className="selectCountry">
-                <p> </p>
-                <SelectCountry />
-            </div>
-            {/* <div className="instructors">
-                {courses && courses.map((course)=>(
-                     <div>
-                     <p key = {course._id}>Course: {course.courseTitle}, Total Hours: {course.totalHours}
-                     ,Rating = {course.courseRating} Out of 5, Price = {course.price}</p>
-                     <button  className={course._id} onClick={()=>{setOpenModal(true)}}>View Course</button>
-                    {openModal && <CourseDetails key={course._id} course = {course} />}
-                     </div>
-                ))}
-            </div> */}
-            <p> </p>
-            <CorpTraineeSearch />
+            <CorpTraineeSearch rateVal = {props.rateVal} currencyVal={props.currencyVal}/>
         </div>
     )
 }

@@ -8,12 +8,15 @@ const InstructorForm = () => {
     const [country,setCountry] = useState('');
     const [phoneNumber,setPhoneNumber] = useState('');
     const [address,setAddress] = useState('');
+    const [rating,setRating] = useState('');
+    const [email,setEmail] = useState('');
+    const [bio,setBio] = useState('');
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const instructor = {firstName,lastName,country,phoneNumber,address};
+        const instructor = {firstName,lastName,country,phoneNumber,address,rating,email,bio};
         
         const response = await fetch('/Admin/addInstructor',{
             method:'POST',
@@ -35,6 +38,9 @@ const InstructorForm = () => {
             setCountry('');
             setPhoneNumber('');
             setAddress('');
+            setRating('');
+            setEmail('');
+            setBio('');
             setError(null);
             console.log("New Instructor Added", json);
             //refresh page on successful submission
@@ -70,6 +76,21 @@ const InstructorForm = () => {
             <label>Address:</label>
             <input type="text" onChange={(e) => setAddress(e.target.value)}
             value= {address}
+            />
+
+            <label>Rating: </label>
+            <input type="number" onChange={(e) => setRating(e.target.value)}
+            value= {rating}
+            />
+
+            <label>Email: </label>
+            <input type="text" onChange={(e) => setEmail(e.target.value)}
+            value= {email}
+            />
+
+            <label>Bio: </label>
+            <input type="text" onChange={(e) => setBio(e.target.value)}
+            value= {bio}
             />
 
             <button>Submit</button>
