@@ -5,7 +5,6 @@ const CorpTrainee = require('../Models/corpTraineeModel');
 const mongoose = require('mongoose');
 
 const postAdmin = async (req, res) => {
-      try {
       const admin = await Admin.create({ userName: randomstring.generate(7), password: randomstring.generate(7) });
       res.status(200).json({ message: "Admin added successfully", message: "Your username is " + admin.userName + " and your password is " + admin.password});
     } catch (error) {
