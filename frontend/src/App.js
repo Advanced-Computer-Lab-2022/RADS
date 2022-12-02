@@ -4,13 +4,17 @@ import InstructorLobby from './webpages/InstructorLobby';
 import Home from './webpages/Home';
 import Admin from './webpages/Admin';
 import CorpTraineeLobby from './webpages/CorpTraineeLobby';
+import TraineeLobby from './webpages/TraineeLobby';
 import CourseView from './webcomponents/CourseView';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState,useEffect } from 'react';
-
+import CorpTraineeCourses from './webcomponents/CorpTraineeCourses';
+import CorpTraineeViewCourse from './webcomponents/CorpTraineeViewCourse';
+import TraineeCourses from './webcomponents/TraineeCourses';
+import TraineeViewCourse from './webcomponents/CorpTraineeViewCourse';
 
 
 
@@ -84,11 +88,28 @@ function App() {
             <Route path="/filter"
             element={<CourseView rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
+            <Route path="/filtercorp"
+            element={<CorpTraineeViewCourse rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+            <Route path="/viewcorp"
+            element={<CorpTraineeCourses rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
             <Route
             path="/corptraineelobby"
             element={<CorpTraineeLobby rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
+            <Route
+            path="/traineelobby"
+            element={<TraineeLobby rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+            <Route path="/viewtraineecourses"
+            element={<TraineeCourses rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+            <Route path="/filtertraineecourses"
+            element={<TraineeViewCourse rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
           </Routes>
+          
 
         </div>
       </BrowserRouter>
