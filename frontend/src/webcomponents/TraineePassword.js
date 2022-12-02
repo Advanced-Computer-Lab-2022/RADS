@@ -12,7 +12,7 @@ const TraineePassword = () => {
         
         const trainee = {password};
 
-        const response = await fetch('/Trainee/password/:id',{
+        const response = await fetch('/Trainee/password/6389573ce9f32538013c578f',{
             method:'PATCH',
             body: JSON.stringify(trainee),
             headers:{
