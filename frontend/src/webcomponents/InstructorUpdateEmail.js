@@ -1,19 +1,18 @@
 import { useState } from "react"
-import {  } from "react-router-dom";
 
-const InstructorUpdateInfo = () => {
+
+const InstructorUpdateEmail = () => {
 
     const [email,setEmail] = useState('');
-    const [bio, setBio] = useState('');
-    const [password, setPassword] = useState('');
+
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const instructor = {email,bio,password};
+        const instructor = {email};
 
-        const response = await fetch('/Instructor/changeInfo/:id',{
+        const response = await fetch('/Instructor/changeInfo/635afde192426ef4e8a9e165',{
             method:'PATCH',
             body: JSON.stringify(instructor),
             headers:{
@@ -28,9 +27,10 @@ const InstructorUpdateInfo = () => {
             setError(json.error);
         }
         if(response.ok){    
+
+
             setEmail('');
-            setBio('');
-            setPassword('');
+        
             setError(null);
             console.log("Info Changed", json);
             
@@ -41,22 +41,14 @@ const InstructorUpdateInfo = () => {
 
     return (
         <form className="change-info" onSubmit={handleSubmit}>
-            <h3>Change Your Information</h3>
+            <h3>Change Your Email</h3>
            
             <label>Email:</label>
-            <input type="text" onChange={(e) => setEmail(e.target.value)}
+            <input type="text" onChange={(e) =>  setEmail(e.target.value)}
             value= {email}
             />
 
-            <label>Bio:</label>
-            <input type="text" onChange={(e) => setBio(e.target.value)}
-            value= {bio}
-            />
-            <label>Password:</label>
-            <input type="text" onChange={(e) => setPassword(e.target.value)}
-            value= {password}
-            />
-
+ 
             <button>Submit</button>
             {error && <div className="error">{error}</div>}
         </form>
@@ -65,4 +57,4 @@ const InstructorUpdateInfo = () => {
 
 
 
-export default InstructorUpdateInfo;
+export default InstructorUpdateEmail;

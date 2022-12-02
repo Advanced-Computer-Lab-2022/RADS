@@ -19,6 +19,8 @@ router.delete('/:id', deleteInstructor);
 
 router.patch('/changeInfo/:id', updateInstructor);
 
+//router.post('/addPromotion/:id', addPromotion);
+
 
 
 module.exports = router;
