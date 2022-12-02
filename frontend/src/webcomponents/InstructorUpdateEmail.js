@@ -1,19 +1,20 @@
 import { useState } from "react"
 
-const CorpTraineePassword = () => {
 
+const InstructorUpdateEmail = () => {
 
-    const [password, setPassword] = useState('');
+    const [email,setEmail] = useState('');
+
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const corpTrainee = {password};
+        const instructor = {email};
 
-        const response = await fetch('/CorpTrainee/password/635aff3e92426ef4e8a9e179',{
+        const response = await fetch('/Instructor/changeInfo/635afde192426ef4e8a9e165',{
             method:'PATCH',
-            body: JSON.stringify(corpTrainee),
+            body: JSON.stringify(instructor),
             headers:{
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
@@ -26,7 +27,10 @@ const CorpTraineePassword = () => {
             setError(json.error);
         }
         if(response.ok){    
-            setPassword('');
+
+
+            setEmail('');
+        
             setError(null);
             console.log("Info Changed", json);
             
@@ -37,14 +41,14 @@ const CorpTraineePassword = () => {
 
     return (
         <form className="change-info" onSubmit={handleSubmit}>
-            <h3>Change Your Information</h3>
+            <h3>Change Your Email</h3>
            
-
-            <label>Password:</label>
-            <input type="text" onChange={(e) => setPassword(e.target.value)}
-            value= {password}
+            <label>Email:</label>
+            <input type="text" onChange={(e) =>  setEmail(e.target.value)}
+            value= {email}
             />
 
+ 
             <button>Submit</button>
             {error && <div className="error">{error}</div>}
         </form>
@@ -53,4 +57,4 @@ const CorpTraineePassword = () => {
 
 
 
-export default CorpTraineePassword;
+export default InstructorUpdateEmail;

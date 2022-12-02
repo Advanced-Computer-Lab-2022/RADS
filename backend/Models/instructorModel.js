@@ -3,6 +3,23 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const ReviewSchema = mongoose.Schema({
+    traineeRating: {
+        type: Number
+    },
+    traineeReview: {
+        type: String
+    },
+    traineeId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'traineeModel'
+    },
+    corpTraineeId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'corpTraineeModel'
+    }
+});
+
 const instructorSchema = new Schema({
     firstName: {
         type: String,
@@ -32,9 +49,6 @@ const instructorSchema = new Schema({
         type: String,
         required: true
     },
-    rating: {
-        type: Number
-    },
     email: {
         type: String,
         required: true,
@@ -43,10 +57,12 @@ const instructorSchema = new Schema({
         type: String
     },
     instructorRating: {
-        type: mongoose.Types.ObjectId,
-        ref: 'instructorRatingModel',
-        required: true
+        rating: Number,
+        ratersCount: Number
     },
+    reviews: {
+        type: [ReviewSchema]
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Instructor', instructorSchema);

@@ -6,6 +6,7 @@ const CorpTraineeForm = () => {
     const [country,setCountry] = useState('');
     const [phoneNumber,setPhoneNumber] = useState('');
     const [address,setAddress] = useState('');
+    const [email,setEmail] = useState('');
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
@@ -33,6 +34,7 @@ const CorpTraineeForm = () => {
             setCountry('');
             setPhoneNumber('');
             setAddress('');
+            setEmail('');
             setError(null);
             console.log("New Corp Trainee Added", json);
             
@@ -69,6 +71,10 @@ const CorpTraineeForm = () => {
             <label>Address:</label>
             <input type="text" onChange={(e) => setAddress(e.target.value)}
             value= {address}
+            />
+            <label>Email:</label>
+            <input type="text" onChange={(e) => setEmail(e.target.value)}
+            value= {email}
             />
 
             <button>Submit</button>
