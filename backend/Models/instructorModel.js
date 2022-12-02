@@ -1,3 +1,4 @@
+const { time } = require('console');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -36,7 +37,7 @@ const instructorSchema = new Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     bio: {
         type: String
@@ -45,7 +46,7 @@ const instructorSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'instructorRatingModel',
         required: true
-    }
+    },
 }, { timestamps: true })
 
 module.exports = mongoose.model('Instructor', instructorSchema);
