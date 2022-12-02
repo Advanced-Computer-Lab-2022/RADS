@@ -95,6 +95,7 @@ const updateCourse = async(req, res) => {
     res.status(200).json(course);
 }
 
+//add a review to a course
 const postCourseReview = async(req, res) => {
     const { traineeRating, traineeReview, traineeId, corpTraineeId } = req.body;
     const newReview = {
@@ -112,7 +113,7 @@ const postCourseReview = async(req, res) => {
         const course = await Course.findById({ "_id": id })
         const currentOverallRating = course.courseRating.rating;
         let currentRatingCount = course.courseRating.ratersCount;
-        const newOverallRating = (currentOverallRating*currentRatingCount + traineeRating)/(currentOverallRating+1);
+        const newOverallRating = (currentOverallRating*currentRatingCount + traineeRating)/(currentOverallCount+1);
         currentRatingCount+=1;
         course.courseRating.rating = newOverallRating;
         course.courseRating.ratersCount = currentRatingCount;
@@ -130,7 +131,7 @@ const postCourseReview = async(req, res) => {
     }
 }
 
-// GET a single course
+// GET a single course rating
 const getCourseRating = async(req, res) => {
     const id = mongoose.Types.ObjectId(req.params.id);
     const course = await Course.findById({ "_id": id })

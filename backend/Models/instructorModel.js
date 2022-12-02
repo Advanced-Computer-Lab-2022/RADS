@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const ratingReviewSchema = mongoose.Schema({
+const ReviewSchema = mongoose.Schema({
     traineeRating: {
         type: Number
     },
@@ -48,9 +48,6 @@ const instructorSchema = new Schema({
         type: String,
         required: true
     },
-    rating: {
-        type: Number
-    },
     email: {
         type: String,
         required: true
@@ -59,17 +56,11 @@ const instructorSchema = new Schema({
         type: String
     },
     instructorRating: {
-        type: Object,
-        rating: {
-            type: Number
-        },
-        ratersCount: {
-            type: Number
-        },
-        required: true
+        rating: Number,
+        ratersCount: Number
     },
     reviews: {
-        type: [ratingReviewSchema]
+        type: [ReviewSchema]
     }
 }, { timestamps: true })
 

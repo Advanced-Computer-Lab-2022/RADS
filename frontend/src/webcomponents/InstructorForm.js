@@ -8,7 +8,7 @@ const InstructorForm = () => {
     const [country,setCountry] = useState('');
     const [phoneNumber,setPhoneNumber] = useState('');
     const [address,setAddress] = useState('');
-    const [rating,setRating] = useState('');
+    const [instructorRating,setInstructorRating] = useState('');
     const [email,setEmail] = useState('');
     const [bio,setBio] = useState('');
     const [error,setError] = useState(null);
@@ -16,7 +16,7 @@ const InstructorForm = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const instructor = {firstName,lastName,country,phoneNumber,address,rating,email,bio};
+        const instructor = {firstName,lastName,country,phoneNumber,address,instructorRating,email,bio};
         
         const response = await fetch('/Admin/addInstructor',{
             method:'POST',
@@ -38,7 +38,7 @@ const InstructorForm = () => {
             setCountry('');
             setPhoneNumber('');
             setAddress('');
-            setRating('');
+            setInstructorRating('');
             setEmail('');
             setBio('');
             setError(null);
@@ -79,8 +79,8 @@ const InstructorForm = () => {
             />
 
             <label>Rating: </label>
-            <input type="number" onChange={(e) => setRating(e.target.value)}
-            value= {rating}
+            <input type="number" onChange={(e) => setInstructorRating(e.target.value)}
+            value= {instructorRating}
             />
 
             <label>Email: </label>

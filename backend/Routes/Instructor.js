@@ -1,5 +1,5 @@
 const express = require('express');
-const { getInstructor, getInstructors, deleteInstructor, updateInstructor, filterCourses, postInstructor } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, deleteInstructor, updateInstructor, filterCourses, postInstructor, postInstructorReview, getInstructorRating } = require('../Controllers/instructorController');
 const router = express.Router();
 
 // GET all instructors info
@@ -19,6 +19,10 @@ router.delete('/:id', deleteInstructor);
 
 router.patch('/changeInfo/:id', updateInstructor);
 
+// POST a new Review
+router.post('/review/:id', postInstructorReview);
 
+// GET a single Course's rating 
+router.get('/rating/:id', getInstructorRating);
 
 module.exports = router;

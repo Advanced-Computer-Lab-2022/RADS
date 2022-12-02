@@ -14,7 +14,7 @@ const postAdmin = async(req, res) => {
     }
 }
 const postInstructor = async(req, res) => {
-    const { firstName, lastName, country, phoneNumber, address, rating, email, bio } = req.body;
+    const { firstName, lastName, country, phoneNumber, address, email, bio } = req.body;
     try {
         const instructor = await Instructor.create({
             firstName,
@@ -25,7 +25,8 @@ const postInstructor = async(req, res) => {
             userName: req.body.firstName + req.body.lastName,
             password: randomstring.generate(7),
             email,
-            bio
+            bio,
+            instructorRating: {rating:0,ratersCount:0}
         });
         res.status(200).json({ message: "Instructor added successfully", message: "Your username is " + instructor.userName + " and your password is " + instructor.password });
     } catch (error) {
