@@ -121,17 +121,17 @@ const SearchCourse = (props) => {
     const [checkedSubjects, setCheckedSubjects] = useState([]);
     const [courseSubjects, setCourseSubjects] = useState([]);
     useEffect(()=>{
-        const fetchCourses = async () => {
+      const fetchCourses = async () => {
           const response = await fetch(`/course/find/${instruId}`);
-            const json = await response.json();
-            if(response.ok){
+          const json = await response.json();
+          if(response.ok){
             console.log(json);
-                setCourses(json)
+            setCourses(json)
             setCourseSubjects(getCourseSubjects(json));
-            }
-        }
-        fetchCourses();
-    }, [])
+          }
+      }
+      fetchCourses();
+  }, [])
 
   useEffect(()=>{
     const fetchInstructor = async () => {
@@ -157,25 +157,25 @@ const SearchCourse = (props) => {
 
   
    const performIntersection = (arr1, arr2, arr3, arr4) => { 
-        const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
-        const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
+    const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
+    const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
     const intersectionResult3 = intersectionResult2.filter(x => arr4.indexOf(x) !== -1);
     if(arr4.length === 0){
-        return intersectionResult2;
+      return intersectionResult2;
     }
     else{
       return intersectionResult3;  
     }
-    
-    }
+   
+}
 
   
     // Search method
     const searchMethod = (courseData) =>{
-        return courseData.filter((item)=>
-        keys.some((key)=>item[key].toString().toLowerCase().includes(queryS.toString().toLowerCase()))
-        );
-    }
+      return courseData.filter((item)=>
+      keys.some((key)=>item[key].toString().toLowerCase().includes(queryS.toString().toLowerCase()))
+      );
+  }
 
  
     // Price filter method
@@ -193,12 +193,12 @@ const SearchCourse = (props) => {
     const filterMethodOnRating = (courseData) =>{
       console.log(queryF3);
       if((!queryF3 ||  queryF3 === -0.5) && queryF3 !== 0){
-            return courseData;
-        }
-        else{
+          return courseData;
+      }
+      else{
           return courseData.filter(item=> item.courseRating === queryF3);
-        }
-    }
+      }
+  }
 
   // Subject filter
   const filterMethodOnSubject = (event) => {
@@ -219,14 +219,14 @@ const SearchCourse = (props) => {
     }
     setCheckedSubjects(updatedSubList);
   };
-    
+
     // const isChecked = (item) => checkedSubjects.includes(item) ? "checked-item" : "not-checked-item";
     // var checkedItems = checkedSubjects.length
     // ? checked.reduce((total, item) => {
     //     return total + ", " + item;
     //   })
     // : "";
-
+    
     return (
         <div>
           <div className='instructor-welcome' >
@@ -274,7 +274,7 @@ const SearchCourse = (props) => {
                         <p>Description: {subtitle.description}</p>
                         <p>Total Hours of the Chapter: {subtitle.hours}</p>
                         <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe> 
-        </div>
+                        </div>
                      ))}</div>
                     <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
                     <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>

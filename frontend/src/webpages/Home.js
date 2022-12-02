@@ -6,7 +6,7 @@ const Home = (props) => {
         currencyVal
     } = props;
     return (
-                     <div>
+        <div>
             <HomeSearch rateVal = {props.rateVal} currencyVal={props.currencyVal}/>
         </div>
     )

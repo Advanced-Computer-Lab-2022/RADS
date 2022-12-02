@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 //import CourseDetails from '../webcomponents/CourseDetails';
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
+import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
 
 
 const CorpTraineeLobby = (props) => {

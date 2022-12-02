@@ -105,7 +105,7 @@ const CorpTraineeSearch = (props) => {
     const [queryF2, setQueryF2] = useState("");
     const [queryF3, setQueryF3] = useState("");
     const [courses, setCourses] = useState([]);
-    const keys = ["courseTitle","subject","instructor"];   
+    const keys = ["courseTitle","subject","instructor"]; 
     const newKeys = ["subject"];   
     const [checkedSubjects, setCheckedSubjects] = useState([]);
     const [courseSubjects, setCourseSubjects] = useState([]);  
@@ -140,8 +140,8 @@ const CorpTraineeSearch = (props) => {
 
     // to Perform the intersection between the search elements and filter elements
     const performIntersection = (arr1, arr2, arr3, arr4) => { 
-        const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
-        const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
+      const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
+      const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
       const intersectionResult3 = intersectionResult2.filter(x => arr4.indexOf(x) !== -1);
       if(arr4.length === 0){
         return intersectionResult2;
@@ -149,7 +149,7 @@ const CorpTraineeSearch = (props) => {
       else{
         return intersectionResult3;  
       }
-    }
+  }
 
     // Search method
     const searchMethod = (courseData) =>{

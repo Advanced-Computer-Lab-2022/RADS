@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 const NewAdminButton = () => {
+    
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [error,setError] = useState(null);
@@ -23,7 +24,7 @@ const NewAdminButton = () => {
         if(!response.ok){
             setError(json.error);
         }
-        if(response.ok){    
+        if(response.ok){   
             setFirstName('');
             setLastName(''); 
             setError(null);
@@ -40,7 +41,7 @@ const NewAdminButton = () => {
             <input type="text" onChange={(e) => setFirstName(e.target.value)}
             value= {firstName}
             />
-            
+
             <label>Last name:</label>
             <input type="text" onChange={(e) => setLastName(e.target.value)}
             value= {lastName}

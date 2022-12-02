@@ -102,7 +102,7 @@ const priceMarks = [
   function valueStar(value) {
     return `${value}`;
   }
-
+   
 
   
 const HomeSearch = (props) => {
@@ -110,7 +110,7 @@ const HomeSearch = (props) => {
     const [queryF2, setQueryF2] = useState("");
     const [queryF3, setQueryF3] = useState("");
     const [courses, setCourses] = useState([]);
-    const keys = ["courseTitle","subject","instructor"];   
+    const keys = ["courseTitle","subject","instructor"];
     const newKeys = ["subject"];   
     const [checkedSubjects, setCheckedSubjects] = useState([]);
     const [courseSubjects, setCourseSubjects] = useState([]);
@@ -120,16 +120,16 @@ const HomeSearch = (props) => {
   } = props;
     // To fetch all the courses and put the results in courses
     useEffect(()=>{
-        const fetchCourses = async () => {
-            const response = await fetch('/course');
-            const json = await response.json();
-            if(response.ok){
+      const fetchCourses = async () => {
+          const response = await fetch('/course');
+          const json = await response.json();
+          if(response.ok){
               setCourses(json);
               setCourseSubjects(getCourseSubjects(json));
-            }
-        }
-        fetchCourses();
-    }, [])
+          }
+      }
+      fetchCourses();
+  }, [])
 
       //GET all course subjects
       const getCourseSubjects = (arr) =>{
@@ -144,10 +144,10 @@ const HomeSearch = (props) => {
  
 
     // to Perform the intersection between the search elements and filter elements
-
+  
     const performIntersection = (arr1, arr2, arr3, arr4) => { 
-        const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
-        const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
+      const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
+      const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
       const intersectionResult3 = intersectionResult2.filter(x => arr4.indexOf(x) !== -1);
       if(arr4.length === 0){
         return intersectionResult2;
@@ -155,8 +155,8 @@ const HomeSearch = (props) => {
       else{
         return intersectionResult3;  
       }
-    
-    }
+     
+  }
 
     // Search method
     const searchMethod = (courseData) =>{
@@ -241,9 +241,9 @@ const HomeSearch = (props) => {
             </div>         
              <div className="home-search">
              {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
-                     <div>
+                    <div>
                     <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {course.price*rateVal} {' '} {currencyVal}</Link>
-                     </div>
+                    </div>
                 ))}
             </div> 
         </div>
