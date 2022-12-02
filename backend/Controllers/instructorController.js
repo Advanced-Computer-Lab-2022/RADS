@@ -11,7 +11,7 @@ const getInstructors = async(req, res) => {
 
 
 const postInstructor = async(req, res) => {
-    const { firstName, lastName, userName, password, country, phoneNumber, address, rating } = req.body;
+    const { firstName, lastName, userName, password, country, phoneNumber, address } = req.body;
     try {
         const instructor = await Instructor.create({
             firstName,
@@ -19,9 +19,10 @@ const postInstructor = async(req, res) => {
             userName,
             password,
             country,
+            instructorRating: {rating:0,ratersCount:0},
             phoneNumber,
             address,
-            rating
+            
         });
         res.status(200).json({ message: "Instructor added successfully", message: "Instructor info" + instructor });
     } catch (error) {
@@ -119,6 +120,49 @@ const login = async (req, res) => {
   }
 //add promotionrate and promotionenddate in course
 
+//add a review to an instructor
+const postInstructorReview = async(req, res) => {
+    const { traineeRating, traineeReview, traineeId, corpTraineeId } = req.body;
+    const newReview = {
+        reviews: {
+            traineeRating: traineeRating,
+            traineeReview: traineeReview,
+            traineeId: traineeId,
+            corpTraineeId: corpTraineeId
+        }
+    
+    };
+    try {
+
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const instructor = await Instructor.findById({ "_id": id })
+        const currentOverallRating = instructor.courseRating.rating;
+        let currentRatingCount = instructor.courseRating.ratersCount;
+        const newOverallRating = (currentOverallRating*currentRatingCount + traineeRating)/(currentOverallCount+1);
+        currentRatingCount+=1;
+        instructor.courseRating.rating = newOverallRating;
+        instructor.courseRating.ratersCount = currentRatingCount;
+        await instructor.save();
+
+        const dbResp = await Instructor.findOneAndUpdate({ "_id": id }, { $push: newReview }, { new: true }).lean(true);
+        if (dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(201).json(newReview);
+        } else {
+            res.status(400).json({ message: 'Not able to update reviews' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+// GET a single course rating
+const getInstructorRating = async(req, res) => {
+    const id = mongoose.Types.ObjectId(req.params.id);
+    const instructor = await Instructor.findById({ "_id": id })
+    currentOverallRating = instructor.courseRating.rating
+    res.status(200).json("Course Rating is: " + currentOverallRating)
+}
 
 
 // Export the functions
@@ -129,6 +173,8 @@ module.exports = {
     deleteInstructor,
     updateInstructor,
     filterCourses,
+    postInstructorReview,
+    getInstructorRating,
     login,
     logout
 }
