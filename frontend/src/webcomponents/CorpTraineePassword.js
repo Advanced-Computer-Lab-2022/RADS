@@ -11,7 +11,7 @@ const CorpTraineePassword = () => {
         
         const corpTrainee = {password};
 
-        const response = await fetch('/CorpTrainee/password/:id',{
+        const response = await fetch('/CorpTrainee/password/635aff3e92426ef4e8a9e179',{
             method:'PATCH',
             body: JSON.stringify(corpTrainee),
             headers:{
