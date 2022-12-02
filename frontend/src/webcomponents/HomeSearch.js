@@ -172,7 +172,7 @@ const HomeSearch = (props) => {
             return courseData;
         }
         else{
-            return courseData.filter(item=> item.price === queryF2);
+            return courseData.filter(item=> item.price <= queryF2);
         }
     }
 
@@ -183,7 +183,8 @@ const HomeSearch = (props) => {
             return courseData;
         }
         else{
-            return courseData.filter(item=> item.courseRating === queryF3);
+          //console.log("here",queryF3 - 3);
+            return courseData.filter(item=> item.courseRating <= queryF3);
         }
     }
 
@@ -236,7 +237,7 @@ const HomeSearch = (props) => {
             <div className='homefilter-component3'>
                 <p><strong>Rating Filter</strong></p>
                 <Box sx={{ width: 950 }}>
-                <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar}  marks={ratingMarks}  valueLabelDisplay="on" size= "small" max = {5} step={0.5} min = {-0.5} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF3(v)}}/> 
+                <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar}  marks={ratingMarks}  valueLabelDisplay="on" size= "small" max = {5} step={0.1} min = {-0.1} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF3(v)}}/> 
                 </Box>
             </div>         
              <div className="home-search">

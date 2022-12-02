@@ -1,3 +1,4 @@
+const { time } = require('console');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -50,7 +51,7 @@ const instructorSchema = new Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     bio: {
         type: String
