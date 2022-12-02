@@ -88,6 +88,8 @@ const filterCourses = async(req, res) => {
     }
 }
 
+//add promotionrate and promotionenddate in course
+
 //add a review to an instructor
 const postInstructorReview = async(req, res) => {
     const { traineeRating, traineeReview, traineeId, corpTraineeId } = req.body;

@@ -19,6 +19,8 @@ router.delete('/:id', deleteInstructor);
 
 router.patch('/changeInfo/:id', updateInstructor);
 
+//router.post('/addPromotion/:id', addPromotion);
+
 // POST a new Review
 router.post('/review/:id', postInstructorReview);
 

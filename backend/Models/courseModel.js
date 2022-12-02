@@ -98,6 +98,12 @@ const courseSchema = new Schema({
     reviews: {
         type: [reviewSchema]
     },
+    promotionRate: {
+        type: Number
+    },
+    promotionEndDate: {
+        type: Date
+    },
 
 }, { timestamps: true })
 
