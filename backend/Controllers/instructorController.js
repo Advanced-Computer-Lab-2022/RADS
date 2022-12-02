@@ -87,6 +87,8 @@ const filterCourses = async(req, res) => {
     }
 }
 
+//add promotionrate and promotionenddate in course
+
 
 
 // Export the functions

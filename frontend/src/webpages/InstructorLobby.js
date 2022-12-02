@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 // Components
 import CourseCreate from "../webcomponents/CourseCreate"
 import SearchCourse from "../webcomponents/SearchCourse"
+import InstructorUpdateEmail from "../webcomponents/InstructorUpdateEmail"
+import InstructorUpdatePassword from "../webcomponents/InstructorUpdatePassword"
+import InstructorUpdateBio from "../webcomponents/InstructorUpdateBio"
 
 const InstructorLobby = (props) => {
     const{
@@ -42,6 +45,9 @@ const InstructorLobby = (props) => {
         <div className="course-add">
            <CourseCreate rateVal ={props.rateVal}  currencyVal={props.currencyVal}/>
         </div>
+        <InstructorUpdateEmail />
+        <InstructorUpdatePassword />
+        <InstructorUpdateBio />
         {/* <div className="instructor-list">
                         <ViewProfileButton />
                         </div> */}

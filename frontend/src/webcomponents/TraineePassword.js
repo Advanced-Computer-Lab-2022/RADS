@@ -1,6 +1,7 @@
 import { useState } from "react"
 
-const CorpTraineePassword = () => {
+
+const TraineePassword = () => {
 
 
     const [password, setPassword] = useState('');
@@ -9,11 +10,11 @@ const CorpTraineePassword = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const corpTrainee = {password};
+        const trainee = {password};
 
-        const response = await fetch('/CorpTrainee/password/:id',{
+        const response = await fetch('/Trainee/password/:id',{
             method:'PATCH',
-            body: JSON.stringify(corpTrainee),
+            body: JSON.stringify(trainee),
             headers:{
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
@@ -53,4 +54,4 @@ const CorpTraineePassword = () => {
 
 
 
-export default CorpTraineePassword;
+export default TraineePassword;

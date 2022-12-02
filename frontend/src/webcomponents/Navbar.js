@@ -16,6 +16,9 @@ const Navbar = () =>{
               <Link to="/corptraineelobby">
                 <h1>Corporate trainee Lobby</h1>
               </Link>
+              <Link to="/traineelobby">
+                <h1>Trainee Lobby</h1>
+              </Link>
             </div>
         </header>
     )
