@@ -13,6 +13,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useState,useEffect } from 'react';
 import InstructorRating from './webcomponents/InstructorRating';
 import CorpRating from './webcomponents/CorpRating';
+import TraineeView from './webcomponents/TraineeView';
+import TraineeForm from './webcomponents/TraineeForm';
 
 
 
@@ -89,6 +91,14 @@ function App() {
              <Route
             path="/corpview"
             element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/traineeview"
+            element={<TraineeView rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+              <Route
+            path="/traineeform"
+            element={<TraineeForm rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
             <Route
             path="/instructorlobby"

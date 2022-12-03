@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCTrainees, updatePassword } = require('../Controllers/corpTraineeController');
+const { getCTrainees, updatePassword, postCourseRegister } = require('../Controllers/corpTraineeController');
 const router = express.Router();
 
 router.get('/', getCTrainees);

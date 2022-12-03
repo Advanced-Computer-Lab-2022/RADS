@@ -36,28 +36,19 @@ const InstructorLobby = (props) => {
         fetchInstructors();
     }, [])
 
-    return ( <
-        div className = "lobby" >
-        <
-        SearchCourse rateVal = { props.rateVal }
-        currencyVal = { props.currencyVal }
-        /> <
-        div className = "course-add" >
-        <
-        CourseCreate rateVal = { props.rateVal }
-        currencyVal = { props.currencyVal }
-        /> < /
-        div > <
-        InstructorUpdateEmail / >
-        <
-        InstructorUpdatePassword / >
-        <
-        InstructorUpdateBio / > {
+    return ( <div className = "lobby" >
+        <SearchCourse rateVal = {props.rateVal} currencyVal = { props.currencyVal }/> 
+        <div className = "course-add" >
+        <CourseCreate rateVal = {props.rateVal} currencyVal = {props.currencyVal}/>
+         </div>
+          <InstructorUpdateEmail />
+        <InstructorUpdatePassword />
+        <InstructorUpdateBio /> {
             /* <div className="instructor-list">
                                     <ViewProfileButton />
                                     </div> */
-        } <
-        /div>
+        }
+        </div>
     )
 }
 
