@@ -110,7 +110,7 @@ const SearchCourse = (props) => {
 
     //const params = new URLSearchParams(window.location.search);
 
-    const instruId ="635afde192426ef4e8a9e165";
+    const instruId ="638a892aded1258e6171b5b8";
     const [queryS, setQueryS] = useState("");
     const [queryF2, setQueryF2] = useState("");
     const [queryF3, setQueryF3] = useState("");
@@ -231,6 +231,7 @@ const SearchCourse = (props) => {
         <div>
           <div className='instructor-welcome' >
             <p>Welcome, <strong>{instructorName}</strong></p>
+            <button onClick={() => window.location.href=`/instructorrating?instructorId=${instruId}`}>View rating & reviews</button>
           </div>
         <div className='search-component'>
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>
@@ -280,7 +281,7 @@ const SearchCourse = (props) => {
                     <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
                     <p><strong>Subject of the course: </strong>{course.subject}</p>
                     <p><strong>Instructor of the course: </strong>{instructorName}</p>
-                    <p><strong>Rating of the course: </strong>{course.courseRating} Out of 5</p>
+                    <p><strong>Rating of the course: </strong>{course.courseRating.rating} Out of 5</p>
                     <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise)=>(
                         <div>
                         <p>Question: {exercise.question}</p>

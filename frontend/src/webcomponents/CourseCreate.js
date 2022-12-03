@@ -9,7 +9,6 @@ const CourseCreate = (props) => {
     const [subject,setSubject] = useState('');
     const [totalHours,setTotalHours] = useState('');
     const [instructor,setInstructor] = useState('');
-    const [courseRating, setCourseRating] = useState('');
     const [courseExercises,setCourseExercises] = useState([{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}]);
     const [coursePreview,setCoursePreview] = useState('');
     const [error,setError] = useState(null);
@@ -19,7 +18,7 @@ const CourseCreate = (props) => {
     } = props;
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission   
-        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseRating,courseExercises,coursePreview};
+        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseExercises,coursePreview};
         const response = await fetch('/course/add',{
             method:'POST',
             body: JSON.stringify(course),
@@ -42,7 +41,6 @@ const CourseCreate = (props) => {
             setSubject('');
             setTotalHours('');
             setInstructor('');
-            setCourseRating('');
             setCourseExercises([{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}]);
             setCoursePreview('');
             setError(null);
@@ -170,14 +168,7 @@ const CourseCreate = (props) => {
             <label>Instructor of the course: </label>
             <input type="text" onChange={(e) => setInstructor(e.target.value)}
             value= {instructor}
-            />
-            
-            <label>Course Rating: </label>
-            <input type="text" onChange={(e) => setCourseRating(e.target.value)}
-            value= {courseRating}
-            />
-            
-            
+            />           
             <br></br>
 
            <label>Subtitles: </label>

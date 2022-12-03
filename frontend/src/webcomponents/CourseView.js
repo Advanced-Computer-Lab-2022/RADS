@@ -50,7 +50,7 @@ return(
             <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
             <p><strong>Subject of the course: </strong>{course.subject}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
-            <p><strong>Rating of the course: </strong>{course.courseRating} Out of 5</p>
+            {/* <p><strong>Rating of the course: </strong>{course.courseRating.rating/course.courseRating.ratersCount} Out of 5</p> */}
             <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise)=>(
                 <div>
                 <p>Question: {exercise.question}</p>

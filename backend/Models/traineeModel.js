@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const courseSchema = new Schema({
+    courseId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Course',
+    },
+    courseGrade: {
+        type: Number
+    }
+})
+
 const traineeSchema = new Schema({
     firstName: {
         type: String,
@@ -28,7 +38,10 @@ const traineeSchema = new Schema({
     },
     address: {
         type: String,
-        required:true
+        required: true
+    },
+    courses: {
+        type: [courseSchema]
     }
 
 }, { timestamps: true })

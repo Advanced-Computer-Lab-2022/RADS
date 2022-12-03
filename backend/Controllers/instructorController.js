@@ -18,10 +18,10 @@ const postInstructor = async(req, res) => {
             userName,
             password,
             country,
-            instructorRating: {rating:0,ratersCount:0},
+            instructorRating: { rating: 0, ratersCount: 0 },
             phoneNumber,
             address,
-            
+
         });
         res.status(200).json({ message: "Instructor added successfully", message: "Instructor info" + instructor });
     } catch (error) {
@@ -100,16 +100,15 @@ const postInstructorReview = async(req, res) => {
             traineeId: traineeId,
             corpTraineeId: corpTraineeId
         }
-    
+
     };
     try {
-
         const id = mongoose.Types.ObjectId(req.params.id);
         const instructor = await Instructor.findById({ "_id": id })
         const currentOverallRating = instructor.courseRating.rating;
         let currentRatingCount = instructor.courseRating.ratersCount;
-        const newOverallRating = (currentOverallRating*currentRatingCount + traineeRating)/(currentOverallCount+1);
-        currentRatingCount+=1;
+        const newOverallRating = (currentOverallRating * currentRatingCount + traineeRating) / (currentOverallCount + 1);
+        currentRatingCount += 1;
         instructor.courseRating.rating = newOverallRating;
         instructor.courseRating.ratersCount = currentRatingCount;
         await instructor.save();

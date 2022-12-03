@@ -57,7 +57,7 @@ const postCourse = async(req, res) => {
             subject,
             totalHours,
             instructor,
-            courseRating: {rating:0,ratersCount:0},
+            courseRating: { rating: 0, ratersCount: 0 },
             courseExercises,
             coursePreview
         });
@@ -105,20 +105,18 @@ const postCourseReview = async(req, res) => {
             traineeId: traineeId,
             corpTraineeId: corpTraineeId
         }
-    
+
     };
     try {
-
         const id = mongoose.Types.ObjectId(req.params.id);
         const course = await Course.findById({ "_id": id })
         const currentOverallRating = course.courseRating.rating;
         let currentRatingCount = course.courseRating.ratersCount;
-        const newOverallRating = (currentOverallRating*currentRatingCount + traineeRating)/(currentOverallCount+1);
-        currentRatingCount+=1;
+        const newOverallRating = (currentOverallRating * currentRatingCount + traineeRating) / (currentOverallCount + 1);
+        currentRatingCount += 1;
         course.courseRating.rating = newOverallRating;
         course.courseRating.ratersCount = currentRatingCount;
         await course.save();
-
         const dbResp = await Course.findOneAndUpdate({ "_id": id }, { $push: newReview }, { new: true }).lean(true);
         if (dbResp) {
             // dbResp will be entire updated document, we're just returning newly added message which is input.

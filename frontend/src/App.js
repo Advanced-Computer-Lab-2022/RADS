@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState,useEffect } from 'react';
+import InstructorRating from './webcomponents/InstructorRating';
+import CorpRating from './webcomponents/CorpRating';
+
 
 
 
@@ -75,6 +78,18 @@ function App() {
 </div>
         <div className='webpages'>
           <Routes>
+          <Route
+            path="/instructorrating"
+            element={<InstructorRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/corprating"
+            element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/corpview"
+            element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
             <Route
             path="/instructorlobby"
             element={<InstructorLobby rateVal = {rateValue} currencyVal = {inputValue} />}
