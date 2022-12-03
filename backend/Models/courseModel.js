@@ -3,13 +3,66 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const reviewSchema = mongoose.Schema({
+    traineeRating: {
+        type: Number
+    },
+    traineeReview: {
+        type: String
+    },
+    traineeId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'traineeModel'
+    },
+    corpTraineeId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'corpTraineeModel'
+    }
+});
+
+const subTitleSchema = mongoose.Schema({
+    subTitle: {
+        type: String
+    },
+    description: {
+        type: String
+    },
+    videoLink: {
+        type: String
+    },
+    hours: {
+        type: Number
+    }
+});
+
+const exerciseSchema = mongoose.Schema({
+    question: {
+        type: String
+    },
+    firstChoice: {
+        type: String
+    },
+    secondChoice: {
+        type: String
+    },
+    thirdChoice: {
+        type: String
+    },
+    fourthChoice: {
+        type: String
+    },
+    answer: {
+        type: String
+    }
+});
+
 const courseSchema = new Schema({
     courseTitle: {
         type: String,
         required: true
     },
     subtitles: {
-        type: String,
+        type: [subTitleSchema],
         required: true
     },
     price: {
@@ -29,17 +82,28 @@ const courseSchema = new Schema({
         required: true
     },
     instructor: {
-        type: String,
-        required: true
-    },
-    courseRating: {
-        type: Number,
-        required: true
+        type: mongoose.Types.ObjectId,
+        ref: 'instructorModel'
     },
     courseExercises: {
-        type: String,
-        required: true
-    }
+        type: [exerciseSchema]
+    },
+    coursePreview: {
+        type: String
+    },
+    courseRating: {
+        rating: Number,
+        ratersCount: Number
+    },
+    reviews: {
+        type: [reviewSchema]
+    },
+    promotionRate: {
+        type: Number
+    },
+    promotionEndDate: {
+        type: Date
+    },
 
 }, { timestamps: true })
 

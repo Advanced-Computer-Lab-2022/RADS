@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import InstructorProfileDetails from '../webcomponents/InstructorProfileDetails'
-import InstructorDetails from '../webcomponents/InstructorDetails'
+import InstructorProfileDetails from './InstructorProfileDetails'
+import InstructorDetails from './InstructorDetails'
 
 const ViewProfileButton = () => {
 
@@ -20,8 +20,6 @@ const ViewProfileButton = () => {
                 setModal(false);
                 console.log(json);
                 setInstructor(json)
-
-
             }
         }
         fetchInstInfo();
@@ -37,7 +35,6 @@ const ViewProfileButton = () => {
                      {modal && <InstructorProfileDetails key = {instructor._id} instructor = {instructor}  />}
                      </div>
                 ))}
-
         </div>
         </div>
     )

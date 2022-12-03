@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react"
 //import CourseDetails from '../webcomponents/CourseDetails';
-import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
-import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
+import TraineePassword from "../webcomponents/TraineePassword";
 
 
-const CorpTraineeLobby = (props) => {
+const TraineeLobby = (props) => {
     const {
         rateVal,
         currencyVal
     } = props;
     const [courses, setCourses] = useState(null);
-    const [corpTrainee, setPassword] = useState(null);
+    const [trainee, setPassword] = useState(null);
     useEffect(() => {
         const fetchCourses = async() => {
             const response = await fetch('/course');
@@ -25,7 +24,7 @@ const CorpTraineeLobby = (props) => {
     }, [])
     useEffect(() => {
         const fetchCourses = async() => {
-            const response = await fetch('/CorpTrainee/password/:id');
+            const response = await fetch('/Trainee/password/:id');
             const json = await response.json();
 
             if (response.ok) {
@@ -48,15 +47,12 @@ const CorpTraineeLobby = (props) => {
     // }
     return ( <
         div className = "home-lobby" >
-        Welcome to RADS Online Course Provider(CorpTraineeLobby side) <
-        CorpTraineeSearch rateVal = { props.rateVal }
-        currencyVal = { props.currencyVal }
-        /> <
-        CorpTraineePassword / >
+        Welcome to RADS Online Course Provider(TraineeLobby side) <
+        TraineePassword / >
         <
         /div>
     )
 }
 
 
-export default CorpTraineeLobby;
+export default TraineeLobby;
