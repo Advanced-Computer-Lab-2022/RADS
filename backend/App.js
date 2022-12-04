@@ -25,7 +25,7 @@ const instructorRoute = require('./Routes/Instructor');
 const courseRoute = require('./Routes/Course');
 const adminRoute = require('./Routes/Admin');
 const corpTraineeRoute = require('./Routes/corpTrainee');
-const traineeRoute = require('./Routes/trainee');
+const traineeRoute = require('./Routes/Trainee');
 
 // Routes
 app.use('/instructor', instructorRoute);

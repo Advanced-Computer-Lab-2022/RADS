@@ -14,25 +14,25 @@ const CourseView =(props)=>{
            
 
 
-useEffect(()=>{
-    const fetchCourse = async () => {
-        const response = await fetch(`/course/${courseId}`);
-        const json = await response.json();
-        if(response.ok){
-            setCourse(json);
-            fetchInstructor(json.instructor); 
+    useEffect(()=>{
+        const fetchCourse = async () => {
+            const response = await fetch(`/course/${courseId}`);
+            const json = await response.json();
+            if(response.ok){
+                setCourse(json);
+                fetchInstructor(json.instructor); 
+            }
         }
+        fetchCourse();
+    }, [])
+    
+const fetchInstructor = async (instID) => {
+    const response = await fetch(`/instructor/${instID}`);
+    const json = await response.json();
+    if(response.ok){
+        setinstructorName(json.firstName+" "+json.lastName);
     }
-    fetchCourse();
-}, [])
-
-    const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if(response.ok){
-            setinstructorName(json.firstName+" "+json.lastName);
-        }
-    }
+}
 
 
 return(
@@ -43,14 +43,11 @@ return(
                 <p>{subtitle.subTitle}</p>
                 <p>Description:{subtitle.description}</p>
                 <p>Total Hours of the Chapter: {subtitle.hours}</p>
-                <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe> 
                 </div>
              ))}</div>
             <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
-            <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
-            <p><strong>Subject of the course: </strong>{course.subject}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
-            {/* <p><strong>Rating of the course: </strong>{course.courseRating.rating/course.courseRating.ratersCount} Out of 5</p> */}
+            <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
             <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise)=>(
                 <div>
                 <p>Question: {exercise.question}</p>

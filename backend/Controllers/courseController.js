@@ -22,7 +22,9 @@ const getCourse = async(req, res) => {
 }
 
 
-const getCourseByInstructor = async(req, res) => {
+
+
+const getCoursesByInstructor = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'There does not exist a course that has an Instructor with the corresponding id.' });
@@ -34,15 +36,7 @@ const getCourseByInstructor = async(req, res) => {
     res.status(200).json(course);
 }
 
-// const filterCourse = async(req, res) => {
-//     const courseId = req.query.courseId;
-//     if (courseId) {
-//         const result = await Course.find({ _id: mongoose.Types.ObjectId(courseId) }).populate('_id');
-//         res.status(200).json(result)
-//     } else {
-//         res.status(400).json({ error: "courseId is required" })
-//     }
-// }
+
 
 
 // POST new course
@@ -57,9 +51,10 @@ const postCourse = async(req, res) => {
             subject,
             totalHours,
             instructor,
-            courseRating: { rating: 0, ratersCount: 0 },
+            courseRating: 1,
+            ratersCount: 1,
             courseExercises,
-            coursePreview
+            coursePreview,
         });
         res.status(200).json({ message: "Course added successfully", message: "Course info" + course });
     } catch (error) {
@@ -97,11 +92,11 @@ const updateCourse = async(req, res) => {
 
 //add a review to a course
 const postCourseReview = async(req, res) => {
-    const { traineeRating, traineeReview, traineeId, corpTraineeId } = req.body;
+    const { cRating, cReview, traineeId, corpTraineeId } = req.body;
     const newReview = {
         reviews: {
-            traineeRating: traineeRating,
-            traineeReview: traineeReview,
+            cRating: cRating,
+            cReview: cReview,
             traineeId: traineeId,
             corpTraineeId: corpTraineeId
         }
@@ -110,12 +105,12 @@ const postCourseReview = async(req, res) => {
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
         const course = await Course.findById({ "_id": id })
-        const currentOverallRating = course.courseRating.rating;
-        let currentRatingCount = course.courseRating.ratersCount;
-        const newOverallRating = (currentOverallRating * currentRatingCount + traineeRating) / (currentOverallCount + 1);
+        const currentOverallRating = course.courseRating;
+        let currentRatingCount = course.ratersCount;
+        const newOverallRating = (currentOverallRating * currentRatingCount + cRating) / (currentRatingCount + 1);
         currentRatingCount += 1;
-        course.courseRating.rating = newOverallRating;
-        course.courseRating.ratersCount = currentRatingCount;
+        course.courseRating = newOverallRating;
+        course.ratersCount = currentRatingCount;
         await course.save();
         const dbResp = await Course.findOneAndUpdate({ "_id": id }, { $push: newReview }, { new: true }).lean(true);
         if (dbResp) {
@@ -128,6 +123,9 @@ const postCourseReview = async(req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+
+
 
 // GET a single course rating
 const getCourseRating = async(req, res) => {
@@ -201,6 +199,8 @@ const updateReview = async(req, res) => {
     res.status(200).json({ message: "Review added successfully", message: "Review info" + review });
 }
 
+
+
 // Export the functions
 module.exports = {
     getCourses,
@@ -208,7 +208,7 @@ module.exports = {
     postCourse,
     deleteCourse,
     updateCourse,
-    getCourseByInstructor,
+    getCoursesByInstructor,
     postCourseReview,
-    getCourseRating
+    getCourseRating,
 }

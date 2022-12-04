@@ -1,10 +1,30 @@
 const Trainee = require('../Models/traineeModel');
 const mongoose = require('mongoose');
-
+const Course = require('../Models/courseModel');
 const getTrainees = async(req, res) => {
     const trainees = await Trainee.find({}).sort({ createdAt: -1 });
     res.status(200).json(trainees);
 }
+
+const postTrainee = async(req, res) => {
+    const { firstName, lastName, userName, password, country, phoneNumber, address } = req.body;
+    try {
+        const trainee = await Trainee.create({
+            firstName,
+            lastName,
+            userName,
+            password,
+            country,
+            phoneNumber,
+            address,
+            courses: []
+        });
+        res.status(200).json({ message: "trainee added successfully", message: "Instructor info" + trainee });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 
 const getTrainee = async(req, res) => {
     const { id } = req.params;
@@ -45,13 +65,12 @@ const getTraineeCourses = async(req, res) => {
 }
 
 const postCourseRegister = async(req, res) => {
-    const { courseId } = req.body;
+    const { courseId, courseGrade } = req.body;
     const newCourse = {
         courses: {
             courseId: courseId,
-            courseGrade: 0
+            courseGrade: courseGrade
         }
-
     };
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
@@ -74,5 +93,6 @@ module.exports = {
     getTrainee,
     updatePassword,
     postCourseRegister,
-    getTraineeCourses
+    getTraineeCourses,
+    postTrainee
 }

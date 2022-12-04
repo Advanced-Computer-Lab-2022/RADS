@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const reviewSchema = mongoose.Schema({
-    traineeRating: {
+    cRating: {
         type: Number
     },
-    traineeReview: {
+    cReview: {
         type: String
     },
     traineeId: {
@@ -92,8 +92,10 @@ const courseSchema = new Schema({
         type: String
     },
     courseRating: {
-        rating: Number,
-        ratersCount: Number
+        type: Number
+    },
+    ratersCount: {
+        type: Number
     },
     reviews: {
         type: [reviewSchema]

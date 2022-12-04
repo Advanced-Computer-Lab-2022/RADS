@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCourseByInstructor, postCourseReview, getCourseRating } = require('../Controllers/courseController');
+const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCoursesByInstructor, postCourseReview, getCourseRating } = require('../Controllers/courseController');
 
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router.get('/', getCourses);
 router.get('/:id', getCourse);
 
 // GET all Courses by a specific instructor
-router.get('/find/:id', getCourseByInstructor);
+router.get('/find/:id', getCoursesByInstructor);
 
 // POST a new Course
 router.post('/add', postCourse);

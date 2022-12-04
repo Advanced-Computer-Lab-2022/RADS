@@ -8,49 +8,39 @@ const TraineeForm =(props)=>{
     } = props;
     const params = new URLSearchParams(window.location.search);
     const traineeId = params.get('traineeId');
-    const [course,setCourse] = useState([]);
     const [courses,setCourses] = useState([]);
-    const [trainee,setTrainee] = useState([]);
-    const [instructorName,setinstructorName] = useState([]);
 
 
     useEffect(()=>{
         const viewRegistered = async () => {
-            const response = await fetch(`/trainee/getcourses/${traineeId}`);
+            const response = await fetch(`/trainee/${traineeId}`);
             const json = await response.json();
+            console.log(json.courses);
             if(response.ok){
-                setCourses(json);
-                fetchTrainee();
+                fetchCourse(json.courses);
             }
         }
         viewRegistered();
     }, [])
 
-  
-    const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
+
+    const fetchCourse = async (coursesIDs) => {
+        let x = [coursesIDs.length];
+        console.log(coursesIDs);
+        for(let i = 0;i<coursesIDs.length;i++){
+        const response = await fetch(`/course/${coursesIDs[i].courseId}`);
         const json = await response.json();
         if(response.ok){
-            setTrainee(json);
+            x[i] = json;
         }
     }
-
-    const registerCourse = async () =>{
-        
-        const response = await fetch('/trainee/postCourseRegister',{
-            method:'POST',
-            body: JSON.stringify(courseId),
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json();
-    } 
+    setCourses(x);
+    }
+    
 return(
     <div>
          {courses && courses.map((course)=>(
-          <div>
+          <div key = {course._id}>
           <h4>The information of course: {course.courseTitle} </h4>
           <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle)=>(
                 <div>
@@ -63,14 +53,7 @@ return(
             <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
             <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
             <p><strong>Subject of the course: </strong>{course.subject}</p>
-            <p><strong>Instructor of the course: </strong>{instructorName}</p>
-            {/* <p><strong>Rating of the course: </strong>{course.courseRating.rating/course.courseRating.ratersCount} Out of 5</p> */}
-            <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise)=>(
-                <div>
-                <p>Question: {exercise.question}</p>
-                
-                </div>
-             ))}</div>
+             <button onClick={() => window.location.href=`/traineerate?traineeId=${traineeId}&courseId=${course._id}`}>Rate Course</button>
             <p><strong>============================================================================================================</strong></p>
                 </div>
              ))}

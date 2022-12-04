@@ -189,7 +189,7 @@ const HomeSearch = (props) => {
         }
         else{
           //console.log("here",queryF3 - 3);
-            return courseData.filter(item=> item.courseRating.rating <= queryF3);
+            return courseData.filter(item=> item.courseRating <= queryF3);
         }
     }
 
@@ -248,7 +248,7 @@ const HomeSearch = (props) => {
              <div className="home-search">
              {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
                     <div>
-                    <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating.rating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal}</Link>
+                    <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal}</Link>
                     </div>
                 ))}
             </div>

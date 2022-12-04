@@ -46,4 +46,4 @@ const traineeSchema = new Schema({
 
 }, { timestamps: true })
 
-module.exports = mongoose.model('trainee', traineeSchema);
+module.exports = mongoose.model('Trainee', traineeSchema);

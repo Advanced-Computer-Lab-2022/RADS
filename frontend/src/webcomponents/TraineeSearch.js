@@ -109,7 +109,7 @@ function valueDollar(value,currencyVal) {
   return `${value} ${currencyVal}`;
 }
 const TraineeSearch = (props) => {
-    const traineeId = '';
+    const traineeId = '638c158f9ac57151d54702a3';
     const [queryS, setQueryS] = useState("");
     const [queryF2, setQueryF2] = useState("");
     const [queryF3, setQueryF3] = useState("");
@@ -190,7 +190,7 @@ const TraineeSearch = (props) => {
         }
         else{
           //console.log("here",queryF3 - 3);
-            return courseData.filter(item=> item.courseRating.rating <= queryF3);
+            return courseData.filter(item=> item.courseRating <= queryF3);
         }
     }
 
@@ -250,7 +250,7 @@ const TraineeSearch = (props) => {
              <div className="home-search">
              {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
                     <div>
-                    <Link onClick={() => window.location.href=`/traineeview?courseId=${course._id}&traineeId=${traineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating.rating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal}</Link>
+                    <Link onClick={() => window.location.href=`/traineeview?courseId=${course._id}&traineeId=${traineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal}</Link>
                     </div>
                 ))}
             </div>
