@@ -118,6 +118,7 @@ const TraineeSearch = (props) => {
     const newKeys = ["subject"];   
     const [checkedSubjects, setCheckedSubjects] = useState([]);
     const [courseSubjects, setCourseSubjects] = useState([]);
+    const [traineeName, setTraineeName] = useState('');
     const{
       rateVal,
       currencyVal
@@ -126,17 +127,27 @@ const TraineeSearch = (props) => {
 
     // To fetch all the courses and put the results in courses
     useEffect(()=>{
-        const fetchCourses = async () => {
-            const response = await fetch('/course');
-            const json = await response.json();
-            if(response.ok){
-                setCourses(json);
-                setCourseSubjects(getCourseSubjects(json));
-            }
+      const fetchCourses = async () => {
+        const response = await fetch('/course');
+        const json = await response.json();
+        if(response.ok){
+            setCourses(json);
+            setCourseSubjects(getCourseSubjects(json));
+            fetchTrainee();
         }
+    }
       fetchCourses();
   }, [])
 
+
+  const fetchTrainee = async () => {
+    const response = await fetch(`/trainee/${traineeId}`);
+    const json = await response.json();
+    if(response.ok){
+        let x = json.firstName +" " + json.lastName;
+        setTraineeName(x);
+    }
+}
       //GET all course subjects
       const getCourseSubjects = (arr) =>{
         const newArray = [];
@@ -217,6 +228,7 @@ const TraineeSearch = (props) => {
   
     return (
         <div>
+          <p><strong>Welcome {traineeName}</strong></p>
         <div className='homesearch-component'>
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>
             <button onClick={() => window.location.href=`/traineeform?traineeId=${traineeId}`}>View my Courses</button>
