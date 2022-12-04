@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const reviewSchema = mongoose.Schema({
-    traineeRating: {
+    cRating: {
         type: Number
     },
-    traineeReview: {
+    cReview: {
         type: String
     },
     traineeId: {
@@ -35,7 +35,7 @@ const subTitleSchema = mongoose.Schema({
     }
 });
 
-const exerciseSchema = mongoose.Schema({
+const questionSchema = mongoose.Schema({
     question: {
         type: String
     },
@@ -53,6 +53,18 @@ const exerciseSchema = mongoose.Schema({
     },
     answer: {
         type: String
+    }
+});
+
+const exerciseSchema = mongoose.Schema({
+    excerciseId: {
+        type: Number
+    },
+    questions: {
+        type: [questionSchema]
+    },
+    grade: {
+        type: Number
     }
 });
 
@@ -92,11 +104,19 @@ const courseSchema = new Schema({
         type: String
     },
     courseRating: {
-        rating: Number,
-        ratersCount: Number
+        type: Number
+    },
+    ratersCount: {
+        type: Number
     },
     reviews: {
         type: [reviewSchema]
+    },
+    promotionRate: {
+        type: Number
+    },
+    promotionEndDate: {
+        type: Date
     },
 
 }, { timestamps: true })

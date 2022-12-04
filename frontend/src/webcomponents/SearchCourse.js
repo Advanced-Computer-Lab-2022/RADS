@@ -196,7 +196,7 @@ const SearchCourse = (props) => {
           return courseData;
       }
       else{
-          return courseData.filter(item=> item.courseRating === queryF3);
+          return courseData.filter(item=> item.courseRating <= queryF3);
       }
   }
 
@@ -231,6 +231,7 @@ const SearchCourse = (props) => {
         <div>
           <div className='instructor-welcome' >
             <p>Welcome, <strong>{instructorName}</strong></p>
+            <button onClick={() => window.location.href=`/instructorrating?instructorId=${instruId}`}>View rating & reviews</button>
           </div>
         <div className='search-component'>
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>

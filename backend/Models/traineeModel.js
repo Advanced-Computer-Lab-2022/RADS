@@ -2,6 +2,25 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const exerciseSchema = mongoose.Schema({
+    excerciseId: {
+        type: Number
+    },
+    grade: {
+        type: Number
+    }
+});
+
+const courseSchema = new Schema({
+    courseId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'courseModel',
+    },
+    exerciseGrades: {
+        type: [exerciseSchema]
+    }
+})
+
 const traineeSchema = new Schema({
     firstName: {
         type: String,
@@ -28,9 +47,12 @@ const traineeSchema = new Schema({
     },
     address: {
         type: String,
-        required:true
+        required: true
+    },
+    courses: {
+        type: [courseSchema]
     }
 
 }, { timestamps: true })
 
-module.exports = mongoose.model('trainee', traineeSchema);
+module.exports = mongoose.model('Trainee', traineeSchema);

@@ -1,12 +1,13 @@
+const { time } = require('console');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const ratingReviewSchema = mongoose.Schema({
-    traineeRating: {
+const ReviewSchema = mongoose.Schema({
+    iRating: {
         type: Number
     },
-    traineeReview: {
+    iReview: {
         type: String
     },
     traineeId: {
@@ -48,28 +49,21 @@ const instructorSchema = new Schema({
         type: String,
         required: true
     },
-    rating: {
-        type: Number
-    },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     bio: {
         type: String
     },
     instructorRating: {
-        type: Object,
-        rating: {
-            type: Number
-        },
-        ratersCount: {
-            type: Number
-        },
-        required: true
+        type: Number
+    },
+    ratersCount: {
+        type: Number
     },
     reviews: {
-        type: [ratingReviewSchema]
+        type: [ReviewSchema]
     }
 }, { timestamps: true })
 

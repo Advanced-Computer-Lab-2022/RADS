@@ -1,6 +1,7 @@
 import{BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './webcomponents/Navbar';
 import InstructorLobby from './webpages/InstructorLobby';
+import TraineeLobby from './webpages/TraineeLobby';
 import Home from './webpages/Home';
 import Admin from './webpages/Admin';
 import CorpTraineeLobby from './webpages/CorpTraineeLobby';
@@ -11,10 +12,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState,useEffect } from 'react';
-import CorpTraineeCourses from './webcomponents/CorpTraineeCourses';
-import CorpTraineeViewCourse from './webcomponents/CorpTraineeViewCourse';
-import TraineeCourses from './webcomponents/TraineeCourses';
-import TraineeViewCourse from './webcomponents/CorpTraineeViewCourse';
+import InstructorRating from './webcomponents/InstructorRating';
+import CorpRating from './webcomponents/CorpRating';
+import TraineeView from './webcomponents/TraineeView';
+import TraineeForm from './webcomponents/TraineeForm';
+import TraineeRating from './webcomponents/TraineeRating';
+import TraineeSolve from './webcomponents/TraineeSolve';
 
 
 
@@ -55,6 +58,13 @@ function App() {
   getOptionLabel={(option) => option.country}
   renderOption={(props, option) => (
     <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+       {/* <img
+            loading="lazy"
+            width="20"
+            src={`https://flagcdn.com/w20/${option.country.toLowerCase()}.png`}
+            srcSet={`https://flagcdn.com/w40/${option.country.toLowerCase()}.png 2x`}
+            alt=""
+          /> */}
       {option.country} 
     </Box>
   )}
@@ -73,6 +83,34 @@ function App() {
 </div>
         <div className='webpages'>
           <Routes>
+          <Route
+            path="/instructorrating"
+            element={<InstructorRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/corprating"
+            element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/corpview"
+            element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/traineesolve"
+            element={<TraineeSolve rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+              <Route
+            path="/traineerate"
+            element={<TraineeRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/traineeview"
+            element={<TraineeView rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+              <Route
+            path="/traineeform"
+            element={<TraineeForm rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
             <Route
             path="/instructorlobby"
             element={<InstructorLobby rateVal = {rateValue} currencyVal = {inputValue} />}
@@ -101,12 +139,6 @@ function App() {
             <Route
             path="/traineelobby"
             element={<TraineeLobby rateVal = {rateValue} currencyVal = {inputValue}/>}
-            />
-            <Route path="/viewtraineecourses"
-            element={<TraineeCourses rateVal = {rateValue} currencyVal = {inputValue}/>}
-            />
-            <Route path="/filtertraineecourses"
-            element={<TraineeViewCourse rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
           </Routes>
           
