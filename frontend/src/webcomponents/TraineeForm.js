@@ -1,82 +1,79 @@
-import { useState } from "react"
+// import axios from 'axios';
+import { useState,useEffect } from 'react';
 
-const TraineeForm = () => {
-    const [firstName,setFirstName] = useState('');
-    const [lastName,setLastName] = useState('');
-    const [country,setCountry] = useState('');
-    const [phoneNumber,setPhoneNumber] = useState('');
-    const [address,setAddress] = useState('');
-    const [error,setError] = useState(null);
+const TraineeForm =(props)=>{
+    const{
+        rateVal,
+        currencyVal
+    } = props;
+    const params = new URLSearchParams(window.location.search);
+    const traineeId = params.get('traineeId');
+    const [courses,setCourses] = useState([]);
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault() //prevent form submission
-        
-        const corpTrainee = {firstName,lastName,country,phoneNumber,address};
-        
-        const response = await fetch('/Admin/addCTrainee',{
-            method:'POST',
-            body: JSON.stringify(Trainee),
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
+
+    useEffect(()=>{
+        const viewRegistered = async () => {
+            const response = await fetch(`/trainee/${traineeId}`);
+            const json = await response.json();
+            console.log(json.courses);
+            if(response.ok){
+                fetchCourse(json.courses);
             }
-        })
-        
+        }
+        viewRegistered();
+    }, [])
+
+
+    const fetchCourse = async (coursesIDs) => {
+        let x = [coursesIDs.length];
+        console.log(coursesIDs);
+        for(let i = 0;i<coursesIDs.length;i++){
+        const response = await fetch(`/course/${coursesIDs[i].courseId}`);
         const json = await response.json();
-
-        if(!response.ok){
-            setError(json.error);
+        if(response.ok){
+            x[i] = json;
         }
-        if(response.ok){    
-            setFirstName('');
-            setLastName('');
-            setCountry('');
-            setPhoneNumber('');
-            setAddress('');
-            setError(null);
-            console.log("New Trainee Added", json);
-            
-            //refresh page on successful submission
-            window.location.reload();
-        }
-    }    
+    }
+    setCourses(x);
+    }
 
-    return (
-        <form className="create-corpTrainee" onSubmit={handleSubmit}>
-            <h3>CorpTrainee: Insert Your Information</h3>
-           
-            <label>First name:</label>
-            <input type="text" onChange={(e) => setFirstName(e.target.value)}
-            value= {firstName}
-            />
-
-            <label>Last name:</label>
-            <input type="text" onChange={(e) => setLastName(e.target.value)}
-            value= {lastName}
-            />
-
-
-            <label>Country:</label>
-            <input type="text" onChange={(e) => setCountry(e.target.value)}
-            value= {country}
-            />
-
-            <label>Phone Number:</label>
-            <input type="number" onChange={(e) => setPhoneNumber(e.target.value)}
-            value= {phoneNumber}
-            />
-
-            <label>Address:</label>
-            <input type="text" onChange={(e) => setAddress(e.target.value)}
-            value= {address}
-            />
-
-            <button>Submit</button>
-            {error && <div className="error">{error}</div>}
-        </form>
-    )
+    // const fetchExcercises = async (exerciseIDs) => {
+    //     let x = [exerciseIDs.length];
+    //     console.log(exerciseIDs);
+    //     for(let i = 0;i<exerciseIDs.length;i++){
+    //     const response = await fetch(`/course/${exerciseIDs[i].exerciseIDs}`);
+    //     const json = await response.json();
+    //     if(response.ok){
+    //         x[i] = json;
+    //     }
+    // }
+    // setCourses(x);
+    // }
+    
+return(
+    <div>
+         {courses && courses.map((course)=>(
+          <div key = {course._id}>
+          <h4>The information of course: {course.courseTitle} </h4>
+          <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle)=>(
+                <div>
+                <p>{subtitle.subTitle}</p>
+                <p>Description:{subtitle.description}</p>
+                <p>Total Hours of the Chapter: {subtitle.hours}</p>
+                <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe> 
+                </div>
+             ))}</div>
+            <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
+            <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
+            <p><strong>Subject of the course: </strong>{course.subject}</p>
+            <button onClick={() => window.location.href=`/traineerate?traineeId=${traineeId}&courseId=${course._id}`}>Rate Course</button>
+            <button onClick={() => window.location.href=`/traineesolve?traineeId=${traineeId}&courseId=${course._id}`}>Solve Exercises</button>
+            <p><strong>============================================================================================================</strong></p>
+                </div>
+             ))}
+    </div>
+)
 }
-
 
 
 export default TraineeForm;
