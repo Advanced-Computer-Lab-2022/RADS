@@ -110,7 +110,7 @@ const SearchCourse = (props) => {
 
     //const params = new URLSearchParams(window.location.search);
 
-    const instruId ="635afde192426ef4e8a9e165";
+    const instruId ="638c11d6147e2173163fd962";
     const [queryS, setQueryS] = useState("");
     const [queryF2, setQueryF2] = useState("");
     const [queryF3, setQueryF3] = useState("");
