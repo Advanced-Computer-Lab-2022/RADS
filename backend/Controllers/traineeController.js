@@ -73,7 +73,7 @@ const postCourseRegister = async(req, res) => {
     const newCourse = {
         courses: {
             courseId: courseId,
-            courseGrade: courseGrade
+            exerciseGrades: courseGrade
         }
     };
     try {
@@ -83,6 +83,32 @@ const postCourseRegister = async(req, res) => {
             // dbResp will be entire updated document, we're just returning newly added message which is input.
             res.status(201).json(newCourse);
         } else {
+            res.status(400).json({ message: 'Not able to update grades' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+//////////////////////////////////
+// POST new Grade: trainee
+//////////////////////////////////
+const postGrade = async(req, res) => {
+    const { excerciseId, grade } = req.body;
+    const newGrade = {
+        exerciseGrades: {
+            excerciseId: excerciseId,
+            grade: grade
+        }
+    };
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const trainee = await Trainee.findById({ "_id": id })
+        const dbResp = await trainee.courses.findOneAndUpdate({ courseId: id }, { $push: newGrade }, { new: true }).lean(true);
+        if (dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(201).json(newGrade);
+        } else {
             res.status(400).json({ message: 'Not able to update reviews' });
         }
     } catch (error) {
@@ -90,13 +116,12 @@ const postCourseRegister = async(req, res) => {
     }
 }
 
-
-
 module.exports = {
     getTrainees,
     getTrainee,
     updatePassword,
     postCourseRegister,
     getTraineeCourses,
-    postTrainee
+    postTrainee,
+    postGrade
 }
