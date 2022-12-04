@@ -19,6 +19,9 @@ const Navbar = () =>{
               <Link to="/traineelobby">
                 <h1>Trainee Lobby</h1>
               </Link>
+              <Link to="/contract">
+                <h1>Contract</h1>
+              </Link>
             </div>
         </header>
     )
