@@ -53,7 +53,8 @@ return(
             <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
             <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
             <p><strong>Subject of the course: </strong>{course.subject}</p>
-             <button onClick={() => window.location.href=`/traineerate?traineeId=${traineeId}&courseId=${course._id}`}>Rate Course</button>
+            <button onClick={() => window.location.href=`/traineerate?traineeId=${traineeId}&courseId=${course._id}`}>Rate Course</button>
+            <button onClick={() => window.location.href=`/traineesolve?traineeId=${traineeId}&courseId=${course._id}`}>Solve Exercises</button>
             <p><strong>============================================================================================================</strong></p>
                 </div>
              ))}

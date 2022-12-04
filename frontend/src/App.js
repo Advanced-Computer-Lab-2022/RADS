@@ -16,6 +16,7 @@ import CorpRating from './webcomponents/CorpRating';
 import TraineeView from './webcomponents/TraineeView';
 import TraineeForm from './webcomponents/TraineeForm';
 import TraineeRating from './webcomponents/TraineeRating';
+import TraineeSolve from './webcomponents/TraineeSolve';
 
 
 
@@ -92,6 +93,10 @@ function App() {
              <Route
             path="/corpview"
             element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/traineesolve"
+            element={<TraineeSolve rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
               <Route
             path="/traineerate"
