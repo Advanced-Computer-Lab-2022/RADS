@@ -25,6 +25,10 @@ const postTrainee = async(req, res) => {
     }
 }
 
+/*const resetPassword = async(req,res) =>{
+    const {email:}
+}*/
+
 
 const getTrainee = async(req, res) => {
     const { id } = req.params;
