@@ -2,13 +2,17 @@ const Course = require('../Models/courseModel');
 const Instructor = require('../Models/instructorModel');
 const mongoose = require('mongoose');
 
+//////////////////////////////////
 // GET all courses
+//////////////////////////////////
 const getCourses = async(req, res) => {
     const courses = await Course.find({}).sort({ createdAt: -1 });
     res.status(200).json(courses);
 }
 
+//////////////////////////////////
 // GET a single course
+//////////////////////////////////
 const getCourse = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -21,9 +25,9 @@ const getCourse = async(req, res) => {
     res.status(200).json(course);
 }
 
-
-
-
+//////////////////////////////////
+// GET all courses taught by an instructor
+//////////////////////////////////
 const getCoursesByInstructor = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -36,10 +40,79 @@ const getCoursesByInstructor = async(req, res) => {
     res.status(200).json(course);
 }
 
+//////////////////////////////////
+// POST new Exercise: Instructor
+//////////////////////////////////
+const postExercise = async(req, res) => {
+    const { excerciseId, question, firstChoice, secondChoice,thirdChoice, fourthChoice, answer, grade } = req.body;
+    const newExercise = {
+        courseExercises: {
+            excerciseId: excerciseId,
+            questions: [{
+                question: question,
+                firstChoice: firstChoice,
+                secondChoice: secondChoice,
+                thirdChoice: thirdChoice,
+                fourthChoice: fourthChoice,
+                answer: answer
+            }],
+            grade: grade
+        }
 
+    };
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const course = await Course.findById({ "_id": id })
+        await course.save();
+        const dbResp = await Course.findOneAndUpdate({ "_id": id }, { $push: newExercise }, { new: true }).lean(true);
+        if (dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(201).json(newExercise);
+        } else {
+            res.status(400).json({ message: 'Not able to update reviews' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
+//////////////////////////////////
+// GET a single exercise
+//////////////////////////////////
+const getCourseExercise = async(req, res) => {
+    const id = mongoose.Types.ObjectId(req.params.id);
+    const eid = (req.params.eid);
+    const course = await Course.findById({ "_id": id })
+    const Exercise = course.courseExercises.find({excerciseId: eid})
+    // const Exercise = {
+    //     courseExercises: {
+    //         excerciseId: course.courseExercises.find(),
+    //         questions: [{
+    //             question: question,
+    //             firstChoice: firstChoice,
+    //             secondChoice: secondChoice,
+    //             thirdChoice: thirdChoice,
+    //             fourthChoice: fourthChoice,
+    //             answer: answer
+    //         }],
+    //         grade: grade
+    //     }
+    res.status(200).json(Exercise)
+}
 
+//////////////////////////////////
+// GET all exercises
+//////////////////////////////////
+const getCourseExercises = async(req, res) => {
+    const id = mongoose.Types.ObjectId(req.params.id);
+    const course = await Course.findById({ "_id": id })
+    const Exercises = course.courseExercises.find({})
+    res.status(200).json(Exercises)
+}
+
+//////////////////////////////////
 // POST new course
+//////////////////////////////////
 const postCourse = async(req, res) => {
     const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, coursePreview } = req.body;
     try {
@@ -62,7 +135,9 @@ const postCourse = async(req, res) => {
     }
 }
 
+//////////////////////////////////
 // DELETE a course
+//////////////////////////////////
 const deleteCourse = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -75,7 +150,9 @@ const deleteCourse = async(req, res) => {
     res.status(200).json(course);
 }
 
+//////////////////////////////////
 // UPDATE a course
+//////////////////////////////////
 const updateCourse = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -90,7 +167,9 @@ const updateCourse = async(req, res) => {
     res.status(200).json(course);
 }
 
-//add a review to a course
+//////////////////////////////////
+// POST a review to a course
+//////////////////////////////////
 const postCourseReview = async(req, res) => {
     const { cRating, cReview, traineeId, corpTraineeId } = req.body;
     const newReview = {
@@ -124,10 +203,9 @@ const postCourseReview = async(req, res) => {
     }
 }
 
-
-
-
-// GET a single course rating
+//////////////////////////////////
+// GET a single course's rating
+//////////////////////////////////
 const getCourseRating = async(req, res) => {
     const id = mongoose.Types.ObjectId(req.params.id);
     const course = await Course.findById({ "_id": id })
@@ -135,7 +213,9 @@ const getCourseRating = async(req, res) => {
     res.status(200).json("Course Rating is: " + currentOverallRating)
 }
 
-
+//////////////////////////////////
+// UPDATE a course's review
+//////////////////////////////////
 const updateCourseReview = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -150,14 +230,17 @@ const updateCourseReview = async(req, res) => {
     res.status(200).json(course);
 }
 
-
-// GET all courses
+//////////////////////////////////
+// GET all course's rating
+//////////////////////////////////
 const getRatings = async(req, res) => {
     const ratings = await courseRating.find({}).sort({ createdAt: -1 });
     res.status(200).json(ratings);
 }
 
-// GET a single course
+//////////////////////////////////
+// GET a single rating
+//////////////////////////////////
 const getRating = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -170,8 +253,9 @@ const getRating = async(req, res) => {
     res.status(200).json(rating);
 }
 
-
-// DELETE a course
+//////////////////////////////////
+// DELETE a review
+//////////////////////////////////
 const deleteReview = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -184,7 +268,9 @@ const deleteReview = async(req, res) => {
     res.status(200).json(course);
 }
 
-// UPDATE a course
+//////////////////////////////////
+// UPDATE a review
+//////////////////////////////////
 const updateReview = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -200,8 +286,9 @@ const updateReview = async(req, res) => {
 }
 
 
-
+//////////////////////////////////
 // Export the functions
+//////////////////////////////////
 module.exports = {
     getCourses,
     getCourse,
@@ -211,4 +298,7 @@ module.exports = {
     getCoursesByInstructor,
     postCourseReview,
     getCourseRating,
+    postExercise,
+    getCourseExercise,
+    getCourseExercises,
 }

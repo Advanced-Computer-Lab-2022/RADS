@@ -2,6 +2,7 @@ import{BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './webcomponents/Navbar';
 import InstructorLobby from './webpages/InstructorLobby';
 import TraineeLobby from './webpages/TraineeLobby';
+import Contract from './webpages/Contract';
 import Home from './webpages/Home';
 import Admin from './webpages/Admin';
 import CorpTraineeLobby from './webpages/CorpTraineeLobby';
@@ -138,6 +139,10 @@ function App() {
             <Route
             path="/traineelobby"
             element={<TraineeLobby rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+            <Route
+            path="/contract"
+            element={<Contract rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
           </Routes>
 
