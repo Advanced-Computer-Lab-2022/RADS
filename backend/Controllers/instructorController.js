@@ -1,7 +1,7 @@
 const Instructor = require('../Models/instructorModel');
 const Course = require('../Models/courseModel');
 const mongoose = require('mongoose');
-
+const { sendMail } = require('../Utilities/sendEmail');
 // GET all instructors
 const getInstructors = async(req, res) => {
     const instructors = await Instructor.find({}).sort({ createdAt: -1 });
@@ -44,7 +44,6 @@ const getInstructor = async(req, res) => {
     }
     res.status(200).json(instructor);
 }
-
 
 // DELETE an instructor
 const deleteInstructor = async(req, res) => {
@@ -128,6 +127,17 @@ const postInstructorReview = async(req, res) => {
 }
 
 
+const forgotPassword = async(req, res) => {
+    const { instEmail } = req.body;
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a trainee with the corresponding id.' });
+    }
+    //http://localhost:3000/forgotpass/instructorId=${id}
+    textBody = `You're Verified!, Click the link to return to change your password: http://localhost:3000/forgotpass`;
+    sendMail(instEmail, textBody);
+    res.status(200).json({ message: "sent successfully" });
+}
 
 
 // GET a single course rating
@@ -147,5 +157,6 @@ module.exports = {
     deleteInstructor,
     updateInstructor,
     postInstructorReview,
-    getInstructorRating
+    getInstructorRating,
+    forgotPassword
 }

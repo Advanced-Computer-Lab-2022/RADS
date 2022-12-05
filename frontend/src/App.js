@@ -17,6 +17,7 @@ import TraineeView from './webcomponents/TraineeView';
 import TraineeForm from './webcomponents/TraineeForm';
 import TraineeRating from './webcomponents/TraineeRating';
 import TraineeSolve from './webcomponents/TraineeSolve';
+import InstructorForgotPass from './webcomponents/InstructorForgotPass';
 
 
 
@@ -82,6 +83,11 @@ function App() {
 </div>
         <div className='webpages'>
           <Routes>
+          <Route
+            path="/forgotpass"
+            element={<InstructorForgotPass
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
           <Route
             path="/instructorrating"
             element={<InstructorRating rateVal = {rateValue} currencyVal = {inputValue}/>}
