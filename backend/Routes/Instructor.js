@@ -1,5 +1,5 @@
 const express = require('express');
-const { getInstructor, getInstructors, deleteInstructor, updateInstructor, postInstructor, postInstructorReview, getInstructorRating, forgotPassword } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, deleteInstructor, updateInstructor, postInstructor, postInstructorReview, getInstructorRating, forgotPassword, updatePassword } = require('../Controllers/instructorController');
 const router = express.Router();
 
 // GET all instructors info
@@ -14,7 +14,13 @@ router.get('/add', postInstructor);
 // DELETE an instructor
 router.delete('/:id', deleteInstructor);
 
+
+// UPDATE instructor
 router.patch('/changeInfo/:id', updateInstructor);
+
+
+// UPDATE password
+router.patch('/password/:id', updatePassword);
 
 //router.post('/addPromotion/:id', addPromotion);   
 

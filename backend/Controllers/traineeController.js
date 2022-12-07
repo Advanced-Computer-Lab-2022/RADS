@@ -38,11 +38,12 @@ const { sendMail } = require('../Utilities/sendEmail');
 
 const forgotPassword = async(req, res) => {
     const { email } = req.body;
+    console.log(email);
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'There does not exist a trainee with the corresponding id.' });
     }
-    textBody = `You're Verified!, Click the link to return to change your password: http://localhost:3000/traineelobby/forgotpass/${id}`;
+    textBody = `You're Verified!, Click the link to return to change your password: http://localhost:3000/forgotpasstrainee/${id}`;
     sendMail(email, textBody);
     res.status(200).json({ message: "sent successfully" });
 }
@@ -56,7 +57,7 @@ const getTrainees = async(req, res) => {
 
 
 const postTrainee = async(req, res) => {
-    const { firstName, lastName, userName, password, country, phoneNumber, address } = req.body;
+    const { firstName, lastName, userName, password, country, phoneNumber, address, email } = req.body;
     try {
         const trainee = await Trainee.create({
             firstName,
@@ -66,6 +67,7 @@ const postTrainee = async(req, res) => {
             country,
             phoneNumber,
             address,
+            email,
             courses: []
         });
         res.status(200).json({ message: "trainee added successfully", message: "Instructor info" + trainee });
@@ -135,54 +137,43 @@ const postCourseRegister = async(req, res) => {
     }
 }
 
-//////////////////////////////////
-// POST new Grade: trainee
-//////////////////////////////////
-const postGrade = async(req, res) => {
-    const { excerciseId, grade } = req.body;
-    const newGrade = {
-        exerciseGrades: {
-            excerciseId: excerciseId,
-            grade: grade
-        }
-    };
+
+
+//update grade
+const postCourseGrade = async(req, res) => {
+    const { courseId, courseGrade } = req.body;
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
-        const trainee = await Trainee.findById({ "_id": id })
-        const dbResp = await trainee.courses.findOneAndUpdate({ courseId: id }, { $push: newGrade }, { new: true }).lean(true);
+        const dbResp = await Trainee.findOneAndUpdate({ "_id": id, 'courses.courseId': courseId }, { '$set': { 'courses.$.courseGrade': courseGrade } });
         if (dbResp) {
-            // dbResp will be entire updated document, we're just returning newly added message which is input.
-            res.status(201).json(newGrade);
+            res.status(201).json("Successfull update!!");
         } else {
-            res.status(400).json({ message: 'Not able to update reviews' });
+            res.status(400).json({ message: 'Not able to update' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 }
 
-//update grade
-const postCourseGrade = async(req, res) => {
-    const { courseId, courseGrade } = req.body;
-    const newCourse = {
-        courses: {
-            courseId: courseId,
-            courseGrade: courseGrade
-        }
-    };
+
+//get old grade
+const findOldGrade = async(req, res) => {
+    const { courseId } = req.body;
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
-        const dbResp = await Trainee.findOneAndUpdate({ "_id": id }, { $push: newCourse }, { new: true }).lean(true);
-        if (dbResp) {
-            // dbResp will be entire updated document, we're just returning newly added message which is input.
-            res.status(201).json(newCourse);
-        } else {
-            res.status(400).json({ message: 'Not able to update reviews' });
+        const dbResp = await Trainee.findOne({ "_id": id, 'courses.courseId': courseId });
+        let oldGrade = dbResp.courseGrade;
+        console.log(oldGrade);
+        if (!dbResp) {
+            return res.status(404).json({ error: 'No such grade for trainee' });
         }
+        res.status(200).json(oldGrade);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 }
+
+
 
 
 module.exports = {
@@ -193,5 +184,6 @@ module.exports = {
     getTraineeCourses,
     postTrainee,
     forgotPassword,
-    postCourseGrade
+    postCourseGrade,
+    findOldGrade
 }

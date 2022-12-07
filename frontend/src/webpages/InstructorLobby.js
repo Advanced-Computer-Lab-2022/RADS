@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 // Components
 import CourseCreate from "../webcomponents/CourseCreate"
 import SearchCourse from "../webcomponents/SearchCourse"
@@ -11,30 +10,7 @@ const InstructorLobby = (props) => {
         rateVal,
         currencyVal
     } = props;
-    const [instructors, setInstructors] = useState(null);
-    const [instructorsinfo, changeInfo] = useState(null);
-    useEffect(() => {
-        const fetchInstructors = async() => {
-            const response = await fetch('/Instructor');
-            const json = await response.json();
-
-            if (response.ok) {
-                setInstructors(json)
-
-            }
-        }
-        fetchInstructors();
-    }, [])
-    useEffect(() => {
-        const fetchInstructors = async() => {
-            const response = await fetch('/Instructor/changeInfo/:id');
-            const json = await response.json();
-            if (response.ok) {
-                changeInfo(json)
-            }
-        }
-        fetchInstructors();
-    }, [])
+    
 
     return ( <div className = "lobby" >
         <SearchCourse rateVal = {props.rateVal} currencyVal = { props.currencyVal }/> 

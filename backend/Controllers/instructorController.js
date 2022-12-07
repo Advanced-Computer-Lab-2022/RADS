@@ -79,6 +79,23 @@ const updateInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
+
+// UPDATE Password
+const updatePassword = async(req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist an trainee with the corresponding id.' });
+    }
+    const trainee = await Instructor.findByIdAndUpdate({ _id: id }, {
+        password: req.body.password
+    });
+    if (!trainee) {
+        return res.status(404).json({ error: 'No such trainee' });
+    }
+    res.status(200).json(trainee);
+}
+
+
 // FILTER a course based on instructor
 /*const filterCourses = async(req, res) => {
     const instructorId = req.query.courseId;
@@ -128,14 +145,14 @@ const postInstructorReview = async(req, res) => {
 
 
 const forgotPassword = async(req, res) => {
-    const { instEmail } = req.body;
+    const { email } = req.body;
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'There does not exist a trainee with the corresponding id.' });
     }
     //http://localhost:3000/forgotpass/instructorId=${id}
-    textBody = `You're Verified!, Click the link to return to change your password: http://localhost:3000/forgotpass`;
-    sendMail(instEmail, textBody);
+    textBody = `You're Verified!, Click the link to return to change your password: http://localhost:3000/forgotpassinstructor/${id}`;
+    sendMail(email, textBody);
     res.status(200).json({ message: "sent successfully" });
 }
 
@@ -158,5 +175,6 @@ module.exports = {
     updateInstructor,
     postInstructorReview,
     getInstructorRating,
-    forgotPassword
+    forgotPassword,
+    updatePassword
 }

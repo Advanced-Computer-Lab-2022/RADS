@@ -2,22 +2,14 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const exerciseSchema = mongoose.Schema({
-    excerciseId: {
-        type: Number
-    },
-    grade: {
-        type: Number
-    }
-});
 
 const courseSchema = new Schema({
     courseId: {
         type: mongoose.Types.ObjectId,
         ref: 'courseModel',
     },
-    exerciseGrades: {
-        type: [exerciseSchema]
+    courseGrade: {
+        type: Number
     }
 })
 
@@ -46,6 +38,10 @@ const traineeSchema = new Schema({
         required: true
     },
     address: {
+        type: String,
+        required: true
+    },
+    email: {
         type: String,
         required: true
     },

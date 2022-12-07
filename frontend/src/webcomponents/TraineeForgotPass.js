@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useParams } from "react-router-dom";
 
 
-const InstructorForgotPass = (props) => {
+const TraineeForgotPass = (props) => {
     const [password, setPassword] = useState('');
     const [error,setError] = useState(null);
     const [html,setHtml] = useState('');
@@ -12,17 +12,14 @@ const InstructorForgotPass = (props) => {
     } = props;
     // const params = new URLSearchParams(window.location.search);
     // const instructorId = params.get('instructorId');
-    const instId = useParams();
-    console.log(instId.id);
-    //const instId = "638c11d6147e2173163fd962";
+    const traineeId = useParams();
+    console.log(traineeId.id);
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
-        
-        const instructor = {password};
-
-        const response = await fetch(`/instructor/password/${instId.id}`,{
+        const trainee = {password};
+        const response = await fetch(`/trainee/password/${traineeId.id}`,{
             method:'PATCH',
-            body: JSON.stringify(instructor),
+            body: JSON.stringify(trainee),
             headers:{
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
@@ -59,4 +56,4 @@ const InstructorForgotPass = (props) => {
 
 
 
-export default InstructorForgotPass;
+export default TraineeForgotPass;

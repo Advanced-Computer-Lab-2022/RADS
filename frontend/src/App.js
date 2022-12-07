@@ -19,6 +19,7 @@ import TraineeForm from './webcomponents/TraineeForm';
 import TraineeRating from './webcomponents/TraineeRating';
 import TraineeSolve from './webcomponents/TraineeSolve';
 import InstructorForgotPass from './webcomponents/InstructorForgotPass';
+import TraineeForgotPass from './webcomponents/TraineeForgotPass';
 
 
 
@@ -85,10 +86,22 @@ function App() {
         <div className='webpages'>
           <Routes>
           <Route
-            path="/forgotpass"
+            path="/forgotpassinstructor/:id"
             element={<InstructorForgotPass
               rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
+
+             <Route
+            path="/forgotpasstrainee/:id"
+            element={<TraineeForgotPass
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+
+             {/* <Route
+            path="/forgotpass/:id"
+            element={<InstructorForgotPass
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            /> */}
           <Route
             path="/instructorrating"
             element={<InstructorRating rateVal = {rateValue} currencyVal = {inputValue}/>}

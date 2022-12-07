@@ -113,12 +113,17 @@ const courseSchema = new Schema({
         type: [reviewSchema]
     },
     promotionRate: {
-        type: Number
+        type: Number,
+        default: 1
     },
     promotionEndDate: {
         type: Date
     },
-
+    promotionStartDate: {
+        type: Date
+    },
 }, { timestamps: true })
+
+
 
 module.exports = mongoose.model('Course', courseSchema)

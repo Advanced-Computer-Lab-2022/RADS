@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCoursesByInstructor, postCourseReview, getCourseRating, postExercise, getCourseExercise, getCourseExercises } = require('../Controllers/courseController');
+const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCoursesByInstructor, postCourseReview, getCourseRating, postExercise, getCourseExercise, getCourseExercises, postPromotion } = require('../Controllers/courseController');
 
 
 const router = express.Router();
@@ -36,5 +36,8 @@ router.get('/exercise/:id/:eid', getCourseExercise);
 
 // GET all Course's Exercises
 router.get('/exercises/:id/', getCourseExercises);
+
+// POST Course's Promotion
+router.post('/promo/:id', postPromotion);
 
 module.exports = router;

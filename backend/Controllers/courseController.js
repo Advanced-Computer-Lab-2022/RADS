@@ -25,6 +25,8 @@ const getCourse = async(req, res) => {
     res.status(200).json(course);
 }
 
+
+
 //////////////////////////////////
 // GET all courses taught by an instructor
 //////////////////////////////////
@@ -44,7 +46,7 @@ const getCoursesByInstructor = async(req, res) => {
 // POST new Exercise: Instructor
 //////////////////////////////////
 const postExercise = async(req, res) => {
-    const { excerciseId, question, firstChoice, secondChoice,thirdChoice, fourthChoice, answer, grade } = req.body;
+    const { excerciseId, question, firstChoice, secondChoice, thirdChoice, fourthChoice, answer, grade } = req.body;
     const newExercise = {
         courseExercises: {
             excerciseId: excerciseId,
@@ -83,20 +85,20 @@ const getCourseExercise = async(req, res) => {
     const id = mongoose.Types.ObjectId(req.params.id);
     const eid = (req.params.eid);
     const course = await Course.findById({ "_id": id })
-    const Exercise = course.courseExercises.find({excerciseId: eid})
-    // const Exercise = {
-    //     courseExercises: {
-    //         excerciseId: course.courseExercises.find(),
-    //         questions: [{
-    //             question: question,
-    //             firstChoice: firstChoice,
-    //             secondChoice: secondChoice,
-    //             thirdChoice: thirdChoice,
-    //             fourthChoice: fourthChoice,
-    //             answer: answer
-    //         }],
-    //         grade: grade
-    //     }
+    const Exercise = course.courseExercises.find({ excerciseId: eid })
+        // const Exercise = {
+        //     courseExercises: {
+        //         excerciseId: course.courseExercises.find(),
+        //         questions: [{
+        //             question: question,
+        //             firstChoice: firstChoice,
+        //             secondChoice: secondChoice,
+        //             thirdChoice: thirdChoice,
+        //             fourthChoice: fourthChoice,
+        //             answer: answer
+        //         }],
+        //         grade: grade
+        //     }
     res.status(200).json(Exercise)
 }
 
@@ -286,6 +288,22 @@ const updateReview = async(req, res) => {
 }
 
 
+
+//Post promo
+const postPromotion = async(req, res) => {
+    const { promotionStartDate, promotionEndDate, promotionRate } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const course = await Course.findById({ "_id": id })
+        course.promotionStartDate = promotionStartDate;
+        course.promotionEndDate = promotionEndDate;
+        course.promotionRate = promotionRate;
+        await course.save();
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 //////////////////////////////////
 // Export the functions
 //////////////////////////////////
@@ -301,4 +319,5 @@ module.exports = {
     postExercise,
     getCourseExercise,
     getCourseExercises,
+    postPromotion
 }
