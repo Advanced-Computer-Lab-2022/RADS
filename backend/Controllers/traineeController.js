@@ -188,7 +188,11 @@ const postCourseRegister = async(req, res) => {
 }
 
 
-
+const logout = async (req, res) => {
+    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
+    res.status(200).json({ message: "logged out" })
+  
+  }
 //update grade
 const postCourseGrade = async(req, res) => {
     const { courseId, courseGrade } = req.body;

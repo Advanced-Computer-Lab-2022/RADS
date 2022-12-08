@@ -56,20 +56,13 @@ const login = async (req, res) => {
       res.status(400).json({error : 'user not found'})
   }
 }
-const maxAge = 3 * 24 * 60 * 60;
-const createToken = (userName) => {
-    return jwt.sign({ userName }, 'supersecret', {
-        expiresIn: maxAge
-    });
-};
 
-}
 
 const logout = async (req, res) => {
   res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
   res.status(200).json({ message: "logged out" })
 
-
+}
 
 
 module.exports = {
