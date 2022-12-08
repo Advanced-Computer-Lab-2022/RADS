@@ -9,28 +9,28 @@ const getCTrainees = async(req, res) => {
 }
 
 const getCTrainee = async(req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'There does not exist a CT with the corresponding id.' });
-  }
-  const corpTrainee = await CorpTrainee.findById(id)
-  if (!corpTrainee) {
-      return res.status(404).json({ error: 'No such CT' });
-  }
-  res.status(200).json(corpTrainee);
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a CT with the corresponding id.' });
+    }
+    const corpTrainee = await CorpTrainee.findById(id)
+    if (!corpTrainee) {
+        return res.status(404).json({ error: 'No such CT' });
+    }
+    res.status(200).json(corpTrainee);
 }
 const updatePassword = async(req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'There does not exist an CT with the corresponding id.' });
-  }
-  const corpTrainee = await CorpTrainee.findByIdAndUpdate({ _id: id }, {
-      password: req.body.password
-  });
-  if (!corpTrainee) {
-      return res.status(404).json({ error: 'No such CT' });
-  }
-  res.status(200).json(corpTrainee);
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist an CT with the corresponding id.' });
+    }
+    const corpTrainee = await CorpTrainee.findByIdAndUpdate({ _id: id }, {
+        password: req.body.password
+    });
+    if (!corpTrainee) {
+        return res.status(404).json({ error: 'No such CT' });
+    }
+    res.status(200).json(corpTrainee);
 }
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (userName) => {
@@ -56,18 +56,26 @@ const login = async (req, res) => {
       res.status(400).json({error : 'user not found'})
   }
 }
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (userName) => {
+    return jwt.sign({ userName }, 'supersecret', {
+        expiresIn: maxAge
+    });
+};
+
+}
 
 const logout = async (req, res) => {
   res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
   res.status(200).json({ message: "logged out" })
 
-}
+
 
 
 module.exports = {
-  getCTrainees,
-  getCTrainee,
-  updatePassword,
+    getCTrainees,
+    getCTrainee,
+    updatePassword,
   login,
   logout
 }

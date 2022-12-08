@@ -11,96 +11,94 @@ import NewAdminButton from "../webcomponents/NewAdminButton"
 import AdminDetails from "../webcomponents/AdminDetails"
 
 const Admin = (props) => {
-    const{
-        rateVal,
-        currencyVal
-    } = props;
-    const [instructors, setInstructors] = useState(null);
-    const [corpTrainees, setCorpTrainees] = useState(null);
-    const [admin, editAdmin] = useState(null);
-useEffect(() => {
-    const fetchCorpTrainees = async () => {
-        const response = await fetch('/corpTrainee');
-        const json = await response.json();
+        const {
+            rateVal,
+            currencyVal
+        } = props;
+        const [instructors, setInstructors] = useState(null);
+        const [corpTrainees, setCorpTrainees] = useState(null);
+        const [admin, editAdmin] = useState(null);
+        useEffect(() => {
+            const fetchCorpTrainees = async() => {
+                const response = await fetch('/corpTrainee');
+                const json = await response.json();
 
-        if(response.ok){
-            setCorpTrainees(json)
-            
-        }
-    }
-    fetchCorpTrainees();
-}, [])
+                if (response.ok) {
+                    setCorpTrainees(json)
 
-  useEffect(() => {
-    const fetchInstructors = async () => {
-        const response = await fetch('/Instructor');
-        const json = await response.json();
+                }
+            }
+            fetchCorpTrainees();
+        }, [])
 
-        if(response.ok){
-            setInstructors(json)
-            
-        }
-    }
-    fetchInstructors();
-}, [])
-useEffect(() => {
-    const fetchAdmins = async () => {
-        const response = await fetch('/Admin');
-        const json = await response.json();
+        useEffect(() => {
+            const fetchInstructors = async() => {
+                const response = await fetch('/Instructor');
+                const json = await response.json();
 
-        if(response.ok){
-            editAdmin(json)
-            
-        }
-    }
-    fetchAdmins();
-}, [])
-useEffect(() => {
-    const fetchAdmins = async () => {
-        const response = await fetch('/Admin');
-        const json = await response.json();
+                if (response.ok) {
+                    setInstructors(json)
 
-        if(response.ok){
-            editAdmin(json)
-            
-        }
-    }
-    fetchAdmins();
-}, [])
+                }
+            }
+            fetchInstructors();
+        }, [])
+        useEffect(() => {
+            const fetchAdmins = async() => {
+                const response = await fetch('/Admin');
+                const json = await response.json();
 
-return (
-    <div className="admin-lobby">
-        <div className="instructors">
-        <h2>Admins:</h2>
-        {admin && admin.map((admin)=>(
-                
-                <AdminDetails key = {admin._id} admin={admin}/>
-            ))}
-            <h2> ================================================================</h2>
-        
-      
-       
-            <h2>corpTrainees:</h2>
-        {corpTrainees && corpTrainees.map((corpTrainee)=>(
-                
-                <CorpTraineeDetails key = {corpTrainee._id} corpTrainee={corpTrainee}/>
-            ))}
-            <h2> ================================================================</h2>
-        <h2>Instructors:</h2>
-           {instructors && instructors.map((instructor)=>(
-                // <p key = {instructor._id}>{instructor.userName}</p>
-                <InstructorDetails key = {instructor._id} instructor={instructor}/>
-            ))}  
-            
-        </div>
-        <InstructorForm />
-        <h2> ================================================================</h2>
-        <CorpTraineeForm />
-        <h2> ================================================================</h2>
-        <AdminForm />
-        <h2> ================================================================</h2>
-        <h2> Add new admin:</h2>
-        <NewAdminButton />
+                if (response.ok) {
+                    editAdmin(json)
+
+                }
+            }
+            fetchAdmins();
+        }, [])
+        useEffect(() => {
+            const fetchAdmins = async() => {
+                const response = await fetch('/Admin');
+                const json = await response.json();
+
+                if (response.ok) {
+                    editAdmin(json)
+
+                }
+            }
+            fetchAdmins();
+        }, [])
+
+        return ( <div className = "admin-lobby" >
+                <div className = "instructors" >
+                <h2 > Admins: </h2> {
+                admin && admin.map((admin) => (
+
+                    <AdminDetails key = { admin._id } admin = { admin }/>
+                ))
+            } <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
+
+
+
+        <h2 >corpTrainees: </h2> {
+        corpTrainees && corpTrainees.map((corpTrainee) => (
+
+            <CorpTraineeDetails key = { corpTrainee._id } corpTrainee = { corpTrainee }/>
+        ))
+    } <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
+    <h2>Instructors: </h2> {
+instructors && instructors.map((instructor) => (
+    // <p key = {instructor._id}>{instructor.userName}</p>
+    <InstructorDetails key = { instructor._id } instructor = { instructor }/>
+))
+}
+
+</div> <InstructorForm />
+    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
+    <CorpTraineeForm />
+    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
+    <AdminForm/>
+    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
+     <h2> Add new admin: </h2> <NewAdminButton/>
     </div>
 )
 }

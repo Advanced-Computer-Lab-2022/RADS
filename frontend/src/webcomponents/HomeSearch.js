@@ -6,105 +6,108 @@ import Link from '@mui/material/Link';
 
 
 
-const priceMarks = [
+
+const setRate = (val) => {
+  const priceMarks = [
     {
-      value: -500,
-      label: 'StartStart',
+      value: Math.ceil(-1*val),
+      label: 'Start',
     },
     {
-      value: 0,
-      label: '0$',
+      value: Math.ceil(0*val),
+      label: `0/FREE`,
     },
     {
-      value: 1000,
-      label: '1000$',
+      value: Math.ceil(1000*val),
+      label: `${Math.ceil(1000*val)}`,
     },
     {
-      value: 2000,
-      label: '2000$',
+      value: Math.ceil(2000*val),
+      label: `${Math.ceil(2000*val)}`,
     },
     {
-      value: 3000,
-      label: '3000$',
+      value: Math.ceil(3000*val),
+      label: `${Math.ceil(3000*val)}`,
     },
     {
-      value: 4000,
-      label: '4000$',
+      value: Math.ceil(4000*val),
+      label: `${Math.ceil(4000*val)}`,
     },
     {
-      value: 5000,
-      label: '5000$',
+      value: Math.ceil(5000*val),
+      label: `${Math.ceil(5000*val)}`,
     },
     {
-      value: 6000,
-      label: '6000$',
+      value: Math.ceil(6000*val),
+      label: `${Math.ceil(6000*val)}`,
     },
     {
-      value: 7000,
-      label: '7000$',
+      value: Math.ceil(7000*val),
+      label: `${Math.ceil(7000*val)}`,
     },
   ];
+  return priceMarks;
+}
 
-  const ratingMarks = [
-    {
-      value: -0.5,
-      label: 'StartStart',
-    },
-    {
-      value: 0,
-      label: '0',
-    },
-    {
-      value: 0.5,
-      label: '0.5',
-    },
-    {
-      value: 1,
-      label: '1',
-    },
-    {
-      value: 1.5,
-      label: '1.5',
-    },
-    {
-      value: 2,
-      label: '2',
-    },
-    {
-      value: 2.5,
-      label: '2.5',
-    },
-    {
-      value: 3,
-      label: '3',
-    },
-    {
-      value: 3.5,
-      label: '3.5',
-    },
-    {
-      value: 4,
-      label: '4',
-    },
-    {
-     value: 4.5,
-     label: '4.5',
-    },
-    {
-     value: 5,
-     label: '5',
-    }
-  ];
 
-  function valueDollar(value) {
-    return `${value}$`;
+const ratingMarks = [
+  {
+    value: -0.5,
+    label: 'StartStart',
+  },
+  {
+    value: 0,
+    label: '0',
+  },
+  {
+    value: 0.5,
+    label: '0.5',
+  },
+  {
+    value: 1,
+    label: '1',
+  },
+  {
+    value: 1.5,
+    label: '1.5',
+  },
+  {
+    value: 2,
+    label: '2',
+  },
+  {
+    value: 2.5,
+    label: '2.5',
+  },
+  {
+    value: 3,
+    label: '3',
+  },
+  {
+    value: 3.5,
+    label: '3.5',
+  },
+  {
+    value: 4,
+    label: '4',
+  },
+  {
+   value: 4.5,
+   label: '4.5',
+  },
+  {
+   value: 5,
+   label: '5',
   }
-  function valueStar(value) {
-    return `${value}`;
-  }
-   
+];
 
-  
+function valueStar(value) {
+  return `${value}`;
+}
+
+function valueDollar(value,currencyVal) {
+  return `${value} ${currencyVal}`;
+}
 const HomeSearch = (props) => {
     const [queryS, setQueryS] = useState("");
     const [queryF2, setQueryF2] = useState("");
@@ -118,6 +121,8 @@ const HomeSearch = (props) => {
       rateVal,
       currencyVal
   } = props;
+ 
+
     // To fetch all the courses and put the results in courses
     useEffect(()=>{
       const fetchCourses = async () => {
@@ -172,7 +177,7 @@ const HomeSearch = (props) => {
             return courseData;
         }
         else{
-            return courseData.filter(item=> item.price <= queryF2);
+            return courseData.filter(item=> Math.ceil(item.price*rateVal) <= queryF2);
         }
     }
 
@@ -231,7 +236,7 @@ const HomeSearch = (props) => {
             <div className='filter-component2'>
                 <p><strong>Price Filter</strong></p>
                 <Box sx={{ width: 950 }}>
-                <Slider className='price-slider'  aria-label="Always visible" getAriaValueText={valueDollar}  marks={priceMarks}  valueLabelDisplay="on" size= "small" max = {7000*rateVal} step={1} min = {-1} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
+                <Slider className='price-slider'  aria-label="Always visible" getAriaValueText={valueDollar}  marks={setRate(rateVal)}  valueLabelDisplay="on" size= "small" max = {Math.ceil(7000*rateVal)} step={Math.ceil(1*rateVal)} min = {Math.ceil(-1*rateVal)} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
                 </Box>
             </div>
             <div className='homefilter-component3'>
@@ -243,10 +248,13 @@ const HomeSearch = (props) => {
              <div className="home-search">
              {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
                     <div>
-                    <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {course.price*rateVal} {' '} {currencyVal}</Link>
+                    <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal}</Link>
                     </div>
                 ))}
-            </div> 
+            </div>
+            {/* <div>
+              <Link onClick={() => window.location.href=`/instructorlobby`}>here</Link>
+              </div>  */}
         </div>
         </div>
     )

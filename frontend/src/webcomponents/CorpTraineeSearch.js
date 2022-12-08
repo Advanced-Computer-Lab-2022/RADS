@@ -221,7 +221,6 @@ const CorpTraineeSearch = (props) => {
             <div>
         {/* {`Subjects checked are: ${checkedItems}`} */}
             </div>
-            
             <div className='filter-component2'>
                 <p><strong>Price Filter</strong></p>
                 <Box sx={{ width: 950 }}>
@@ -237,9 +236,10 @@ const CorpTraineeSearch = (props) => {
              <div className="home-search">
                 {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
                      <div>
-                     <p key = {course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5</p>
+                     <p key = {course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating =Out of 5 <button on></button></p> 
                      </div>
                 ))}
+                {/* <button>onClick={() => window.location.href=`/corpview?corpId=${instruId}&`} </button> */}
             </div> 
         </div>
         </div>

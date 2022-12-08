@@ -2,6 +2,7 @@ import{BrowserRouter, Routes, Route} from 'react-router-dom'
 import Navbar from './webcomponents/Navbar';
 import InstructorLobby from './webpages/InstructorLobby';
 import TraineeLobby from './webpages/TraineeLobby';
+import Contract from './webpages/Contract';
 import Home from './webpages/Home';
 import Admin from './webpages/Admin';
 import CorpTraineeLobby from './webpages/CorpTraineeLobby';
@@ -11,6 +12,15 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState,useEffect } from 'react';
+import InstructorRating from './webcomponents/InstructorRating';
+import CorpRating from './webcomponents/CorpRating';
+import TraineeView from './webcomponents/TraineeView';
+import TraineeForm from './webcomponents/TraineeForm';
+import TraineeRating from './webcomponents/TraineeRating';
+import TraineeSolve from './webcomponents/TraineeSolve';
+import InstructorForgotPass from './webcomponents/InstructorForgotPass';
+import TraineeForgotPass from './webcomponents/TraineeForgotPass';
+
 
 
 
@@ -75,6 +85,51 @@ function App() {
 </div>
         <div className='webpages'>
           <Routes>
+          <Route
+            path="/forgotpassinstructor/:id"
+            element={<InstructorForgotPass
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+
+             <Route
+            path="/forgotpasstrainee/:id"
+            element={<TraineeForgotPass
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+
+             {/* <Route
+            path="/forgotpass/:id"
+            element={<InstructorForgotPass
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            /> */}
+          <Route
+            path="/instructorrating"
+            element={<InstructorRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/corprating"
+            element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/corpview"
+            element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/traineesolve"
+            element={<TraineeSolve rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+              <Route
+            path="/traineerate"
+            element={<TraineeRating rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+             <Route
+            path="/traineeview"
+            element={<TraineeView rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+              <Route
+            path="/traineeform"
+            element={<TraineeForm rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
             <Route
             path="/instructorlobby"
             element={<InstructorLobby rateVal = {rateValue} currencyVal = {inputValue} />}
@@ -97,6 +152,10 @@ function App() {
             <Route
             path="/traineelobby"
             element={<TraineeLobby rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+            <Route
+            path="/contract"
+            element={<Contract rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
           </Routes>
 

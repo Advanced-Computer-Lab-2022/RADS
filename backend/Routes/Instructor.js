@@ -1,5 +1,5 @@
 const express = require('express');
-const { getInstructor, getInstructors, deleteInstructor, updateInstructor, filterCourses, postInstructor, postInstructorReview, getInstructorRating,login,logout } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, deleteInstructor, updateInstructor, postInstructor, postInstructorReview, getInstructorRating, forgotPassword, updatePassword,login,logout } = require('../Controllers/instructorController');
 const router = express.Router();
 
 // GET all instructors info
@@ -11,23 +11,28 @@ router.get('/:id', getInstructor);
 // Post an instructor
 router.get('/add', postInstructor);
 
-// GET all courses the instructors give
-router.get('/filter', filterCourses);
-
 // DELETE an instructor
 router.delete('/:id', deleteInstructor);
 
+
+// UPDATE instructor
 router.patch('/changeInfo/:id', updateInstructor);
 
 router.post('/login', login);
 router.get('/logout', logout);
-//router.post('/addPromotion/:id', addPromotion);
+
+// UPDATE password
+router.patch('/password/:id', updatePassword);
+
+//router.post('/addPromotion/:id', addPromotion);   
 
 // POST a new Review
 router.post('/review/:id', postInstructorReview);
 
 // GET a single Course's rating 
 router.get('/rating/:id', getInstructorRating);
+
+router.post('/forgot/:id', forgotPassword);
 
 
 module.exports = router;

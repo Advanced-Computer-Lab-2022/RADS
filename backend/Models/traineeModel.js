@@ -2,6 +2,17 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+
+const courseSchema = new Schema({
+    courseId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'courseModel',
+    },
+    courseGrade: {
+        type: Number
+    }
+})
+
 const traineeSchema = new Schema({
     firstName: {
         type: String,
@@ -31,8 +42,15 @@ const traineeSchema = new Schema({
     gender: {
         type: String,
         required:true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    courses: {
+        type: [courseSchema]
     }
 
 }, { timestamps: true })
 
-module.exports = mongoose.model('trainee', traineeSchema);
+module.exports = mongoose.model('Trainee', traineeSchema);
