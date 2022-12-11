@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTrainees, updatePassword, postCourseRegister, getTrainee, getTraineeCourses, postTrainee, forgotPassword, postCourseGrade, findOldGrade } = require('../Controllers/traineeController');
+const { getTrainees, updatePassword, postCourseRegister, getTrainee, getTraineeCourses, postTrainee, forgotPassword, postCourseGrade, findOldGrade, postCreditCard, checkRegistered } = require('../Controllers/traineeController');
 const router = express.Router();
 
 router.get('/', getTrainees);
@@ -11,5 +11,7 @@ router.post('/register/:id', postCourseRegister);
 router.post('/update/:id', postCourseGrade);
 router.post('/findgrade/:id', findOldGrade);
 router.post('/forgot/:id', forgotPassword);
+router.post('/addcredit/:id', postCreditCard);
+router.post('/checkregister/:id', checkRegistered);
 
 module.exports = router;

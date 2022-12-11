@@ -35,7 +35,7 @@ const subTitleSchema = mongoose.Schema({
     }
 });
 
-const questionSchema = mongoose.Schema({
+const exerciseSchema = mongoose.Schema({
     question: {
         type: String
     },
@@ -56,17 +56,7 @@ const questionSchema = mongoose.Schema({
     }
 });
 
-const exerciseSchema = mongoose.Schema({
-    excerciseId: {
-        type: Number
-    },
-    questions: {
-        type: [questionSchema]
-    },
-    grade: {
-        type: Number
-    }
-});
+
 
 const courseSchema = new Schema({
     courseTitle: {

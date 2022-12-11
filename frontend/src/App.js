@@ -20,6 +20,8 @@ import TraineeRating from './webcomponents/TraineeRating';
 import TraineeSolve from './webcomponents/TraineeSolve';
 import InstructorForgotPass from './webcomponents/InstructorForgotPass';
 import TraineeForgotPass from './webcomponents/TraineeForgotPass';
+import TraineeCreditCard from './webcomponents/TraineeCreditCard';
+import TraineeCreditOptions from './webcomponents/TraineeCreditOptions';
 
 
 
@@ -86,6 +88,17 @@ function App() {
         <div className='webpages'>
           <Routes>
           <Route
+            path="/traineeoptions"
+            element={<TraineeCreditOptions
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+          
+          <Route
+            path="/traineecredit"
+            element={<TraineeCreditCard
+              rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+          <Route
             path="/forgotpassinstructor/:id"
             element={<InstructorForgotPass
               rateVal = {rateValue} currencyVal = {inputValue}/>}
@@ -96,13 +109,7 @@ function App() {
             element={<TraineeForgotPass
               rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
-
-             {/* <Route
-            path="/forgotpass/:id"
-            element={<InstructorForgotPass
-              rateVal = {rateValue} currencyVal = {inputValue}/>}
-            /> */}
-          <Route
+           <Route
             path="/instructorrating"
             element={<InstructorRating rateVal = {rateValue} currencyVal = {inputValue}/>}
             />

@@ -1,5 +1,6 @@
 import TraineePassword from "../webcomponents/TraineePassword";
 import TraineeSearch from "../webcomponents/TraineeSearch";
+import TraineeCreditCard from "../webcomponents/TraineeCreditCard";
 
 
 const TraineeLobby = (props) => {

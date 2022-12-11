@@ -8,13 +8,19 @@ const TraineeView =(props)=>{
     } = props;
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get('courseId');
-    console.log(courseId);
     const traineeId = params.get('traineeId');
     const [course,setCourse] = useState([]);
     const [trainee,setTrainee] = useState([]);
     const [traineeCourses,setTraineeCourses] = useState([]);
     const [instructorName,setinstructorName] = useState([]);
-
+    const [exists,setExists] = useState(false);
+    // const todayDate = new Date();
+    // console.log(todayDate);
+    // console.log(json.promotionEndDate);
+    // const promoend = new Date(json.promotionEndDate);
+    // console.log("course end date: ",promoend);
+    // console.log("today date: ",todayDate);
+    // console.log("here ",promoend > todayDate);
 
     useEffect(()=>{
         const fetchCourse = async () => {
@@ -24,6 +30,7 @@ const TraineeView =(props)=>{
                 setCourse(json);
                 fetchInstructor(json.instructor); 
                 fetchTrainee();
+
             }
         }
         fetchCourse();
@@ -47,10 +54,10 @@ const TraineeView =(props)=>{
         }
     }
 
-    const registerCourse = async () =>{
-        let courseGrade = 0;
-        const info = {courseId,courseGrade};
-        const response = await fetch(`/trainee/register/${traineeId}`,{
+
+    const findRegistered = async() =>{
+        const info = {courseId};
+        const response = await fetch(`/trainee/checkregister/${traineeId}`,{
             method:'POST',
             body: JSON.stringify(info),
             headers:{
@@ -58,33 +65,27 @@ const TraineeView =(props)=>{
                 'Content-Type': 'application/json'
             }
         })
+        const json = await response.json();
         if(response.ok){
-            window.location.reload();
+            setExists(json);
         }  
-    } 
-
+    }
     const CheckRegistered = () =>{
-        let exists = false;
-       for(let i = 0; i<traineeCourses.length;i++){
-        if(traineeCourses[i].courseId === courseId){
-            exists = true;
-            break;
-        }
-       }
+       findRegistered();
        if(exists){
+        return( <div>
         <p><bold>Registered</bold></p>
+        </div>)
        } 
        else{
         return(
-            <button  onClick={registerCourse} key = {courseId}>Register in Course <strong>{course.courseTitle}</strong></button>
+            <div>
+            <button  onClick={() => window.location.href=`/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key = {courseId}>Register in Course <strong>{course.courseTitle}</strong></button>
+            </div>
         )
        }
     } 
 return(
-
-
-   
-
     <div>
            <h4>The information of course: {course.courseTitle} </h4>
     <div><CheckRegistered /></div>

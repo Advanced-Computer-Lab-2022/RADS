@@ -68,7 +68,8 @@ const postTrainee = async(req, res) => {
             phoneNumber,
             address,
             email,
-            courses: []
+            courses: [],
+            creditCards: []
         });
         res.status(200).json({ message: "trainee added successfully", message: "Instructor info" + trainee });
     } catch (error) {
@@ -125,19 +126,46 @@ const postCourseRegister = async(req, res) => {
     };
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
-        const dbResp = await Trainee.findOneAndUpdate({ "_id": id }, { $push: newCourse }, { new: true }).lean(true);
-        if (dbResp) {
-            // dbResp will be entire updated document, we're just returning newly added message which is input.
-            res.status(201).json(newCourse);
+        const dbResp1 = await Trainee.findOne({ "_id": id, 'courses.courseId': courseId });
+        if (!dbResp1) {
+            const dbResp = await Trainee.findOneAndUpdate({ "_id": id }, { $push: newCourse }, { new: true }).lean(true);
+            if (dbResp) {
+                // dbResp will be entire updated document, we're just returning newly added message which is input.
+                res.status(201).json(newCourse);
+            } else {
+                res.status(400).json({ message: 'Not able to register grades' });
+            }
         } else {
-            res.status(400).json({ message: 'Not able to update grades' });
+            res.status(400).json({ message: 'already in db' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 }
 
-
+const postCreditCard = async(req, res) => {
+    const { cardName, cardNumber, cardExpiryDate, cardCVV } = req.body;
+    const newCreditCard = {
+        creditCards: {
+            cardName: cardName,
+            cardNumber: cardNumber,
+            cardExpiryDate: cardExpiryDate,
+            cardCVV: cardCVV
+        }
+    };
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const dbResp = await Trainee.findOneAndUpdate({ "_id": id }, { $push: newCreditCard }, { new: true }).lean(true);
+        if (dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(201).json(newCreditCard);
+        } else {
+            res.status(400).json({ message: 'Not able to add CreditCard' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
 //update grade
 const postCourseGrade = async(req, res) => {
@@ -174,6 +202,23 @@ const findOldGrade = async(req, res) => {
 }
 
 
+const checkRegistered = async(req, res) => {
+    const { courseId } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        //const dbResp = await Trainee.findOne({ "_id": id }, { courses: { $elemMatch: { courseId: courseId } } });
+        const dbResp = await Trainee.findOne({ "_id": id, 'courses.courseId': courseId })
+        if (!dbResp) {
+            return res.status(200).json(false);
+        } else {
+            res.status(200).json(true);
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
 
 
 module.exports = {
@@ -185,5 +230,7 @@ module.exports = {
     postTrainee,
     forgotPassword,
     postCourseGrade,
-    findOldGrade
+    findOldGrade,
+    postCreditCard,
+    checkRegistered
 }

@@ -13,6 +13,21 @@ const courseSchema = new Schema({
     }
 })
 
+const creditCardSchema = new Schema({
+    cardName: {
+        type: String
+    },
+    cardNumber: {
+        type: Number
+    },
+    cardExpiryDate: {
+        type: Date
+    },
+    cardCVV: {
+        type: Number
+    }
+})
+
 const traineeSchema = new Schema({
     firstName: {
         type: String,
@@ -47,6 +62,9 @@ const traineeSchema = new Schema({
     },
     courses: {
         type: [courseSchema]
+    },
+    creditCards: {
+        type: [creditCardSchema]
     }
 
 }, { timestamps: true })

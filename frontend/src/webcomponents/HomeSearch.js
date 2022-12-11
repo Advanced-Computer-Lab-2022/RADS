@@ -10,10 +10,6 @@ import Link from '@mui/material/Link';
 const setRate = (val) => {
   const priceMarks = [
     {
-      value: Math.ceil(-1*val),
-      label: 'Start',
-    },
-    {
       value: Math.ceil(0*val),
       label: `0/FREE`,
     },
@@ -117,12 +113,14 @@ const HomeSearch = (props) => {
     const newKeys = ["subject"];   
     const [checkedSubjects, setCheckedSubjects] = useState([]);
     const [courseSubjects, setCourseSubjects] = useState([]);
+    const [error, setError] = useState(null);
+    const [maxPrice, setMaxPrice] = useState(0);
     const{
       rateVal,
       currencyVal
   } = props;
- 
 
+  const todayDate = new Date();
     // To fetch all the courses and put the results in courses
     useEffect(()=>{
       const fetchCourses = async () => {
@@ -131,11 +129,35 @@ const HomeSearch = (props) => {
           if(response.ok){
               setCourses(json);
               setCourseSubjects(getCourseSubjects(json));
+              findMaxPrice();
           }
       }
       fetchCourses();
   }, [])
 
+
+  const findMaxPrice = async () =>{
+    const response = await fetch('/course/max',{
+        method:'POST',
+        body: JSON.stringify({}),
+        headers:{
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json'
+        }
+    })  
+    const json = await response.json();
+    if(!response.ok){
+        setError(json.error);
+    }
+    if(response.ok){    
+        setMaxPrice(json);
+        setError(null);
+        console.log("max price added", json);
+    }
+}  
+  // findMax = (arr) =>{
+  //   for(let i = 0;)
+  // } 
       //GET all course subjects
       const getCourseSubjects = (arr) =>{
         const newArray = [];
@@ -172,15 +194,13 @@ const HomeSearch = (props) => {
 
     // Price filter method
     const filterMethodOnPrice = (courseData) =>{
-        console.log(queryF2);
-        if((!queryF2 ||  queryF2 === -500) && queryF2 !== 0){
+      if((!queryF2 ||  queryF2 === Math.ceil(7000*rateVal))){
             return courseData;
         }
         else{
-            return courseData.filter(item=> Math.ceil(item.price*rateVal) <= queryF2);
+      return courseData.filter(item=> Math.ceil(item.price*rateVal) <= queryF2);
         }
-    }
-
+  }
     // Rating filter method
     const filterMethodOnRating = (courseData) =>{
       console.log(queryF3);
@@ -236,7 +256,7 @@ const HomeSearch = (props) => {
             <div className='filter-component2'>
                 <p><strong>Price Filter</strong></p>
                 <Box sx={{ width: 950 }}>
-                <Slider className='price-slider'  aria-label="Always visible" getAriaValueText={valueDollar}  marks={setRate(rateVal)}  valueLabelDisplay="on" size= "small" max = {Math.ceil(7000*rateVal)} step={Math.ceil(1*rateVal)} min = {Math.ceil(-1*rateVal)} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
+                <Slider className='price-slider'  aria-label="Always visible" getAriaValueText={valueDollar} defaultValue={Math.ceil(7000*rateVal)} marks={setRate(rateVal)}  valueLabelDisplay="on" size= "small" max = {Math.ceil(7000*rateVal)}  step={Math.ceil(1*rateVal)} min = {Math.ceil(0*rateVal)} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
                 </Box>
             </div>
             <div className='homefilter-component3'>
@@ -248,9 +268,11 @@ const HomeSearch = (props) => {
              <div className="home-search">
              {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
                     <div>
-                    <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal}</Link>
+                    <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal} |    {course.promotionEndDate && new Date(course.promotionEndDate) >= todayDate ? ( <p>Promotion: {course.promotionRate} off</p>) : (<p>no promo</p>)}</Link>
                     </div>
                 ))}
+
+   
             </div>
             {/* <div>
               <Link onClick={() => window.location.href=`/instructorlobby`}>here</Link>

@@ -6,7 +6,7 @@ const TraineePassword = () => {
 
     const [password, setPassword] = useState('');
     const [error,setError] = useState(null);
-    const traineeId = "63906b4cb9b09cd81e48472f";
+    const traineeId = "6395b442bd29cab07c63afa5";
     const [email,setEmail] = useState('');
     const [html1,setHtml1] = useState('');
     const [html2,setHtml2] = useState('');

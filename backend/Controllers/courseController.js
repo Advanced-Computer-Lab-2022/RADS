@@ -10,6 +10,16 @@ const getCourses = async(req, res) => {
     res.status(200).json(courses);
 }
 
+
+//find price maximum value
+const maxPrice = async(req, res) => {
+    const course = await Course.find().sort({ "price": -1 }).limit(1);
+    if (!course) {
+        return res.status(404).json({ error: 'No such course' });
+    }
+    res.status(200).json(course[0].price);
+}
+
 //////////////////////////////////
 // GET a single course
 //////////////////////////////////
@@ -23,6 +33,25 @@ const getCourse = async(req, res) => {
         return res.status(404).json({ error: 'No such course' });
     }
     res.status(200).json(course);
+}
+
+
+//Get a subset of courses using a subset of ids
+const getCourseSubset = async(req, res) => {
+    const { ids } = req.body
+        //const courses = await Course.find({ '_id': "ids.courseId" });
+        // const courses = await Course.find({ _id, "ids.courseId": _id });
+        // const courses = await Course.find().where('_id').in(ids);
+    let onlyIds = [] // declaring array to store only _ids
+    for (let i = 0; i < ids.length; i++) {
+        if (!onlyIds.includes(ids[i].courseId)) //checking id exist in array, if not exist push _id to onlyIds aarray
+            onlyIds.push(ids[i].courseId); //push _id
+    }
+    const courses = await Course.find().where('_id').in(onlyIds);
+    if (!courses) {
+        return res.status(404).json({ error: 'No courses' });
+    }
+    res.status(200).json(courses);
 }
 
 
@@ -42,41 +71,6 @@ const getCoursesByInstructor = async(req, res) => {
     res.status(200).json(course);
 }
 
-//////////////////////////////////
-// POST new Exercise: Instructor
-//////////////////////////////////
-const postExercise = async(req, res) => {
-    const { excerciseId, question, firstChoice, secondChoice, thirdChoice, fourthChoice, answer, grade } = req.body;
-    const newExercise = {
-        courseExercises: {
-            excerciseId: excerciseId,
-            questions: [{
-                question: question,
-                firstChoice: firstChoice,
-                secondChoice: secondChoice,
-                thirdChoice: thirdChoice,
-                fourthChoice: fourthChoice,
-                answer: answer
-            }],
-            grade: grade
-        }
-
-    };
-    try {
-        const id = mongoose.Types.ObjectId(req.params.id);
-        const course = await Course.findById({ "_id": id })
-        await course.save();
-        const dbResp = await Course.findOneAndUpdate({ "_id": id }, { $push: newExercise }, { new: true }).lean(true);
-        if (dbResp) {
-            // dbResp will be entire updated document, we're just returning newly added message which is input.
-            res.status(201).json(newExercise);
-        } else {
-            res.status(400).json({ message: 'Not able to update reviews' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
 
 //////////////////////////////////
 // GET a single exercise
@@ -287,6 +281,20 @@ const updateReview = async(req, res) => {
     res.status(200).json({ message: "Review added successfully", message: "Review info" + review });
 }
 
+const deletePromo = async(req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
+    }
+    const course = await Course.findByIdAndUpdate({ _id: id }, {
+        promotionRate: 1
+    });
+    if (!course) {
+        return res.status(404).json({ error: "no such course" });
+    }
+    res.status(200).json({ message: "rate updated succesfully", message: "course info" + course });
+}
+
 
 
 //Post promo
@@ -316,8 +324,10 @@ module.exports = {
     getCoursesByInstructor,
     postCourseReview,
     getCourseRating,
-    postExercise,
     getCourseExercise,
     getCourseExercises,
-    postPromotion
+    postPromotion,
+    deletePromo,
+    maxPrice,
+    getCourseSubset
 }

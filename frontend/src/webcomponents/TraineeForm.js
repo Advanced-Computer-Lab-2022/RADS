@@ -9,7 +9,7 @@ const TraineeForm =(props)=>{
     const params = new URLSearchParams(window.location.search);
     const traineeId = params.get('traineeId');
     const [courses,setCourses] = useState([]);
-
+    const [coursesIds,setCoursesIds] = useState([]);
 
     useEffect(()=>{
         const viewRegistered = async () => {
@@ -17,29 +17,36 @@ const TraineeForm =(props)=>{
             const json = await response.json();
             console.log(json.courses);
             if(response.ok){
-                fetchCourse(json.courses);
+                fetchCourses(json.courses);
+                console.log(json.courses);
+                setCoursesIds(json.courses)
             }
         }
         viewRegistered();
     }, [])
 
 
-    const fetchCourse = async (coursesIDs) => {
-        let x = [coursesIDs.length];
-        console.log(coursesIDs);
-        for(let i = 0;i<coursesIDs.length;i++){
-        const response = await fetch(`/course/${coursesIDs[i].courseId}`);
+    const fetchCourses = async (ids) => {
+        let courseIds = {ids};
+        const response = await fetch(`/course/subset`,{
+            method:'POST',
+            body: JSON.stringify(courseIds),
+            headers:{
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
         const json = await response.json();
         if(response.ok){
-            x[i] = json;
+            setCourses(json);
         }
-    }
-    setCourses(x);
     }
     
 return(
-    <div>
-         {courses && courses.map((course)=>(
+   <div>
+     {courses.length === 0 ?( <p><strong><bold>{`You have not registered in any Course.`}</bold></strong></p>) : (       
+        <div>
+        {courses && courses.map((course)=>(
           <div key = {course._id}>
           <h4>The information of course: {course.courseTitle} </h4>
           <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle)=>(
@@ -58,7 +65,9 @@ return(
             <p><strong>============================================================================================================</strong></p>
                 </div>
              ))}
-    </div>
+             </div>
+             )}   
+       </div>   
 )
 }
 

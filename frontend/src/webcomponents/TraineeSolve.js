@@ -22,7 +22,14 @@ const TraineeSolve = (props) => {
     const [resultValues, setResultValues] = useState([]);
     const [courseGrade, setCourseGrade] = useState(0);
     const [oldGrade,setOldGrade] = useState(0);
+    
+    
+    const [choicesChecked,setChoicesChecked] = useState([]);
     const [choices,setChoices] = useState([]);
+    const [firstChoices,setFirstChoices] = useState([]);
+    const [secondChoices,setSecondChoices] = useState([]);
+    const [thirdChoices,setThirdChoices] = useState([]);
+    const [fourthChoices,setFourthChoices] = useState([]);
     const [grades,setGrades] = useState([]);
     const [corrects,setCorrects] = useState([]);
 
@@ -59,13 +66,16 @@ const TraineeSolve = (props) => {
     }
 
 
-const handleChoice = (e) =>{
-    var updatedAnswers = [...choices, e.target.value];
-    console.log(updatedAnswers);
-    setChoices(updatedAnswers);
-}
-
-//const handleChoice = ({ target: { value } }) => setChoices([...choices, value])
+    const handleChoice = (e, exIndex) =>{
+        var updatedAnswers = [...choices];
+        if (e.target.checked) { 
+            updatedAnswers[exIndex] = e.target.value;
+          } else {
+            updatedAnswers.splice(exIndex,1);
+          }
+          console.log(updatedAnswers);
+          setChoices(updatedAnswers);
+    }
 
 const ShowGrades = async() =>{
     let array1 = grades;
@@ -98,10 +108,6 @@ const ShowGrades = async() =>{
         }
     })
     if(response.ok){
-      // setChoices([]);
-      // setCorrects([]);
-      // setCourseGrade(0);
-      // setGrades([]);
       console.log("Done");
     }  
 }
@@ -111,10 +117,6 @@ const handleSubmit = (e) =>{
     ShowGrades();
 }
 
-const updateGrade = async() => {
-  console.log(courseGrade);
- 
-};
 
     return ( 
         <div>
@@ -123,11 +125,13 @@ const updateGrade = async() => {
  <form onSubmit={handleSubmit}>
 {exercises && exercises.map((exercise,index)=>(
     <div>
+    <fieldset id = {exercise._id}>
     <p><strong>Exercise {index+1}: {exercise.question}</strong></p>
-    <label><input type = 'radio' value = {exercise.firstChoice} name = {exercise.firstChoice} onChange={e=>{handleChoice(e)}}/> {exercise.firstChoice}</label>
-    <label><input type = 'radio' value = {exercise.secondChoice} name = {exercise.secondChoice} onChange={e=>{handleChoice(e)}}/>{exercise.secondChoice}</label>
-    <label><input type = 'radio' value = {exercise.thirdChoice} name = {exercise.thirdChoice} onChange={e=>{handleChoice(e)}}/>{exercise.thirdChoice}</label>
-    <label><input type = 'radio' value = {exercise.fourthChoice} name = {exercise.fourthChoice} onChange={e=>{handleChoice(e)}}/>{exercise.fourthChoice}</label>
+    <label><input id = {`first${index}`} type = 'radio' value = {exercise.firstChoice} name = {exercise.firstChoice} checked = {choices[index] === exercise.firstChoice} onChange={e=>{handleChoice(e,index)}}/> {exercise.firstChoice}</label>
+    <label><input id = {`second${index}`} type = 'radio' value = {exercise.secondChoice} name = {exercise.secondChoice} checked = {choices[index]  === exercise.secondChoice} onChange={e=>{handleChoice(e,index)}}/>{exercise.secondChoice}</label>
+    <label><input id = {`third${index}`} type = 'radio' value = {exercise.thirdChoice} name = {exercise.thirdChoice} checked = {choices[index] === exercise.thirdChoice} onChange={e=>{handleChoice(e, index)}}/>{exercise.thirdChoice}</label>
+    <label><input id = {`forth${index}`} type = 'radio' value = {exercise.fourthChoice} name = {exercise.fourthChoice} checked = {choices[index] === exercise.fourthChoice} onChange={e=>{handleChoice(e, index)}}/>{exercise.fourthChoice}</label>
+    </fieldset>
     </div>
  ))}
  <button type='submit'>Submit</button>
