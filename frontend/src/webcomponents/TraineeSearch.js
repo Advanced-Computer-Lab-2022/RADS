@@ -109,7 +109,7 @@ function valueDollar(value,currencyVal) {
   return `${value} ${currencyVal}`;
 }
 const TraineeSearch = (props) => {
-    const traineeId = '638c158f9ac57151d54702a3';
+    const traineeId = '6395b442bd29cab07c63afa5';
     const [queryS, setQueryS] = useState("");
     const [queryF2, setQueryF2] = useState("");
     const [queryF3, setQueryF3] = useState("");

@@ -5,7 +5,7 @@ import TraineeLobby from './webpages/TraineeLobby';
 import Home from './webpages/Home';
 import Admin from './webpages/Admin';
 import CorpTraineeLobby from './webpages/CorpTraineeLobby';
-import TraineeLobby from './webpages/TraineeLobby';
+//import TraineeLobby from './webpages/TraineeLobby';
 import CourseView from './webcomponents/CourseView';
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -14,6 +14,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useState,useEffect } from 'react';
 import InstructorRating from './webcomponents/InstructorRating';
 import CorpRating from './webcomponents/CorpRating';
+import CorpTraineeViewCourse from './webcomponents/CorpTraineeView';
+import CorpTraineeCourses from './webcomponents/CorpTraineeCourses';
+import CorpTraineeView from './webcomponents/CorpTraineeView';
+import CorpTraineeForm from './webcomponents/CorpTraineeForm';
+import CorpTraineeSolve from './webcomponents/CorpTraineeSolve';
 import TraineeView from './webcomponents/TraineeView';
 import TraineeForm from './webcomponents/TraineeForm';
 import TraineeRating from './webcomponents/TraineeRating';
@@ -91,13 +96,17 @@ function App() {
             path="/corprating"
             element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
-             <Route
+             { <Route
             path="/corpview"
-            element={<CorpRating rateVal = {rateValue} currencyVal = {inputValue}/>}
-            />
+            element={<CorpTraineeView rateVal = {rateValue} currencyVal = {inputValue}/>}
+            /> }
              <Route
             path="/traineesolve"
             element={<TraineeSolve rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+            <Route
+            path="/corptraineesolve"
+            element={<CorpTraineeSolve rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
               <Route
             path="/traineerate"
@@ -107,7 +116,7 @@ function App() {
             path="/traineeview"
             element={<TraineeView rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
-              <Route
+            <Route
             path="/traineeform"
             element={<TraineeForm rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
@@ -127,14 +136,22 @@ function App() {
             element={<CourseView rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
             <Route path="/filtercorp"
-            element={<CorpTraineeViewCourse rateVal = {rateValue} currencyVal = {inputValue}/>}
+            element={<CorpTraineeView rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
-            <Route path="/viewcorp"
+            { <Route path="/viewcorp"
             element={<CorpTraineeCourses rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />}
+            <Route
+            path="/corptraineeview"
+            element={<CorpTraineeView rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
             <Route
             path="/corptraineelobby"
             element={<CorpTraineeLobby rateVal = {rateValue} currencyVal = {inputValue}/>}
+            />
+            <Route
+            path="/corptraineeform"
+            element={<CorpTraineeForm rateVal = {rateValue} currencyVal = {inputValue}/>}
             />
             <Route
             path="/traineelobby"

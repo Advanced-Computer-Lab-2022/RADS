@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect,useState } from "react"
+import { Link } from "react-router-dom";
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 
@@ -101,31 +102,45 @@ const priceMarks = [
   }
 
 const CorpTraineeSearch = (props) => {
-    const [queryS, setQueryS] = useState("");
-    const [queryF2, setQueryF2] = useState("");
-    const [queryF3, setQueryF3] = useState("");
-    const [courses, setCourses] = useState([]);
-    const keys = ["courseTitle","subject","instructor"]; 
-    const newKeys = ["subject"];   
-    const [checkedSubjects, setCheckedSubjects] = useState([]);
-    const [courseSubjects, setCourseSubjects] = useState([]);  
-    const{
-      rateVal,
-      currencyVal
-  } = props;
-    // To fetch all the courses and put the results in courses
-    useEffect(()=>{
-        const fetchCourses = async () => {
-            const response = await fetch('/course');
-            const json = await response.json();
-            if(response.ok){
-                setCourses(json)
-                setCourseSubjects(getCourseSubjects(json));
-            }
-        }
-        fetchCourses();
-    }, [])
+  const corptraineeId = '635aff3e92426ef4e8a9e179';
+  const [queryS, setQueryS] = useState("");
+  const [queryF2, setQueryF2] = useState("");
+  const [queryF3, setQueryF3] = useState("");
+  const [courses, setCourses] = useState([]);
+  const keys = ["courseTitle","subject","instructor"];
+  const newKeys = ["subject"];   
+  const [checkedSubjects, setCheckedSubjects] = useState([]);
+  const [courseSubjects, setCourseSubjects] = useState([]);
+  const [corpTraineeName, setCorpTraineeName] = useState('');
+  const{
+    rateVal,
+    currencyVal
+} = props;
 
+
+  // To fetch all the courses and put the results in courses
+  useEffect(()=>{
+    const fetchCourses = async () => {
+      const response = await fetch('/course');
+      const json = await response.json();
+      if(response.ok){
+          setCourses(json);
+          setCourseSubjects(getCourseSubjects(json));
+          fetchCorpTrainee();
+      }
+  }
+    fetchCourses();
+}, [])
+
+
+const fetchCorpTrainee = async () => {
+  const response = await fetch(`/corptrainee/${corptraineeId}`);
+  const json = await response.json();
+  if(response.ok){
+      let x = json.firstName +" " + json.lastName;
+      setCorpTraineeName(x);
+  }
+}
     //GET all course subjects
     const getCourseSubjects = (arr) =>{
       const newArray = [];
@@ -138,49 +153,52 @@ const CorpTraineeSearch = (props) => {
    }
 
 
-    // to Perform the intersection between the search elements and filter elements
-    const performIntersection = (arr1, arr2, arr3, arr4) => { 
-      const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
-      const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
-      const intersectionResult3 = intersectionResult2.filter(x => arr4.indexOf(x) !== -1);
-      if(arr4.length === 0){
-        return intersectionResult2;
+  // to Perform the intersection between the search elements and filter elements
+
+  const performIntersection = (arr1, arr2, arr3, arr4) => { 
+    const intersectionResult1 = arr1.filter(x => arr2.indexOf(x) !== -1);
+    const intersectionResult2 = intersectionResult1.filter(x => arr3.indexOf(x) !== -1);
+    const intersectionResult3 = intersectionResult2.filter(x => arr4.indexOf(x) !== -1);
+    if(arr4.length === 0){
+      return intersectionResult2;
+    }
+    else{
+      return intersectionResult3;  
+    }
+   
+}
+
+  // Search method
+  const searchMethod = (courseData) =>{
+      return courseData.filter((item)=>
+      keys.some((key)=>item[key].toString().toLowerCase().includes(queryS.toString().toLowerCase()))
+      );
+  }
+
+  // Price filter method
+  const filterMethodOnPrice = (courseData) =>{
+      console.log(queryF2);
+      if((!queryF2 ||  queryF2 === -500) && queryF2 !== 0){
+          return courseData;
       }
       else{
-        return intersectionResult3;  
+          return courseData.filter(item=> Math.ceil(item.price*rateVal) <= queryF2);
       }
   }
 
-    // Search method
-    const searchMethod = (courseData) =>{
-        return courseData.filter((item)=>
-        keys.some((key)=>item[key].toString().toLowerCase().includes(queryS.toString().toLowerCase()))
-        );
-    }
+  // Rating filter method
+  const filterMethodOnRating = (courseData) =>{
+    console.log(queryF3);
+      if((!queryF3 ||  queryF3 === -0.5) && queryF3 !== 0){
+          return courseData;
+      }
+      else{
+        //console.log("here",queryF3 - 3);
+          return courseData.filter(item=> item.courseRating <= queryF3);
+      }
+  }
 
-    // Price filter method
-    const filterMethodOnPrice = (courseData) =>{
-        console.log(queryF2);
-        if((!queryF2 ||  queryF2 === -500) && queryF2 !== 0){
-            return courseData;
-        }
-        else{
-            return courseData.filter(item=> item.price === queryF2);
-        }
-    }
-
-    // Rating filter method
-    const filterMethodOnRating = (courseData) =>{
-        console.log(queryF3);
-        if((!queryF3 ||  queryF3 === -0.5) && queryF3 !== 0){
-            return courseData;
-        }
-        else{
-            return courseData.filter(item=> item.courseRating === queryF3);
-        }
-    }
-
-        // Subject filter
+  // Subject filter
   const filterMethodOnSubject = (event) => {
     var updatedSubList = [...checkedSubjects];
     let subjects = courses.filter((item)=>
@@ -204,17 +222,18 @@ const CorpTraineeSearch = (props) => {
 
     return (
         <div>
+          <p><strong>Welcome {corpTraineeName}</strong></p>
         <div className='homesearch-component'>
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>
-            
+            <button onClick={() => window.location.href=`/corptraineeform?corptraineeId=${corptraineeId}`}>View my Courses</button>
             <div className='filter-component1'>
             <div className="list-container">
                {courseSubjects.map((course) => (
-             <div>
-                      <input value={course} name = {course} type="checkbox"  onChange={e=>{filterMethodOnSubject(e)}} />
-                      <span>{course}</span>
-                       {/* <span className= {isChecked(course)}>{course.subject}</span> */}
-               </div>
+            <div>
+                <input value={course} name = {course} type="checkbox"  onChange={e=>{filterMethodOnSubject(e)}} />
+                <span>{course}</span>
+                {/* <span className= {isChecked(course)}>{course.subject}</span> */}
+            </div>
                ))}
               </div>
             </div>
@@ -233,14 +252,13 @@ const CorpTraineeSearch = (props) => {
                 <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar}  marks={ratingMarks}  valueLabelDisplay="on" size= "small" max = {5} step={0.5} min = {-0.5} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF3(v)}}/> 
                 </Box>
             </div>         
-             <div className="home-search">
-                {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
-                     <div>
-                     <p key = {course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating =Out of 5 <button on></button></p> 
-                     </div>
+            <div className="home-search">
+             {performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects) && performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses),checkedSubjects).map((course)=>(
+                    <div>
+                    <Link onClick={() => window.location.href=`/corptraineeview?courseId=${course._id}&corptraineeId=${corptraineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal}</Link>
+                    </div>
                 ))}
-                {/* <button>onClick={() => window.location.href=`/corpview?corpId=${instruId}&`} </button> */}
-            </div> 
+            </div>
         </div>
         </div>
     )

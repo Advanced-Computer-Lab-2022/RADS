@@ -10,7 +10,7 @@ const TraineeCourses = (props) =>{
     } = props;
     const [course,setCourse] = useState('')
     //update the model of trainees to have array of course IDS to be their registered courses
-    const courseId = "6383805519d1b21e5867c64b";
+    const courseId = "638c139b147e2173163fd976";
     useEffect(()=>{
         const fetchCourse = async () => {
             const response = await fetch(`/course/${courseId}`);

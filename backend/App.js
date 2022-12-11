@@ -31,7 +31,7 @@ const traineeRoute = require('./Routes/Trainee');
 app.use('/instructor', instructorRoute);
 app.use('/course', courseRoute);
 app.use('/admin', adminRoute);
-app.use('/corpTrainee', corpTraineeRoute);
+app.use('/corptrainee', corpTraineeRoute);
 app.use('/trainee', traineeRoute);
 
 // Configurations

@@ -7,6 +7,7 @@ const TraineeDetails = ({Trainee}) =>{
             <p><strong>Country: </strong>{Trainee.country}</p>
             <p><strong>Phone Number: </strong>{Trainee.phoneNumber}</p>
             <p><strong>address: </strong>{Trainee.address}</p>
+            <p><strong>courses: </strong>{Trainee.courses}</p>
         </div>
     )
 }

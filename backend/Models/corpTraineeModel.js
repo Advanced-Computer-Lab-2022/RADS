@@ -2,15 +2,25 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const exerciseSchema = mongoose.Schema({
+    excerciseId: {
+        type: Number
+    },
+    grade: {
+        type: Number
+    }
+});
+
 const courseSchema = new Schema({
     courseId: {
         type: mongoose.Types.ObjectId,
-        ref: 'Course',
+        ref: 'courseModel',
     },
-    courseGrade: {
-        type: Number
+    exerciseGrades: {
+        type: [exerciseSchema]
     }
 })
+
 
 const corpTraineeSchema = new Schema({
     firstName: {

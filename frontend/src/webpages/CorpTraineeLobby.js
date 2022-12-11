@@ -25,7 +25,7 @@ const CorpTraineeLobby = (props) => {
     }, [])
     useEffect(() => {
         const fetchCourses = async() => {
-            const response = await fetch('/CorpTrainee/password/:id');
+            const response = await fetch('/corptrainee/password/:id');
             const json = await response.json();
 
             if (response.ok) {
