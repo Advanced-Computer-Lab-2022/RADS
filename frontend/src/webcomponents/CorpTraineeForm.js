@@ -9,8 +9,6 @@ const CorpTraineeForm = () => {
     const [email,setEmail] = useState('');
     const [error,setError] = useState(null);
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault() //prevent form submission
         
         const corpTrainee = {firstName,lastName,country,phoneNumber,address};
         
