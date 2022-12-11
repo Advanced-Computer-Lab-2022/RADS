@@ -1,6 +1,8 @@
 const Instructor = require('../Models/instructorModel');
 const Course = require('../Models/courseModel');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
 const { sendMail } = require('../Utilities/sendEmail');
 // GET all instructors
 const getInstructors = async(req, res) => {
@@ -105,8 +107,38 @@ const updatePassword = async(req, res) => {
     } else {
         res.status(400).json({ error: "courseId is required" })
     }
-}*/
+} */
 
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (userName) => {
+    return jwt.sign({ userName }, 'supersecret', {
+        expiresIn: maxAge
+    });
+};
+const login = async (req, res) => {
+    const {userName,password} = req.body;
+    const instructor = await Instructor.findOne({userName : userName});
+    if(instructor){
+        const auth = await bcrypt.compare(password, instructor.password);
+        if(auth){
+            const token = createToken(instructor.userName);
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(200).json(instructor);
+        }
+        else{
+            res.status(400).json({error : 'password is incorrect'})
+        }
+    }
+    else{
+        res.status(400).json({error : 'user not found'})
+    }
+  }
+  
+  const logout = async (req, res) => {
+    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
+    res.status(200).json({ message: "logged out" })
+  
+  }
 //add promotionrate and promotionenddate in course
 
 //add a review to an instructor
@@ -176,5 +208,7 @@ module.exports = {
     postInstructorReview,
     getInstructorRating,
     forgotPassword,
-    updatePassword
+    updatePassword,
+    login,
+    logout
 }
