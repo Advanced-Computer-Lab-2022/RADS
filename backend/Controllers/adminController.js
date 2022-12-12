@@ -79,7 +79,5 @@ module.exports = {
     postCTrainee,
     postInstructor,
     editAdmin,
-    getAdmins,
-    login,
-    logout
+    getAdmins
 }

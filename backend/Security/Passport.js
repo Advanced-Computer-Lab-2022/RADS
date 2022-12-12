@@ -3,7 +3,6 @@ const Instructor = require("../Models/instructorModel");
 const corpTrainee = require("../Models/corpTraineeModel");
 const Admin = require("../Models/adminModel");
 
-
 var JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
 var opts = {};

@@ -96,8 +96,6 @@ module.exports = {
     getCTrainees,
     getCTrainee,
     updatePassword,
-    login,
-    logout,
     getCTraineeCourses,
     postGrade,
     postCourseRegister
