@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Course = require('../Models/courseModel');
 const nodemailer = require("nodemailer");
 const { sendMail } = require('../Utilities/sendEmail');
+
 // const getRequest = async(req,res) =>{
 //     let transporter = nodemailer.createTransport({
 //         service: 'gmail',
@@ -56,8 +57,6 @@ const getTrainees = async(req, res) => {
     res.status(200).json(trainees);
 }
 
-
-
 const postTrainee = async(req, res) => {
     const { firstName, lastName, userName, password, country, phoneNumber, address, email } = req.body;
     try {
@@ -79,7 +78,6 @@ const postTrainee = async(req, res) => {
     }
 }
 
-
 const getTrainee = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -91,6 +89,7 @@ const getTrainee = async(req, res) => {
     }
     res.status(200).json(trainee);
 }
+
 const updatePassword = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -104,12 +103,14 @@ const updatePassword = async(req, res) => {
     }
     res.status(200).json(trainee);
 }
+
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (userName) => {
     return jwt.sign({ userName }, 'supersecret', {
         expiresIn: maxAge
     });
 };
+
 const signUp = async(req, res) => {
     const { userName, firstName, lastName, gender, email, password } = req.body;
     try {
@@ -132,9 +133,6 @@ const signUp = async(req, res) => {
     }
 }
 
-
-
-
 const login = async(req, res) => {
     const { userName, password } = req.body;
     const trainee = await Trainee.findOne({ userName: userName });
@@ -151,7 +149,6 @@ const login = async(req, res) => {
         res.status(400).json({ error: 'user not found' })
     }
 }
-
 
 const getTraineeCourses = async(req, res) => {
     const { id } = req.params;
@@ -235,7 +232,6 @@ const postCourseGrade = async(req, res) => {
     }
 }
 
-
 //get old grade
 const findOldGrade = async(req, res) => {
     const { courseId } = req.body;
@@ -253,7 +249,6 @@ const findOldGrade = async(req, res) => {
     }
 }
 
-
 const checkRegistered = async(req, res) => {
     const { courseId } = req.body;
     try {
@@ -269,9 +264,6 @@ const checkRegistered = async(req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
-
-
-
 
 module.exports = {
     getTrainees,

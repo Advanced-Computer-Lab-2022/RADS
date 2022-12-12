@@ -35,7 +35,6 @@ const corpTraineeSchema = new Schema({
     },
     gender: {
         type: String,
-        required: true
     },
     password: {
         type: String,
@@ -43,15 +42,12 @@ const corpTraineeSchema = new Schema({
     },
     country: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: Number,
-        required: true
     },
     address: {
         type: String,
-        required: true
     },
     courses: {
         type: [courseSchema]

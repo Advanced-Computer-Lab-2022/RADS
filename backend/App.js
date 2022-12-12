@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passport = require('passport');
 
 // Require the dotenv to attach environment variables to the process object
 require('dotenv').config();
@@ -36,6 +37,12 @@ app.use('/admin', adminRoute);
 app.use('/corptrainee', corpTraineeRoute);
 app.use('/trainee', traineeRoute);
 app.use('/', guestRoute);
+
+// Passport Middleware
+app.use(passport.initialize());
+// Passport Config
+require('./Security/Passport')(passport);
+
 
 // Configurations
 // MongoDB
