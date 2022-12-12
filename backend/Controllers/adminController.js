@@ -3,6 +3,8 @@ var randomstring = require("randomstring");
 const Instructor = require('../Models/instructorModel');
 const CorpTrainee = require('../Models/corpTraineeModel');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
 
 const postAdmin = async(req, res) => {
     const { firstName, lastName } = req.body;
@@ -73,10 +75,42 @@ const getAdmins = async(req, res) => {
     const admins = await Admin.find({}).sort({ createdAt: -1 });
     res.status(200).json(admins);
 }
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (userName) => {
+    return jwt.sign({ userName }, 'supersecret', {
+        expiresIn: maxAge
+    });
+};
+const login = async (req, res) => {
+    const {userName,password} = req.body;
+    const admin = await Admin.findOne({userName : userName});
+    if(admin){
+        const auth = await bcrypt.compare(password, admin.password);
+        if(auth){
+            const token = createToken(admin.userName);
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(200).json(admin);
+        }
+        else{
+            res.status(400).json({error : 'password is incorrect'})
+        }
+    }
+    else{
+        res.status(400).json({error : 'user not found'})
+    }
+  }
+  
+  const logout = async (req, res) => {
+    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
+    res.status(200).json({ message: "logged out" })
+  
+}
 module.exports = {
     postAdmin,
     postCTrainee,
     postInstructor,
     editAdmin,
-    getAdmins
+    getAdmins,
+    login,
+    logout
 }
