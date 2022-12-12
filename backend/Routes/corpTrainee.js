@@ -1,6 +1,5 @@
 const express = require('express');
-const { getCTrainees, updatePassword, postCourseRegister, getCTrainee, postGrade, getCTraineeCourses } = require('../Controllers/corpTraineeController');
-const { getCTrainees, updatePassword, postCourseRegister, getCTrainee, login, logout } = require('../Controllers/corpTraineeController');
+const { getCTrainees, updatePassword, postCourseRegister, getCTrainee, postGrade, getCTraineeCourses, login, logout } = require('../Controllers/corpTraineeController');
 const router = express.Router();
 
 router.get('/', getCTrainees);

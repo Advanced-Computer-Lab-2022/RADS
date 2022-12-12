@@ -35,6 +35,21 @@ const CorpTraineeSolve = (props) => {
     const [corptrainee,setCorpTrainee] = useState([]);
     const [instructorName, setinstructorName] = useState([]);
     const [instructorId, setInstructorId] = useState('');
+    const [exercises, setExercises] = useState([]);
+    const [selectedValues, setSelectedValues] = useState([]);
+    const [resultValues, setResultValues] = useState([]);
+    const [courseGrade, setCourseGrade] = useState(0);
+    const [oldGrade,setOldGrade] = useState(0);
+
+    const [choicesChecked,setChoicesChecked] = useState([]);
+    const [choices,setChoices] = useState([]);
+    const [firstChoices,setFirstChoices] = useState([]);
+    const [secondChoices,setSecondChoices] = useState([]);
+    const [thirdChoices,setThirdChoices] = useState([]);
+    const [fourthChoices,setFourthChoices] = useState([]);
+    const [grades,setGrades] = useState([]);
+    const [corrects,setCorrects] = useState([]);
+
 
     useEffect(() => {
         const fetchCourse = async() => {
@@ -65,38 +80,86 @@ const CorpTraineeSolve = (props) => {
             setCorpTrainee(json);
         }
     }
+    const handleChoice = (e, exIndex) =>{
+        var updatedAnswers = [...choices];
+        if (e.target.checked) { 
+            updatedAnswers[exIndex] = e.target.value;
+          } else {
+            updatedAnswers.splice(exIndex,1);
+          }
+          console.log(updatedAnswers);
+          setChoices(updatedAnswers);
+    }
+
+const ShowGrades = async() =>{
+    let array1 = grades;
+    let array2 = corrects;
+    let initialGrade = 0;
+    for(let i = 0;i<choices.length;i++){
+        if(choices[i] === exercises[i].answer){
+            array1[i] = 1;
+            array2[i] = 'Correct !';
+            initialGrade += 1;
+        }
+        else{
+            array1[i] = 0;
+            array2[i] = `Incorrect! , correct solution is ${exercises[i].answer}`
+        }
+    }
+    setGrades(array1);
+    setCorrects(array2);
+    console.log(initialGrade);
+    let finalgrade = (initialGrade/choices.length)*100;
+    setCourseGrade(finalgrade);
+    let courseGrade = finalgrade
+    const info = {courseId,courseGrade};
+    const response = await fetch(`/corptrainee/update/${corptraineeId}`,{
+        method:'POST',
+        body: JSON.stringify(info),
+        headers:{
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json'
+        }
+    })
+    if(response.ok){
+      console.log("Done");
+    }  
+}
+
+const handleSubmit = (e) =>{
+    e.preventDefault();
+    ShowGrades();
+}
 
     return (
         <div>
-            <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female" name="radio-buttons-group">
-                    <FormControlLabel value="female" control={<Radio />} label="Female" />
-                    <FormControlLabel value="male" control={<Radio />} label="Male" />
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
-                </RadioGroup>
-            </FormControl>
-
-            {courses && courses.map((course)=>(
-          <div key = {course._id}>
-          <h4>The information of course: {course.courseTitle} </h4>
-          <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle)=>(
-                <div>
-                <p>{subtitle.subTitle}</p>
-                <p>Description:{subtitle.description}</p>
-                <p>Total Hours of the Chapter: {subtitle.hours}</p>
-                <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe> 
-                </div>
-             ))}</div>
-            <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
-            <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
-            <p><strong>Subject of the course: </strong>{course.subject}</p>
-            <button onClick={() => window.location.href=`/corptraineerate?corptraineeId=${corptraineeId}&courseId=${course._id}`}>Rate Course</button>
-            <button onClick={() => window.location.href=`/corptraineesolve?corptraineeId=${corptraineeId}&courseId=${course._id}`}>Solve Exercises</button>
-            <p><strong>============================================================================================================</strong></p>
-                </div>
+       <div className='quiz-form'>
+        <h1>Quiz</h1>
+ <form onSubmit={handleSubmit}>
+{exercises && exercises.map((exercise,index)=>(
+    <div>
+    <fieldset id = {exercise._id}>
+    <p><strong>Exercise {index+1}: {exercise.question}</strong></p>
+    <label><input id = {`first${index}`} type = 'radio' value = {exercise.firstChoice} name = {exercise.firstChoice} checked = {choices[index] === exercise.firstChoice} onChange={e=>{handleChoice(e,index)}}/> {exercise.firstChoice}</label>
+    <label><input id = {`second${index}`} type = 'radio' value = {exercise.secondChoice} name = {exercise.secondChoice} checked = {choices[index]  === exercise.secondChoice} onChange={e=>{handleChoice(e,index)}}/>{exercise.secondChoice}</label>
+    <label><input id = {`third${index}`} type = 'radio' value = {exercise.thirdChoice} name = {exercise.thirdChoice} checked = {choices[index] === exercise.thirdChoice} onChange={e=>{handleChoice(e, index)}}/>{exercise.thirdChoice}</label>
+    <label><input id = {`forth${index}`} type = 'radio' value = {exercise.fourthChoice} name = {exercise.fourthChoice} checked = {choices[index] === exercise.fourthChoice} onChange={e=>{handleChoice(e, index)}}/>{exercise.fourthChoice}</label>
+    </fieldset>
+    </div>
+ ))}
+ <button type='submit'>Submit</button>
+</form>
+       </div >
+       <div className='solution-form'>
+       {grades && grades.map((grade,index)=>(
+            <p>Q{index+1} Grade: {grade} out of 1</p>
              ))}
-        </div>
+       {corrects && corrects.map((correct,index)=>(
+            <p>A1{index+1}: {correct}</p>
+             ))}
+        <p><strong>Total Grade: {courseGrade}</strong></p>
+       </div>
+       </div>
     )
 }
 

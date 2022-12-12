@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
 import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
 
