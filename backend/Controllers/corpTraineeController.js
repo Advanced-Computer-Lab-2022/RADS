@@ -128,8 +128,8 @@ module.exports = {
     getCTrainees,
     getCTrainee,
     updatePassword,
-  login,
-  logout,
+    login,
+    logout,
     getCTraineeCourses,
     postGrade,
     postCourseRegister
