@@ -18,7 +18,10 @@ const CourseCreate = (props) => {
     } = props;
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission   
+        console.log(courseExercises);
         const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseExercises,coursePreview};
+        console.log(course.courseExercises);
+        console.log(course);
         const response = await fetch('/course/add',{
             method:'POST',
             body: JSON.stringify(course),
@@ -85,48 +88,48 @@ const CourseCreate = (props) => {
     const handleExerciseAdd = () =>{
         setCourseExercises([...courseExercises,{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}])
     }
-    const setQuestion  = (e,index) =>{
+    const setQuestion  = (e,index2) =>{
         const {name,value} = e.target;
         console.log(e.target);
-        const list = [...subtitles];
-        list[index][name] = value;
+        const list = [...courseExercises];
+        list[index2][name] = value;
         setCourseExercises(list);
     }
-    const setFirstChoice  = (e,index) =>{
+    const setFirstChoice  = (e,index2) =>{
         const {name,value} = e.target;
         console.log(e.target);
-        const list = [...subtitles];
-        list[index][name] = value;
+        const list = [...courseExercises];
+        list[index2][name] = value;
         setCourseExercises(list);
     }
-    const setSecondChoice  = (e,index) =>{
+    const setSecondChoice  = (e,index2) =>{
         const {name,value} = e.target;
         console.log(e.target);
-        const list = [...subtitles];
-        list[index][name] = value;
+        const list = [...courseExercises];
+        list[index2][name] = value;
         setCourseExercises(list);
     }
-    const setThirdChoice  = (e,index) =>{
+    const setThirdChoice  = (e,index2) =>{
         const {name,value} = e.target;
         console.log(e.target);
-        const list = [...subtitles];
-        list[index][name] = value;
-        setCourseExercises(list);
-    }
-
-    const setFourthChoice  = (e,index) =>{
-        const {name,value} = e.target;
-        console.log(e.target);
-        const list = [...subtitles];
-        list[index][name] = value;
+        const list = [...courseExercises];
+        list[index2][name] = value;
         setCourseExercises(list);
     }
 
-    const setAnswer  = (e,index) =>{
+    const setFourthChoice  = (e,index2) =>{
         const {name,value} = e.target;
         console.log(e.target);
-        const list = [...subtitles];
-        list[index][name] = value;
+        const list = [...courseExercises];
+        list[index2][name] = value;
+        setCourseExercises(list);
+    }
+
+    const setAnswer  = (e,index2) =>{
+        const {name,value} = e.target;
+        console.log(e.target);
+        const list = [...courseExercises];
+        list[index2][name] = value;
         setCourseExercises(list);
     }
    
@@ -171,6 +174,7 @@ const CourseCreate = (props) => {
             />           
             <br></br>
 
+            <div>
            <label>Subtitles: </label>
              {subtitles.map((subtitle,index)=>(
                 <div key ={index} className="subtitles">
@@ -200,46 +204,49 @@ const CourseCreate = (props) => {
                 </div>
              ))}
              <br></br>
+             </div>
 
+
+             <div>
             <label>Exercises: </label>
-             {courseExercises.map((exercise,index)=>(
-                <div key ={index} className="exercises">
+             {courseExercises.map((exercise,index2)=>(
+                <div key ={index2} className="exercises">
                 <div className="add-exercise">
             <label>Question :</label>
-            <input name="question" type="text" onChange={(e) => setQuestion(e,index)}
+            <input name="question" type="text" onChange={(e) => setQuestion(e,index2)}
             value= {exercise.question}
             />
 
             <label>First Choice: </label>
-            <input name="firstChoice" type="text" onChange={(e) => setFirstChoice(e,index)}
+            <input name="firstChoice" type="text" onChange={(e) => setFirstChoice(e,index2)}
             value= {exercise.firstChoice}
             />
 
             <label>Second Choice: </label>
-            <input name = "secondChoice" type="text" onChange={(e) => setSecondChoice(e,index)}
+            <input name = "secondChoice" type="text" onChange={(e) => setSecondChoice(e,index2)}
             value= {exercise.secondChoice}
             />  
 
             <label>Third Choice: </label>
-            <input name = "thirdChoice" type="text" onChange={(e) => setThirdChoice(e,index)}
+            <input name = "thirdChoice" type="text" onChange={(e) => setThirdChoice(e,index2)}
             value= {exercise.thirdChoice}
             />
 
             <label>Fourth Choice: </label>
-            <input name = "fourthChoice" type="text" onChange={(e) => setFourthChoice(e,index)}
+            <input name = "fourthChoice" type="text" onChange={(e) => setFourthChoice(e,index2)}
             value= {exercise.fourthChoice}
             />
 
             <label>Answer: </label>
-            <input name = "answer" type="text" onChange={(e) => setAnswer(e,index)}
+            <input name = "answer" type="text" onChange={(e) => setAnswer(e,index2)}
             value= {exercise.answer}
             />
-            {subtitles.length-1 === index &&  
+            {courseExercises.length-1 === index2 &&  
             (<button type="button" className="add-btn" onClick={handleExerciseAdd}><span>Add an Exercise</span></button>)}
                   </div>
                 </div>
              ))}
-
+             </div>
             <button>Submit</button>
             {error && <div className="error">{error}</div>}
         </form>

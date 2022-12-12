@@ -69,8 +69,8 @@ return(
                  <div>
                  <p>Review {index + 1}: Rating: {review.iRating} out of 5.</p>
                  <p>{review.iReview}</p>
-                 <p>{review.traineeId}</p>
-                 <p>{review.corpTraineeId}</p>
+                 {/* <p>{review.traineeId}</p>
+                 <p>{review.corpTraineeId}</p> */}
                  </div>
             ))}
     </div>
@@ -84,7 +84,7 @@ return(
           {course.reviews && course.reviews.map((review,index)=>(
                 <div>
                 <p>Rating {index+1}: {review.cRating} out of 5.</p>
-                <p>Review {index+1}:{review.cReview}</p>
+                <p>Review {index+1}: {review.cReview}</p>
                 </div>
              ))}
             <p><strong>============================================================================================================</strong></p>

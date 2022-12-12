@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react"
-//import CourseDetails from '../webcomponents/CourseDetails';
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
 import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
 
@@ -45,7 +43,6 @@ const CorpTraineeLobby = (props) => {
 
     //     )
 
-    // }
     return ( 
     <div className = "home-lobby" >
         Welcome to RADS Online Course Provider(CorpTraineeLobby side) 

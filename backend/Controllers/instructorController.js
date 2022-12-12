@@ -1,7 +1,9 @@
 const Instructor = require('../Models/instructorModel');
 const Course = require('../Models/courseModel');
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+const { sendMail } = require('../Utilities/sendEmail');
 // GET all instructors
 const getInstructors = async(req, res) => {
     const instructors = await Instructor.find({}).sort({ createdAt: -1 });
@@ -45,7 +47,6 @@ const getInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-
 // DELETE an instructor
 const deleteInstructor = async(req, res) => {
     const { id } = req.params;
@@ -80,6 +81,23 @@ const updateInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
+
+// UPDATE Password
+const updatePassword = async(req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist an trainee with the corresponding id.' });
+    }
+    const trainee = await Instructor.findByIdAndUpdate({ _id: id }, {
+        password: req.body.password
+    });
+    if (!trainee) {
+        return res.status(404).json({ error: 'No such trainee' });
+    }
+    res.status(200).json(trainee);
+}
+
+
 // FILTER a course based on instructor
 /*const filterCourses = async(req, res) => {
     const instructorId = req.query.courseId;
@@ -89,8 +107,38 @@ const updateInstructor = async(req, res) => {
     } else {
         res.status(400).json({ error: "courseId is required" })
     }
-}*/
+} */
 
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (userName) => {
+    return jwt.sign({ userName }, 'supersecret', {
+        expiresIn: maxAge
+    });
+};
+const login = async (req, res) => {
+    const {userName,password} = req.body;
+    const instructor = await Instructor.findOne({userName : userName});
+    if(instructor){
+        const auth = await bcrypt.compare(password, instructor.password);
+        if(auth){
+            const token = createToken(instructor.userName);
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(200).json(instructor);
+        }
+        else{
+            res.status(400).json({error : 'password is incorrect'})
+        }
+    }
+    else{
+        res.status(400).json({error : 'user not found'})
+    }
+  }
+  
+  const logout = async (req, res) => {
+    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
+    res.status(200).json({ message: "logged out" })
+  
+  }
 //add promotionrate and promotionenddate in course
 
 //add a review to an instructor
@@ -128,6 +176,17 @@ const postInstructorReview = async(req, res) => {
 }
 
 
+const forgotPassword = async(req, res) => {
+    const { email } = req.body;
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a trainee with the corresponding id.' });
+    }
+    //http://localhost:3000/forgotpass/instructorId=${id}
+    textBody = `You're Verified!, Click the link to return to change your password: http://localhost:3000/forgotpassinstructor/${id}`;
+    sendMail(email, textBody);
+    res.status(200).json({ message: "sent successfully" });
+}
 
 
 // GET a single course rating
@@ -147,5 +206,9 @@ module.exports = {
     deleteInstructor,
     updateInstructor,
     postInstructorReview,
-    getInstructorRating
+    getInstructorRating,
+    forgotPassword,
+    updatePassword,
+    login,
+    logout
 }

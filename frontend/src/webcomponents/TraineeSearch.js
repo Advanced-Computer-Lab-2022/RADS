@@ -6,13 +6,8 @@ import Link from '@mui/material/Link';
 
 
 
-
 const setRate = (val) => {
   const priceMarks = [
-    {
-      value: Math.ceil(-1*val),
-      label: 'Start',
-    },
     {
       value: Math.ceil(0*val),
       label: `0/FREE`,
@@ -181,17 +176,15 @@ const TraineeSearch = (props) => {
         keys.some((key)=>item[key].toString().toLowerCase().includes(queryS.toString().toLowerCase()))
         );
     }
-
-    // Price filter method
-    const filterMethodOnPrice = (courseData) =>{
-        console.log(queryF2);
-        if((!queryF2 ||  queryF2 === -500) && queryF2 !== 0){
-            return courseData;
-        }
-        else{
-            return courseData.filter(item=> Math.ceil(item.price*rateVal) <= queryF2);
-        }
-    }
+   // Price filter method
+   const filterMethodOnPrice = (courseData) =>{
+    if((!queryF2 ||  queryF2 === Math.ceil(7000*rateVal))){
+          return courseData;
+      }
+      else{
+    return courseData.filter(item=> Math.ceil(item.price*rateVal) <= queryF2);
+      }
+}
 
     // Rating filter method
     const filterMethodOnRating = (courseData) =>{
@@ -250,7 +243,7 @@ const TraineeSearch = (props) => {
             <div className='filter-component2'>
                 <p><strong>Price Filter</strong></p>
                 <Box sx={{ width: 950 }}>
-                <Slider className='price-slider'  aria-label="Always visible" getAriaValueText={valueDollar}  marks={setRate(rateVal)}  valueLabelDisplay="on" size= "small" max = {Math.ceil(7000*rateVal)} step={Math.ceil(1*rateVal)} min = {Math.ceil(-1*rateVal)} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
+                <Slider className='price-slider'  aria-label="Always visible" getAriaValueText={valueDollar} defaultValue={Math.ceil(7000*rateVal)} marks={setRate(rateVal)}  valueLabelDisplay="on" size= "small" max = {Math.ceil(7000*rateVal)}  step={Math.ceil(1*rateVal)} min = {Math.ceil(0*rateVal)} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
                 </Box>
             </div>
             <div className='homefilter-component3'>

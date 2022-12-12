@@ -2,22 +2,29 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const exerciseSchema = mongoose.Schema({
-    excerciseId: {
-        type: Number
-    },
-    grade: {
-        type: Number
-    }
-});
 
 const courseSchema = new Schema({
     courseId: {
         type: mongoose.Types.ObjectId,
         ref: 'courseModel',
     },
-    exerciseGrades: {
-        type: [exerciseSchema]
+    courseGrade: {
+        type: Number
+    }
+})
+
+const creditCardSchema = new Schema({
+    cardName: {
+        type: String
+    },
+    cardNumber: {
+        type: Number
+    },
+    cardExpiryDate: {
+        type: Date
+    },
+    cardCVV: {
+        type: Number
     }
 })
 
@@ -31,7 +38,8 @@ const traineeSchema = new Schema({
         required: true
     },
     userName: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
         type: String,
@@ -39,18 +47,26 @@ const traineeSchema = new Schema({
     },
     country: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: Number,
-        required: true
     },
     address: {
+        type: String,
+    },
+    gender: {
+        type: String,
+        required:true
+    },
+    email: {
         type: String,
         required: true
     },
     courses: {
         type: [courseSchema]
+    },
+    creditCards: {
+        type: [creditCardSchema]
     }
 
 }, { timestamps: true })

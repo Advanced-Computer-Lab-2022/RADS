@@ -1,5 +1,6 @@
 const express = require('express');
 const { getCTrainees, updatePassword, postCourseRegister, getCTrainee, postGrade, getCTraineeCourses } = require('../Controllers/corpTraineeController');
+const { getCTrainees, updatePassword, postCourseRegister, getCTrainee, login, logout } = require('../Controllers/corpTraineeController');
 const router = express.Router();
 
 router.get('/', getCTrainees);
@@ -8,5 +9,7 @@ router.get('/getcourses/:id', getCTraineeCourses);
 router.patch('/password/:id', updatePassword);
 router.post('/register/:id', postCourseRegister);
 router.post('/grade/:id', postGrade);
+router.post('/login', login);
+router.get('/logout', logout);
 
 module.exports = router;
