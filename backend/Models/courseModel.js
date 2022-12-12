@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-
 const Schema = mongoose.Schema;
 
 const reviewSchema = mongoose.Schema({
@@ -113,7 +111,5 @@ const courseSchema = new Schema({
         type: Date
     },
 }, { timestamps: true })
-
-
 
 module.exports = mongoose.model('Course', courseSchema)

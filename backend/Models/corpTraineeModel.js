@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const exerciseSchema = mongoose.Schema({
@@ -21,7 +20,6 @@ const courseSchema = new Schema({
     }
 })
 
-
 const corpTraineeSchema = new Schema({
     firstName: {
         type: String,
@@ -32,7 +30,12 @@ const corpTraineeSchema = new Schema({
         required: true
     },
     userName: {
-        type: String
+        type: String,
+        unique: true
+    },
+    gender: {
+        type: String,
+        required: true
     },
     password: {
         type: String,
@@ -52,8 +55,11 @@ const corpTraineeSchema = new Schema({
     },
     courses: {
         type: [courseSchema]
+    },
+    role: {
+        type: String,
+        required: true
     }
-
 }, { timestamps: true })
 
 module.exports = mongoose.model('corpTrainee', corpTraineeSchema);

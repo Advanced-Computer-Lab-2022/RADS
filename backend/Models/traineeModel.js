@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 
@@ -39,6 +38,7 @@ const traineeSchema = new Schema({
     },
     userName: {
         type: String,
+        unique: true,
         required: true
     },
     password: {
@@ -56,10 +56,12 @@ const traineeSchema = new Schema({
     },
     gender: {
         type: String,
-        required:true
+        required: true
     },
     email: {
         type: String,
+        trim: true,
+        unique: true,
         required: true
     },
     courses: {
@@ -67,8 +69,11 @@ const traineeSchema = new Schema({
     },
     creditCards: {
         type: [creditCardSchema]
+    },
+    role: {
+        type: String,
+        required: true
     }
-
 }, { timestamps: true })
 
 module.exports = mongoose.model('Trainee', traineeSchema);

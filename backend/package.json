@@ -29,6 +29,8 @@
         "nodejs-nodemailer-outlook": "^1.2.4",
         "nodemailer": "^6.8.0",
         "nodemon": "^2.0.20",
-        "randomstring": "^1.2.3"
+        "passport": "^0.6.0",
+        "randomstring": "^1.2.3",
+        "validator": "^13.7.0"
     }
 }
