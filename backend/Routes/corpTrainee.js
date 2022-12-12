@@ -34,14 +34,4 @@ passport.authenticate('jwt', { session: false }),
 inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
 postGrade);
 
-router.post('/login',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
-login);
-
-router.get('/logout',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
-logout);
-
 module.exports = router;

@@ -35,16 +35,6 @@ passport.authenticate('jwt', { session: false }),
 inRole(ROLES.INSTRUCTOR, ROLES.ADMIN),
 updateInstructor);
 
-router.post('/login',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.INSTRUCTOR, ROLES.ADMIN),
-login);
-
-router.get('/logout',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.INSTRUCTOR, ROLES.ADMIN),
-logout);
-
 // UPDATE password
 router.patch('/password/:id',
 passport.authenticate('jwt', { session: false }),

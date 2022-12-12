@@ -22,21 +22,21 @@ app.use((req, res, next) => {
 app.use(cors());
 
 // Importing Routes
+const guestRoute = require('./Routes/Guest');
 const instructorRoute = require('./Routes/Instructor');
 const courseRoute = require('./Routes/Course');
 const adminRoute = require('./Routes/Admin');
 const corpTraineeRoute = require('./Routes/corpTrainee');
 const traineeRoute = require('./Routes/Trainee');
-const guestRoute = require('./Routes/Guest');
 
 
 // Using Routes
+app.use('/', guestRoute);
 app.use('/instructor', instructorRoute);
 app.use('/course', courseRoute);
 app.use('/admin', adminRoute);
 app.use('/corptrainee', corpTraineeRoute);
 app.use('/trainee', traineeRoute);
-app.use('/', guestRoute);
 
 // Passport Middleware
 app.use(passport.initialize());

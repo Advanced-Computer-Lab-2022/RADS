@@ -10,7 +10,6 @@ const getCourses = async(req, res) => {
     res.status(200).json(courses);
 }
 
-
 //find price maximum value
 const maxPrice = async(req, res) => {
     const course = await Course.find().sort({ "price": -1 }).limit(1);
@@ -35,7 +34,6 @@ const getCourse = async(req, res) => {
     res.status(200).json(course);
 }
 
-
 //Get a subset of courses using a subset of ids
 const getCourseSubset = async(req, res) => {
     const { ids } = req.body
@@ -54,8 +52,6 @@ const getCourseSubset = async(req, res) => {
     res.status(200).json(courses);
 }
 
-
-
 //////////////////////////////////
 // GET all courses taught by an instructor
 //////////////////////////////////
@@ -70,7 +66,6 @@ const getCoursesByInstructor = async(req, res) => {
     }
     res.status(200).json(course);
 }
-
 
 //////////////////////////////////
 // GET a single exercise
@@ -294,8 +289,6 @@ const deletePromo = async(req, res) => {
     }
     res.status(200).json({ message: "rate updated succesfully", message: "course info" + course });
 }
-
-
 
 //Post promo
 const postPromotion = async(req, res) => {

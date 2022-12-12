@@ -30,14 +30,4 @@ passport.authenticate('jwt', { session: false }),
 inRole(ROLES.ADMIN),
 editAdmin);
 
-router.post('/login',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.ADMIN),
-login);
-
-router.get('/logout',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.ADMIN),
-logout);
-
 module.exports = router;

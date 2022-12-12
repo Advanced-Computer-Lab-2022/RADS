@@ -1,15 +1,13 @@
 const Instructor = require('../Models/instructorModel');
 const Course = require('../Models/courseModel');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken');
 const { sendMail } = require('../Utilities/sendEmail');
+
 // GET all instructors
 const getInstructors = async(req, res) => {
     const instructors = await Instructor.find({}).sort({ createdAt: -1 });
     res.status(200).json(instructors);
 }
-
 
 const postInstructor = async(req, res) => {
     const { firstName, lastName, userName, password, country, phoneNumber, address, email, bio, instructorRating, ratersCount, reviews } = req.body;
@@ -60,10 +58,6 @@ const deleteInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-
-
-
-
 // UPDATE an instructor
 const updateInstructor = async(req, res) => {
     const { id } = req.params;
@@ -81,7 +75,6 @@ const updateInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-
 // UPDATE Password
 const updatePassword = async(req, res) => {
     const { id } = req.params;
@@ -97,7 +90,6 @@ const updatePassword = async(req, res) => {
     res.status(200).json(trainee);
 }
 
-
 // FILTER a course based on instructor
 /*const filterCourses = async(req, res) => {
     const instructorId = req.query.courseId;
@@ -109,36 +101,6 @@ const updatePassword = async(req, res) => {
     }
 } */
 
-const maxAge = 3 * 24 * 60 * 60;
-const createToken = (userName) => {
-    return jwt.sign({ userName }, 'supersecret', {
-        expiresIn: maxAge
-    });
-};
-const login = async (req, res) => {
-    const {userName,password} = req.body;
-    const instructor = await Instructor.findOne({userName : userName});
-    if(instructor){
-        const auth = await bcrypt.compare(password, instructor.password);
-        if(auth){
-            const token = createToken(instructor.userName);
-            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-            res.status(200).json(instructor);
-        }
-        else{
-            res.status(400).json({error : 'password is incorrect'})
-        }
-    }
-    else{
-        res.status(400).json({error : 'user not found'})
-    }
-  }
-  
-  const logout = async (req, res) => {
-    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
-    res.status(200).json({ message: "logged out" })
-  
-  }
 //add promotionrate and promotionenddate in course
 
 //add a review to an instructor
@@ -175,7 +137,6 @@ const postInstructorReview = async(req, res) => {
     }
 }
 
-
 const forgotPassword = async(req, res) => {
     const { email } = req.body;
     const { id } = req.params;
@@ -188,7 +149,6 @@ const forgotPassword = async(req, res) => {
     res.status(200).json({ message: "sent successfully" });
 }
 
-
 // GET a single course rating
 const getInstructorRating = async(req, res) => {
     const id = mongoose.Types.ObjectId(req.params.id);
@@ -196,7 +156,6 @@ const getInstructorRating = async(req, res) => {
     currentOverallRating = instructor.courseRating.rating
     res.status(200).json("Course Rating is: " + currentOverallRating)
 }
-
 
 // Export the functions
 module.exports = {
@@ -208,7 +167,5 @@ module.exports = {
     postInstructorReview,
     getInstructorRating,
     forgotPassword,
-    updatePassword,
-    login,
-    logout
+    updatePassword
 }

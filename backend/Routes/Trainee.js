@@ -59,19 +59,4 @@ passport.authenticate('jwt', { session: false }),
 inRole(ROLES.TRAINEE, ROLES.ADMIN),
 checkRegistered);
 
-router.post('/signup',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
-signUp);
-
-router.post('/login',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
-login);
-
-router.get('/logout',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
-logout);
-
 module.exports = router;
