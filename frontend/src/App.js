@@ -30,11 +30,18 @@ import TraineeCreditCard from './webcomponents/TraineeCreditCard';
 import TraineeCreditOptions from './webcomponents/TraineeCreditOptions';
 import SignUp from './webpages/SignUp';
 import LogIn from './webpages/LogIn';
+import NotFound from './webpages/NotFound';
+import NoAccess from './webpages/NoAccess';
 
 function App() {
   const url = 'https://api.exchangerate.host/convert?from=USD&to=';
   const [rateValue, setRateValue] = useState(1);
   const [inputValue, setInputValue] = useState("USD");
+
+// Control the state and role of the user from HERE!
+  const user = { role: "INSTRUCTOR", isConnected: true };
+
+
   //const [error,setError] = useState(null);
   const fetchCurrencyRate = async (val) => {
     console.log("Val", val);
@@ -49,155 +56,162 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
-        <div className="home-lobby">
-          Welcome to RADS Online Course Provider
-          <div>
-            {/* <div>{`rate value: ${rateValue !== null ? `'${rateValue}'` : '1'}`}</div> */}
-            <br />
-            <Autocomplete
-              id="country-select-demo"
-              onChange={(event, inputValue) => {
-                setInputValue(inputValue.currency_code);
-                fetchCurrencyRate(inputValue.currency_code);
-              }}
-              sx={{ width: 300 }}
-              options={countries}
-              autoHighlight
-              getOptionLabel={(option) => option.country}
-              renderOption={(props, option) => (
-                <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                  {/* <img
+         <div className="bg-light" style={{ height: "100vh" }}>
+          <Navbar user={user} />
+          <div className="home-lobby">
+            Welcome to RADS Online Course Provider
+            <div>
+              {/* <div>{`rate value: ${rateValue !== null ? `'${rateValue}'` : '1'}`}</div> */}
+              <br />
+              <Autocomplete
+                id="country-select-demo"
+                onChange={(event, inputValue) => {
+                  setInputValue(inputValue.currency_code);
+                  fetchCurrencyRate(inputValue.currency_code);
+                }}
+                sx={{ width: 300 }}
+                options={countries}
+                autoHighlight
+                getOptionLabel={(option) => option.country}
+                renderOption={(props, option) => (
+                  <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                    {/* <img
             loading="lazy"
             width="20"
             src={`https://flagcdn.com/w20/${option.country.toLowerCase()}.png`}
             srcSet={`https://flagcdn.com/w40/${option.country.toLowerCase()}.png 2x`}
             alt=""
           /> */}
-                  {option.country}
-                </Box>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Choose a country"
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: 'new-password', // disable autocomplete and autofill
-                  }}
-                />
-              )}
-            />
+                    {option.country}
+                  </Box>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Choose a country"
+                    inputProps={{
+                      ...params.inputProps,
+                      autoComplete: 'new-password', // disable autocomplete and autofill
+                    }}
+                  />
+                )}
+              />
+            </div>
           </div>
-        </div>
-        <div className='webpages'>
-          <Routes>
-            <Route
-              path="/traineeoptions"
-              element={<TraineeCreditOptions
-                rateVal={rateValue} currencyVal={inputValue} />}
-            />
-
-            <Route
-              path="/traineecredit"
-              element={<TraineeCreditCard
-                rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/forgotpassinstructor/:id"
-              element={<InstructorForgotPass
-                rateVal={rateValue} currencyVal={inputValue} />}
-            />
-
-            <Route
-              path="/forgotpasstrainee/:id"
-              element={<TraineeForgotPass
-                rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/instructorrating"
-              element={<InstructorRating rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/corprating"
-              element={<CorpRating rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            {<Route
-              path="/corpview"
-              element={<CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />}
-            />}
-            <Route
-              path="/traineesolve"
-              element={<TraineeSolve rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/corptraineesolve"
-              element={<CorpTraineeSolve rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/traineerate"
-              element={<TraineeRating rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/traineeview"
-              element={<TraineeView rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/traineeform"
-              element={<TraineeForm rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/instructorlobby"
-              element={<InstructorLobby rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/"
-              element={<SignUp rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/home"
-              element={<Home rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/login"
-              element={<LogIn rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/adminlobby"
-              element={<Admin rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route path="/filter"
-              element={<CourseView rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route path="/filtercorp"
-              element={<CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            {<Route path="/viewcorp"
-              element={<CorpTraineeCourses rateVal={rateValue} currencyVal={inputValue} />}
-            />}
-            <Route
-              path="/corptraineeview"
-              element={<CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/corptraineelobby"
-              element={<CorpTraineeLobby rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/corptraineeform"
-              element={<CorpTraineeForm rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/traineelobby"
-              element={<TraineeLobby rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/contract"
-              element={<Contract rateVal={rateValue} currencyVal={inputValue} />}
-            />
-          </Routes>
-
-
+          <div className='webpages'>
+            <Routes>
+              <Route
+                path="*"
+                element={<NotFound rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/noacccess"
+                element={<NoAccess rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/traineeoptions"
+                element={<TraineeCreditOptions rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/traineecredit"
+                element={<TraineeCreditCard rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/forgotpassinstructor/:id"
+                element={<InstructorForgotPass rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/forgotpasstrainee/:id"
+                element={<TraineeForgotPass
+                  rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/instructorrating"
+                element={<InstructorRating rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/corprating"
+                element={<CorpRating rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              {<Route
+                path="/corpview"
+                element={<CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />}
+              />}
+              <Route
+                path="/traineesolve"
+                element={<TraineeSolve rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/corptraineesolve"
+                element={<CorpTraineeSolve rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/traineerate"
+                element={<TraineeRating rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/traineeview"
+                element={<TraineeView rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/traineeform"
+                element={<TraineeForm rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/instructorlobby"
+                element={<InstructorLobby rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/"
+                element={<SignUp rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/home"
+                element={<Home rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/login"
+                element={<LogIn rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/signup"
+                element={<SignUp rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/adminlobby"
+                element={<Admin rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route path="/filter"
+                element={<CourseView rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route path="/filtercorp"
+                element={<CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              {<Route path="/viewcorp"
+                element={<CorpTraineeCourses rateVal={rateValue} currencyVal={inputValue} />}
+              />}
+              <Route
+                path="/corptraineeview"
+                element={<CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/corptraineelobby"
+                element={<CorpTraineeLobby rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/corptraineeform"
+                element={<CorpTraineeForm rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/traineelobby"
+                element={<TraineeLobby rateVal={rateValue} currencyVal={inputValue} />}
+              />
+              <Route
+                path="/contract"
+                element={<Contract rateVal={rateValue} currencyVal={inputValue} />}
+              />
+            </Routes>
+          </div>
         </div>
       </BrowserRouter>
     </div>
