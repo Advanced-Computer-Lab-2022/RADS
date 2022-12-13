@@ -6,57 +6,57 @@ const router = express.Router();
 
 router.get('/',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 getTrainees);
 
 router.get('/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 getTrainee);
 
 router.get('/getcourses/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 getTraineeCourses);
 
 router.patch('/password/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 updatePassword);
 
 router.post('/add',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 postTrainee);
 
 router.post('/register/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 postCourseRegister);
 
 router.post('/update/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 postCourseGrade);
 
 router.post('/findgrade/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 findOldGrade);
 
 router.post('/forgot/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 forgotPassword);
 
 router.post('/addcredit/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 postCreditCard);
 
 router.post('/checkregister/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE, ROLES.ADMIN),
+inRole(ROLES.TRAINEE),
 checkRegistered);
 
 module.exports = router;

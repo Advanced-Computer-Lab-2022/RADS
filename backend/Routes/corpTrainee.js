@@ -6,32 +6,32 @@ const router = express.Router();
 
 router.get('/',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
+inRole(ROLES.CORP_TRAINEE),
 getCTrainees);
 
 router.get('/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
+inRole(ROLES.CORP_TRAINEE),
 getCTrainee);
 
 router.get('/getcourses/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
+inRole(ROLES.CORP_TRAINEE),
 getCTraineeCourses);
 
 router.patch('/password/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
+inRole(ROLES.CORP_TRAINEE),
 updatePassword);
 
 router.post('/register/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
+inRole(ROLES.CORP_TRAINEE),
 postCourseRegister);
 
 router.post('/grade/:id',
 passport.authenticate('jwt', { session: false }),
-inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
+inRole(ROLES.CORP_TRAINEE),
 postGrade);
 
 module.exports = router;

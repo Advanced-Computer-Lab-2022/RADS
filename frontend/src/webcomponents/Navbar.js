@@ -13,7 +13,7 @@ function Navbar({ user }) {
       <div className="container-fluid">
         { !user.isConnected ? (
           <>
-            <Link to="/login">
+            <Link to="/">
               RADS
             </Link>
           </>
