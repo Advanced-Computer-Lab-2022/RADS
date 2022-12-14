@@ -112,6 +112,9 @@ const courseSchema = new Schema({
     promotionStartDate: {
         type: Date
     },
+    view: {
+        type: Number
+    }
 }, { timestamps: true })
 
 

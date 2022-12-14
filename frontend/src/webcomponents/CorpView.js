@@ -25,6 +25,7 @@ const CorpView =(props)=>{
         }
         fetchInstructor();
     }, [])
+    
    
 return(
     <div>

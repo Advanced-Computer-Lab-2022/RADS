@@ -21,6 +21,7 @@ const CourseView =(props)=>{
             if(response.ok){
                 setCourse(json);
                 fetchInstructor(json.instructor); 
+                incrementViews();
             }
         }
         fetchCourse();
@@ -34,6 +35,26 @@ const fetchInstructor = async (instID) => {
     }
 }
 
+const incrementViews = async () =>{
+    const response = await fetch(`/course/updateviews/${courseId}`,{
+        method:'PATCH',
+        body: JSON.stringify({}),
+        headers:{
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json'
+        }
+    })
+    
+    const json = await response.json();
+
+    if(!response.ok){
+        console.log("error happened:", json.error);
+    }
+    if(response.ok){    
+        console.log("course view incremented", json);
+        //refresh page on successful submission
+    }
+}    
 
 return(
     <div>

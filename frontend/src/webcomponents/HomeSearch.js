@@ -109,6 +109,7 @@ const HomeSearch = (props) => {
     const [queryF2, setQueryF2] = useState("");
     const [queryF3, setQueryF3] = useState("");
     const [courses, setCourses] = useState([]);
+    const [highestViewedCourses, setHighestViewedCourses] = useState([]);
     const keys = ["courseTitle","subject","instructor"];
     const newKeys = ["subject"];   
     const [checkedSubjects, setCheckedSubjects] = useState([]);
@@ -124,13 +125,14 @@ const HomeSearch = (props) => {
     // To fetch all the courses and put the results in courses
     useEffect(()=>{
       const fetchCourses = async () => {
-          const response = await fetch('/course');
-          const json = await response.json();
-          if(response.ok){
-              setCourses(json);
-              setCourseSubjects(getCourseSubjects(json));
-              findMaxPrice();
-          }
+        const response = await fetch('/course');
+        const json = await response.json();
+        if(response.ok){
+            setCourses(json);
+            setCourseSubjects(getCourseSubjects(json));
+            findMaxPrice();
+            getMostViewed();
+        }
       }
       fetchCourses();
   }, [])
@@ -155,9 +157,14 @@ const HomeSearch = (props) => {
         console.log("max price added", json);
     }
 }  
-  // findMax = (arr) =>{
-  //   for(let i = 0;)
-  // } 
+
+const getMostViewed = async() =>{
+  const response = await fetch('/course/highest/views');
+          const json = await response.json();
+          if(response.ok){
+              setHighestViewedCourses(json);
+          }
+}
       //GET all course subjects
       const getCourseSubjects = (arr) =>{
         const newArray = [];
@@ -232,15 +239,26 @@ const HomeSearch = (props) => {
       }
       setCheckedSubjects(updatedSubList);
     };
-
+    // 
 
     return (
         <div>
         <div className='homesearch-component'>
             <input type='text' placeholder='Search Course...' className='search' onChange={e=>setQueryS(e.target.value)}/>
+
+            <div className = 'highestviewed-courses'>
+              <p className='highview-p'><strong>Highest Viewed Courses</strong></p>
+            {highestViewedCourses.map((course) => (
+             <div>
+                     <Link onClick={() => window.location.href=`/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price*rateVal)} {' '} {currencyVal} |    {course.promotionEndDate && new Date(course.promotionEndDate) >= todayDate ? ( <p>Promotion: {course.promotionRate} off</p>) : (<p>no promo</p>)}</Link>
+               </div>
+               ))}
+            </div>
+            <br />
+
             <div className='filter-component1'>
             <div className="list-container">
-               {courseSubjects.map((course) => (
+            {courseSubjects.map((course) => (
              <div>
                       <input value={course} name = {course} type="checkbox"  onChange={e=>{filterMethodOnSubject(e)}} />
                       <span>{course}</span>
@@ -255,13 +273,13 @@ const HomeSearch = (props) => {
             
             <div className='filter-component2'>
                 <p><strong>Price Filter</strong></p>
-                <Box sx={{ width: 950 }}>
+                <Box className='price-box' sx={{ width: 430 }}>
                 <Slider className='price-slider'  aria-label="Always visible" getAriaValueText={valueDollar} defaultValue={Math.ceil(7000*rateVal)} marks={setRate(rateVal)}  valueLabelDisplay="on" size= "small" max = {Math.ceil(7000*rateVal)}  step={Math.ceil(1*rateVal)} min = {Math.ceil(0*rateVal)} name = 'Price-filter' onChangeCommitted={(e,v)=>{setQueryF2(v)}}/> 
                 </Box>
             </div>
             <div className='homefilter-component3'>
                 <p><strong>Rating Filter</strong></p>
-                <Box sx={{ width: 950 }}>
+                <Box className='rating-box' sx={{ width: 430 }}>
                 <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar}  marks={ratingMarks}  valueLabelDisplay="on" size= "small" max = {5} step={0.1} min = {-0.1} name = 'Rating-filter' onChangeCommitted={(e,v)=>{setQueryF3(v)}}/> 
                 </Box>
             </div>         

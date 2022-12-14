@@ -56,6 +56,18 @@ const getCourseSubset = async(req, res) => {
 
 
 
+//Get a subset of courses using a subset of ids
+const getHighestViewedCourses = async(req, res) => {
+    const courses = await Course.find({ view: { $gte: 3 } })
+    console.log(courses);
+    if (!courses) {
+        return res.status(404).json({ error: 'No courses' });
+    }
+    res.status(200).json(courses);
+}
+
+
+
 //////////////////////////////////
 // GET all courses taught by an instructor
 //////////////////////////////////
@@ -124,6 +136,7 @@ const postCourse = async(req, res) => {
             ratersCount: 1,
             courseExercises,
             coursePreview,
+            view: 0
         });
         res.status(200).json({ message: "Course added successfully", message: "Course info" + course });
     } catch (error) {
@@ -199,6 +212,23 @@ const postCourseReview = async(req, res) => {
     }
 }
 
+//Update views
+const updateViews = async(req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
+    }
+    const course = await Course.findById({ "_id": id })
+    if (!course) {
+        return res.status(404).json({ error: 'No such course' });
+    }
+    let currentViews = course.view;
+    currentViews += 1;
+    course.view = currentViews;
+    await course.save();
+    res.status(200).json(course);
+}
+
 //////////////////////////////////
 // GET a single course's rating
 //////////////////////////////////
@@ -207,78 +237,6 @@ const getCourseRating = async(req, res) => {
     const course = await Course.findById({ "_id": id })
     currentOverallRating = course.courseRating.rating
     res.status(200).json("Course Rating is: " + currentOverallRating)
-}
-
-//////////////////////////////////
-// UPDATE a course's review
-//////////////////////////////////
-const updateCourseReview = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
-    }
-    const course = await Course.findByIdAndUpdate({ _id: id }, {
-        ...req.body
-    });
-    if (!course) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json(course);
-}
-
-//////////////////////////////////
-// GET all course's rating
-//////////////////////////////////
-const getRatings = async(req, res) => {
-    const ratings = await courseRating.find({}).sort({ createdAt: -1 });
-    res.status(200).json(ratings);
-}
-
-//////////////////////////////////
-// GET a single rating
-//////////////////////////////////
-const getRating = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a rating for the corresponding id.' });
-    }
-    const rating = await courseRating.findById(id)
-    if (!rating) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json(rating);
-}
-
-//////////////////////////////////
-// DELETE a review
-//////////////////////////////////
-const deleteReview = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
-    }
-    const course = await Course.findOneAndDelete({ _id: id });
-    if (!course) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json(course);
-}
-
-//////////////////////////////////
-// UPDATE a review
-//////////////////////////////////
-const updateReview = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
-    }
-    const review = await Course.findByIdAndUpdate({ _id: id }, {
-        ...req.body
-    });
-    if (!review) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json({ message: "Review added successfully", message: "Review info" + review });
 }
 
 const deletePromo = async(req, res) => {
@@ -329,5 +287,7 @@ module.exports = {
     postPromotion,
     deletePromo,
     maxPrice,
-    getCourseSubset
+    getCourseSubset,
+    updateViews,
+    getHighestViewedCourses
 }

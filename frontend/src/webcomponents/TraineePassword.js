@@ -2,8 +2,6 @@ import { useState,useEffect } from "react"
 
 
 const TraineePassword = () => {
-
-
     const [password, setPassword] = useState('');
     const [error,setError] = useState(null);
     const traineeId = "6395b442bd29cab07c63afa5";
