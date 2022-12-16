@@ -20,19 +20,24 @@ app.use((req, res, next) => {
 })
 app.use(cors());
 
-// Instructor Route
+// Importing Routes
 const instructorRoute = require('./Routes/Instructor');
 const courseRoute = require('./Routes/Course');
 const adminRoute = require('./Routes/Admin');
 const corpTraineeRoute = require('./Routes/corpTrainee');
 const traineeRoute = require('./Routes/Trainee');
+const guestRoute = require('./Routes/Guest');
+const routerRoute = require('./Routes/Report');
 
-// Routes
+
+// Using Routes
 app.use('/instructor', instructorRoute);
 app.use('/course', courseRoute);
 app.use('/admin', adminRoute);
-app.use('/corpTrainee', corpTraineeRoute);
+app.use('/corptrainee', corpTraineeRoute);
 app.use('/trainee', traineeRoute);
+app.use('/report', routerRoute);
+app.use('/', guestRoute);
 
 // Configurations
 // MongoDB
@@ -49,3 +54,5 @@ mongoose.connect(MongoURI)
 app.get("/", async(req, res) => {
     res.status(200).send("You're good to go!");
 });
+
+module.exports = app;

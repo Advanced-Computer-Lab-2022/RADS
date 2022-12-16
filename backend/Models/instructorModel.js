@@ -1,6 +1,5 @@
 const { time } = require('console');
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const ReviewSchema = mongoose.Schema({
@@ -25,13 +24,14 @@ const instructorSchema = new Schema({
         type: String,
         required: true
     },
-
     lastName: {
         type: String,
         required: true
     },
     userName: {
-        type: String
+        type: String,
+        unique: true,
+        required: true
     },
     password: {
         type: String,
@@ -39,19 +39,22 @@ const instructorSchema = new Schema({
     },
     country: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: Number,
-        required: true
     },
     address: {
         type: String,
-        required: true
     },
     email: {
         type: String,
+        trim: true,
+        unique: true,
         required: true,
+    },
+    gender: {
+        type: String,
+        required: true
     },
     bio: {
         type: String
@@ -64,6 +67,10 @@ const instructorSchema = new Schema({
     },
     reviews: {
         type: [ReviewSchema]
+    },
+    role: {
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 

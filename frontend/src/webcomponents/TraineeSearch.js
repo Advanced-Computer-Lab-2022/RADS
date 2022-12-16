@@ -104,7 +104,7 @@ function valueDollar(value, currencyVal) {
   return `${value} ${currencyVal}`;
 }
 const TraineeSearch = (props) => {
-  const traineeId = '6395b442bd29cab07c63afa5';
+  const traineeId = '639b76cc2450d106e79418b6';
   const [queryS, setQueryS] = useState("");
   const [queryF2, setQueryF2] = useState("");
   const [queryF3, setQueryF3] = useState("");
@@ -201,7 +201,7 @@ const TraineeSearch = (props) => {
   // Rating filter method
   const filterMethodOnRating = (courseData) => {
     console.log(queryF3);
-    if ((!queryF3 || queryF3 === -0.5) && queryF3 !== 0) {
+    if ((!queryF3 || queryF3 === 5)) {
       return courseData;
     }
     else {
@@ -241,7 +241,7 @@ const TraineeSearch = (props) => {
           <p className='highview-p'><strong>Highest Viewed Courses</strong></p>
           {highestViewedCourses.map((course) => (
             <div>
-              <Link onClick={() => window.location.href = `/filter?courseId=${course._id}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price * rateVal)} {' '} {currencyVal} |    {course.promotionEndDate && new Date(course.promotionEndDate) >= todayDate ? (<p>Promotion: {course.promotionRate} off</p>) : (<p>no promo</p>)}</Link>
+              <Link onClick={() => window.location.href = `/traineeview?courseId=${course._id}&traineeId=${traineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5 | Price = {Math.ceil(course.price * rateVal)} {' '} {currencyVal} |    {course.promotionEndDate && new Date(course.promotionEndDate) >= todayDate ? (<p>Promotion: {course.promotionRate} off</p>) : (<p>no promo</p>)}</Link>
             </div>
           ))}
         </div>
@@ -272,7 +272,7 @@ const TraineeSearch = (props) => {
         <div className='homefilter-component3'>
           <p><strong>Rating Filter</strong></p>
           <Box className='rating-box' sx={{ width: 430 }}>
-            <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar} marks={ratingMarks} valueLabelDisplay="on" size="small" max={5} step={0.1} min={-0.1} name='Rating-filter' onChangeCommitted={(e, v) => { setQueryF3(v) }} />
+            <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar} defaultValue={5} marks={ratingMarks} valueLabelDisplay="on" size="small" max={5} step={0.1} min={0} name='Rating-filter' onChangeCommitted={(e, v) => { setQueryF3(v) }} />
           </Box>
         </div>
         <div className="home-search">

@@ -1,14 +1,31 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+
 
 const courseSchema = new Schema({
     courseId: {
         type: mongoose.Types.ObjectId,
-        ref: 'Course',
+        ref: 'courseModel',
     },
-    courseGrade: {
-        type: Number
+    exercisesGrade: {
+        type: Number,
+        default: 0
+    },
+    solvedExercises: {
+        type: Boolean,
+        default: false
+    },
+    examGrade: {
+        type: Number,
+        default: 0
+    },
+    courseProgress: {
+        type: Number,
+        default: 0
+    },
+    solvedExam: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -22,7 +39,12 @@ const corpTraineeSchema = new Schema({
         required: true
     },
     userName: {
-        type: String
+        type: String,
+        unique: true
+    },
+    gender: {
+        type: String,
+        required: true
     },
     password: {
         type: String,
@@ -40,10 +62,17 @@ const corpTraineeSchema = new Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true
+    },
     courses: {
         type: [courseSchema]
+    },
+    role: {
+        type: String,
+        required: true
     }
-
 }, { timestamps: true })
 
 module.exports = mongoose.model('corpTrainee', corpTraineeSchema);

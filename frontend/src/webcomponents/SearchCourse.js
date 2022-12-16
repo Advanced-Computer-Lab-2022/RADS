@@ -211,7 +211,7 @@ const SearchCourse = (props) => {
   // Rating filter method
   const filterMethodOnRating = (courseData) => {
     console.log(queryF3);
-    if ((!queryF3 || queryF3 === -0.5) && queryF3 !== 0) {
+    if ((!queryF3 || queryF3 === 5)) {
       return courseData;
     }
     else {
@@ -357,7 +357,7 @@ const SearchCourse = (props) => {
       <div className='filter-component3'>
         <p><strong>Rating Filter</strong></p>
         <Box className='rating-box' sx={{ width: 430 }}>
-          <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar} marks={ratingMarks} valueLabelDisplay="on" size="small" max={5} step={0.5} min={-0.5} name='Rating-filter' onChangeCommitted={(e, v) => { setQueryF3(v) }} />
+          <Slider className='rating-slider' aria-label="Always visible" getAriaValueText={valueStar} defaultValue={5} marks={ratingMarks} valueLabelDisplay="on" size="small" max={5} step={0.1} min={0} name='Rating-filter' onChangeCommitted={(e, v) => { setQueryF3(v) }} />
         </Box>
       </div>
       {/* <CourseTable data={performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses))} />    */}

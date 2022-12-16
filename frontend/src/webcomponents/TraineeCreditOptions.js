@@ -1,86 +1,146 @@
 // import axios from 'axios';
-import { useState,useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-const TraineeCreditOptions =(props)=>{
-    const{
+import { useState, useEffect } from 'react';
+import { json, useNavigate } from 'react-router-dom';
+const TraineeCreditOptions = (props) => {
+    const {
         rateVal,
         currencyVal
     } = props;
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get('courseId');
     const traineeId = params.get('traineeId');
-    const [trainee,setTrainee] = useState([]);
-    const [traineeCards,setTraineeCards] = useState([]);
-    const [checkedCard,setCheckedCard] = useState(null);
-    const [html,setHtml] = useState('');
-    const [button,setButton] = useState(false);
-    const [noCreditCard,setNoCreditCard] = useState('');
+    const [course, setCourse] = useState([]);
+    const [trainee, setTrainee] = useState([]);
+    const [traineeCards, setTraineeCards] = useState([]);
+    const [checkedCard, setCheckedCard] = useState(null)
+    const [html, setHtml] = useState('');
+    const [html2, setHtml2] = useState('');
+    const [button, setButton] = useState(false);
+    const [noCreditCard, setNoCreditCard] = useState('');
+    const [purchased, setPurchased] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchTrainee = async () => {
             const response = await fetch(`/trainee/${traineeId}`);
             const json = await response.json();
-            if(response.ok){
+            if (response.ok) {
                 setTrainee(json);
                 setTraineeCards(json.creditCards);
+                fetchCourse();
             }
         }
         fetchTrainee();
     }, [])
 
-    const registerCourse = async () =>{
-        let courseGrade = 0;
-        const info = {courseId,courseGrade};
-        const response = await fetch(`/trainee/register/${traineeId}`,{
-            method:'POST',
+    const fetchCourse = async () => {
+        const response = await fetch(`/course/${courseId}`);
+        const json = await response.json();
+        if (response.ok) {
+            setCourse(json);
+        }
+    }
+
+    const updateBalance = async (priceVal) => {
+        let balanceValue = priceVal;
+        const info = { balanceValue };
+        const response = await fetch(`/trainee/updatebalance/${traineeId}`, {
+            method: 'POST',
             body: JSON.stringify(info),
-            headers:{
+            headers: {
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
             }
         })
-        if(response.ok){
+        if (response.ok) {
+            console.log("updated balance");
+        }
+    }
+
+    const registerCourse = async () => {
+        let courseGrade = 0;
+        let courseProgress = 0;
+        const info = { courseId, courseGrade, courseProgress };
+        const response = await fetch(`/trainee/register/${traineeId}`, {
+            method: 'POST',
+            body: JSON.stringify(info),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if (response.ok) {
             setHtml('Purchase was done successfully !');
             setButton(true);
             // navigate(`/traineeform?traineeId=${traineeId}`);
-        }  
-    } 
-    const handleSubmit = (e) =>{
+        }
+
+        else if (!response.ok && json.message === 'already in db') {
+            setHtml('You already bought the course');
+        }
+    }
+    const handleSubmit = (e) => {
         e.preventDefault() //prevent form submission
-        if(checkedCard === null){
+        if (checkedCard === null) {
             setNoCreditCard("You need to enter select a payment method.");
         }
-        else{
-        registerCourse();
+        else if (checkedCard === "balance" && !purchased) {
+            if (trainee.balance >= course.price) {
+                registerCourse();
+                let price = (course.price * -1);
+                updateBalance(price);
+                setPurchased(true);
+            }
+            else {
+                setHtml2(`You dont have enought money in the balance!`);
+            }
         }
-    }   
+        else if(checkedCard !== "balance" && checkedCard !== null && !purchased){
+                registerCourse();
+                setPurchased(true);
+        }
+        else{
+            setHtml('You already bought the course');
+        }
+    }
 
-    
-return(
-    <div>
-        <form onSubmit={handleSubmit}>
-        <div className='Cards'>
-        {traineeCards && traineeCards.map((card,index)=>(
-          <div>
-          <fieldset id = {card._id}>
-          <p><strong>Card {index+1} information:</strong></p>
-          <p>Name on card: {card.cardName}</p>
-          <p>Card Number: {card.cardNumber}</p>
-          <p>Card Expiry Date: {card.cardExpiryDate}</p>
-          <label><input id = {`first${index}`} type = 'radio' value = {card._id} name = {card.cardName} checked = {checkedCard === card._id} onChange={e=>{setCheckedCard(e.target.value)}}/>Select</label>
-          </fieldset>
-          </div>    
-       ))}
-       <button id= "pay">Purchase</button>
-       <p><strong>{html}</strong></p>
+
+    return (
+        <div>
+            <h1><strong>Select a payment method:</strong></h1>
+            <div>
+                <p><strong>Course Information:</strong></p>
+                <p>Course name: {course.courseTitle} </p>
+                <p>Price: {Math.ceil(course.price * rateVal)} {currencyVal} </p>
+            </div>
+            <form onSubmit={handleSubmit}>
+                <div className='Cards'>
+                    {traineeCards && traineeCards.map((card, index) => (
+                        <div>
+                            <fieldset id={card._id}>
+                                <p><strong>Card {index + 1} information:</strong></p>
+                                <p>Name on card: {card.cardName}</p>
+                                <p>Card Number: {card.cardNumber}</p>
+                                <p>Card Expiry Date: {card.cardExpiryDate}</p>
+                                <label><input id={`first${index}`} type='radio' value={card._id} name={card.cardName} checked={checkedCard === card._id} onChange={e => { setCheckedCard(e.target.value) }} />Select</label>
+                            </fieldset>
+                        </div>
+                    ))}
+                    <fieldset>
+                        <p>Current Balance: {Math.ceil(trainee.balance * rateVal)} {currencyVal}</p>
+                        <label><input id='balance-pay' type='radio' value="balance" name="balance" checked={checkedCard === "balance"} onChange={e => { setCheckedCard(e.target.value) }} />Select</label>
+                    </fieldset>
+                    <button id="pay">Purchase</button>
+                    <p><strong>{html}</strong></p>
+                    <p><strong>{html2}</strong></p>
+                </div>
+            </form>
+            <p><strong>{noCreditCard}</strong></p>
+            {button === true ? (<button onClick={() => window.location.href = `/traineeform?traineeId=${traineeId}`} >View your courses</button>) : (<p></p>)}
+            <button id="newcard" onClick={() => window.location.href = `/traineecredit?courseId=${courseId}&traineeId=${traineeId}`}>Add new credit/debit card</button>
         </div>
-        </form>
-        <p><strong>{noCreditCard}</strong></p>
-        {button === true ?( <button onClick={() => window.location.href=`/traineeform?traineeId=${traineeId}`} >View your courses</button>) : (<p></p>)}
-        <button id= "newcard" onClick={() => window.location.href=`/traineecredit?courseId=${courseId}&traineeId=${traineeId}`}>Add new credit/debit card</button>
-    </div>
-)
+    )
 }
 
 

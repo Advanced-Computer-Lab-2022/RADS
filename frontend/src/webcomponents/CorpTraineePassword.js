@@ -5,15 +5,15 @@ const CorpTraineePassword = () => {
 
     const [password, setPassword] = useState('');
     const [error,setError] = useState(null);
-
+    const corpTraineeId = "635aff3e92426ef4e8a9e179";
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
-        const corpTrainee = {password};
+        const trainee = {password};
 
-        const response = await fetch('/CorpTrainee/password/635aff3e92426ef4e8a9e179',{
+        const response = await fetch(`/corptrainee/password/${corpTraineeId}`,{
             method:'PATCH',
-            body: JSON.stringify(corpTrainee),
+            body: JSON.stringify(trainee),
             headers:{
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'

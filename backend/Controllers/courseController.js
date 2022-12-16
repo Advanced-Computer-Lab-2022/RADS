@@ -40,8 +40,8 @@ const getCourse = async(req, res) => {
 const getCourseSubset = async(req, res) => {
     const { ids } = req.body
         //const courses = await Course.find({ '_id': "ids.courseId" });
-        // const courses = await Course.find({ _id, "ids.courseId": _id });
-        // const courses = await Course.find().where('_id').in(ids);
+        //const courses = await Course.find({ _id, "ids.courseId": _id });
+        //const courses = await Course.find().where('_id').in(ids);
     let onlyIds = [] // declaring array to store only _ids
     for (let i = 0; i < ids.length; i++) {
         if (!onlyIds.includes(ids[i].courseId)) //checking id exist in array, if not exist push _id to onlyIds aarray
@@ -59,7 +59,6 @@ const getCourseSubset = async(req, res) => {
 //Get a subset of courses using a subset of ids
 const getHighestViewedCourses = async(req, res) => {
     const courses = await Course.find({ view: { $gte: 3 } })
-    console.log(courses);
     if (!courses) {
         return res.status(404).json({ error: 'No courses' });
     }
@@ -85,44 +84,10 @@ const getCoursesByInstructor = async(req, res) => {
 
 
 //////////////////////////////////
-// GET a single exercise
-//////////////////////////////////
-const getCourseExercise = async(req, res) => {
-    const id = mongoose.Types.ObjectId(req.params.id);
-    const eid = (req.params.eid);
-    const course = await Course.findById({ "_id": id })
-    const Exercise = course.courseExercises.find({ excerciseId: eid })
-        // const Exercise = {
-        //     courseExercises: {
-        //         excerciseId: course.courseExercises.find(),
-        //         questions: [{
-        //             question: question,
-        //             firstChoice: firstChoice,
-        //             secondChoice: secondChoice,
-        //             thirdChoice: thirdChoice,
-        //             fourthChoice: fourthChoice,
-        //             answer: answer
-        //         }],
-        //         grade: grade
-        //     }
-    res.status(200).json(Exercise)
-}
-
-//////////////////////////////////
-// GET all exercises
-//////////////////////////////////
-const getCourseExercises = async(req, res) => {
-    const id = mongoose.Types.ObjectId(req.params.id);
-    const course = await Course.findById({ "_id": id })
-    const Exercises = course.courseExercises.find({})
-    res.status(200).json(Exercises)
-}
-
-//////////////////////////////////
 // POST new course
 //////////////////////////////////
 const postCourse = async(req, res) => {
-    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, coursePreview } = req.body;
+    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, exam, coursePreview } = req.body;
     try {
         const course = await Course.create({
             courseTitle,
@@ -132,10 +97,12 @@ const postCourse = async(req, res) => {
             subject,
             totalHours,
             instructor,
+            courseExercises,
+            exam,
+            coursePreview,
             courseRating: 1,
             ratersCount: 1,
-            courseExercises,
-            coursePreview,
+            reviews: [],
             view: 0
         });
         res.status(200).json({ message: "Course added successfully", message: "Course info" + course });
@@ -218,12 +185,12 @@ const updateViews = async(req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
     }
+    console.log("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     const course = await Course.findById({ "_id": id })
     if (!course) {
         return res.status(404).json({ error: 'No such course' });
     }
-    let currentViews = course.view;
-    currentViews += 1;
+    let currentViews = course.view + 1;
     course.view = currentViews;
     await course.save();
     res.status(200).json(course);
@@ -282,8 +249,6 @@ module.exports = {
     getCoursesByInstructor,
     postCourseReview,
     getCourseRating,
-    getCourseExercise,
-    getCourseExercises,
     postPromotion,
     deletePromo,
     maxPrice,

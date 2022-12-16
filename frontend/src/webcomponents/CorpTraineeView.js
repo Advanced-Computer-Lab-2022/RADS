@@ -1,30 +1,20 @@
-// import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const TraineeView = (props) => {
+const CorpTraineeView = (props) => {
     const {
         rateVal,
         currencyVal
     } = props;
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get('courseId');
-    const traineeId = params.get('traineeId');
+    const corpTraineeId = params.get('corpTraineeId');
     const [course, setCourse] = useState([]);
-    const [trainee, setTrainee] = useState([]);
-    const [traineeCourses, setTraineeCourses] = useState([]);
+    const [corpTrainee, setCorpTrainee] = useState([]);
+    const [corptraineeCourses, setCorpTraineeCourses] = useState([]);
     const [instructorName, setinstructorName] = useState([]);
-    const [traineeBalance, setTraineeBalance] = useState(0);
-    const [exists, setExists] = useState(false);
-    const [balanceHtml,setBalanceHtml] = useState("");
-    
-    // const todayDate = new Date();
-    // console.log(todayDate);
-    // console.log(json.promotionEndDate);
-    // const promoend = new Date(json.promotionEndDate);
-    // console.log("course end date: ",promoend);
-    // console.log("today date: ",todayDate);
-    // console.log("here ",promoend > todayDate);
-
+    const [exists,setExists] = useState(false);
+ 
     useEffect(() => {
         const fetchCourse = async () => {
             const response = await fetch(`/course/${courseId}`);
@@ -32,21 +22,19 @@ const TraineeView = (props) => {
             if (response.ok) {
                 setCourse(json);
                 fetchInstructor(json.instructor);
-                fetchTrainee();
+                fetchCorpTrainee();
                 incrementViews();
             }
         }
         fetchCourse();
     }, [])
 
-
-    const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
+    const fetchCorpTrainee = async () => {
+        const response = await fetch(`/corptrainee/${corpTraineeId}`);
         const json = await response.json();
         if (response.ok) {
-            setTrainee(json);
-            setTraineeCourses(json.courses);
-            setTraineeBalance(json.balance);
+            setCorpTrainee(json);
+            setCorpTraineeCourses(json.courses);
         }
     }
 
@@ -57,7 +45,7 @@ const TraineeView = (props) => {
             setinstructorName(json.firstName + " " + json.lastName);
         }
     }
-
+    
     const incrementViews = async () => {
         const response = await fetch(`/course/updateviews/${courseId}`, {
             method: 'PATCH',
@@ -77,9 +65,9 @@ const TraineeView = (props) => {
         }
     }
 
-    const findRegistered = async () => {
+    const findAccessed = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/checkregister/${traineeId}`, {
+        const response = await fetch(`/corptrainee/checkaccess/${corpTraineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -92,36 +80,31 @@ const TraineeView = (props) => {
             setExists(json);
         }
     }
-    const CheckRegistered = () => {
-        findRegistered();
+        
+    const CheckHaveAccess = () => {
+        findAccessed();
         if (exists) {
             return (<div>
-                <p><bold>Registered</bold></p>
-                <button onClick={() => window.location.href = `/traineecourse?courseId=${courseId}&traineeId=${traineeId}`}>Go to course</button>
+                <p><bold>Enrolled</bold></p>
+                <button onClick={() => window.location.href = `/corptraineecourse?courseId=${courseId}&corpTraineeId=${corpTraineeId}`}>Go to course</button>
             </div>)
         }
         else {
             return (
                 <div>
-                    <button onClick={() => window.location.href = `/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key={courseId}>Register in Course <strong>{course.courseTitle}</strong></button>
+                   {<button onClick={() => window.location.href = `/corptraineesubmitaccess?courseId=${courseId}&corpTraineeId=${corpTraineeId}`} key={courseId}>Request Access for <strong>{course.courseTitle}</strong></button>}
                 </div>
             )
         }
     }
 
-    const handleClick = (e) =>{
-        e.preventDefault();
-        let x = `Balance: ${Math.ceil(traineeBalance*rateVal)} ${currencyVal}`;
-        setBalanceHtml(x);
-    }
     return (
         <div>
-            <div className='wallet-div'>
-                <button onClick={handleClick}><strong>Wallet</strong></button>
-                <p>{balanceHtml}</p>
-            </div>
             <h4>The information of course: {course.courseTitle} </h4>
-            <div><CheckRegistered /></div>
+            <div>
+                <CheckHaveAccess />
+            </div>
+
             <iframe width="600" height="315" title="Course preview" src={course.coursePreview} frameBorder="0" allowFullScreen></iframe>
             <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
                 <div>
@@ -130,7 +113,6 @@ const TraineeView = (props) => {
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
                 </div>
             ))}</div>
-            <p><strong>Price: </strong>{course.price * rateVal}{" "}{currencyVal}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
             <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
@@ -144,4 +126,5 @@ const TraineeView = (props) => {
 }
 
 
-export default TraineeView;
+
+export default CorpTraineeView;

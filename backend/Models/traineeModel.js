@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 
@@ -8,8 +7,25 @@ const courseSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'courseModel',
     },
-    courseGrade: {
-        type: Number
+    exercisesGrade: {
+        type: Number,
+        default: 0
+    },
+    solvedExercises: {
+        type: Boolean,
+        default: false
+    },
+    examGrade: {
+        type: Number,
+        default: 0
+    },
+    courseProgress: {
+        type: Number,
+        default: 0
+    },
+    solvedExam: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -39,6 +55,7 @@ const traineeSchema = new Schema({
     },
     userName: {
         type: String,
+        unique: true,
         required: true
     },
     password: {
@@ -56,10 +73,12 @@ const traineeSchema = new Schema({
     },
     gender: {
         type: String,
-        required:true
+        required: true
     },
     email: {
         type: String,
+        trim: true,
+        unique: true,
         required: true
     },
     courses: {
@@ -67,8 +86,14 @@ const traineeSchema = new Schema({
     },
     creditCards: {
         type: [creditCardSchema]
-    }
+    },
+    balance: {
+        type: Number
+    },
+    role: {
+        type: String,
 
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Trainee', traineeSchema);

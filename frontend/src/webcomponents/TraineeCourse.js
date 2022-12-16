@@ -1,7 +1,9 @@
-// import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const TraineeView = (props) => {
+
+
+const TraineeCourse = (props) => {
     const {
         rateVal,
         currencyVal
@@ -15,8 +17,9 @@ const TraineeView = (props) => {
     const [instructorName, setinstructorName] = useState([]);
     const [traineeBalance, setTraineeBalance] = useState(0);
     const [exists, setExists] = useState(false);
-    const [balanceHtml,setBalanceHtml] = useState("");
-    
+    const [balanceHtml, setBalanceHtml] = useState("");
+    const [currentProgress,setCurrentProgress] = useState(0);
+
     // const todayDate = new Date();
     // console.log(todayDate);
     // console.log(json.promotionEndDate);
@@ -33,7 +36,7 @@ const TraineeView = (props) => {
                 setCourse(json);
                 fetchInstructor(json.instructor);
                 fetchTrainee();
-                incrementViews();
+                findCurrentProgress();
             }
         }
         fetchCourse();
@@ -58,28 +61,40 @@ const TraineeView = (props) => {
         }
     }
 
-    const incrementViews = async () => {
-        const response = await fetch(`/course/updateviews/${courseId}`, {
-            method: 'PATCH',
-            body: JSON.stringify({}),
+    const handleClick = (e) => {
+        e.preventDefault();
+        let x = `Balance: ${Math.ceil(traineeBalance * rateVal)} ${currencyVal}`;
+        setBalanceHtml(x);
+    }
+
+    
+   
+    const findCurrentProgress = async() =>{  
+        const info = { courseId }
+        const response = await fetch(`/trainee/courseprogress/${traineeId}`, {
+            method: 'POST',
+            body: JSON.stringify(info),
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
             }
         })
         const json = await response.json();
-        if (!response.ok) {
-            console.log("error happened:", json.error);
-        }
+        console.log(json);
         if (response.ok) {
-            console.log("course view incremented", json);
-            //refresh page on successful submission
+            setCurrentProgress(json);
         }
     }
 
-    const findRegistered = async () => {
-        const info = { courseId };
-        const response = await fetch(`/trainee/checkregister/${traineeId}`, {
+    const handleEnding = async(e,index) =>{
+        e.preventDefault();
+        // const 
+        console.log("endingggggggggg");
+        let currentChapter = index+1;
+        let totalChapters = course.subtitles.length+2;
+        const info = { courseId, currentChapter, totalChapters }
+        console.log(info);
+        const response = await fetch(`/trainee/updateprogress/${traineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -89,59 +104,44 @@ const TraineeView = (props) => {
         })
         const json = await response.json();
         if (response.ok) {
-            setExists(json);
+            console.log(json);
         }
     }
-    const CheckRegistered = () => {
-        findRegistered();
-        if (exists) {
-            return (<div>
-                <p><bold>Registered</bold></p>
-                <button onClick={() => window.location.href = `/traineecourse?courseId=${courseId}&traineeId=${traineeId}`}>Go to course</button>
-            </div>)
-        }
-        else {
-            return (
-                <div>
-                    <button onClick={() => window.location.href = `/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key={courseId}>Register in Course <strong>{course.courseTitle}</strong></button>
-                </div>
-            )
-        }
-    }
+  
 
-    const handleClick = (e) =>{
-        e.preventDefault();
-        let x = `Balance: ${Math.ceil(traineeBalance*rateVal)} ${currencyVal}`;
-        setBalanceHtml(x);
-    }
+    
+    
     return (
         <div>
             <div className='wallet-div'>
+                <h1><strong>Welcome back, current course progress is {currentProgress}%,{currentProgress === 100 ? (<p>Congratulations on finishing the Course.</p>)
+                : ( <p>Keep going, ur doing great.</p>)}</strong></h1>
+                
+                {currentProgress && currentProgress > 50 ? (<div><p> </p></div>)
+                : (
+                <button onClick={() => window.location.href = `/traineesubmitrefund?traineeId=${traineeId}&courseId=${courseId}`}><strong>Request Refund</strong></button>
+                )}
+                <div>
                 <button onClick={handleClick}><strong>Wallet</strong></button>
                 <p>{balanceHtml}</p>
+                </div>
             </div>
-            <h4>The information of course: {course.courseTitle} </h4>
-            <div><CheckRegistered /></div>
-            <iframe width="600" height="315" title="Course preview" src={course.coursePreview} frameBorder="0" allowFullScreen></iframe>
-            <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
+            <h4>Welcome to course: {course.courseTitle} </h4>
+            <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
+            {course.subtitles && course.subtitles.map((subtitle,index) => (
                 <div>
-                    <p>{subtitle.subTitle}</p>
+                    <p>Subtitle: {subtitle.subTitle}</p>
                     <p>Description:{subtitle.description}</p>
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
+                    <iframe onEnded={e => handleEnding(e, index)} width="600" height="315" title={`${subtitle.subTitle} video:`} src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe>
+                    <br />
                 </div>
-            ))}</div>
-            <p><strong>Price: </strong>{course.price * rateVal}{" "}{currencyVal}</p>
-            <p><strong>Instructor of the course: </strong>{instructorName}</p>
-            <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
-            <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
-                <div>
-                    <p>Question: {exercise.question}</p>
-                </div>
-            ))}</div>
-            <p><strong>============================================================================================================</strong></p>
+            ))}
+            <button onClick={() => window.location.href = `/traineerate?traineeId=${traineeId}&courseId=${courseId}`}>Rate Course</button>
+            <button onClick={() => window.location.href = `/traineesolve?traineeId=${traineeId}&courseId=${courseId}`}>Solve Exercises</button>
+            <button onClick={() => window.location.href = `/traineexam?traineeId=${traineeId}&courseId=${courseId}`}>Solve Final Exam</button>
         </div>
     )
 }
 
-
-export default TraineeView;
+export default TraineeCourse;

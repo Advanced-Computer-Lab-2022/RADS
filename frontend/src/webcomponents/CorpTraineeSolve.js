@@ -1,18 +1,17 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-const TraineeSolve = (props) => {
+const CorpTraineeSolve = (props) => {
     const {
         rateVal,
         currencyVal
     } = props;
     const params = new URLSearchParams(window.location.search);
-    const traineeId = params.get('traineeId');
+    const corpTraineeId = params.get('corpTraineeId');
     const courseId = params.get('courseId');
-    const corpTraineeId = null;
     const [course, setCourse] = useState([]);
     const [exercises, setExercises] = useState([]);
-    const [trainee, setTrainee] = useState([]);
+    const [corpTrainee, setCorpTrainee] = useState([]);
     const [instructorName, setinstructorName] = useState([]);
     const [instructorId, setInstructorId] = useState('');
 
@@ -31,8 +30,8 @@ const TraineeSolve = (props) => {
     const [grades, setGrades] = useState([]);
     const [corrects, setCorrects] = useState([]);
     const [status, setStatus] = useState(false);
-    const [showButton,setShowButton] = useState(true); 
-    const [solved,setSolved] = useState(false);     
+    const [showButton, setShowButton] = useState(true);
+    const [solved, setSolved] = useState(false);
     useEffect(() => {
         const fetchCourse = async () => {
             const response = await fetch(`/course/${courseId}`);
@@ -40,7 +39,7 @@ const TraineeSolve = (props) => {
             if (response.ok) {
                 setCourse(json);
                 fetchInstructor(json.instructor);
-                fetchTrainee();
+                fetchCorpTrainee();
                 setExercises(json.courseExercises);
                 setInstructorId(json.instructor);
                 findExercisesLastGrade();
@@ -57,16 +56,17 @@ const TraineeSolve = (props) => {
             setinstructorName(json.firstName + " " + json.lastName);
         }
     }
-    const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
+    const fetchCorpTrainee = async () => {
+        const response = await fetch(`/corptrainee/${corpTraineeId}`);
         const json = await response.json();
         if (response.ok) {
-            setTrainee(json);
+            setCorpTrainee(json);
         }
     }
+
     const updateSolvingStatus = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/updateexercisesstatus/${traineeId}`, {
+        const response = await fetch(`/corptrainee/updateexercisesstatus/${corpTraineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -83,7 +83,7 @@ const TraineeSolve = (props) => {
 
     const getSolvingStatus = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/checkexstatus/${traineeId}`, {
+        const response = await fetch(`/corptrainee/checkexstatus/${corpTraineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -92,7 +92,7 @@ const TraineeSolve = (props) => {
             }
         })
         const json = await response.json();
-        console.log("status",json);
+        console.log("status", json);
         if (response.ok) {
             setStatus(json)
         }
@@ -110,7 +110,7 @@ const TraineeSolve = (props) => {
     }
     const findExercisesLastGrade = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/findgrade/${traineeId}`, {
+        const response = await fetch(`/corptrainee/findgrade/${corpTraineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -119,17 +119,19 @@ const TraineeSolve = (props) => {
             }
         })
         const json = await response.json();
-        console.log("oldgrade",json);
+        console.log("oldgrade", json);
         if (response.ok) {
             setOldExercisesGrade(json)
         }
     }
-    const handleEnding = async() =>{
+
+    
+    const handleEnding = async () => {
         // const 
-        let currentChapter = course.subtitles.length+1
-        let totalChapters = course.subtitles.length+2;
+        let currentChapter = course.subtitles.length + 1
+        let totalChapters = course.subtitles.length + 2;
         const info = { courseId, currentChapter, totalChapters }
-        const response = await fetch(`/trainee/updateprogress/${traineeId}`, {
+        const response = await fetch(`/corptrainee/updateprogress/${corpTraineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -171,7 +173,7 @@ const TraineeSolve = (props) => {
         console.log(finalgrade);
         let exercisesGrade = finalgrade
         const info = { courseId, exercisesGrade };
-        const response = await fetch(`/trainee/updateexercisesgrade/${traineeId}`, {
+        const response = await fetch(`/corptrainee/updateexercisesgrade/${corpTraineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -199,7 +201,6 @@ const TraineeSolve = (props) => {
                 <p><strong>Exercises Grade was: {Math.ceil(oldExercisesGrade * 2)}%</strong></p></div>)
                 : (
                     <div>
-
                         <div className='quiz-form'>
                             <h1>Subtitle Exercises:</h1>
                             <form onSubmit={handleSubmit}>
@@ -213,7 +214,7 @@ const TraineeSolve = (props) => {
                                     </fieldset>
                                     </div>
                                 ))}
-                               {showButton && <button id = "submit-solve"type='submit'>Submit</button>}
+                                {showButton && <button id="submit-solve" type='submit'>Submit</button>}
                             </form>
                         </div >
                         <div className='solution-form'>
@@ -231,4 +232,4 @@ const TraineeSolve = (props) => {
 }
 
 
-export default TraineeSolve;
+export default CorpTraineeSolve;
