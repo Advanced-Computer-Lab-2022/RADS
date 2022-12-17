@@ -407,6 +407,22 @@ const checkSolvingStatus = async(req, res) => {
     }
 }
 
+const findCreditCard = async(req, res) => {
+    const { creditCardId } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const dbResp = await Trainee.findOne({ "_id": id, creditCards: { $elemMatch: { '_id': creditCardId, "cardExpiryDate": { $exists: true } } } }, { "creditCards._id": 1, "creditCards.cardExpiryDate": 1 })
+        let result = dbResp.creditCards.filter((item) => (item["_id"].toString().toLowerCase().includes(creditCardId.toString().toLowerCase())))[0].cardExpiryDate;
+        if (dbResp) {
+            res.status(201).json(result);
+        } else {
+            res.status(400).json({ message: 'Not able to find exam status' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 const checkExercisesSolvingStatus = async(req, res) => {
     const { courseId } = req.body;
     try {
@@ -469,4 +485,5 @@ module.exports = {
     findExamGrade,
     checkSolvingStatus,
     checkExercisesSolvingStatus,
+    findCreditCard
 }

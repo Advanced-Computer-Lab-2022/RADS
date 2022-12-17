@@ -1,5 +1,6 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
+import ReactPlayer from 'react-player';
 
 const TraineeView = (props) => {
     const {
@@ -122,7 +123,8 @@ const TraineeView = (props) => {
             </div>
             <h4>The information of course: {course.courseTitle} </h4>
             <div><CheckRegistered /></div>
-            <iframe width="600" height="315" title="Course preview" src={course.coursePreview} frameBorder="0" allowFullScreen></iframe>
+         
+            <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true}/>
             <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
                 <div>
                     <p>{subtitle.subTitle}</p>

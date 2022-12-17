@@ -24,7 +24,6 @@ const AdminRefund = (props) => {
             const json = await response.json();
             if (response.ok) {
                 setRequest(json);
-                console.log(json.courseProgress);
                 fetchCourse();
                 fetchTrainee();
             }
@@ -95,8 +94,8 @@ const AdminRefund = (props) => {
             <p>Trainee Name: {trainee.firstName} {trainee.lastName}</p>
             <p>Course Name: {course.courseTitle} </p>
             <p>Current progress: {request.courseProgress}%</p>
-            <p>Amount of money to be refunded: {Math.ceil(request.refundAmout*rateVal)} {currencyVal}</p>
-            <p>{trainee.firstName}'s reason for refund:{request.traineeComment}%</p>
+            <p>Amount of money to be refunded: {Math.ceil(request.refundAmount*rateVal)} {currencyVal}</p>
+            <p>{trainee.firstName}'s reason for refund:{request.traineeComment}</p>
             <p>Request Type: {request.requestType} Request</p>
             </div>
             <button onClick={handleAccept}>Accept Refund</button>

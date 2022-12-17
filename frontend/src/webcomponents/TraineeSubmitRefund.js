@@ -34,6 +34,7 @@ const TraineeSubmitRefund = (props) => {
                 fetchInstructor(json.instructor);
                 fetchTrainee();
                 findCurrentProgress();
+                console.log(json.price);
                 setRefundAmount(json.price);
             }
         }
@@ -82,8 +83,7 @@ const TraineeSubmitRefund = (props) => {
 
     const sendRefundRequest = async () => {
         let requestType = "Refund";
-        const body = { traineeId, traineeComment, courseId, courseProgress,refundAmount ,requestType }
-        console.log(body);
+        const body = { traineeId, traineeComment, courseId, courseProgress, refundAmount, requestType }
         const response = await fetch(`/report/postrequest`, {
             method: 'POST',
             body: JSON.stringify(body),

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import ReactPlayer from "react-player";
 
 
 const CorpTraineeCourse = (props) => {
@@ -17,7 +17,7 @@ const CorpTraineeCourse = (props) => {
     const [instructorName, setinstructorName] = useState([]);
     const [exists, setExists] = useState(false);
     const [balanceHtml, setBalanceHtml] = useState("");
-    const [currentProgress,setCurrentProgress] = useState(0);
+    const [currentProgress, setCurrentProgress] = useState(0);
 
     // const todayDate = new Date();
     // console.log(todayDate);
@@ -59,10 +59,10 @@ const CorpTraineeCourse = (props) => {
         }
     }
 
-    
 
-   
-    const findCurrentProgress = async() =>{  
+
+
+    const findCurrentProgress = async () => {
         const info = { courseId }
         const response = await fetch(`/corptrainee/courseprogress/${corpTraineeId}`, {
             method: 'POST',
@@ -78,13 +78,9 @@ const CorpTraineeCourse = (props) => {
             setCurrentProgress(json);
         }
     }
-
-    const handleEnding = async(e,index) =>{
-        e.preventDefault();
-        // const 
-        console.log("endingggggggggg");
-        let currentChapter = index+1;
-        let totalChapters = course.subtitles.length+2;
+    const handleEnding = async (index) => {
+        let currentChapter = index + 1;
+        let totalChapters = course.subtitles.length + 2;
         const info = { courseId, currentChapter, totalChapters }
         console.log(info);
         const response = await fetch(`/corptrainee/updateprogress/${corpTraineeId}`, {
@@ -100,24 +96,25 @@ const CorpTraineeCourse = (props) => {
             console.log(json);
         }
     }
-  
 
-    
-    
+
+
+
+
     return (
         <div>
             <div className='wallet-div'>
                 <h1><strong>Welcome back, current course progress is {currentProgress}%,{currentProgress === 100 ? (<p>Congratulations on finishing the Course.</p>)
-                : ( <p>Keep going, ur doing great.</p>)}</strong></h1>
+                    : (<p>Keep going, ur doing great.</p>)}</strong></h1>
             </div>
             <h4>Welcome to course: {course.courseTitle} </h4>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
-            {course.subtitles && course.subtitles.map((subtitle,index) => (
+            {course.subtitles && course.subtitles.map((subtitle, index) => (
                 <div>
                     <p>Subtitle: {subtitle.subTitle}</p>
                     <p>Description:{subtitle.description}</p>
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
-                    <iframe onEnded={e => handleEnding(e, index)} width="600" height="315" title={`${subtitle.subTitle} video:`} src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe>
+                    <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={subtitle.videoLink} width='20%' height='100%' controls={true} onEnded={async () => (handleEnding(index))} />
                     <br />
                 </div>
             ))}

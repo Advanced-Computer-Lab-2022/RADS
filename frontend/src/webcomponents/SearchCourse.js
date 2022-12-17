@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Link from '@mui/material/Link';
+import ReactPlayer from 'react-player';
 
 const setRate = (val) => {
   const priceMarks = [
@@ -369,7 +370,7 @@ const SearchCourse = (props) => {
               <p>{subtitle.subTitle}</p>
               <p>Description: {subtitle.description}</p>
               <p>Total Hours of the Chapter: {subtitle.hours}</p>
-              <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe>
+              <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={subtitle.videoLink} width='20%' height='100%' controls={true}/>
             </div>
           ))}</div>
           <p><strong>Price: </strong>{course.price * rateVal}{" "}{currencyVal}</p>

@@ -19,7 +19,7 @@ const TraineeCreditOptions = (props) => {
     const [noCreditCard, setNoCreditCard] = useState('');
     const [purchased, setPurchased] = useState(false);
     const navigate = useNavigate();
-
+    const todayDate = new Date();
     useEffect(() => {
         const fetchTrainee = async () => {
             const response = await fetch(`/trainee/${traineeId}`);
@@ -80,6 +80,33 @@ const TraineeCreditOptions = (props) => {
             setHtml('You already bought the course');
         }
     }
+
+
+    const checkExpiryDate = async (id) => {
+        let creditCardId = id;
+        const body = { creditCardId };
+        const response = await fetch(`/trainee/findcreditcard/${traineeId}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if (response.ok) {
+            const newDate = new Date(json);
+            if (newDate >= todayDate) {
+                registerCourse();
+                setPurchased(true);
+            }
+            else {
+                setHtml("Cannot perform purschase, The Card is Expired")
+            }
+        }
+    }
+
+
     const handleSubmit = (e) => {
         e.preventDefault() //prevent form submission
         if (checkedCard === null) {
@@ -96,15 +123,21 @@ const TraineeCreditOptions = (props) => {
                 setHtml2(`You dont have enought money in the balance!`);
             }
         }
-        else if(checkedCard !== "balance" && checkedCard !== null && !purchased){
-                registerCourse();
-                setPurchased(true);
+        else if (checkedCard !== "balance" && checkedCard !== null && !purchased) {
+           checkExpiryDate(checkedCard);            
         }
-        else{
+        else {
             setHtml('You already bought the course');
         }
     }
 
+    const getDateAttributes = (date) => {
+        let newDate = new Date(date);
+        let year = newDate.getFullYear();
+        let month = newDate.toLocaleString('en-us', { month: 'long' });;
+        let result = `${year}, ${month}`;
+        return result
+    }
 
     return (
         <div>
@@ -122,7 +155,8 @@ const TraineeCreditOptions = (props) => {
                                 <p><strong>Card {index + 1} information:</strong></p>
                                 <p>Name on card: {card.cardName}</p>
                                 <p>Card Number: {card.cardNumber}</p>
-                                <p>Card Expiry Date: {card.cardExpiryDate}</p>
+                                <p>Card Expiry Date: {getDateAttributes(card.cardExpiryDate)}</p>
+                                {card.cardExpiryDate && new Date(card.cardExpiryDate) >= todayDate ? (<p></p>) : (<p>Card Expired</p>)}
                                 <label><input id={`first${index}`} type='radio' value={card._id} name={card.cardName} checked={checkedCard === card._id} onChange={e => { setCheckedCard(e.target.value) }} />Select</label>
                             </fieldset>
                         </div>

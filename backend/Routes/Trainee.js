@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTrainees, updatePassword, getTrainee, postCourseRegister, updateSolvedExercises, checkExercisesSolvingStatus, checkSolvingStatus, getTraineeCourses, postTrainee, forgotPassword, findExercisesGrade, postCreditCard, checkRegistered, signUp, login, logout, updateCourseProgress, checkCourseProgress, refundCourse, updateTraineeBalance, updateSolvedExam, updateExamGrade, updateExercisesGrade, findExamGrade } = require('../Controllers/traineeController');
+const { getTrainees, updatePassword, getTrainee, postCourseRegister, updateSolvedExercises, checkExercisesSolvingStatus, checkSolvingStatus, getTraineeCourses, postTrainee, forgotPassword, findExercisesGrade, postCreditCard, checkRegistered, signUp, login, logout, updateCourseProgress, checkCourseProgress, refundCourse, updateTraineeBalance, updateSolvedExam, updateExamGrade, updateExercisesGrade, findExamGrade, findCreditCard } = require('../Controllers/traineeController');
 const router = express.Router();
 
 router.get('/', getTrainees);
@@ -26,5 +26,7 @@ router.post('/updateexercisesstatus/:id', updateSolvedExercises);
 router.post('/refund/:id', refundCourse);
 router.post('/checkstatus/:id', checkSolvingStatus);
 router.post('/checkexstatus/:id', checkExercisesSolvingStatus);
+router.post('/findcreditcard/:id', findCreditCard);
+
 
 module.exports = router;
