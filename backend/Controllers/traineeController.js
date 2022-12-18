@@ -459,6 +459,22 @@ const refundCourse = async(req, res) => {
 }
 
 
+const deleteCreditCard = async(req, res) => {
+    const { creditCardId } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const update = await Trainee.update({ _id: id }, { $pull: { creditCards: { _id: creditCardId } } });
+        if (!update) {
+            res.status(400).json({ message: 'Not able to remove credit card' });
+        }
+        res.status(200).json({ message: "credit card removed done successfully!" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
+
 
 module.exports = {
     getTrainees,
@@ -485,5 +501,6 @@ module.exports = {
     findExamGrade,
     checkSolvingStatus,
     checkExercisesSolvingStatus,
-    findCreditCard
+    findCreditCard,
+    deleteCreditCard
 }

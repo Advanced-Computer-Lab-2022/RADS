@@ -139,6 +139,24 @@ const TraineeCreditOptions = (props) => {
         return result
     }
 
+    const removeCard = async (value) =>{
+        let creditCardId = value;
+        let body = {creditCardId};
+        const response = await fetch(`/trainee/deletecard/${traineeId}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if (response.ok) {
+            window.location.reload();
+        }
+    }
+
+
     return (
         <div>
             <h1><strong>Select a payment method:</strong></h1>
@@ -158,6 +176,8 @@ const TraineeCreditOptions = (props) => {
                                 <p>Card Expiry Date: {getDateAttributes(card.cardExpiryDate)}</p>
                                 {card.cardExpiryDate && new Date(card.cardExpiryDate) >= todayDate ? (<p></p>) : (<p>Card Expired</p>)}
                                 <label><input id={`first${index}`} type='radio' value={card._id} name={card.cardName} checked={checkedCard === card._id} onChange={e => { setCheckedCard(e.target.value) }} />Select</label>
+                                <br/>
+                                <button value={card._id} onClick={(e)=>removeCard(e.target.value)}>Remove</button>
                             </fieldset>
                         </div>
                     ))}
