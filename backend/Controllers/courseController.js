@@ -38,8 +38,8 @@ const getCourse = async(req, res) => {
 const getCourseSubset = async(req, res) => {
     const { ids } = req.body
         //const courses = await Course.find({ '_id': "ids.courseId" });
-        // const courses = await Course.find({ _id, "ids.courseId": _id });
-        // const courses = await Course.find().where('_id').in(ids);
+        //const courses = await Course.find({ _id, "ids.courseId": _id });
+        //const courses = await Course.find().where('_id').in(ids);
     let onlyIds = [] // declaring array to store only _ids
     for (let i = 0; i < ids.length; i++) {
         if (!onlyIds.includes(ids[i].courseId)) //checking id exist in array, if not exist push _id to onlyIds aarray
@@ -51,6 +51,19 @@ const getCourseSubset = async(req, res) => {
     }
     res.status(200).json(courses);
 }
+
+
+
+//Get a subset of courses using a subset of ids
+const getHighestViewedCourses = async(req, res) => {
+    const courses = await Course.find({ view: { $gte: 3 } })
+    if (!courses) {
+        return res.status(404).json({ error: 'No courses' });
+    }
+    res.status(200).json(courses);
+}
+
+
 
 //////////////////////////////////
 // GET all courses taught by an instructor
@@ -105,7 +118,7 @@ const getCourseExercises = async(req, res) => {
 // POST new course
 //////////////////////////////////
 const postCourse = async(req, res) => {
-    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, coursePreview } = req.body;
+    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, exam, coursePreview } = req.body;
     try {
         const course = await Course.create({
             courseTitle,
@@ -115,10 +128,13 @@ const postCourse = async(req, res) => {
             subject,
             totalHours,
             instructor,
+            courseExercises,
+            exam,
+            coursePreview,
             courseRating: 1,
             ratersCount: 1,
-            courseExercises,
-            coursePreview,
+            reviews: [],
+            view: 0
         });
         res.status(200).json({ message: "Course added successfully", message: "Course info" + course });
     } catch (error) {
@@ -194,6 +210,23 @@ const postCourseReview = async(req, res) => {
     }
 }
 
+//Update views
+const updateViews = async(req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
+    }
+    console.log("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+    const course = await Course.findById({ "_id": id })
+    if (!course) {
+        return res.status(404).json({ error: 'No such course' });
+    }
+    let currentViews = course.view + 1;
+    course.view = currentViews;
+    await course.save();
+    res.status(200).json(course);
+}
+
 //////////////////////////////////
 // GET a single course's rating
 //////////////////////////////////
@@ -202,78 +235,6 @@ const getCourseRating = async(req, res) => {
     const course = await Course.findById({ "_id": id })
     currentOverallRating = course.courseRating.rating
     res.status(200).json("Course Rating is: " + currentOverallRating)
-}
-
-//////////////////////////////////
-// UPDATE a course's review
-//////////////////////////////////
-const updateCourseReview = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
-    }
-    const course = await Course.findByIdAndUpdate({ _id: id }, {
-        ...req.body
-    });
-    if (!course) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json(course);
-}
-
-//////////////////////////////////
-// GET all course's rating
-//////////////////////////////////
-const getRatings = async(req, res) => {
-    const ratings = await courseRating.find({}).sort({ createdAt: -1 });
-    res.status(200).json(ratings);
-}
-
-//////////////////////////////////
-// GET a single rating
-//////////////////////////////////
-const getRating = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a rating for the corresponding id.' });
-    }
-    const rating = await courseRating.findById(id)
-    if (!rating) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json(rating);
-}
-
-//////////////////////////////////
-// DELETE a review
-//////////////////////////////////
-const deleteReview = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
-    }
-    const course = await Course.findOneAndDelete({ _id: id });
-    if (!course) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json(course);
-}
-
-//////////////////////////////////
-// UPDATE a review
-//////////////////////////////////
-const updateReview = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'There does not exist a course with the corresponding id.' });
-    }
-    const review = await Course.findByIdAndUpdate({ _id: id }, {
-        ...req.body
-    });
-    if (!review) {
-        return res.status(404).json({ error: 'No such course' });
-    }
-    res.status(200).json({ message: "Review added successfully", message: "Review info" + review });
 }
 
 const deletePromo = async(req, res) => {
@@ -317,10 +278,10 @@ module.exports = {
     getCoursesByInstructor,
     postCourseReview,
     getCourseRating,
-    getCourseExercise,
-    getCourseExercises,
     postPromotion,
     deletePromo,
     maxPrice,
-    getCourseSubset
+    getCourseSubset,
+    updateViews,
+    getHighestViewedCourses
 }

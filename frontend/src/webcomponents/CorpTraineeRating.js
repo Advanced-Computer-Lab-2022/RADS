@@ -21,17 +21,17 @@ function getLabelText(value) {
     return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
-const TraineeRating = (props) => {
+const CorpTraineeRating = (props) => {
     const {
         rateVal,
         currencyVal
     } = props;
     const params = new URLSearchParams(window.location.search);
-    const traineeId = params.get('traineeId');
+    const corpTraineeId = params.get('corpTraineeId');
     const courseId = params.get('courseId');
-    const corpTraineeId = null;
+    const traineeId = null;
     const [course, setCourse] = useState([]);
-    const [trainee, setTrainee] = useState([]);
+    const [corpTrainee, setCorpTrainee] = useState([]);
     const [cReview, setCReview] = useState('');
     const [cRating, setCRating] = useState(0);
     const [iReview, setIReview] = useState('');
@@ -42,6 +42,7 @@ const TraineeRating = (props) => {
     const [error2, setError2] = useState(null);
     const [html1, setHtml1] = useState("");
     const [html2, setHtml2] = useState("");
+
     useEffect(() => {
         const fetchCourse = async () => {
             const response = await fetch(`/course/${courseId}`);
@@ -50,7 +51,7 @@ const TraineeRating = (props) => {
             if (response.ok) {
                 setCourse(json);
                 fetchInstructor(json.instructor);
-                fetchTrainee();
+                fetchCorpTrainee();
                 setInstructorId(json.instructor);
             }
         }
@@ -64,11 +65,11 @@ const TraineeRating = (props) => {
             setinstructorName(json.firstName + " " + json.lastName);
         }
     }
-    const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
+    const fetchCorpTrainee = async () => {
+        const response = await fetch(`/corptrainee/${corpTraineeId}`);
         const json = await response.json();
         if (response.ok) {
-            setTrainee(json);
+            setCorpTrainee(json);
         }
     }
 
@@ -96,7 +97,7 @@ const TraineeRating = (props) => {
             setIRating(0);
             console.log("New review Added for Instructor", json);
             //refresh page on successful submission
-            window.location.reload();
+            setHtml1("Instructor rating & review Added Successfully");
         }
 
     }
@@ -120,7 +121,7 @@ const TraineeRating = (props) => {
             setCRating(0);
             console.log("New review Added for Course ", json);
             //refresh page on successful submission
-            window.location.reload();
+            setHtml2("Course rating & review Added Successfully");
         }
     }
 
@@ -155,8 +156,9 @@ const TraineeRating = (props) => {
                     <input type="text" onChange={(e) => setIReview(e.target.value)} value={iReview}></input>
                     <button>Submit</button>
                 </form>
-
                 <p><strong>{html1}</strong></p>
+
+
 
                 <form className='rating-course' onSubmit={submitReviewCourse}>
                     <label>Enter a rating on the course:</label>
@@ -178,6 +180,7 @@ const TraineeRating = (props) => {
                             }}
                         />
 
+
                     </Box>
                     <label>Enter a review on the course:</label>
                     <input type="text" onChange={(e) => setCReview(e.target.value)} value={cReview}></input>
@@ -185,10 +188,9 @@ const TraineeRating = (props) => {
                 </form>
                 <p><strong>{html2}</strong></p>
             </div>
-
         </div>
     )
 }
 
 
-export default TraineeRating;
+export default CorpTraineeRating;

@@ -34,15 +34,15 @@ passport.authenticate('jwt', { session: false }),
 inRole(ROLES.TRAINEE),
 postCourseRegister);
 
-router.post('/update/:id',
-passport.authenticate('jwt', { session: false }),
-inRole(ROLES.TRAINEE),
-postCourseGrade);
-
 router.post('/findgrade/:id',
 passport.authenticate('jwt', { session: false }),
 inRole(ROLES.TRAINEE),
-findOldGrade);
+findExercisesGrade);
+
+router.post('/findtestgrade/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+findExamGrade);
 
 router.post('/forgot/:id',
 passport.authenticate('jwt', { session: false }),
@@ -58,5 +58,18 @@ router.post('/checkregister/:id',
 passport.authenticate('jwt', { session: false }),
 inRole(ROLES.TRAINEE),
 checkRegistered);
+router.post('/updatebalance/:id', updateTraineeBalance);
+router.post('/updateprogress/:id', updateCourseProgress);
+router.post('/courseprogress/:id', checkCourseProgress);
+router.post('/updateexamstatus/:id', updateSolvedExam);
+router.post('/updateexamgrade/:id', updateExamGrade);
+router.post('/updateexercisesgrade/:id', updateExercisesGrade);
+router.post('/updateexercisesstatus/:id', updateSolvedExercises);
+router.post('/refund/:id', refundCourse);
+router.post('/checkstatus/:id', checkSolvingStatus);
+router.post('/checkexstatus/:id', checkExercisesSolvingStatus);
+router.post('/findcreditcard/:id', findCreditCard);
+router.post('/deletecard/:id', deleteCreditCard);
+
 
 module.exports = router;

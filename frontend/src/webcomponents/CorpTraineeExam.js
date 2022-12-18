@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-const CorpTraineeSolve = (props) => {
+const CorpTraineeExam = (props) => {
     const {
         rateVal,
         currencyVal
@@ -9,17 +9,16 @@ const CorpTraineeSolve = (props) => {
     const params = new URLSearchParams(window.location.search);
     const corpTraineeId = params.get('corpTraineeId');
     const courseId = params.get('courseId');
+    const traineeId = null;
     const [course, setCourse] = useState([]);
-    const [exercises, setExercises] = useState([]);
+    const [examExercises, setExamExercises] = useState([]);
     const [corpTrainee, setCorpTrainee] = useState([]);
     const [instructorName, setinstructorName] = useState([]);
     const [instructorId, setInstructorId] = useState('');
-
-
-    const [oldGrade, setOldGrade] = useState(0);
-
-    const [exercisesGradeFinal, setExercisesGradeFinal] = useState(0);
+    const [examGradeFinal, setExamGradeFinal] = useState(0);
+    const [oldExamGrade, setOldExamGrade] = useState(0);
     const [oldExercisesGrade, setOldExercisesGrade] = useState(0);
+
 
     const [choicesChecked, setChoicesChecked] = useState([]);
     const [choices, setChoices] = useState([]);
@@ -32,6 +31,8 @@ const CorpTraineeSolve = (props) => {
     const [status, setStatus] = useState(false);
     const [showButton, setShowButton] = useState(true);
     const [solved, setSolved] = useState(false);
+
+
     useEffect(() => {
         const fetchCourse = async () => {
             const response = await fetch(`/course/${courseId}`);
@@ -40,8 +41,9 @@ const CorpTraineeSolve = (props) => {
                 setCourse(json);
                 fetchInstructor(json.instructor);
                 fetchCorpTrainee();
-                setExercises(json.courseExercises);
+                setExamExercises(json.exam);
                 setInstructorId(json.instructor);
+                findExamLastGrade();
                 findExercisesLastGrade();
                 getSolvingStatus();
             }
@@ -64,39 +66,6 @@ const CorpTraineeSolve = (props) => {
         }
     }
 
-    const updateSolvingStatus = async () => {
-        const info = { courseId };
-        const response = await fetch(`/corptrainee/updateexercisesstatus/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json();
-        console.log(json);
-        if (response.ok) {
-            console.log(json);
-        }
-    }
-
-    const getSolvingStatus = async () => {
-        const info = { courseId };
-        const response = await fetch(`/corptrainee/checkexstatus/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json();
-        console.log("status", json);
-        if (response.ok) {
-            setStatus(json)
-        }
-    }
 
     const handleChoice = (e, exIndex) => {
         var updatedAnswers = [...choices];
@@ -108,6 +77,7 @@ const CorpTraineeSolve = (props) => {
         console.log(updatedAnswers);
         setChoices(updatedAnswers);
     }
+
     const findExercisesLastGrade = async () => {
         const info = { courseId };
         const response = await fetch(`/corptrainee/findgrade/${corpTraineeId}`, {
@@ -119,16 +89,64 @@ const CorpTraineeSolve = (props) => {
             }
         })
         const json = await response.json();
-        console.log("oldgrade", json);
         if (response.ok) {
             setOldExercisesGrade(json)
         }
     }
 
-    
+    const updateSolvingStatus = async () => {
+        const info = { courseId };
+        const response = await fetch(`/corptrainee/updateexamstatus/${corpTraineeId}`, {
+            method: 'POST',
+            body: JSON.stringify(info),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if (response.ok) {
+            console.log(json);
+        }
+    }
+
+    const getSolvingStatus = async () => {
+        const info = { courseId };
+        const response = await fetch(`/corptrainee/checkstatus/${corpTraineeId}`, {
+            method: 'POST',
+            body: JSON.stringify(info),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if (response.ok) {
+            setStatus(json)
+        }
+    }
+
+
+
+    const findExamLastGrade = async () => {
+        const info = { courseId };
+        const response = await fetch(`/corptrainee/findtestgrade/${corpTraineeId}`, {
+            method: 'POST',
+            body: JSON.stringify(info),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if (response.ok) {
+            setOldExamGrade(json)
+        }
+    }
+
     const handleEnding = async () => {
         // const 
-        let currentChapter = course.subtitles.length + 1
+        let currentChapter = course.subtitles.length + 2;
         let totalChapters = course.subtitles.length + 2;
         const info = { courseId, currentChapter, totalChapters }
         const response = await fetch(`/corptrainee/updateprogress/${corpTraineeId}`, {
@@ -145,35 +163,30 @@ const CorpTraineeSolve = (props) => {
         }
     }
 
-
-
     const ShowGrades = async () => {
         let array1 = grades;
         let array2 = corrects;
         let initialGrade = 0;
         for (let i = 0; i < choices.length; i++) {
-            if (choices[i] === exercises[i].answer) {
+            if (choices[i] === examExercises[i].answer) {
                 array1[i] = 1;
                 array2[i] = 'Correct !';
                 initialGrade += 1;
             }
             else {
                 array1[i] = 0;
-                array2[i] = `Incorrect! , correct solution is ${exercises[i].answer}`
+                array2[i] = `Incorrect! , correct solution is ${examExercises[i].answer}`
             }
         }
+        setSolved(true);
         setGrades(array1);
         setCorrects(array2);
-        setSolved(true);
-        console.log(array1);
-        console.log(array2);
         console.log(initialGrade);
         let finalgrade = ((initialGrade / choices.length) * 100) * 0.5;
-        setExercisesGradeFinal(finalgrade);
-        console.log(finalgrade);
-        let exercisesGrade = finalgrade
-        const info = { courseId, exercisesGrade };
-        const response = await fetch(`/corptrainee/updateexercisesgrade/${corpTraineeId}`, {
+        setExamGradeFinal(finalgrade);
+        let examGrade = finalgrade
+        const info = { courseId, examGrade };
+        const response = await fetch(`/corptrainee/updateexamgrade/${corpTraineeId}`, {
             method: 'POST',
             body: JSON.stringify(info),
             headers: {
@@ -185,51 +198,51 @@ const CorpTraineeSolve = (props) => {
             console.log("Done");
         }
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowButton(false);
-        updateSolvingStatus();
         handleEnding();
+        updateSolvingStatus();
         ShowGrades();
     }
 
 
     return (
         <div>
-            {status && status === true ? (<div><p><strong>Already Solved the course exercises</strong></p>
-                <p><strong>Exercises Grade was: {Math.ceil(oldExercisesGrade * 2)}%</strong></p></div>)
-                : (
-                    <div>
-                        <div className='quiz-form'>
-                            <h1>Subtitle Exercises:</h1>
-                            <form onSubmit={handleSubmit}>
-                                {exercises && exercises.map((exercise, index) => (
-                                    <div> <fieldset id={exercise._id}>
-                                        <p><strong>Exercise {index + 1}: {exercise.question}</strong></p>
-                                        <label><input id={`first${index}`} type='radio' value={exercise.firstChoice} name={exercise.firstChoice} checked={choices[index] === exercise.firstChoice} onChange={e => { handleChoice(e, index) }} /> {exercise.firstChoice}</label>
-                                        <label><input id={`second${index}`} type='radio' value={exercise.secondChoice} name={exercise.secondChoice} checked={choices[index] === exercise.secondChoice} onChange={e => { handleChoice(e, index) }} />{exercise.secondChoice}</label>
-                                        <label><input id={`third${index}`} type='radio' value={exercise.thirdChoice} name={exercise.thirdChoice} checked={choices[index] === exercise.thirdChoice} onChange={e => { handleChoice(e, index) }} />{exercise.thirdChoice}</label>
-                                        <label><input id={`forth${index}`} type='radio' value={exercise.fourthChoice} name={exercise.fourthChoice} checked={choices[index] === exercise.fourthChoice} onChange={e => { handleChoice(e, index) }} />{exercise.fourthChoice}</label>
-                                    </fieldset>
-                                    </div>
-                                ))}
-                                {showButton && <button id="submit-solve" type='submit'>Submit</button>}
-                            </form>
-                        </div >
-                        <div className='solution-form'>
-                            {solved && grades && grades.map((grade, index2) => (
-                                <p>Q{index2 + 1}: {grade} out of 1</p>
+            {status && status === true ? (<div><p><strong>Already Solved the exam</strong></p>
+                <p><strong>Exam Grade was: {Math.ceil(oldExamGrade * 2)}%</strong></p></div>)
+
+                : (<div>
+                    <div className='quiz-form'>
+                        <h1>Final Exam:</h1>
+                        <form onSubmit={handleSubmit}>
+                            {examExercises && examExercises.map((exercise, index) => (
+                                <div> <fieldset id={exercise._id}>
+                                    <p><strong>Exercise {index + 1}: {exercise.question}</strong></p>
+                                    <label><input id={`first${index}`} type='radio' value={exercise.firstChoice} name={exercise.firstChoice} checked={choices[index] === exercise.firstChoice} onChange={e => { handleChoice(e, index) }} /> {exercise.firstChoice}</label>
+                                    <label><input id={`second${index}`} type='radio' value={exercise.secondChoice} name={exercise.secondChoice} checked={choices[index] === exercise.secondChoice} onChange={e => { handleChoice(e, index) }} />{exercise.secondChoice}</label>
+                                    <label><input id={`third${index}`} type='radio' value={exercise.thirdChoice} name={exercise.thirdChoice} checked={choices[index] === exercise.thirdChoice} onChange={e => { handleChoice(e, index) }} />{exercise.thirdChoice}</label>
+                                    <label><input id={`forth${index}`} type='radio' value={exercise.fourthChoice} name={exercise.fourthChoice} checked={choices[index] === exercise.fourthChoice} onChange={e => { handleChoice(e, index) }} />{exercise.fourthChoice}</label>
+                                </fieldset>
+                                </div>
                             ))}
-                            {solved && corrects && corrects.map((correct, index3) => (
-                                <p>A{index3 + 1}: {correct}</p>
-                            ))}
-                            <p><strong>Exercises Grade: {Math.ceil(exercisesGradeFinal * 2)}%</strong></p>
-                        </div>
-                    </div>)}
+                            {showButton && <button type='submit'>Submit</button>}
+                        </form>
+                    </div >
+                    <div className='solution-form'>
+                        {solved && grades && grades.map((grade, index) => (
+                            <p>Q{index + 1} Grade: {grade} out of 1</p>
+                        ))}
+                        {solved && corrects && corrects.map((correct, index) => (
+                            <p>A1{index + 1}: {correct}</p>
+                        ))}
+                        <p><strong>Exam Grade: {Math.ceil(examGradeFinal * 2)}%</strong></p>
+                        <p><strong>Total course grade: {Math.ceil(examGradeFinal + oldExercisesGrade)} out of 100</strong></p>
+                    </div>
+                </div>)}
         </div>
     )
 }
 
 
-export default CorpTraineeSolve;
+export default CorpTraineeExam;

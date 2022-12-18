@@ -1,5 +1,5 @@
 import { useState } from "react";
-const signUpForm = () => {
+const SignUpForm = () => {
     const [userName, setUserName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -69,4 +69,4 @@ const signUpForm = () => {
         </form>
     )
 }
-export default signUpForm;
+export default SignUpForm;
