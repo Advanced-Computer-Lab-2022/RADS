@@ -5,13 +5,13 @@ const CorpTraineePassword = () => {
 
     const [password, setPassword] = useState('');
     const [error,setError] = useState(null);
-    const corpTraineeId = "635aff3e92426ef4e8a9e179";
+    const corptraineeId = "635aff3e92426ef4e8a9e179";
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
         const trainee = {password};
 
-        const response = await fetch(`/corptrainee/password/${corpTraineeId}`,{
+        const response = await fetch(`/corptrainee/password/${corptraineeId}`,{
             method:'PATCH',
             body: JSON.stringify(trainee),
             headers:{

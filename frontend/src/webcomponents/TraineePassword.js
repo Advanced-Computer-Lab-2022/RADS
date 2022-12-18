@@ -2,9 +2,11 @@ import { useState,useEffect } from "react"
 
 
 const TraineePassword = () => {
+
+
     const [password, setPassword] = useState('');
     const [error,setError] = useState(null);
-    const traineeId = "639ad07efd79849d06521f53";
+    const traineeId = "6395b442bd29cab07c63afa5";
     const [email,setEmail] = useState('');
     const [html1,setHtml1] = useState('');
     const [html2,setHtml2] = useState('');

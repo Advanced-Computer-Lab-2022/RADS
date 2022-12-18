@@ -88,9 +88,6 @@ const courseSchema = new Schema({
     courseExercises: {
         type: [exerciseSchema]
     },
-    exam: {
-        type: [exerciseSchema]
-    },
     coursePreview: {
         type: String
     },
@@ -113,9 +110,6 @@ const courseSchema = new Schema({
     promotionStartDate: {
         type: Date
     },
-    view: {
-        type: Number
-    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', courseSchema)

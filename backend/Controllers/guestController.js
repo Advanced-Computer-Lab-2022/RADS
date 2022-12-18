@@ -33,34 +33,17 @@ const SignUp = async (req, res) => {
                                             errors.userName = "This username already exists";
                                             res.status(404).json(errors);
                                         } else {
-                                            if (req.body.role === "INSTRUCTOR") {
-                                                Instructor.findOne({ email: req.body.email }).then(async (exist) => {
-                                                    if (exist) {
-                                                        errors.email = "This email already exists";
-                                                        res.status(404).json(errors);
-                                                    } else {
-                                                        const hash = bcrypt.hashSync(req.body.password, 10);
-                                                        req.body.password = hash;
-                                                        await Instructor.create(req.body);
-                                                        res.status(200).json({ message: "success" });
-                                                    }
-                                                });
-                                            } else if (req.body.role === "TRAINEE") {
-                                                Trainee.findOne({ email: req.body.email }).then(async (exist) => {
-                                                    if (exist) {
-                                                        errors.email = "This email already exists";
-                                                        res.status(404).json(errors);
-                                                    } else {
-                                                        const hash = bcrypt.hashSync(req.body.password, 10);
-                                                        req.body.password = hash;
-                                                        await Trainee.create(req.body);
-                                                        res.status(200).json({ message: "success" });
-                                                    }
-                                                });
-                                            } else {
-                                                errors.role = "You can not sign up as this role";
-                                                res.status(404).json(errors);
-                                            }
+                                            Trainee.findOne({ email: req.body.email }).then(async (exist) => {
+                                                if (exist) {
+                                                    errors.email = "This email already exists";
+                                                    res.status(404).json(errors);
+                                                } else {
+                                                    const hash = bcrypt.hashSync(req.body.password, 10);
+                                                    req.body.password = hash;
+                                                    await Trainee.create(req.body);
+                                                    res.status(200).json({ message: "success" });
+                                                }
+                                            });
                                         }
                                     });
                                 }

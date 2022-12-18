@@ -1,7 +1,7 @@
-// import axios from 'axios';
-import { useState,useEffect } from 'react';
+import { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const CourseView =(props)=>{
+const TraineeViewCourse = (props) =>{
     const{
         rateVal,
         currencyVal
@@ -12,20 +12,18 @@ const CourseView =(props)=>{
     const [instructorName,setinstructorName] = useState([]);
 
            
-
-
-    useEffect(()=>{
-        const fetchCourse = async () => {
-            const response = await fetch(`/course/${courseId}`);
-            const json = await response.json();
-            if(response.ok){
-                setCourse(json);
-                fetchInstructor(json.instructor); 
-            }
+useEffect(()=>{
+    const fetchCourse = async () => {
+        const response = await fetch(`/course/${courseId}`);
+        const json = await response.json();
+        if(response.ok){
+            setCourse(json);
+            fetchInstructor(json.instructor); 
         }
-        fetchCourse();
-    }, [])
-    
+    }
+    fetchCourse();
+}, [])
+
 const fetchInstructor = async (instID) => {
     const response = await fetch(`/instructor/${instID}`);
     const json = await response.json();
@@ -34,21 +32,22 @@ const fetchInstructor = async (instID) => {
     }
 }
 
-
 return(
     <div>
           <h4>The information of course: {course.courseTitle} </h4>
-          <iframe width="600" height="315" title="Course preview" src={course.coursePreview} frameBorder="0" allowFullScreen></iframe> 
           <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle)=>(
                 <div>
                 <p>{subtitle.subTitle}</p>
+                <p><strong>Price: </strong>{course.price}</p>
                 <p>Description:{subtitle.description}</p>
                 <p>Total Hours of the Chapter: {subtitle.hours}</p>
+                <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe> 
                 </div>
              ))}</div>
-            <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
+            <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
+            <p><strong>Subject of the course: </strong>{course.subject}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
-            <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
+            <p><strong>Rating of the course: </strong>{course.courseRating} Out of 5</p>
             <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise)=>(
                 <div>
                 <p>Question: {exercise.question}</p>
@@ -60,4 +59,5 @@ return(
 }
 
 
-export default CourseView;
+
+export default TraineeViewCourse;

@@ -138,20 +138,6 @@ export default function SignUp() {
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12}>
-                                <FormControl>
-                                   <FormLabel id="role-radio">You're registering as:</FormLabel>
-                                    <RadioGroup
-                                        row
-                                        aria-labelledby="role-radio"
-                                        defaultValue="TRAINEE"
-                                        name="role"
-                                   >
-                                        <FormControlLabel control={<Radio value="TRAINEE" color="primary" />} label="Trainee" />
-                                        <FormControlLabel control={<Radio value="INSTRUCTOR" color="primary" />} label="Instructor" />
-                                   </RadioGroup>
-                                </FormControl>
-                            </Grid>
                         </Grid>
                         <Button
                             component={NavLink} to="/contract"

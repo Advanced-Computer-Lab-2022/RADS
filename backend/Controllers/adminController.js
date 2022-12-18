@@ -35,17 +35,14 @@ const postInstructor = async(req, res) => {
     }
 }
 const postCTrainee = async(req, res) => {
-    const { firstName, lastName, gender, country, phoneNumber, address, email } = req.body;
+    const { firstName, lastName, country, phoneNumber, address } = req.body;
     try {
         const corpTrainee = await CorpTrainee.create({
             firstName,
             lastName,
-            gender,
             country,
             phoneNumber,
             address,
-            email,
-            courses: [],
             userName: req.body.firstName + req.body.lastName,
             password: randomstring.generate(7)
         });

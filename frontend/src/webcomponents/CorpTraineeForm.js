@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react"
-import Link from '@mui/material/Link';
-
 
 const CorpTraineeForm = (props) => {
     const{
@@ -8,53 +6,71 @@ const CorpTraineeForm = (props) => {
         currencyVal
     } = props;
     const params = new URLSearchParams(window.location.search);
-    const corpTraineeId = params.get('corpTraineeId');
+    const corptraineeId = params.get('corptraineeId');
     const [courses,setCourses] = useState([]);
-    const [coursesIds,setCoursesIds] = useState([]);
-    
+
 
     useEffect(()=>{
         const viewRegistered = async () => {
-            const response = await fetch(`/corptrainee/${corpTraineeId}`);
+            const response = await fetch(`/corptrainee/${corptraineeId}`);
             const json = await response.json();
             console.log(json.courses);
             if(response.ok){
-                fetchCourses(json.courses);
-                console.log(json.courses);
-                setCoursesIds(json.courses)
+                fetchCourse(json.courses);
             }
         }
         viewRegistered();
     }, [])
 
-    const fetchCourses = async (ids) => {
-        let courseIds = {ids};
-        const response = await fetch(`/course/subset`,{
-            method:'POST',
-            body: JSON.stringify(courseIds),
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
+
+    const fetchCourse = async (coursesIDs) => {
+        let x = [coursesIDs.length];
+        console.log(coursesIDs);
+        for(let i = 0;i<coursesIDs.length;i++){
+        const response = await fetch(`/course/${coursesIDs[i].courseId}`);
         const json = await response.json();
         if(response.ok){
-            setCourses(json);
+            x[i] = json;
         }
     }
+    setCourses(x);
+    }
+
+    // const fetchExcercises = async (exerciseIDs) => {
+    //     let x = [exerciseIDs.length];
+    //     console.log(exerciseIDs);
+    //     for(let i = 0;i<exerciseIDs.length;i++){
+    //     const response = await fetch(`/course/${exerciseIDs[i].exerciseIDs}`);
+    //     const json = await response.json();
+    //     if(response.ok){
+    //         x[i] = json;
+    //     }
+    // }
+    // setCourses(x);
+    // }
     
 return(
-   <div>
-     {courses.length === 0 ?( <p><strong><bold>{`You dont have access to any Course.`}</bold></strong></p>) : (       
-        <div>
-        {courses && courses.map((course)=>(
+    <div>
+         {courses && courses.map((course)=>(
           <div key = {course._id}>
-             <Link onClick={() => window.location.href = `/corptraineecourse?courseId=${course._id}&corpTraineeId=${corpTraineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5</Link>
-         </div>
+          <h4>The information of course: {course.courseTitle} </h4>
+          <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle)=>(
+                <div>
+                <p>{subtitle.subTitle}</p>
+                <p>Description:{subtitle.description}</p>
+                <p>Total Hours of the Chapter: {subtitle.hours}</p>
+                <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe> 
+                </div>
+             ))}</div>
+            <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
+            <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
+            <p><strong>Subject of the course: </strong>{course.subject}</p>
+            <button onClick={() => window.location.href=`/corprating?corptraineeId=${corptraineeId}&courseId=${course._id}`}>Rate Course</button>
+            <button onClick={() => window.location.href=`/corptraineesolve?corptraineeId=${corptraineeId}&courseId=${course._id}`}>Solve Exercises</button>
+            <p><strong>============================================================================================================</strong></p>
+                </div>
              ))}
-             </div>
-             )}   
-       </div>   
+    </div>
 )
 }
 

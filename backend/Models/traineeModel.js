@@ -7,25 +7,8 @@ const courseSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'courseModel',
     },
-    exercisesGrade: {
-        type: Number,
-        default: 0
-    },
-    solvedExercises: {
-        type: Boolean,
-        default: false
-    },
-    examGrade: {
-        type: Number,
-        default: 0
-    },
-    courseProgress: {
-        type: Number,
-        default: 0
-    },
-    solvedExam: {
-        type: Boolean,
-        default: false
+    courseGrade: {
+        type: Number
     }
 })
 
@@ -87,12 +70,9 @@ const traineeSchema = new Schema({
     creditCards: {
         type: [creditCardSchema]
     },
-    balance: {
-        type: Number
-    },
     role: {
         type: String,
-
+        required: true
     }
 }, { timestamps: true })
 

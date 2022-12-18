@@ -1,6 +1,5 @@
 // import axios from 'axios';
 import { useState,useEffect } from 'react';
-import Link from '@mui/material/Link';
 
 const TraineeForm =(props)=>{
     const{
@@ -49,8 +48,21 @@ return(
         <div>
         {courses && courses.map((course)=>(
           <div key = {course._id}>
-             <Link onClick={() => window.location.href = `/traineecourse?courseId=${course._id}&traineeId=${traineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5</Link>
-             
+          <h4>The information of course: {course.courseTitle} </h4>
+          <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle)=>(
+                <div>
+                <p>{subtitle.subTitle}</p>
+                <p>Description:{subtitle.description}</p>
+                <p>Total Hours of the Chapter: {subtitle.hours}</p>
+                <iframe width="600" height="315" title="Video Summary" src={subtitle.videoLink} frameBorder="0" allowFullScreen></iframe> 
+                </div>
+             ))}</div>
+            <p><strong>Price: </strong>{course.price*rateVal}{" "}{currencyVal}</p>
+            <p><strong>Short Summary about the Course: </strong>{course.shortSummary}</p>
+            <p><strong>Subject of the course: </strong>{course.subject}</p>
+            <button onClick={() => window.location.href=`/traineerate?traineeId=${traineeId}&courseId=${course._id}`}>Rate Course</button>
+            <button onClick={() => window.location.href=`/traineesolve?traineeId=${traineeId}&courseId=${course._id}`}>Solve Exercises</button>
+            <p><strong>============================================================================================================</strong></p>
                 </div>
              ))}
              </div>

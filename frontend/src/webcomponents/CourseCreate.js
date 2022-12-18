@@ -1,53 +1,50 @@
 import { useState } from "react"
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 
 const CourseCreate = (props) => {
-    const [courseTitle, setCourseTitle] = useState('');
-    const [subtitles, setSubtitles] = useState([{ subTitle: "", description: "", videoLink: "", hours: "" }]);
-    const [price, setPrice] = useState('');
-    const [shortSummary, setShortSummary] = useState('');
-    const [subject, setSubject] = useState('');
-    const [totalHours, setTotalHours] = useState('');
-    const [instructor, setInstructor] = useState('');
-    const [courseExercises, setCourseExercises] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
-    const [exam, setExam] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}]);
-    const [coursePreview, setCoursePreview] = useState('');
-    const [error, setError] = useState(null);
-    const {
+    const [courseTitle,setCourseTitle] = useState('');
+    const [subtitles,setSubtitles] = useState([{subTitle:"",description:"",videoLink:"",hours:""}]);
+    const [price,setPrice] = useState('');
+    const [shortSummary,setShortSummary] = useState('');
+    const [subject,setSubject] = useState('');
+    const [totalHours,setTotalHours] = useState('');
+    const [instructor,setInstructor] = useState('');
+    const [courseExercises,setCourseExercises] = useState([{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}]);
+    const [coursePreview,setCoursePreview] = useState('');
+    const [error,setError] = useState(null);
+    const{
         rateVal,
         currencyVal
     } = props;
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission   
-        const course = { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, exam, coursePreview };
-        const response = await fetch('/course/add', {
-            method: 'POST',
+        console.log(courseExercises);
+        const course = {courseTitle,subtitles,price,shortSummary,subject,totalHours,instructor,courseExercises,coursePreview};
+        console.log(course.courseExercises);
+        console.log(course);
+        const response = await fetch('/course/add',{
+            method:'POST',
             body: JSON.stringify(course),
-            headers: {
+            headers:{
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
             }
         })
+        
         const json = await response.json();
 
-        if (!response.ok) {
+        if(!response.ok){
             setError(json.error);
         }
-        if (response.ok) {
+        if(response.ok){    
             setCourseTitle('');
-            setSubtitles([{ subTitle: "", description: "", videoLink: "", hours: "" }]);
+            setSubtitles([{subTitle:"",description:"",videoLink:"",hours:""}]);
             setPrice('');
             setShortSummary('');
             setSubject('');
             setTotalHours('');
             setInstructor('');
-            setCourseExercises([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}]);
-            setExam([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}]);
+            setCourseExercises([{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}]);
             setCoursePreview('');
             setError(null);
             console.log("New Course Added", json);
@@ -55,302 +52,206 @@ const CourseCreate = (props) => {
         }
     }
 
-    const handleSubtitleAdd = () => {
-        setSubtitles([...subtitles, { subTitle: "", description: "", videoLink: "", hours: "" }])
+    const handleSubtitleAdd = () =>{
+        setSubtitles([...subtitles,{subTitle:"",description:"",videoLink:"",hours:""}])
     }
-    const setCourseSubTitle = (e, index) => {
-        const { name, value } = e.target;
+    const setCourseSubTitle  = (e,index) =>{
+        const {name,value} = e.target;
         console.log(e.target);
         const list = [...subtitles];
         list[index][name] = value;
         setSubtitles(list);
     }
-    const setCourseSubDesc = (e, index) => {
-        const { name, value } = e.target;
+    const setCourseSubDesc  = (e,index) =>{
+        const {name,value} = e.target;
         console.log(e.target);
         const list = [...subtitles];
         list[index][name] = value;
         setSubtitles(list);
     }
-    const setVidLink = (e, index) => {
-        const { name, value } = e.target;
+    const setVidLink  = (e,index) =>{
+        const {name,value} = e.target;
         console.log(e.target);
         const list = [...subtitles];
         list[index][name] = value;
         setSubtitles(list);
     }
-    const setSubHours = (e, index) => {
-        const { name, value } = e.target;
+    const setSubHours  = (e,index) =>{
+        const {name,value} = e.target;
         console.log(e.target);
         const list = [...subtitles];
         list[index][name] = value;
         setSubtitles(list);
     }
-  
 
-    const handleExerciseAdd = () => {
-        setCourseExercises([...courseExercises, { question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}])
-    }
-    const setQuestion = (e, index2) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...courseExercises];
-        list[index2][name] = value;
-        setCourseExercises(list);
-    }
-    const setFirstChoice = (e, index2) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...courseExercises];
-        list[index2][name] = value;
-        setCourseExercises(list);
-    }
-    const setSecondChoice = (e, index2) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...courseExercises];
-        list[index2][name] = value;
-        setCourseExercises(list);
-    }
-    const setThirdChoice = (e, index2) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...courseExercises];
-        list[index2][name] = value;
-        setCourseExercises(list);
-    }
 
-    const setFourthChoice = (e, index2) => {
-        const { name, value } = e.target;
+    const handleExerciseAdd = () =>{
+        setCourseExercises([...courseExercises,{question:"",firstChoice:"",secondChoice:"",thirdChoice:"",fourthChoice:"",answer:""}])
+    }
+    const setQuestion  = (e,index2) =>{
+        const {name,value} = e.target;
+        console.log(e.target);
+        const list = [...courseExercises];
+        list[index2][name] = value;
+        setCourseExercises(list);
+    }
+    const setFirstChoice  = (e,index2) =>{
+        const {name,value} = e.target;
+        console.log(e.target);
+        const list = [...courseExercises];
+        list[index2][name] = value;
+        setCourseExercises(list);
+    }
+    const setSecondChoice  = (e,index2) =>{
+        const {name,value} = e.target;
+        console.log(e.target);
+        const list = [...courseExercises];
+        list[index2][name] = value;
+        setCourseExercises(list);
+    }
+    const setThirdChoice  = (e,index2) =>{
+        const {name,value} = e.target;
         console.log(e.target);
         const list = [...courseExercises];
         list[index2][name] = value;
         setCourseExercises(list);
     }
 
-    const setAnswer = (e, index2) => {
-        const { name, value } = e.target;
+    const setFourthChoice  = (e,index2) =>{
+        const {name,value} = e.target;
         console.log(e.target);
         const list = [...courseExercises];
         list[index2][name] = value;
         setCourseExercises(list);
     }
 
-    const handleExamExerciseAdd = () => {
-        setExam([...exam, { question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}])
-    }
-    const setEQuestion = (e, index3) => {
-        const { name, value } = e.target;
+    const setAnswer  = (e,index2) =>{
+        const {name,value} = e.target;
         console.log(e.target);
-        const list = [...exam];
-        list[index3][name] = value;
-        setExam(list);
+        const list = [...courseExercises];
+        list[index2][name] = value;
+        setCourseExercises(list);
     }
-    const setEFirstChoice = (e, index3) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...exam];
-        list[index3][name] = value;
-        setExam(list);
-    }
-    const setESecondChoice = (e, index3) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...exam];
-        list[index3][name] = value;
-        setExam(list);
-    }
-    const setEThirdChoice = (e, index3) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...exam];
-        list[index3][name] = value;
-        setExam(list);
-    }
-
-    const setEFourthChoice = (e, index3) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...exam];
-        list[index3][name] = value;
-        setExam(list);
-    }
-
-    const setEAnswer = (e, index3) => {
-        const { name, value } = e.target;
-        console.log(e.target);
-        const list = [...exam];
-        list[index3][name] = value;
-        setExam(list);
-    }
-
    
     return (
         <div>
-            <form className="create-course" onSubmit={handleSubmit}>
-                <h3>Insert Course Information</h3>
+        <form className="create-course" onSubmit={handleSubmit}>
+            <h3>Insert Course Information</h3>
+           
+            <label>Course Title:</label>
+            <input type="text" onChange={(e) => setCourseTitle(e.target.value)}
+            value= {courseTitle}
+            />
 
-                <label>Course Title:</label>
-                <input type="text" onChange={(e) => setCourseTitle(e.target.value)}
-                    value={courseTitle}
-                />
+            <label>Course Preview Video Link: </label>
+            <input type="text" onChange={(e) => setCoursePreview(e.target.value)}
+            value= {coursePreview}
+            />
 
-                <label>Course Preview Video Link: </label>
-                <input type="text" onChange={(e) => setCoursePreview(e.target.value)}
-                    value={coursePreview}
-                />
+            <label>Price: </label>
+            <input type="number" onChange={(e) => setPrice(e.target.value)}
+            value= {price}
+            />
 
-                <label>Price: </label>
-                <input type="number" onChange={(e) => setPrice(e.target.value)}
-                    value={price}
-                />
+            <label>Short summary about the course: </label>
+            <input type="text" onChange={(e) => setShortSummary(e.target.value)}
+            value= {shortSummary}
+            />
 
-                <label>Short summary about the course: </label>
-                <input type="text" onChange={(e) => setShortSummary(e.target.value)}
-                    value={shortSummary}
-                />
+            <label>Subject of the course: </label>
+            <input type="text" onChange={(e) => setSubject(e.target.value)}
+            value= {subject}
+            />
 
-                <label>Subject of the course: </label>
-                <input type="text" onChange={(e) => setSubject(e.target.value)}
-                    value={subject}
-                />
+            <label>Total Hours of the course: </label>
+            <input type="number" onChange={(e) => setTotalHours(e.target.value)}
+            value= {totalHours}
+            />
 
-                <label>Total Hours of the course: </label>
-                <input type="number" onChange={(e) => setTotalHours(e.target.value)}
-                    value={totalHours}
-                />
+            <label>Instructor of the course: </label>
+            <input type="text" onChange={(e) => setInstructor(e.target.value)}
+            value= {instructor}
+            />           
+            <br></br>
 
-                <label>Instructor of the course: </label>
-                <input type="text" onChange={(e) => setInstructor(e.target.value)}
-                    value={instructor}
-                />
-                <br></br>
+            <div>
+           <label>Subtitles: </label>
+             {subtitles.map((subtitle,index)=>(
+                <div key ={index} className="subtitles">
+                <div className="add-subtitle">
+            <label>Title :</label>
+            <input name="subTitle" type="text" onChange={(e) => setCourseSubTitle(e,index)}
+            value= {subtitle.subTitle}
+            />
 
-                <div>
-                    <label>Subtitles: </label>
-                    {subtitles.map((subtitle, index) => (
-                        <div key={index} className="subtitles">
-                            <div className="add-subtitle">
-                                <label>Title :</label>
-                                <input name="subTitle" type="text" onChange={(e) => setCourseSubTitle(e, index)}
-                                    value={subtitle.subTitle}
-                                />
+            <label>Description: </label>
+            <input name="description" type="text" onChange={(e) => setCourseSubDesc(e,index)}
+            value= {subtitle.description}
+            />
 
-                                <label>Description: </label>
-                                <input name="description" type="text" onChange={(e) => setCourseSubDesc(e, index)}
-                                    value={subtitle.description}
-                                />
+            <label>Video Link: </label>
+            <input name = "videoLink" type="text" onChange={(e) => setVidLink(e,index)}
+            value= {subtitle.videoLink}
+            />
 
-                                <label>Video Link: </label>
-                                <input name="videoLink" type="text" onChange={(e) => setVidLink(e, index)}
-                                    value={subtitle.videoLink}
-                                />
-
-                                <           label>Subtitle hours: </label>
-                                <input name="hours" type="number" onChange={(e) => setSubHours(e, index)}
-                                    value={subtitle.hours}
-                                />
-                                {subtitles.length - 1 === index &&
-                                    (<button type="button" className="add-btn" onClick={handleSubtitleAdd}><span>Add a Subtitle</span></button>)}
-                            </div>
-                        </div>
-                    ))}
-                    <br></br>
+<           label>Subtitle hours: </label>
+            <input name="hours" type="number" onChange={(e) => setSubHours(e,index)}
+            value= {subtitle.hours}
+            />                
+            {subtitles.length-1 === index &&  
+            (<button type="button" className="add-btn" onClick={handleSubtitleAdd}><span>Add a Subtitle</span></button>)}
+                  </div>
                 </div>
+             ))}
+             <br></br>
+             </div>
 
 
-                <div>
-                    <label>Subtitle Exercises: </label>
-                    {courseExercises.map((exercise, index2) => (
-                        <div key={index2} className="exercises">
-                            <div className="add-exercise">
-                                <label>Question :</label>
-                                <input name="question" type="text" onChange={(e) => setQuestion(e, index2)}
-                                    value={exercise.question}
-                                />
+             <div>
+            <label>Exercises: </label>
+             {courseExercises.map((exercise,index2)=>(
+                <div key ={index2} className="exercises">
+                <div className="add-exercise">
+            <label>Question :</label>
+            <input name="question" type="text" onChange={(e) => setQuestion(e,index2)}
+            value= {exercise.question}
+            />
 
-                                <label>First Choice: </label>
-                                <input name="firstChoice" type="text" onChange={(e) => setFirstChoice(e, index2)}
-                                    value={exercise.firstChoice}
-                                />
+            <label>First Choice: </label>
+            <input name="firstChoice" type="text" onChange={(e) => setFirstChoice(e,index2)}
+            value= {exercise.firstChoice}
+            />
 
-                                <label>Second Choice: </label>
-                                <input name="secondChoice" type="text" onChange={(e) => setSecondChoice(e, index2)}
-                                    value={exercise.secondChoice}
-                                />
+            <label>Second Choice: </label>
+            <input name = "secondChoice" type="text" onChange={(e) => setSecondChoice(e,index2)}
+            value= {exercise.secondChoice}
+            />  
 
-                                <label>Third Choice: </label>
-                                <input name="thirdChoice" type="text" onChange={(e) => setThirdChoice(e, index2)}
-                                    value={exercise.thirdChoice}
-                                />
+            <label>Third Choice: </label>
+            <input name = "thirdChoice" type="text" onChange={(e) => setThirdChoice(e,index2)}
+            value= {exercise.thirdChoice}
+            />
 
-                                <label>Fourth Choice: </label>
-                                <input name="fourthChoice" type="text" onChange={(e) => setFourthChoice(e, index2)}
-                                    value={exercise.fourthChoice}
-                                />
+            <label>Fourth Choice: </label>
+            <input name = "fourthChoice" type="text" onChange={(e) => setFourthChoice(e,index2)}
+            value= {exercise.fourthChoice}
+            />
 
-                                <label>Answer: </label>
-                                <input name="answer" type="text" onChange={(e) => setAnswer(e, index2)}
-                                    value={exercise.answer}
-                                />
-
-
-                                {courseExercises.length - 1 === index2 &&
-                                    (<button type="button" className="add-btn" onClick={handleExerciseAdd}><span>Add an Exercise</span></button>)}
-                            </div>
-                        </div>
-                    ))}
+            <label>Answer: </label>
+            <input name = "answer" type="text" onChange={(e) => setAnswer(e,index2)}
+            value= {exercise.answer}
+            />
+            {courseExercises.length-1 === index2 &&  
+            (<button type="button" className="add-btn" onClick={handleExerciseAdd}><span>Add an Exercise</span></button>)}
+                  </div>
                 </div>
+             ))}
+             </div>
+            <button>Submit</button>
+            {error && <div className="error">{error}</div>}
+        </form>
 
-
-
-                <div>
-                    <label>Exam Exercises: </label>
-                    {exam.map((exercise, index3) => (
-                        <div key={index3} className="exam=exercises">
-                            <div className="add-exercise">
-                                <label>Question :</label>
-                                <input name="question" type="text" onChange={(e) => setEQuestion(e, index3)}
-                                    value={exercise.question}
-                                />
-
-                                <label>First Choice: </label>
-                                <input name="firstChoice" type="text" onChange={(e) => setEFirstChoice(e, index3)}
-                                    value={exercise.firstChoice}
-                                />
-
-                                <label>Second Choice: </label>
-                                <input name="secondChoice" type="text" onChange={(e) => setESecondChoice(e, index3)}
-                                    value={exercise.secondChoice}
-                                />
-
-                                <label>Third Choice: </label>
-                                <input name="thirdChoice" type="text" onChange={(e) => setEThirdChoice(e, index3)}
-                                    value={exercise.thirdChoice}
-                                />
-
-                                <label>Fourth Choice: </label>
-                                <input name="fourthChoice" type="text" onChange={(e) => setEFourthChoice(e, index3)}
-                                    value={exercise.fourthChoice}
-                                />
-
-                                <label>Answer: </label>
-                                <input name="answer" type="text" onChange={(e) => setEAnswer(e, index3)}
-                                    value={exercise.answer}
-                                />
-
-
-                                {exam.length - 1 === index3 &&
-                                    (<button type="button" className="add-btn" onClick={handleExamExerciseAdd}><span>Add an Exercise</span></button>)}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <button>Submit</button>
-                {error && <div className="error">{error}</div>}
-            </form>
-
-            <p> <strong>____________________________________________________________________________________________</strong></p>
+        <p> <strong>____________________________________________________________________________________________</strong></p>
         </div>
     )
 }

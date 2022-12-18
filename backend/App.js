@@ -28,7 +28,6 @@ const courseRoute = require('./Routes/Course');
 const adminRoute = require('./Routes/Admin');
 const corpTraineeRoute = require('./Routes/corpTrainee');
 const traineeRoute = require('./Routes/Trainee');
-const reportRoute = require('./Routes/Report');
 
 
 // Using Routes
@@ -38,7 +37,6 @@ app.use('/course', courseRoute);
 app.use('/admin', adminRoute);
 app.use('/corptrainee', corpTraineeRoute);
 app.use('/trainee', traineeRoute);
-app.use('/report', reportRoute);
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -51,14 +49,14 @@ require('./Security/Passport')(passport);
 mongoose.connect(MongoURI)
     .then(() => {
         console.log("MongoDB is now connected!")
-            // Starting server
+        // Starting server
         app.listen(port, () => {
             console.log(`Listening to requests on http://localhost:${port}`);
         })
     })
     .catch(err => console.log(err));
 
-app.get("/", async(req, res) => {
+app.get("/", async (req, res) => {
     res.status(200).send("You're good to go!");
 });
 

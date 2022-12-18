@@ -1,31 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const exerciseSchema = mongoose.Schema({
+    excerciseId: {
+        type: Number
+    },
+    grade: {
+        type: Number
+    }
+});
 
 const courseSchema = new Schema({
     courseId: {
         type: mongoose.Types.ObjectId,
         ref: 'courseModel',
     },
-    exercisesGrade: {
-        type: Number,
-        default: 0
-    },
-    solvedExercises: {
-        type: Boolean,
-        default: false
-    },
-    examGrade: {
-        type: Number,
-        default: 0
-    },
-    courseProgress: {
-        type: Number,
-        default: 0
-    },
-    solvedExam: {
-        type: Boolean,
-        default: false
+    exerciseGrades: {
+        type: [exerciseSchema]
     }
 })
 
@@ -57,10 +48,6 @@ const corpTraineeSchema = new Schema({
     },
     address: {
         type: String,
-    },
-    email: {
-        type: String,
-        required: true
     },
     courses: {
         type: [courseSchema]
