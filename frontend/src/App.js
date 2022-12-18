@@ -48,7 +48,7 @@ function App() {
   //////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////
   // CONTROL THE STATE AND ROLE OF USER FROM HERE!///////////////
-  const user = { role: "INSTRUCTOR", isConnected: false };////////
+  const user = { role: "INSTRUCTOR", isConnected: true };////////
   //////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////
 
@@ -222,12 +222,18 @@ function App() {
               <Route
                 path="/"
                 element={
-                    <Home rateVal={rateValue} currencyVal={inputValue} /> }
+                  <PrivateRouter user={user}>
+                    <SignUp rateVal={rateValue} currencyVal={inputValue} />
+                  </PrivateRouter>
+                }
               />
               <Route
                 path="/home"
                 element={
-                    <Home rateVal={rateValue} currencyVal={inputValue} /> }
+                  <PrivateRouter user={user}>
+                    <Home rateVal={rateValue} currencyVal={inputValue} />
+                  </PrivateRouter>
+                }
               />
               <Route
                 path="/login"

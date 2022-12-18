@@ -5,7 +5,7 @@ const AdminRouter = ({user, children}) =>{
    if(!user.isConnected){
      return <Navigate to="/login" replace/> 
    }else{
-      if(user.role !== "INSTRUCTOR"){
+      if(user.role !== "INSTRUCTOR" && user.role !== "ADMIN"){
         return <Navigate to="/noaccess" replace/> 
       }
    }
