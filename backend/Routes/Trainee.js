@@ -58,18 +58,65 @@ router.post('/checkregister/:id',
 passport.authenticate('jwt', { session: false }),
 inRole(ROLES.TRAINEE),
 checkRegistered);
-router.post('/updatebalance/:id', updateTraineeBalance);
-router.post('/updateprogress/:id', updateCourseProgress);
-router.post('/courseprogress/:id', checkCourseProgress);
-router.post('/updateexamstatus/:id', updateSolvedExam);
-router.post('/updateexamgrade/:id', updateExamGrade);
-router.post('/updateexercisesgrade/:id', updateExercisesGrade);
-router.post('/updateexercisesstatus/:id', updateSolvedExercises);
-router.post('/refund/:id', refundCourse);
-router.post('/checkstatus/:id', checkSolvingStatus);
-router.post('/checkexstatus/:id', checkExercisesSolvingStatus);
-router.post('/findcreditcard/:id', findCreditCard);
-router.post('/deletecard/:id', deleteCreditCard);
 
+router.post('/updatebalance/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+updateTraineeBalance);
+
+router.post('/updateprogress/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+updateCourseProgress);
+
+router.post('/courseprogress/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+checkCourseProgress);
+
+router.post('/updateexamstatus/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+updateSolvedExam);
+
+router.post('/updateexamgrade/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+updateExamGrade);
+
+router.post('/updateexercisesgrade/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+updateExercisesGrade);
+
+router.post('/updateexercisesstatus/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+updateSolvedExercises);
+
+router.post('/refund/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+refundCourse);
+
+router.post('/checkstatus/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+checkSolvingStatus);
+
+router.post('/checkexstatus/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+checkExercisesSolvingStatus);
+
+router.post('/findcreditcard/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+findCreditCard);
+
+router.post('/deletecard/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.TRAINEE),
+deleteCreditCard);
 
 module.exports = router;

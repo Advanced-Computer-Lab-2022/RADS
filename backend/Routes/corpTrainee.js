@@ -34,22 +34,59 @@ passport.authenticate('jwt', { session: false }),
 inRole(ROLES.CORP_TRAINEE),
 postGrade);
 
-router.get('/', getCTrainees);
-router.get('/:id', getCTrainee);
-router.get('/getcourses/:id', getCTraineeCourses);
-router.patch('/password/:id', updatePassword);
-router.post('/register/:id', postCourseRegister);
-router.post('/login', login);
-router.get('/logout', logout);
-router.post('/checkaccess/:id', checkHaveAccess);
-router.post('/courseprogress/:id', checkCourseProgress);
-router.post('/findgrade/:id', findExercisesGrade);
-router.post('/findtestgrade/:id', findExamGrade);
-router.post('/checkexstatus/:id', checkExercisesSolvingStatus);
-router.post('/checkstatus/:id', checkSolvingStatus);
-router.post('/updateexamgrade/:id', updateExamGrade);
-router.post('/updateexercisesgrade/:id', updateExercisesGrade);
-router.post('/updateexercisesstatus/:id', updateSolvedExercises);
-router.post('/updateprogress/:id', updateCourseProgress);
-router.post('/updateexamstatus/:id', updateSolvedExam);
+router.post('/checkaccess/:id', 
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+checkHaveAccess);
+
+router.post('/courseprogress/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+checkCourseProgress);
+
+router.post('/findgrade/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+findExercisesGrade);
+
+router.post('/findtestgrade/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+findExamGrade);
+
+router.post('/checkexstatus/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+checkExercisesSolvingStatus);
+
+router.post('/checkstatus/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+checkSolvingStatus);
+
+router.post('/updateexamgrade/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+updateExamGrade);
+
+router.post('/updateexercisesgrade/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+updateExercisesGrade);
+
+router.post('/updateexercisesstatus/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+updateSolvedExercises);
+
+router.post('/updateprogress/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+updateCourseProgress);
+
+router.post('/updateexamstatus/:id',
+passport.authenticate('jwt', { session: false }),
+inRole(ROLES.CORP_TRAINEE),
+updateSolvedExam);
+
 module.exports = router;
