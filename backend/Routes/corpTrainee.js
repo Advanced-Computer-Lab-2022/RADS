@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.CORP_TRAINEE),
+    inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
     getCTrainees);
 
 router.get('/:id',
