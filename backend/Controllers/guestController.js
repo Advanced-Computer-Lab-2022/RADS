@@ -28,34 +28,24 @@ const SignUp = async (req, res) => {
                                     errors.userName = "This username already exists";
                                     res.status(404).json(errors);
                                 } else {
-                                    if (req.body.role === "INSTRUCTOR") {
-                                        Instructor.findOne({ email: req.body.email }).then(async (exist) => {
-                                            if (exist) {
-                                                errors.email = "This email already exists";
-                                                res.status(404).json(errors);
-                                            } else {
-                                                const hash = bcrypt.hashSync(req.body.password, 10);
-                                                req.body.password = hash;
-                                                await Instructor.create(req.body);
-                                                res.status(200).json({ message: "success" });
-                                            }
-                                        });
-                                    } else if (req.body.role === "TRAINEE") {
-                                        Trainee.findOne({ email: req.body.email }).then(async (exist) => {
-                                            if (exist) {
-                                                errors.email = "This email already exists";
-                                                res.status(404).json(errors);
-                                            } else {
-                                                const hash = bcrypt.hashSync(req.body.password, 10);
-                                                req.body.password = hash;
-                                                await Trainee.create(req.body);
-                                                res.status(200).json({ message: "success" });
-                                            }
-                                        });
-                                    } else {
-                                        errors.role = "You can not sign up as this role";
-                                        res.status(404).json(errors);
-                                    }
+                                    Admin.findOne({ userName: req.body.userName }).then(async (exist) => {
+                                        if (exist) {
+                                            errors.userName = "This username already exists";
+                                            res.status(404).json(errors);
+                                        } else {
+                                            Trainee.findOne({ email: req.body.email }).then(async (exist) => {
+                                                if (exist) {
+                                                    errors.email = "This email already exists";
+                                                    res.status(404).json(errors);
+                                                } else {
+                                                    const hash = bcrypt.hashSync(req.body.password, 10);
+                                                    req.body.password = hash;
+                                                    await Trainee.create(req.body);
+                                                    res.status(200).json({ message: "success" });
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -102,11 +92,11 @@ const Login = async (req, res) => {
                                                                             userName: user.userName,
                                                                             email: user.email,
                                                                             role: user.role
-                                                                        }, process.env.PRIVATE_KEY, { expiresIn: '3d' });
+                                                                        }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                                                         res.status(200).json({
                                                                             message: "success",
                                                                             user,
-                                                                            token: "Bearer " + token
+                                                                            token: "Bearer " + token,
                                                                         })
                                                                     }
                                                                 })
@@ -126,7 +116,7 @@ const Login = async (req, res) => {
                                                                 userName: user.userName,
                                                                 email: user.email,
                                                                 role: user.role
-                                                            }, process.env.PRIVATE_KEY, { expiresIn: '3d' });
+                                                            }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                                             res.status(200).json({
                                                                 message: "success",
                                                                 user,
@@ -150,7 +140,7 @@ const Login = async (req, res) => {
                                                     userName: user.userName,
                                                     email: user.email,
                                                     role: user.role
-                                                }, process.env.PRIVATE_KEY, { expiresIn: '3d' });
+                                                }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                                 res.status(200).json({
                                                     message: "success",
                                                     user,
@@ -174,7 +164,7 @@ const Login = async (req, res) => {
                                         userName: user.userName,
                                         email: user.email,
                                         role: user.role
-                                    }, process.env.PRIVATE_KEY, { expiresIn: '3d' });
+                                    }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                     res.status(200).json({
                                         message: "success",
                                         user,
@@ -190,17 +180,7 @@ const Login = async (req, res) => {
     }
 }
 
-const Test = (req, res) => {
-    res.send("welcome user")
-}
-
-// const Admin = (req, res) => {
-//     res.send("welcome admin")
-// }
-
 module.exports = {
     SignUp,
-    Login,
-    Test,
-    Admin
+    Login
 };

@@ -92,7 +92,7 @@ const traineeSchema = new Schema({
     },
     role: {
         type: String,
-
+        required: true
     }
 }, { timestamps: true })
 

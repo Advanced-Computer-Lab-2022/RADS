@@ -19,6 +19,7 @@ const getCTrainee = async(req, res) => {
     }
     res.status(200).json(corpTrainee);
 }
+
 const updatePassword = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -32,28 +33,8 @@ const updatePassword = async(req, res) => {
     }
     res.status(200).json(corpTrainee);
 }
-const maxAge = 3 * 24 * 60 * 60;
-const createToken = (userName) => {
-    return jwt.sign({ userName }, 'supersecret', {
-        expiresIn: maxAge
-    });
-};
-const login = async(req, res) => {
-    const { userName, password } = req.body;
-    const corpTrainee = await CorpTrainee.findOne({ userName: userName });
-    if (corpTrainee) {
-        const auth = await bcrypt.compare(password, corpTrainee.password);
-        if (auth) {
-            const token = createToken(corpTrainee.userName);
-            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-            res.status(200).json(corpTrainee);
-        } else {
-            res.status(400).json({ error: 'password is incorrect' })
-        }
-    } else {
-        res.status(400).json({ error: 'user not found' })
-    }
-}
+
+
 const getCTraineeCourses = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -275,19 +256,11 @@ const updateExamGrade = async(req, res) => {
 }
 
 
-const logout = async(req, res) => {
-    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
-    res.status(200).json({ message: "logged out" })
-
-}
-
 
 module.exports = {
     getCTrainees,
     getCTrainee,
     updatePassword,
-    login,
-    logout,
     getCTraineeCourses,
     postCourseRegister,
     checkHaveAccess,

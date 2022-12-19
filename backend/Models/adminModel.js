@@ -1,17 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const requestSchema = new Schema({
-    corpTraineeId: {
-        type: mongoose.Types.ObjectId,
-        ref: 'corpTraineeModel'
-    },
-    courseId: {
-        type: mongoose.Types.ObjectId,
-        ref: 'courseModel'
-    }
-})
-
 const adminSchema = new Schema({
     firstName: {
         type: String,
@@ -26,14 +15,17 @@ const adminSchema = new Schema({
         unique: true,
         required: true
     },
+    gender: {
+        type: String,
+    },
     password: {
         type: String,
         required: true
     },
-    requests: {
-        type: [requestSchema]
+    role: {
+        type: String,
+        required: true
     }
-
 }, { timestamps: true })
 
 module.exports = mongoose.model('Admin', adminSchema);

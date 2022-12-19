@@ -62,7 +62,7 @@ return(
         <form onSubmit={handleSubmit}>
             <fieldset>
         Name on card:
-        <input className="inputCard" type="text" name="user" id="user" placeholder='ex: Nick Jones' value={cardName} onChange={(e)=>{setCardName(e.target.value)}} required/>
+        <input className="inputCard" type="text" name="user" id="user" placeholder='ex: Nada Ashraf' value={cardName} onChange={(e)=>{setCardName(e.target.value)}} required/>
         <br />
         Card Number:
         <input id="creditdigits" className="inputCard"  type="tel" pattern="[0-9]*{16}" maxLength="16" name="creditCard1" inputMode='numeric' placeholder="1111-2222-3333-4444" value={cardNumber} onChange={(e)=>{setCardNumber(e.target.value)}} required/>

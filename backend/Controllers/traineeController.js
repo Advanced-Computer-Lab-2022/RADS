@@ -3,38 +3,7 @@ const mongoose = require('mongoose');
 const Course = require('../Models/courseModel');
 const nodemailer = require("nodemailer");
 const { sendMail } = require('../Utilities/sendEmail');
-// const getRequest = async(req,res) =>{
-//     let transporter = nodemailer.createTransport({
-//         service: 'gmail',
-//         auth: {
-//             user: "aboahmedabomohamed@gmail.com",
-//             pass: "Khaled01020304",
-//         }
-//     });
-//     let mailOptions = {
-//         from: "aboahmedabomohamed@gmail.com",
-//         to: "khaledayman012@gmail.com",
-//         subject: 'Test Mail',
-//         text: 'TESTINGGGGGG !',
-//     }
-//     transporter.sendMail(mailOptions, function(err, data) {
-//         if (err) {
-//             res.status(400).json({message:'Error Occurs'});
-//         } else {
-//             res.status(200).json({message:'Email sent successfully'});
-//         }
-//     });
-// }
 
-// const getRequest = async(req,res) =>{
-//     sendMail();
-//         if (err) {
-//             res.status(400).json({message:'Error Occurs'});
-//         } else {
-//             res.status(200).json({message:'Email sent successfully'});
-//         }
-
-// }
 
 const forgotPassword = async(req, res) => {
     const { email } = req.body;
@@ -107,53 +76,6 @@ const updatePassword = async(req, res) => {
     }
     res.status(200).json(trainee);
 }
-const maxAge = 3 * 24 * 60 * 60;
-const createToken = (userName) => {
-    return jwt.sign({ userName }, 'supersecret', {
-        expiresIn: maxAge
-    });
-};
-const signUp = async(req, res) => {
-    const { userName, firstName, lastName, gender, email, password } = req.body;
-    try {
-        const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const trainee = await Trainee.create({
-            userName: userName,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            gender: gender,
-            password: hashedPassword
-        });
-        const token = createToken(trainee.userName);
-
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(200).json(trainee)
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
-}
-
-
-
-
-const login = async(req, res) => {
-    const { userName, password } = req.body;
-    const trainee = await Trainee.findOne({ userName: userName });
-    if (trainee) {
-        const auth = await bcrypt.compare(password, trainee.password);
-        if (auth) {
-            const token = createToken(trainee.userName);
-            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-            res.status(200).json(trainee);
-        } else {
-            res.status(400).json({ error: 'password is incorrect' })
-        }
-    } else {
-        res.status(400).json({ error: 'user not found' })
-    }
-}
 
 
 const getTraineeCourses = async(req, res) => {
@@ -218,10 +140,6 @@ const postCreditCard = async(req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}
-const logout = async(req, res) => {
-    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
-    res.status(200).json({ message: "logged out" })
 }
 
 //update exam grade
@@ -487,9 +405,6 @@ module.exports = {
     findExercisesGrade,
     postCreditCard,
     checkRegistered,
-    signUp,
-    login,
-    logout,
     updateCourseProgress,
     checkCourseProgress,
     refundCourse,

@@ -25,6 +25,7 @@ const TraineeCreditOptions = (props) => {
             const response = await fetch(`/trainee/${traineeId}`);
             const json = await response.json();
             if (response.ok) {
+                console.log("HEREEEEE1");
                 setTrainee(json);
                 setTraineeCards(json.creditCards);
                 fetchCourse();
@@ -36,6 +37,7 @@ const TraineeCreditOptions = (props) => {
     const fetchCourse = async () => {
         const response = await fetch(`/course/${courseId}`);
         const json = await response.json();
+        console.log("HEREEEEEEEEE2");
         if (response.ok) {
             setCourse(json);
         }

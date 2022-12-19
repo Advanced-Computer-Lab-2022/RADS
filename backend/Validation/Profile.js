@@ -12,19 +12,15 @@ module.exports = function ValidateProfile(data) {
   if (validator.isEmpty(data.tel)) {
     errors.tel = "Required tel";
   }
- 
   if (validator.isEmpty(data.city)) {
     errors.city = "Required city";
   }
   if (validator.isEmpty(data.country)) {
     errors.country = "Required country";
   }
-  
   if (validator.isEmpty(data.postalcode)) {
     errors.postalcode = "Required postalcode";
   }
-  
-
 
   return {
       errors,
