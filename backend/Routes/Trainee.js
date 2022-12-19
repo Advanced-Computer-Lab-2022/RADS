@@ -6,95 +6,118 @@ const router = express.Router();
 
 router.get('/',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), getTrainees);
+    inRole(ROLES.TRAINEE),
+    getTrainees);
 
 router.get('/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), getTrainee);
+    inRole(ROLES.TRAINEE),
+    getTrainee);
 
 router.get('/getcourses/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), getTraineeCourses);
+    inRole(ROLES.TRAINEE),
+    getTraineeCourses);
 
 router.patch('/password/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), updatePassword);
+    inRole(ROLES.TRAINEE),
+    updatePassword);
 
 router.post('/add',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), postTrainee);
+    inRole(ROLES.TRAINEE),
+    postTrainee);
 
 router.post('/register/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), postCourseRegister);
+    inRole(ROLES.TRAINEE),
+    postCourseRegister);
 
 router.post('/findgrade/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), findExercisesGrade);
+    inRole(ROLES.TRAINEE),
+    findExercisesGrade);
 
 router.post('/findtestgrade/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), findExamGrade);
+    inRole(ROLES.TRAINEE),
+    findExamGrade);
 
 router.post('/forgot/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), forgotPassword);
+    inRole(ROLES.TRAINEE),
+    forgotPassword);
 
 router.post('/addcredit/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), postCreditCard);
+    inRole(ROLES.TRAINEE),
+    postCreditCard);
 
 router.post('/checkregister/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), checkRegistered);
+    inRole(ROLES.TRAINEE),
+    checkRegistered);
 
 router.post('/updatebalance/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), updateTraineeBalance);
+    inRole(ROLES.TRAINEE),
+    updateTraineeBalance);
 
 router.post('/updateprogress/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), updateCourseProgress);
+    inRole(ROLES.TRAINEE),
+    updateCourseProgress);
 
 router.post('/courseprogress/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), checkCourseProgress);
+    inRole(ROLES.TRAINEE),
+    checkCourseProgress);
 
 router.post('/updateexamstatus/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), updateSolvedExam);
+    inRole(ROLES.TRAINEE),
+    updateSolvedExam);
 
 router.post('/updateexamgrade/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), updateExamGrade);
+    inRole(ROLES.TRAINEE),
+    updateExamGrade);
 
 router.post('/updateexercisesgrade/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), updateExercisesGrade);
+    inRole(ROLES.TRAINEE),
+    updateExercisesGrade);
 
 router.post('/updateexercisesstatus/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), updateSolvedExercises);
+    inRole(ROLES.TRAINEE),
+    updateSolvedExercises);
 
 router.post('/refund/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), refundCourse);
+    inRole(ROLES.TRAINEE),
+    refundCourse);
 
 router.post('/checkstatus/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), checkSolvingStatus);
+    inRole(ROLES.TRAINEE),
+    checkSolvingStatus);
 
 router.post('/checkexstatus/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), checkExercisesSolvingStatus);
+    inRole(ROLES.TRAINEE),
+    checkExercisesSolvingStatus);
 
 router.post('/findcreditcard/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), findCreditCard);
+    inRole(ROLES.TRAINEE),
+    findCreditCard);
 
 router.post('/deletecard/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE), deleteCreditCard);
+    inRole(ROLES.TRAINEE),
+    deleteCreditCard);
 
 
 module.exports = router;

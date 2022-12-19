@@ -11,7 +11,7 @@ function Navbar({ user }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        { !user.isConnected ? (
+        {!user.isConnected ? (
           <>
             <Link to="/">
               RADS

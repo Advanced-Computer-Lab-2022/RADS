@@ -28,7 +28,7 @@ const courseRoute = require('./Routes/Course');
 const adminRoute = require('./Routes/Admin');
 const corpTraineeRoute = require('./Routes/corpTrainee');
 const traineeRoute = require('./Routes/Trainee');
-const routerRoute = require('./Routes/Report');
+const reportRoute = require('./Routes/Report');
 
 // Using Routes
 app.use('/', guestRoute);
@@ -37,7 +37,7 @@ app.use('/course', courseRoute);
 app.use('/admin', adminRoute);
 app.use('/corptrainee', corpTraineeRoute);
 app.use('/trainee', traineeRoute);
-app.use('/report', routerRoute);
+app.use('/report', reportRoute);
 
 // Passport Middleware
 app.use(passport.initialize());

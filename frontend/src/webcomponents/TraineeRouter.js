@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 
-const AdminRouter = ({user, children}) =>{
+const TraineeRouter = ({user, children}) =>{
    if(!user.isConnected){
      return <Navigate to="/login" replace/> 
    }else{
@@ -12,4 +12,4 @@ const AdminRouter = ({user, children}) =>{
    return children
 }
 
-export default AdminRouter
+export default TraineeRouter
