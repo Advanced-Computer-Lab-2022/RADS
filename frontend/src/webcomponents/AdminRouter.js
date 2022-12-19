@@ -12,4 +12,4 @@ const AdminRouter = ({user, children}) =>{
    return children
 }
 
-export default AdminRouter
+export default AdminRouter;

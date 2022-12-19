@@ -39,7 +39,7 @@ import SignUp from './webpages/SignUp';
 import LogIn from './webpages/LogIn';
 import NotFound from './webpages/NotFound';
 import NoAccess from './webpages/NoAccess';
-import AdminRouter from './webcomponents/AdminRouter';
+import AdminRouter from './webcomponents/AdminRouter'
 import TraineeRouter from './webcomponents/TraineeRouter';
 import CorpTraineeRouter from './webcomponents/CorpTraineeRouter';
 import InstructorRouter from './webcomponents/InstructorRouter';
