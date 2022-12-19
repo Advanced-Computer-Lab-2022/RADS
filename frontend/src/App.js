@@ -35,6 +35,8 @@ import CorpTraineeExam from './webcomponents/CorpTraineeExam';
 import CorpTraineeSubmitAccess from './webcomponents/CorpTraineeSubmitAccess';
 import CorpTraineeCourse from './webcomponents/CorpTraineeCourse';
 import CorpTraineeRating from './webcomponents/CorpTraineeRating';
+import AdminProblems from './webcomponents/AdminProblems';
+import AdminPromotion from './webcomponents/AdminPromotion';
 
 
 
@@ -135,6 +137,16 @@ function App() {
             <Route
               path="/adminaccess"
               element={<AdminAccess
+                rateVal={rateValue} currencyVal={inputValue} />}
+            />
+            <Route
+              path="/adminpromotion"
+              element={<AdminPromotion
+                rateVal={rateValue} currencyVal={inputValue} />}
+            />
+            <Route
+              path="/adminproblems"
+              element={<AdminProblems
                 rateVal={rateValue} currencyVal={inputValue} />}
             />
             <Route

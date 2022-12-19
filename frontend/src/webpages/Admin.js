@@ -71,6 +71,8 @@ const Admin = (props) => {
         return ( <div className = "admin-lobby" >
                 <div className = "instructors" >
                 <button onClick={() => window.location.href = `/adminreports`}>View Requests</button>
+                <button onClick={() => window.location.href = `/adminproblems`}>View Reported Problems</button>
+                <button onClick={() => window.location.href = `/adminpromotion`}>Set Promotion</button>
                 <h2 > Admins: </h2> {
                 admin && admin.map((admin) => (
 
