@@ -132,7 +132,7 @@ const TraineeView = (props) => {
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
                 </div>
             ))}</div>
-            <p><strong>Price: </strong>{course.price * rateVal}{" "}{currencyVal}</p>
+            <p><strong>Price: </strong>{Math.ceil(course.price * rateVal)}{" "}{currencyVal}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
             <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
