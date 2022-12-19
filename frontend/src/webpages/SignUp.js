@@ -12,9 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import { FormControl, FormLabel, Radio, RadioGroup } from '@mui/material';
-
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -31,16 +32,46 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-    const handleSubmit = (event) => {
+    const [html,setHtml] = useState('');
+    const navigate = useNavigate();
+    const handleSubmit = async(event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        console.log(data.get);
         console.log({
             email: data.get('email'),
             password: data.get('password'),
         });
+        let userName = data.get('userName');
+        let firstName = data.get('firstName');
+        let lastName = data.get('lastName');
+        let email = data.get('email');
+        let gender = data.get('gender');
+        let role = "TRAINEE";
+        let password = data.get('password');
+        let confirm = data.get('confirm');
+        let body = {userName,firstName,lastName,email,gender,role,password,confirm};
+        const response = await fetch(`/signup`,{
+            method:'POST',
+            body: JSON.stringify(body),
+            headers:{
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if(response.ok){
+            console.log("Signed up successfully !!");
+            navigate("/contract");
+        }
+        else{
+            setHtml(json.email);
+             console.log(json);
+        }
     };
 
     return (
+        <div>
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -140,7 +171,6 @@ export default function SignUp() {
                             </Grid>
                         </Grid>
                         <Button
-                            component={NavLink} to="/contract"
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -160,5 +190,7 @@ export default function SignUp() {
                 <Copyright sx={{ mt: 5 }} />
             </Container>
         </ThemeProvider>
+        <p><strong>{html}</strong></p>
+        </div>
     );
 }

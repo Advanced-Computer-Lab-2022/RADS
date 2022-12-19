@@ -13,7 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -30,13 +31,35 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LogIn() {
-    const handleSubmit = (event) => {
+    const [html,setHtml] = useState('');
+    const navigate = useNavigate();
+    const handleSubmit = async(event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
             email: data.get('email'),
             password: data.get('password'),
         });
+        let userName = data.get('userName');
+        let password = data.get('password');
+        let body = {userName,password};
+        const response = await fetch(`/login`,{
+            method:'POST',
+            body: JSON.stringify(body),
+            headers:{
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if(response.ok){
+            console.log("Signed up successfully !!");
+            navigate("/home");
+        }
+        else{
+            setHtml(json.email);
+             console.log(json);
+        }
     };
 
     return (
