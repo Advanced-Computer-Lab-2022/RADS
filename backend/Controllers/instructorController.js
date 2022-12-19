@@ -1,7 +1,9 @@
 const Instructor = require('../Models/instructorModel');
 const Course = require('../Models/courseModel');
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+const { sendMail } = require('../Utilities/sendEmail');
 // GET all instructors
 const getInstructors = async(req, res) => {
     const instructors = await Instructor.find({}).sort({ createdAt: -1 });
@@ -10,7 +12,7 @@ const getInstructors = async(req, res) => {
 
 
 const postInstructor = async(req, res) => {
-    const { firstName, lastName, userName, password, country, phoneNumber, address } = req.body;
+    const { firstName, lastName, userName, password, country, phoneNumber, address, email, bio, instructorRating, ratersCount, reviews } = req.body;
     try {
         const instructor = await Instructor.create({
             firstName,
@@ -18,10 +20,13 @@ const postInstructor = async(req, res) => {
             userName,
             password,
             country,
-            instructorRating: { rating: 0, ratersCount: 0 },
             phoneNumber,
             address,
-
+            email,
+            bio,
+            instructorRating,
+            ratersCount,
+            reviews
         });
         res.status(200).json({ message: "Instructor added successfully", message: "Instructor info" + instructor });
     } catch (error) {
@@ -41,7 +46,6 @@ const getInstructor = async(req, res) => {
     }
     res.status(200).json(instructor);
 }
-
 
 // DELETE an instructor
 const deleteInstructor = async(req, res) => {
@@ -77,8 +81,25 @@ const updateInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
+
+// UPDATE Password
+const updatePassword = async(req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist an trainee with the corresponding id.' });
+    }
+    const trainee = await Instructor.findByIdAndUpdate({ _id: id }, {
+        password: req.body.password
+    });
+    if (!trainee) {
+        return res.status(404).json({ error: 'No such trainee' });
+    }
+    res.status(200).json(trainee);
+}
+
+
 // FILTER a course based on instructor
-const filterCourses = async(req, res) => {
+/*const filterCourses = async(req, res) => {
     const instructorId = req.query.courseId;
     if (instructorId) {
         const result = await Course.find({ instructor: mongoose.Types.ObjectId(instructorId) }).populate('instructor');
@@ -86,17 +107,18 @@ const filterCourses = async(req, res) => {
     } else {
         res.status(400).json({ error: "courseId is required" })
     }
-}
+} */
+
 
 //add promotionrate and promotionenddate in course
 
 //add a review to an instructor
 const postInstructorReview = async(req, res) => {
-    const { traineeRating, traineeReview, traineeId, corpTraineeId } = req.body;
+    const { iRating, iReview, traineeId, corpTraineeId } = req.body;
     const newReview = {
         reviews: {
-            traineeRating: traineeRating,
-            traineeReview: traineeReview,
+            iRating: iRating,
+            iReview: iReview,
             traineeId: traineeId,
             corpTraineeId: corpTraineeId
         }
@@ -105,14 +127,13 @@ const postInstructorReview = async(req, res) => {
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
         const instructor = await Instructor.findById({ "_id": id })
-        const currentOverallRating = instructor.courseRating.rating;
-        let currentRatingCount = instructor.courseRating.ratersCount;
-        const newOverallRating = (currentOverallRating * currentRatingCount + traineeRating) / (currentOverallCount + 1);
+        const currentOverallRating = instructor.instructorRating;
+        let currentRatingCount = instructor.ratersCount;
+        const newOverallRating = (currentOverallRating * currentRatingCount + iRating) / (currentRatingCount + 1);
         currentRatingCount += 1;
-        instructor.courseRating.rating = newOverallRating;
-        instructor.courseRating.ratersCount = currentRatingCount;
+        instructor.instructorRating = newOverallRating;
+        instructor.ratersCount = currentRatingCount;
         await instructor.save();
-
         const dbResp = await Instructor.findOneAndUpdate({ "_id": id }, { $push: newReview }, { new: true }).lean(true);
         if (dbResp) {
             // dbResp will be entire updated document, we're just returning newly added message which is input.
@@ -124,6 +145,20 @@ const postInstructorReview = async(req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+
+const forgotPassword = async(req, res) => {
+    const { email } = req.body;
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'There does not exist a trainee with the corresponding id.' });
+    }
+    //http://localhost:3000/forgotpass/instructorId=${id}
+    textBody = `You're Verified!, Click the link to return to change your password: http://localhost:3000/forgotpassinstructor/${id}`;
+    sendMail(email, textBody);
+    res.status(200).json({ message: "sent successfully" });
+}
+
 
 // GET a single course rating
 const getInstructorRating = async(req, res) => {
@@ -141,7 +176,8 @@ module.exports = {
     getInstructor,
     deleteInstructor,
     updateInstructor,
-    filterCourses,
     postInstructorReview,
-    getInstructorRating
+    getInstructorRating,
+    forgotPassword,
+    updatePassword,
 }

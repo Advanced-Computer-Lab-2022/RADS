@@ -26,7 +26,8 @@ const postInstructor = async(req, res) => {
             password: randomstring.generate(7),
             email,
             bio,
-            instructorRating: {rating:0,ratersCount:0}
+            instructorRating: 1,
+            ratersCount: 1
         });
         res.status(200).json({ message: "Instructor added successfully", message: "Your username is " + instructor.userName + " and your password is " + instructor.password });
     } catch (error) {
@@ -72,6 +73,7 @@ const getAdmins = async(req, res) => {
     const admins = await Admin.find({}).sort({ createdAt: -1 });
     res.status(200).json(admins);
 }
+
 module.exports = {
     postAdmin,
     postCTrainee,

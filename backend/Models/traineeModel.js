@@ -1,13 +1,45 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+
 
 const courseSchema = new Schema({
     courseId: {
         type: mongoose.Types.ObjectId,
-        ref: 'Course',
+        ref: 'courseModel',
     },
-    courseGrade: {
+    exercisesGrade: {
+        type: Number,
+        default: 0
+    },
+    solvedExercises: {
+        type: Boolean,
+        default: false
+    },
+    examGrade: {
+        type: Number,
+        default: 0
+    },
+    courseProgress: {
+        type: Number,
+        default: 0
+    },
+    solvedExam: {
+        type: Boolean,
+        default: false
+    }
+})
+
+const creditCardSchema = new Schema({
+    cardName: {
+        type: String
+    },
+    cardNumber: {
+        type: Number
+    },
+    cardExpiryDate: {
+        type: Date
+    },
+    cardCVV: {
         type: Number
     }
 })
@@ -22,7 +54,9 @@ const traineeSchema = new Schema({
         required: true
     },
     userName: {
-        type: String
+        type: String,
+        unique: true,
+        required: true
     },
     password: {
         type: String,
@@ -30,20 +64,36 @@ const traineeSchema = new Schema({
     },
     country: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: Number,
-        required: true
     },
     address: {
         type: String,
+    },
+    gender: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        trim: true,
+        unique: true,
         required: true
     },
     courses: {
         type: [courseSchema]
+    },
+    creditCards: {
+        type: [creditCardSchema]
+    },
+    balance: {
+        type: Number
+    },
+    role: {
+        type: String,
+        required: true
     }
-
 }, { timestamps: true })
 
-module.exports = mongoose.model('trainee', traineeSchema);
+module.exports = mongoose.model('Trainee', traineeSchema);

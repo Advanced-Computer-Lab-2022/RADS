@@ -68,60 +68,38 @@ const Admin = (props) => {
             fetchAdmins();
         }, [])
 
-        return ( <
-                div className = "admin-lobby" >
-                <
-                div className = "instructors" >
-                <
-                h2 > Admins: < /h2> {
+        return ( <div className = "admin-lobby" >
+                <div className = "instructors" >
+                <button onClick={() => window.location.href = `/adminreports`}>View Requests</button>
+                <h2 > Admins: </h2> {
                 admin && admin.map((admin) => (
 
-                    <
-                    AdminDetails key = { admin._id }
-                    admin = { admin }
-                    />
+                    <AdminDetails key = { admin._id } admin = { admin }/>
                 ))
-            } <
-            h2 > === === === === === === === === === === === === === === === === === === === === === = < /h2>
+            } <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
 
 
 
-        <
-        h2 > corpTrainees: < /h2> {
+        <h2 >corpTrainees: </h2> {
         corpTrainees && corpTrainees.map((corpTrainee) => (
 
-            <
-            CorpTraineeDetails key = { corpTrainee._id }
-            corpTrainee = { corpTrainee }
-            />
+            <CorpTraineeDetails key = { corpTrainee._id } corpTrainee = { corpTrainee }/>
         ))
-    } <
-    h2 > === === === === === === === === === === === === === === === === === === === === === = < /h2> <
-h2 > Instructors: < /h2> {
+    } <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
+    <h2>Instructors: </h2> {
 instructors && instructors.map((instructor) => (
     // <p key = {instructor._id}>{instructor.userName}</p>
-    <
-    InstructorDetails key = { instructor._id }
-    instructor = { instructor }
-    />
+    <InstructorDetails key = { instructor._id } instructor = { instructor }/>
 ))
 }
 
-<
-/div> <
-InstructorForm / >
-    <
-    h2 > === === === === === === === === === === === === === === === === === === === === === = < /h2> <
-CorpTraineeForm / >
-    <
-    h2 > === === === === === === === === === === === === === === === === === === === === === = < /h2> <
-AdminForm / >
-    <
-    h2 > === === === === === === === === === === === === === === === === === === === === === = < /h2> <
-h2 > Add new admin: < /h2> <
-NewAdminButton / >
-    <
-    /div>
+</div> <InstructorForm />
+    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
+    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
+    <AdminForm/>
+    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
+     <h2> Add new admin: </h2> <NewAdminButton/>
+    </div>
 )
 }
 

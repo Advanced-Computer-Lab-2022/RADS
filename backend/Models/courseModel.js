@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
-
-
 const Schema = mongoose.Schema;
 
 const reviewSchema = mongoose.Schema({
-    traineeRating: {
+    cRating: {
         type: Number
     },
-    traineeReview: {
+    cReview: {
         type: String
     },
     traineeId: {
@@ -56,6 +54,8 @@ const exerciseSchema = mongoose.Schema({
     }
 });
 
+
+
 const courseSchema = new Schema({
     courseTitle: {
         type: String,
@@ -88,23 +88,34 @@ const courseSchema = new Schema({
     courseExercises: {
         type: [exerciseSchema]
     },
+    exam: {
+        type: [exerciseSchema]
+    },
     coursePreview: {
         type: String
     },
     courseRating: {
-        rating: Number,
-        ratersCount: Number
+        type: Number
+    },
+    ratersCount: {
+        type: Number
     },
     reviews: {
         type: [reviewSchema]
     },
     promotionRate: {
-        type: Number
+        type: Number,
+        default: 1
     },
     promotionEndDate: {
         type: Date
     },
-
+    promotionStartDate: {
+        type: Date
+    },
+    view: {
+        type: Number
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', courseSchema)

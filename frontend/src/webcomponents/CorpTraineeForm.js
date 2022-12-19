@@ -1,86 +1,61 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import Link from '@mui/material/Link';
 
-const CorpTraineeForm = () => {
-    const [firstName,setFirstName] = useState('');
-    const [lastName,setLastName] = useState('');
-    const [country,setCountry] = useState('');
-    const [phoneNumber,setPhoneNumber] = useState('');
-    const [address,setAddress] = useState('');
-    const [email,setEmail] = useState('');
-    const [error,setError] = useState(null);
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault() //prevent form submission
-        
-        const corpTrainee = {firstName,lastName,country,phoneNumber,address};
-        
-        const response = await fetch('/Admin/addCTrainee',{
+const CorpTraineeForm = (props) => {
+    const{
+        rateVal,
+        currencyVal
+    } = props;
+    const params = new URLSearchParams(window.location.search);
+    const corpTraineeId = params.get('corpTraineeId');
+    const [courses,setCourses] = useState([]);
+    const [coursesIds,setCoursesIds] = useState([]);
+    
+
+    useEffect(()=>{
+        const viewRegistered = async () => {
+            const response = await fetch(`/corptrainee/${corpTraineeId}`);
+            const json = await response.json();
+            console.log(json.courses);
+            if(response.ok){
+                fetchCourses(json.courses);
+                console.log(json.courses);
+                setCoursesIds(json.courses)
+            }
+        }
+        viewRegistered();
+    }, [])
+
+    const fetchCourses = async (ids) => {
+        let courseIds = {ids};
+        const response = await fetch(`/course/subset`,{
             method:'POST',
-            body: JSON.stringify(corpTrainee),
+            body: JSON.stringify(courseIds),
             headers:{
                 "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
             }
         })
-        
         const json = await response.json();
-
-        if(!response.ok){
-            setError(json.error);
+        if(response.ok){
+            setCourses(json);
         }
-        if(response.ok){    
-            setFirstName('');
-            setLastName('');
-            setCountry('');
-            setPhoneNumber('');
-            setAddress('');
-            setEmail('');
-            setError(null);
-            console.log("New Corp Trainee Added", json);
-            
-            //refresh page on successful submission
-            window.location.reload();
-        }
-    }    
-
-    return (
-        <form className="create-corpTrainee" onSubmit={handleSubmit}>
-            <h3>CorpTrainee: Insert Your Information</h3>
-           
-            <label>First name:</label>
-            <input type="text" onChange={(e) => setFirstName(e.target.value)}
-            value= {firstName}
-            />
-
-            <label>Last name:</label>
-            <input type="text" onChange={(e) => setLastName(e.target.value)}
-            value= {lastName}
-            />
-
-
-            <label>Country:</label>
-            <input type="text" onChange={(e) => setCountry(e.target.value)}
-            value= {country}
-            />
-
-            <label>Phone Number:</label>
-            <input type="number" onChange={(e) => setPhoneNumber(e.target.value)}
-            value= {phoneNumber}
-            />
-
-            <label>Address:</label>
-            <input type="text" onChange={(e) => setAddress(e.target.value)}
-            value= {address}
-            />
-            <label>Email:</label>
-            <input type="text" onChange={(e) => setEmail(e.target.value)}
-            value= {email}
-            />
-
-            <button>Submit</button>
-            {error && <div className="error">{error}</div>}
-        </form>
-    )
+    }
+    
+return(
+   <div>
+     {courses.length === 0 ?( <p><strong><bold>{`You dont have access to any Course.`}</bold></strong></p>) : (       
+        <div>
+        {courses && courses.map((course)=>(
+          <div key = {course._id}>
+             <Link onClick={() => window.location.href = `/corptraineecourse?courseId=${course._id}&corpTraineeId=${corpTraineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5</Link>
+         </div>
+             ))}
+             </div>
+             )}   
+       </div>   
+)
 }
 
 

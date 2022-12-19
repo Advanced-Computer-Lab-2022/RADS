@@ -6,13 +6,13 @@ const InstructorUpdateBio = () => {
 
     const [bio, setBio] = useState('');
     const [error,setError] = useState(null);
-
+    const instId = "638c11d6147e2173163fd962";
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
         
         const instructor = {bio};
 
-        const response = await fetch('/Instructor/changeInfo/635afde192426ef4e8a9e165',{
+        const response = await fetch(`/Instructor/changeInfo/${instId}`,{
             method:'PATCH',
             body: JSON.stringify(instructor),
             headers:{

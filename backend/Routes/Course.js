@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCourseByInstructor, postCourseReview, getCourseRating } = require('../Controllers/courseController');
+const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCoursesByInstructor, postCourseReview, getCourseRating, postPromotion, deletePromo, maxPrice, getCourseSubset, updateViews, getHighestViewedCourses } = require('../Controllers/courseController');
 
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router.get('/', getCourses);
 router.get('/:id', getCourse);
 
 // GET all Courses by a specific instructor
-router.get('/find/:id', getCourseByInstructor);
+router.get('/find/:id', getCoursesByInstructor);
 
 // POST a new Course
 router.post('/add', postCourse);
@@ -27,5 +27,23 @@ router.post('/review/:id', postCourseReview);
 
 // GET a single Course's rating 
 router.get('/rating/:id', getCourseRating);
+
+// POST Course's Promotion  
+router.post('/promo/:id', postPromotion);
+
+// UPDATE Course Promotion
+router.patch('/updatepromo/:id', deletePromo);
+
+// GET max price
+router.post('/max', maxPrice);
+
+// GET Some courses
+router.post('/subset', getCourseSubset);
+
+// UPDATE the views for a course
+router.patch('/updateviews/:id', updateViews);
+
+// GET Highest viewed courses
+router.get('/highest/views', getHighestViewedCourses);
 
 module.exports = router;

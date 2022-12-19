@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-//import CourseDetails from '../webcomponents/CourseDetails';
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
 import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
+import AppBar  from "../webcomponents/AppBar";
 
 
 const CorpTraineeLobby = (props) => {
@@ -25,7 +25,7 @@ const CorpTraineeLobby = (props) => {
     }, [])
     useEffect(() => {
         const fetchCourses = async() => {
-            const response = await fetch('/CorpTrainee/password/:id');
+            const response = await fetch('/corptrainee/password/:id');
             const json = await response.json();
 
             if (response.ok) {
@@ -45,14 +45,12 @@ const CorpTraineeLobby = (props) => {
 
     //     )
 
-    // }
     return ( 
-        <div className = "home-lobby" >
-        Welcome to RADS Online Course Provider(CorpTraineeLobby side) <
-        CorpTraineeSearch rateVal = { props.rateVal }
-        currencyVal = { props.currencyVal }
-        /> <
-        CorpTraineePassword / >
+    <div className = "home-lobby" >
+        {/* <AppBar /> */}
+        Welcome to RADS Online Course Provider(CorpTraineeLobby side) 
+        <CorpTraineeSearch rateVal = { props.rateVal } currencyVal = { props.currencyVal }/> 
+        <CorpTraineePassword />
         </div>
     )
 }
