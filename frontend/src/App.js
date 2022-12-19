@@ -198,16 +198,22 @@ function App() {
               />
 
               <Route
-              path="/adminpromotion"
-              element={<AdminPromotion
-                rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
-              path="/adminproblems"
-              element={<AdminProblems
-                rateVal={rateValue} currencyVal={inputValue} />}
-            />
-            <Route
+                path="/adminpromotion"
+                element={
+                  <AdminRouter user={user}>
+                    <AdminPromotion rateVal={rateValue} currencyVal={inputValue} />
+                  </AdminRouter>
+                }
+              />
+              <Route
+                path="/adminproblems"
+                element={
+                  <AdminRouter user={user}>
+                    <AdminProblems rateVal={rateValue} currencyVal={inputValue} />
+                  </AdminRouter>
+                }
+              />
+              <Route
                 path="/traineeoptions"
                 element={
                   <TraineeRouter user={user}>
