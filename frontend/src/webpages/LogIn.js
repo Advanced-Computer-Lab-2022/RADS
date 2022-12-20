@@ -28,7 +28,18 @@ function Copyright(props) {
     );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+    palette: {
+    mode: 'light',
+    primary: {
+      main: '#ffffff',
+      contrastText: '#d80621',
+    },
+    secondary: {
+      main: '#222222',
+    },
+  },
+});
 
 export default function LogIn() {
     const [html, setHtml] = useState('');

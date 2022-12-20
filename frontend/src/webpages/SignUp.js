@@ -29,7 +29,18 @@ function Copyright(props) {
     );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+    palette: {
+    mode: 'light',
+    primary: {
+      main: '#d80621',
+      contrastText: 'white',
+    },
+    secondary: {
+      main: '#222222',
+    },
+  },
+});
 
 export default function SignUp() {
     const [html, setHtml] = useState('');

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
 import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
-import AppBar  from "../webcomponents/AppBar";
+import AppBar  from "../webcomponents/AppNavBar";
 
 
 const CorpTraineeLobby = (props) => {

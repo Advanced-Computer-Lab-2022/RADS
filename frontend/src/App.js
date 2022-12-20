@@ -43,6 +43,7 @@ import InstructorRouter from './webcomponents/InstructorRouter';
 import PrivateRouter from './webcomponents/PrivateRouter';
 import ForceRedirect from './webcomponents/ForceRedirect';
 import SelectCountry from './webcomponents/SelectCountry';
+import AppNavBar from './webcomponents/AppNavBar';
 
 
 function App() {
@@ -81,24 +82,32 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div className="bg-light" style={{ height: "100vh" }}>
+          <AppNavBar
+            rateValue={rateValue}
+            inputValue={inputValue}
+            handleSelection={handleSelection}
+          />
           <Navbar user={user} />
           <div className="home-lobby">
             <h2>Welcome to RADS Online Course Provider</h2>
-            <SelectCountry rateValue = {rateValue} inputValue = {inputValue} handleSelection={handleSelection}/>
           </div>
-          <div className='webpages'>
+          <div className="webpages">
             <Routes>
-
               <Route
                 path="/noaccess"
-                element={<NoAccess rateVal={rateValue} currencyVal={inputValue} />}
+                element={
+                  <NoAccess rateVal={rateValue} currencyVal={inputValue} />
+                }
               />
 
               <Route
                 path="/traineeoptions"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeCreditOptions rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeCreditOptions
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -107,7 +116,10 @@ function App() {
                 path="/corptraineecourse"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeCourse rateVal={rateValue} currencyVal={inputValue} />
+                    <CorpTraineeCourse
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </CorpTraineeRouter>
                 }
               />
@@ -116,7 +128,10 @@ function App() {
                 path="/corptraineexam"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeExam rateVal={rateValue} currencyVal={inputValue} />
+                    <CorpTraineeExam
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </CorpTraineeRouter>
                 }
               />
@@ -125,7 +140,10 @@ function App() {
                 path="/corptraineesubmitaccess"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeSubmitAccess rateVal={rateValue} currencyVal={inputValue} />
+                    <CorpTraineeSubmitAccess
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </CorpTraineeRouter>
                 }
               />
@@ -134,7 +152,10 @@ function App() {
                 path="/traineesubmitrefund"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeSubmitRefund rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeSubmitRefund
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -143,7 +164,10 @@ function App() {
                 path="/adminreports"
                 element={
                   <AdminRouter user={user}>
-                    <AdminReports rateVal={rateValue} currencyVal={inputValue} />
+                    <AdminReports
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </AdminRouter>
                 }
               />
@@ -170,7 +194,10 @@ function App() {
                 path="/traineeoptions"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeCreditOptions rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeCreditOptions
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -188,7 +215,10 @@ function App() {
                 path="/traineecourse"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeCourse rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeCourse
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -197,7 +227,10 @@ function App() {
                 path="/traineecredit"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeCreditCard rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeCreditCard
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -206,7 +239,10 @@ function App() {
                 path="/forgotpassinstructor/:id"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorForgotPass ateVal={rateValue} currencyVal={inputValue} />
+                    <InstructorForgotPass
+                      ateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </InstructorRouter>
                 }
               />
@@ -215,7 +251,10 @@ function App() {
                 path="/forgotpasstrainee/:id"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeForgotPass rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeForgotPass
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -224,16 +263,23 @@ function App() {
                 path="/instructorrating"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorRating rateVal={rateValue} currencyVal={inputValue} />
+                    <InstructorRating
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </InstructorRouter>
                 }
               />
 
               <Route
                 path="/corptraineerating"
-                element={<CorpTraineeRouter user={user}>
-                  <CorpTraineeRating rateVal={rateValue} currencyVal={inputValue} />
-                </CorpTraineeRouter>
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeRating
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </CorpTraineeRouter>
                 }
               />
 
@@ -241,7 +287,10 @@ function App() {
                 path="/traineesolve"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeSolve rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeSolve
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -250,7 +299,10 @@ function App() {
                 path="/corptraineesolve"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeSolve rateVal={rateValue} currencyVal={inputValue} />
+                    <CorpTraineeSolve
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </CorpTraineeRouter>
                 }
               />
@@ -259,7 +311,10 @@ function App() {
                 path="/traineerate"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeRating rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeRating
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
@@ -286,7 +341,10 @@ function App() {
                 path="/instructorlobby"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorLobby rateVal={rateValue} currencyVal={inputValue} />
+                    <InstructorLobby
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </InstructorRouter>
                 }
               />
@@ -300,15 +358,21 @@ function App() {
                 }
               />
 
-              <Route path="/filter"
-                element={<CourseView rateVal={rateValue} currencyVal={inputValue} />}
+              <Route
+                path="/filter"
+                element={
+                  <CourseView rateVal={rateValue} currencyVal={inputValue} />
+                }
               />
 
               <Route
                 path="/corptraineeview"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />
+                    <CorpTraineeView
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </CorpTraineeRouter>
                 }
               />
@@ -317,7 +381,10 @@ function App() {
                 path="/corptraineelobby"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeLobby rateVal={rateValue} currencyVal={inputValue} />
+                    <CorpTraineeLobby
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </CorpTraineeRouter>
                 }
               />
@@ -326,7 +393,10 @@ function App() {
                 path="/corptraineeform"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeForm rateVal={rateValue} currencyVal={inputValue} />
+                    <CorpTraineeForm
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </CorpTraineeRouter>
                 }
               />
@@ -335,21 +405,22 @@ function App() {
                 path="/traineelobby"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeLobby rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeLobby
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </TraineeRouter>
                 }
               />
 
               <Route
                 path="/"
-                element={
-                  <Home rateVal={rateValue} currencyVal={inputValue} />}
+                element={<Home rateVal={rateValue} currencyVal={inputValue} />}
               />
 
               <Route
                 path="/home"
-                element={
-                  <Home rateVal={rateValue} currencyVal={inputValue} />}
+                element={<Home rateVal={rateValue} currencyVal={inputValue} />}
               />
 
               <Route
@@ -372,14 +443,17 @@ function App() {
 
               <Route
                 path="/contract"
-                element={<Contract rateVal={rateValue} currencyVal={inputValue} />}
+                element={
+                  <Contract rateVal={rateValue} currencyVal={inputValue} />
+                }
               />
 
               <Route
                 path="*"
-                element={<NotFound rateVal={rateValue} currencyVal={inputValue} />}
+                element={
+                  <NotFound rateVal={rateValue} currencyVal={inputValue} />
+                }
               />
-
             </Routes>
           </div>
         </div>
