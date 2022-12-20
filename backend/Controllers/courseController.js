@@ -228,10 +228,15 @@ const postPromotion = async(req, res) => {
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
         const course = await Course.findById({ "_id": id })
+        if (course.promotionRate == 1) {
         course.promotionStartDate = promotionStartDate;
         course.promotionEndDate = promotionEndDate;
         course.promotionRate = promotionRate;
         await course.save();
+        }
+        else {
+            return res.status(404).json({ error: "course already has a promotion" });
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

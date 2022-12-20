@@ -67,6 +67,11 @@ const AdminPromotion = (props) => {
         const json = await response.json();
         if (!response.ok) {
           setError(json.error);
+          setText('error');
+          //refresh
+          //window.location.reload();
+            
+
         }
         if (response.ok) {
           setSelectedCourseId('');
@@ -76,6 +81,7 @@ const AdminPromotion = (props) => {
           setText('Promotion inserted !');
           setError(null);
           console.log("New promotion Added", json);
+          //window.location.reload();
         }
       }
         return (
