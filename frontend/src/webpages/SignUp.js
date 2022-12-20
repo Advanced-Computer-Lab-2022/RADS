@@ -65,7 +65,24 @@ export default function SignUp() {
             navigate("/contract");
         }
         else{
-            setHtml(json.email);
+            if(!json.firstName && !json.lastName && !json.email && !json.password && !json.confirm){
+                setHtml(json.userName);
+            }
+            if(!json.userName && !json.lastName && !json.email && !json.password && !json.confirm){
+                setHtml(json.firstName);
+            }
+            if(!json.firstName && !json.userName && !json.email && !json.password && !json.confirm){
+                setHtml(json.lastName);
+            }
+            if(!json.firstName && !json.lastName && !json.userName && !json.password && !json.confirm){
+                setHtml(json.email);
+            }
+            if(!json.firstName && !json.lastName && !json.userName && !json.email && !json.confirm){
+                setHtml(json.password);
+            }
+            if(!json.firstName && !json.lastName && !json.email && !json.password && !json.userName){
+                setHtml(json.confirm);
+            }
              console.log(json);
         }
     };

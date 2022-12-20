@@ -42,7 +42,8 @@ const postTrainee = async(req, res) => {
             email,
             courses: [],
             creditCards: [],
-            balance: 0
+            balance: 0,
+            notes: []
         });
         res.status(200).json({ message: "trainee added successfully", message: "Instructor info" + trainee });
     } catch (error) {
@@ -391,7 +392,44 @@ const deleteCreditCard = async(req, res) => {
     }
 }
 
+const postNote = async(req, res) => {
+    const { courseId, subTitleId, note } = req.body;
+    const newNote = {
+        notes: {
+            courseId: courseId,
+            subTitleId: subTitleId,
+            note: note
+        }
+    };
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const dbResp = await Trainee.findOneAndUpdate({ "_id": id }, { $push: newNote }, { new: true }).lean(true);
+        if (dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(201).json(newNote);
+        } else {
+            res.status(400).json({ message: 'Not able to add note' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
+const getSubTitleNote = async(req, res) => {
+    const { subTitleId } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const dbResp = await Trainee.find({ subTitleId: subTitleId }, );
+        if (!dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(400).json({ message: 'Not able to find note' });
+        } else {
+            res.status(200).json(dbResp);
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
 
 module.exports = {

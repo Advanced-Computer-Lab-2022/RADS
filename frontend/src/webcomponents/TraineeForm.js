@@ -11,6 +11,8 @@ const TraineeForm =(props)=>{
     const traineeId = params.get('traineeId');
     const [courses,setCourses] = useState([]);
     const [coursesIds,setCoursesIds] = useState([]);
+    const [trainee,setTrainee] = useState([]);
+
 
     useEffect(()=>{
         const viewRegistered = async () => {
@@ -21,11 +23,11 @@ const TraineeForm =(props)=>{
                 fetchCourses(json.courses);
                 console.log(json.courses);
                 setCoursesIds(json.courses)
+                setTrainee(json);
             }
         }
         viewRegistered();
     }, [])
-
 
     const fetchCourses = async (ids) => {
         let courseIds = {ids};
@@ -42,7 +44,9 @@ const TraineeForm =(props)=>{
             setCourses(json);
         }
     }
-    
+
+
+
 return(
    <div>
      {courses.length === 0 ?( <p><strong><bold>{`You have not registered in any Course.`}</bold></strong></p>) : (       
@@ -50,11 +54,12 @@ return(
         {courses && courses.map((course)=>(
           <div key = {course._id}>
              <Link onClick={() => window.location.href = `/traineecourse?courseId=${course._id}&traineeId=${traineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5</Link>
-             
+             <button onClick={() => window.location.href = `/traineereport?courseId=${course._id}&traineeId=${traineeId}`}>Report Course</button>
                 </div>
              ))}
              </div>
-             )}   
+             )}
+               <button onClick={() => window.location.href = `/traineeviewreports?traineeId=${traineeId}`}>View Reports</button>   
        </div>   
 )
 }

@@ -7,13 +7,13 @@ const router = express.Router();
 // GET all instructors info
 router.get('/',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR),
+    inRole(ROLES.TRAINEE, ROLES.INSTRUCTOR),
     getInstructors);
 
 // GET a single instructor's info 
 router.get('/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR),
+    inRole(ROLES.TRAINEE, ROLES.INSTRUCTOR),
     getInstructor);
 
 // Post an instructor

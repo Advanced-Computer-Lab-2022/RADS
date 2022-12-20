@@ -57,7 +57,12 @@ export default function LogIn() {
             navigate("/home");
         }
         else{
-            setHtml(json.email);
+            if(!json.userName){
+                setHtml(json.password);
+            }
+            else{
+                setHtml(json.userName);
+            }
              console.log(json);
         }
     };

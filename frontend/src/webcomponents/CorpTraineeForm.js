@@ -43,6 +43,7 @@ const CorpTraineeForm = (props) => {
         }
     }
     
+
 return(
    <div>
      {courses.length === 0 ?( <p><strong><bold>{`You dont have access to any Course.`}</bold></strong></p>) : (       
@@ -50,10 +51,12 @@ return(
         {courses && courses.map((course)=>(
           <div key = {course._id}>
              <Link onClick={() => window.location.href = `/corptraineecourse?courseId=${course._id}&corpTraineeId=${corpTraineeId}`} key={course._id}>Course: {course.courseTitle} | Total Hours: {course.totalHours} | Rating = {course.courseRating} Out of 5</Link>
+             <button onClick={() => window.location.href = `/corptraineereport?courseId=${course._id}&corpTraineeId=${corpTraineeId}`}>Report Course</button>
          </div>
              ))}
              </div>
-             )}   
+             )}  
+             <button onClick={() => window.location.href = `/corptraineeviewreports?corpTraineeId=${corpTraineeId}`}>View Reports</button>    
        </div>   
 )
 }

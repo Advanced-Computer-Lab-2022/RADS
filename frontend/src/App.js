@@ -45,7 +45,15 @@ import CorpTraineeRouter from './webcomponents/CorpTraineeRouter';
 import InstructorRouter from './webcomponents/InstructorRouter';
 import PrivateRouter from './webcomponents/PrivateRouter';
 import ForceRedirect from './webcomponents/ForceRedirect';
-
+import TraineeReport from './webcomponents/TraineeReport';
+import TraineeViewReports from './webcomponents/TraineeViewReports';
+import CorpTraineeReport from './webcomponents/CorpTraineeReport'; 
+import CorpTraineeViewReports from './webcomponents/CorpTraineeViewReports';
+import InstructorReport from './webcomponents/InstructorReport';
+import InstructorViewReports from './webcomponents/InstructorViewReports';
+import TraineeFollowUp from './webcomponents/TraineeFollowUp';
+import CorpTraineeFollowUp from './webcomponents/CorpTraineeFollowUp';
+import InstructorFollowUp from './webcomponents/InstructorFollowUp';
 
 function App() {
   const url = 'https://api.exchangerate.host/convert?from=USD&to=';
@@ -55,7 +63,7 @@ function App() {
   //////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////
   // CONTROL THE STATE AND ROLE OF USER FROM HERE!///////////////
-  const user = { role: "TRAINEE", isConnected: false };////////
+  const user = { role: "TRAINEE", isConnected: true };////////
   //////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////
 
@@ -125,6 +133,84 @@ function App() {
                 element={<NoAccess rateVal={rateValue} currencyVal={inputValue} />}
               />
 
+              <Route
+                path="/corptraineereport"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeReport rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corptraineeviewreports"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeViewReports rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
+              />
+              <Route
+                path="/corptraineefollowup"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeFollowUp rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/instructorreport"
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorReport rateVal={rateValue} currencyVal={inputValue} />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorviewreports"
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorViewReports rateVal={rateValue} currencyVal={inputValue} />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorfollowup"
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorFollowUp rateVal={rateValue} currencyVal={inputValue} />
+                  </InstructorRouter>
+                }
+              />
+
+
+              <Route
+                path="/traineereport"
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeReport rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
+              />
+               <Route
+                path="/traineeviewreports"
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeViewReports rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
+              />
+               <Route
+                path="/traineefollowup"
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeFollowUp rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
+              />
               <Route
                 path="/traineeoptions"
                 element={

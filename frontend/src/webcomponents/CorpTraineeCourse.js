@@ -98,9 +98,6 @@ const CorpTraineeCourse = (props) => {
     }
 
 
-
-
-
     return (
         <div>
             <div className='wallet-div'>
