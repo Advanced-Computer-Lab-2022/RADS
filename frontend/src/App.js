@@ -127,7 +127,6 @@ function App() {
           <div className='webpages'>
             <Routes>
 
-
               <Route
                 path="/noaccess"
                 element={<NoAccess rateVal={rateValue} currencyVal={inputValue} />}
@@ -222,192 +221,253 @@ function App() {
 
               <Route
                 path="/corptraineecourse"
-                element={<CorpTraineeRouter user={user}>
-                  <CorpTraineeCourse
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </CorpTraineeRouter>}
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeCourse rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
               />
+
               <Route
                 path="/corptraineexam"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeExam
-                      rateVal={rateValue} currencyVal={inputValue} />
-                  </CorpTraineeRouter>}
+                    <CorpTraineeExam rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
               />
+
               <Route
                 path="/corptraineesubmitaccess"
-                element={<CorpTraineeRouter user={user}>
-                  <CorpTraineeSubmitAccess
-                    rateVal={rateValue} currencyVal={inputValue}
-                  />
-                </CorpTraineeRouter>}
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeSubmitAccess rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
               />
+
               <Route
                 path="/traineesubmitrefund"
-                element={<TraineeRouter user={user}>
-                  <TraineeSubmitRefund
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeSubmitRefund rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/adminreports"
-                element={<AdminRouter user={user}>
-                  <AdminReports
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </AdminRouter>}
+                element={
+                  <AdminRouter user={user}>
+                    <AdminReports rateVal={rateValue} currencyVal={inputValue} />
+                  </AdminRouter>
+                }
               />
+
               <Route
                 path="/adminrefunds"
-                element={<AdminRouter user={user}>
-                  <AdminRefund
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </AdminRouter>}
+                element={
+                  <AdminRouter user={user}>
+                    <AdminRefund rateVal={rateValue} currencyVal={inputValue} />
+                  </AdminRouter>
+                }
               />
+
               <Route
                 path="/adminaccess"
-                element={<AdminRouter user={user}>
-                  <AdminAccess
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </AdminRouter>}
+                element={
+                  <AdminRouter user={user}>
+                    <AdminAccess rateVal={rateValue} currencyVal={inputValue} />
+                  </AdminRouter>
+                }
               />
+
               <Route
                 path="/traineeoptions"
-                element={<TraineeRouter user={user}>
-                  <TraineeCreditOptions
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeCreditOptions rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/traineexam"
-                element={<TraineeRouter user={user}>
-                  <TraineeExam
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeExam rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
 
               <Route
                 path="/traineecourse"
-                element={<TraineeRouter user={user}>
-                  <TraineeCourse
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeCourse rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
 
               <Route
                 path="/traineecredit"
-                element={<TraineeRouter user={user}>
-                  <TraineeCreditCard
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeCreditCard rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/forgotpassinstructor/:id"
-                element={<InstructorRouter user={user}>
-                  <InstructorForgotPass
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </InstructorRouter>}
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorForgotPass ateVal={rateValue} currencyVal={inputValue} />
+                  </InstructorRouter>
+                }
               />
 
               <Route
                 path="/forgotpasstrainee/:id"
-                element={<TraineeRouter user={user}>
-                  <TraineeForgotPass
-                    rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeForgotPass rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/instructorrating"
-                element={<InstructorRouter user={user}>
-                  <InstructorRating rateVal={rateValue} currencyVal={inputValue} />
-                </InstructorRouter>}
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorRating rateVal={rateValue} currencyVal={inputValue} />
+                  </InstructorRouter>
+                }
               />
+
               <Route
                 path="/corptraineerating"
                 element={<CorpTraineeRouter user={user}>
                   <CorpTraineeRating rateVal={rateValue} currencyVal={inputValue} />
-                </CorpTraineeRouter>}
+                </CorpTraineeRouter>
+                }
               />
+
               <Route
                 path="/traineesolve"
-                element={<TraineeRouter user={user}>
-                  <TraineeSolve rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeSolve rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/corptraineesolve"
-                element={<CorpTraineeRouter user={user}>
-                  <CorpTraineeSolve rateVal={rateValue} currencyVal={inputValue} />
-                </CorpTraineeRouter>}
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeSolve rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
               />
 
               <Route
                 path="/traineerate"
-                element={<TraineeRouter user={user}>
-                  <TraineeRating rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeRating rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/traineeview"
-                element={<TraineeRouter user={user}>
-                  <TraineeView rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeView rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/traineeform"
-                element={<TraineeRouter user={user}>
-                  <TraineeForm rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeForm rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/instructorlobby"
-                element={<InstructorRouter user={user}>
-                  <InstructorLobby rateVal={rateValue} currencyVal={inputValue} />
-                </InstructorRouter>}
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorLobby rateVal={rateValue} currencyVal={inputValue} />
+                  </InstructorRouter>
+                }
               />
+
               <Route
                 path="/adminlobby"
-                element={<AdminRouter user={user}>
-                  <Admin rateVal={rateValue} currencyVal={inputValue} />
-                </AdminRouter>}
+                element={
+                  <AdminRouter user={user}>
+                    <Admin rateVal={rateValue} currencyVal={inputValue} />
+                  </AdminRouter>
+                }
               />
+
               <Route path="/filter"
                 element={<CourseView rateVal={rateValue} currencyVal={inputValue} />}
               />
+
               <Route
                 path="/corptraineeview"
-                element={<CorpTraineeRouter user={user}>
-                  <CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />
-                </CorpTraineeRouter>}
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeView rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
               />
+
               <Route
                 path="/corptraineelobby"
-                element={<CorpTraineeRouter user={user}>
-                  <CorpTraineeLobby rateVal={rateValue} currencyVal={inputValue} />
-                </CorpTraineeRouter>}
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeLobby rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
               />
+
               <Route
                 path="/corptraineeform"
-                element={<CorpTraineeRouter user={user}>
-                  <CorpTraineeForm rateVal={rateValue} currencyVal={inputValue} />
-                </CorpTraineeRouter>}
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeForm rateVal={rateValue} currencyVal={inputValue} />
+                  </CorpTraineeRouter>
+                }
               />
+
               <Route
                 path="/traineelobby"
-                element={<TraineeRouter user={user}>
-                  <TraineeLobby rateVal={rateValue} currencyVal={inputValue} />
-                </TraineeRouter>}
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeLobby rateVal={rateValue} currencyVal={inputValue} />
+                  </TraineeRouter>
+                }
               />
+
               <Route
                 path="/"
                 element={
                   <Home rateVal={rateValue} currencyVal={inputValue} />}
               />
+
               <Route
                 path="/home"
                 element={
                   <Home rateVal={rateValue} currencyVal={inputValue} />}
               />
+
               <Route
                 path="/login"
                 element={
@@ -416,6 +476,7 @@ function App() {
                   </ForceRedirect>
                 }
               />
+
               <Route
                 path="/signup"
                 element={
@@ -429,10 +490,12 @@ function App() {
                 path="/contract"
                 element={<Contract rateVal={rateValue} currencyVal={inputValue} />}
               />
+
               <Route
                 path="*"
                 element={<NotFound rateVal={rateValue} currencyVal={inputValue} />}
               />
+
             </Routes>
           </div>
         </div>
