@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/RoleMiddleware");
-const { getTrainees, updatePassword, getTrainee, postCourseRegister, updateSolvedExercises, checkExercisesSolvingStatus, checkSolvingStatus, getTraineeCourses, postTrainee, deleteCreditCard, forgotPassword, findExercisesGrade, postCreditCard, checkRegistered, updateCourseProgress, checkCourseProgress, refundCourse, updateTraineeBalance, updateSolvedExam, updateExamGrade, updateExercisesGrade, findExamGrade, findCreditCard } = require('../Controllers/traineeController');
+const { getTrainees, updatePassword, getTrainee, postCourseRegister, updateSolvedExercises, checkExercisesSolvingStatus, checkSolvingStatus, getTraineeCourses, postTrainee, deleteCreditCard, forgotPassword, findExercisesGrade, postCreditCard, checkRegistered, updateCourseProgress, checkCourseProgress, refundCourse, updateTraineeBalance, updateSolvedExam, updateExamGrade, updateExercisesGrade, findExamGrade, findCreditCard, getCourseNotes, postNote } = require('../Controllers/traineeController');
 const router = express.Router();
 
 router.get('/',
@@ -118,6 +118,16 @@ router.post('/deletecard/:id',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.TRAINEE),
     deleteCreditCard);
+
+router.post('/postnote/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    postNote);
+
+router.post('/getnotes/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    getCourseNotes);
 
 
 module.exports = router;

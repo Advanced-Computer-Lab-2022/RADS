@@ -6,9 +6,6 @@ const noteSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'courseModel',
     },
-    subTitleId: {
-        type: mongoose.Types.ObjectId
-    },
     note: {
         type: String
     }

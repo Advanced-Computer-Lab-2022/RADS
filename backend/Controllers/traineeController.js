@@ -393,11 +393,10 @@ const deleteCreditCard = async(req, res) => {
 }
 
 const postNote = async(req, res) => {
-    const { courseId, subTitleId, note } = req.body;
+    const { courseId, note } = req.body;
     const newNote = {
         notes: {
             courseId: courseId,
-            subTitleId: subTitleId,
             note: note
         }
     };
@@ -415,16 +414,17 @@ const postNote = async(req, res) => {
     }
 }
 
-const getSubTitleNote = async(req, res) => {
-    const { subTitleId } = req.body;
+const getCourseNotes = async(req, res) => {
+    const { courseId } = req.body;
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
-        const dbResp = await Trainee.find({ subTitleId: subTitleId }, );
+        const dbResp = await Trainee.find({ _id: id });
+        let result = dbResp[0].notes.filter((item) => (item["courseId"].toString().toLowerCase().includes(courseId.toString().toLowerCase())));
         if (!dbResp) {
             // dbResp will be entire updated document, we're just returning newly added message which is input.
-            res.status(400).json({ message: 'Not able to find note' });
+            res.status(400).json({ message: 'Not able to find notes' });
         } else {
-            res.status(200).json(dbResp);
+            res.status(200).json(result);
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -455,5 +455,7 @@ module.exports = {
     checkSolvingStatus,
     checkExercisesSolvingStatus,
     findCreditCard,
-    deleteCreditCard
+    deleteCreditCard,
+    postNote,
+    getCourseNotes
 }

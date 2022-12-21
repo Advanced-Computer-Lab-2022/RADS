@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/RoleMiddleware");
-const { getCTrainees, updatePassword, postCourseRegister, getCTrainee, getCTraineeCourses, checkHaveAccess, checkCourseProgress, findExamGrade, findExercisesGrade, checkExercisesSolvingStatus, checkSolvingStatus, updateExercisesGrade, updateSolvedExercises, updateCourseProgress, updateSolvedExam, updateExamGrade } = require('../Controllers/corpTraineeController');
+const { getCTrainees, updatePassword, postCourseRegister, getCTrainee, getCTraineeCourses, checkHaveAccess, checkCourseProgress, findExamGrade, findExercisesGrade, checkExercisesSolvingStatus, checkSolvingStatus, updateExercisesGrade, updateSolvedExercises, updateCourseProgress, updateSolvedExam, updateExamGrade, postNote, getCourseNotes } = require('../Controllers/corpTraineeController');
 const router = express.Router();
 
 router.get('/',
@@ -83,5 +83,15 @@ router.post('/updateexamstatus/:id',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.CORP_TRAINEE),
     updateSolvedExam);
+
+router.post('/postnote/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.CORP_TRAINEE),
+    postNote);
+
+router.post('/getnotes/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.CORP_TRAINEE),
+    getCourseNotes);
 
 module.exports = router;
