@@ -383,9 +383,11 @@ const SearchCourse = (props) => {
               <p>Question: {exercise.question}</p>
             </div>
           ))}</div>
+          <button onClick={() => window.location.href = `/instructorreport?courseId=${course._id}&instructorId=${instruId}`}>Report Course</button>
           <p><strong>============================================================================================================</strong></p>
         </div>
       ))}
+       <button onClick={() => window.location.href = `/instructorreports?instructorId=${instruId}`}>View Reports</button>    
     </div>
   )
 
