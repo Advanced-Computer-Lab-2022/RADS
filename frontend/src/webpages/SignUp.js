@@ -33,14 +33,15 @@ function Copyright(props) {
 }
 
 const theme = createTheme({
-    palette: {
-    mode: 'light',
+  palette: {
+    mode: "light",
     primary: {
-      main: '#d80621',
-      contrastText: 'white',
+      main: "#d80621",
+      contrastText: "white",
     },
     secondary: {
-      main: '#222222',
+      main: "#222222",
+      contrastText: "white",
     },
   },
 });
@@ -76,7 +77,7 @@ export default function SignUp() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
