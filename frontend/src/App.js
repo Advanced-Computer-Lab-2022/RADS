@@ -12,7 +12,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import InstructorRating from './webcomponents/InstructorRating';
 import CorpTraineeView from './webcomponents/CorpTraineeView';
 import CorpTraineeForm from './webcomponents/CorpTraineeForm';
@@ -43,24 +43,33 @@ import AdminRouter from './webcomponents/AdminRouter'
 import TraineeRouter from './webcomponents/TraineeRouter';
 import CorpTraineeRouter from './webcomponents/CorpTraineeRouter';
 import InstructorRouter from './webcomponents/InstructorRouter';
-import PrivateRouter from './webcomponents/PrivateRouter';
 import ForceRedirect from './webcomponents/ForceRedirect';
+import { Logout, setUser } from './redux/actions/authActions';
+import { setAuth } from './util/setAuth';
+import store from './redux/store';
+import jwt_decode from 'jwt-decode'
+import { useSelector } from 'react-redux';
 
+if(window.localStorage.jwt){
+  const decode = jwt_decode(window.localStorage.jwt)
+  store.dispatch(setUser(decode))
+  setAuth(window.localStorage.jwt)
+  const currentDate = Date.now / 1000
+  if(decode.exp >  currentDate){
+   store.dispatch(Logout())
+  }
+}
 
 function App() {
   const url = 'https://api.exchangerate.host/convert?from=USD&to=';
   const [rateValue, setRateValue] = useState(1);
   const [inputValue, setInputValue] = useState("USD");
+  const auth = useSelector(state => state.auth)
+  const user = {
+    isConnected: auth.isConnected,
+    role: auth.user.role
+  }
 
-  //////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////
-  // CONTROL THE STATE AND ROLE OF USER FROM HERE!///////////////
-  const user = { role: "ADMIN", isConnected: true };////////
-  //////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////
-
-
-  //const [error,setError] = useState(null);
   const fetchCurrencyRate = async (val) => {
     console.log("Val", val);
     const response = await fetch(url + val);
@@ -93,13 +102,6 @@ function App() {
                 getOptionLabel={(option) => option.country}
                 renderOption={(props, option) => (
                   <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                    {/* <img
-            loading="lazy"
-            width="20"
-            src={`https://flagcdn.com/w20/${option.country.toLowerCase()}.png`}
-            srcSet={`https://flagcdn.com/w40/${option.country.toLowerCase()}.png 2x`}
-            alt=""
-          /> */}
                     {option.country}
                   </Box>
                 )}
@@ -128,7 +130,7 @@ function App() {
                 path="/traineeoptions"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeCreditOptions rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeCreditOptions rateVal={rateValue} currencyVal={inputValue}  token={window.localStorage.jwt} />
                   </TraineeRouter>
                 }
               />
@@ -365,7 +367,7 @@ function App() {
                 path="/traineelobby"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeLobby rateVal={rateValue} currencyVal={inputValue} />
+                    <TraineeLobby rateVal={rateValue} currencyVal={inputValue} token = {window.localStorage.jwt} />
                   </TraineeRouter>
                 }
               />

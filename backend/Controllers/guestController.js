@@ -91,11 +91,11 @@ const Login = async (req, res) => {
                                                                             lastName: user.lastName,
                                                                             userName: user.userName,
                                                                             email: user.email,
+                                                                            gender: user.gender,
                                                                             role: user.role
                                                                         }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                                                         res.status(200).json({
                                                                             message: "success",
-                                                                            user,
                                                                             token: "Bearer " + token,
                                                                         })
                                                                     }
@@ -115,11 +115,11 @@ const Login = async (req, res) => {
                                                                 lastName: user.lastName,
                                                                 userName: user.userName,
                                                                 email: user.email,
+                                                                gender: user.gender,
                                                                 role: user.role
                                                             }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                                             res.status(200).json({
                                                                 message: "success",
-                                                                user,
                                                                 token: "Bearer " + token
                                                             })
                                                         }
@@ -139,11 +139,11 @@ const Login = async (req, res) => {
                                                     lastName: user.lastName,
                                                     userName: user.userName,
                                                     email: user.email,
+                                                    gender: user.gender,
                                                     role: user.role
                                                 }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                                 res.status(200).json({
                                                     message: "success",
-                                                    user,
                                                     token: "Bearer " + token
                                                 })
                                             }
@@ -163,11 +163,12 @@ const Login = async (req, res) => {
                                         lastName: user.lastName,
                                         userName: user.userName,
                                         email: user.email,
-                                        role: user.role
+                                        gender: user.gender,
+                                        role: user.role,
+                                        verified: user.verified
                                     }, process.env.PRIVATE_KEY, { expiresIn: '10h' });
                                     res.status(200).json({
                                         message: "success",
-                                        user,
                                         token: "Bearer " + token
                                     })
                                 }

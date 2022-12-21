@@ -1,10 +1,12 @@
 // import axios from 'axios';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { json, useNavigate } from 'react-router-dom';
 const TraineeCreditOptions = (props) => {
     const {
         rateVal,
-        currencyVal
+        currencyVal,
+        token
     } = props;
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get('courseId');
@@ -20,24 +22,40 @@ const TraineeCreditOptions = (props) => {
     const [purchased, setPurchased] = useState(false);
     const navigate = useNavigate();
     const todayDate = new Date();
+
+    // useEffect(() => {
+    //     const fetchTrainee = async () => {
+    //         const response = await fetch(`/trainee/${traineeId}`, { method: 'GET', headers: { 'Authorization': `Bearer ${token}` } });
+    //         const json = await response.json();
+    //         if (response.ok) {
+    //             console.log("HEREEEEE1");
+    //             setTrainee(json);
+    //             setTraineeCards(json.creditCards);
+    //             fetchCourse();
+    //         }
+    //     }
+    //     fetchTrainee();
+    // }, [])
+
     useEffect(() => {
-        const fetchTrainee = async () => {
-            const response = await fetch(`/trainee/${traineeId}`);
-            const json = await response.json();
-            if (response.ok) {
-                console.log("HEREEEEE1");
-                setTrainee(json);
-                setTraineeCards(json.creditCards);
-                fetchCourse();
-            }
+        const fetchTrainee = () => {
+            axios
+                .get(`/trainee/${traineeId}`)
+                .then((res) => {
+                    setTrainee(res.data);
+                    setTraineeCards(res.data.creditCards);
+                    fetchCourse();
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }
         fetchTrainee();
-    }, [])
+    }, []);
 
     const fetchCourse = async () => {
-        const response = await fetch(`/course/${courseId}`);
+        const response = await fetch(`/course/${courseId}`, { method: 'GET', headers: { 'Authorization': `Bearer ${token}` } });
         const json = await response.json();
-        console.log("HEREEEEEEEEE2");
         if (response.ok) {
             setCourse(json);
         }
@@ -51,7 +69,8 @@ const TraineeCreditOptions = (props) => {
             body: JSON.stringify(info),
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
         if (response.ok) {
@@ -68,7 +87,8 @@ const TraineeCreditOptions = (props) => {
             body: JSON.stringify(info),
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
         const json = await response.json();
@@ -92,7 +112,8 @@ const TraineeCreditOptions = (props) => {
             body: JSON.stringify(body),
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
         const json = await response.json();
@@ -126,7 +147,7 @@ const TraineeCreditOptions = (props) => {
             }
         }
         else if (checkedCard !== "balance" && checkedCard !== null && !purchased) {
-           checkExpiryDate(checkedCard);            
+            checkExpiryDate(checkedCard);
         }
         else {
             setHtml('You already bought the course');
@@ -141,15 +162,16 @@ const TraineeCreditOptions = (props) => {
         return result
     }
 
-    const removeCard = async (value) =>{
+    const removeCard = async (value) => {
         let creditCardId = value;
-        let body = {creditCardId};
+        let body = { creditCardId };
         const response = await fetch(`/trainee/deletecard/${traineeId}`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
         const json = await response.json();
@@ -178,8 +200,8 @@ const TraineeCreditOptions = (props) => {
                                 <p>Card Expiry Date: {getDateAttributes(card.cardExpiryDate)}</p>
                                 {card.cardExpiryDate && new Date(card.cardExpiryDate) >= todayDate ? (<p></p>) : (<p>Card Expired</p>)}
                                 <label><input id={`first${index}`} type='radio' value={card._id} name={card.cardName} checked={checkedCard === card._id} onChange={e => { setCheckedCard(e.target.value) }} />Select</label>
-                                <br/>
-                                <button value={card._id} onClick={(e)=>removeCard(e.target.value)}>Remove</button>
+                                <br />
+                                <button value={card._id} onClick={(e) => removeCard(e.target.value)}>Remove</button>
                             </fieldset>
                         </div>
                     ))}

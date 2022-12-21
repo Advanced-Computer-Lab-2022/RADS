@@ -71,7 +71,7 @@ const corpTraineeSchema = new Schema({
     },
     role: {
         type: String,
-        required: true
+        default: "CORP_TRAINEE"
     }
 }, { timestamps: true })
 

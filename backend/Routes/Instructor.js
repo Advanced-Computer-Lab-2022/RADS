@@ -13,7 +13,7 @@ router.get('/',
 // GET a single instructor's info 
 router.get('/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR),
+    inRole(ROLES.INSTRUCTOR, ROLES.TRAINEE),
     getInstructor);
 
 // Post an instructor
