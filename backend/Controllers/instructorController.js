@@ -60,10 +60,6 @@ const deleteInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-
-
-
-
 // UPDATE an instructor
 const updateInstructor = async(req, res) => {
     const { id } = req.params;
@@ -73,7 +69,8 @@ const updateInstructor = async(req, res) => {
     const instructor = await Instructor.findByIdAndUpdate({ _id: id }, {
         email: req.body.email,
         bio: req.body.bio,
-        password: req.body.password
+        password: req.body.password,
+        verified: req.body.verified
     });
     if (!instructor) {
         return res.status(404).json({ error: 'No such instructor' });

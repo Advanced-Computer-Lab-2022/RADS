@@ -70,7 +70,11 @@ const instructorSchema = new Schema({
     },
     role: {
         type: String,
-        required: true
+        default: "INSTRUCTOR"
+    },
+    verified: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true })
 

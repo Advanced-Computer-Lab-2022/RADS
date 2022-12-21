@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import CourseCard from "./CourseCard";
+import jwt_decode from "jwt-decode";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -101,7 +102,13 @@ function valueDollar(value, currencyVal) {
   return `${value} ${currencyVal}`;
 }
 const TraineeSearch = (props) => {
-  const traineeId = "639b76cc2450d106e79418b6";
+  const {
+    rateVal,
+    currencyVal,
+    token
+  } = props;
+  const decode = jwt_decode(token);
+  const traineeId = decode.id;
   const [queryS, setQueryS] = useState("");
   const [queryF2, setQueryF2] = useState("");
   const [queryF3, setQueryF3] = useState("");
@@ -113,7 +120,7 @@ const TraineeSearch = (props) => {
   const [courseSubjects, setCourseSubjects] = useState([]);
   const [traineeName, setTraineeName] = useState("");
   const todayDate = new Date();
-  const { rateVal, currencyVal } = props;
+
 
   // To fetch all the courses and put the results in courses
   useEffect(() => {

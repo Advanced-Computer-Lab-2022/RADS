@@ -9,7 +9,10 @@ import CorpTraineeLobby from './webpages/CorpTraineeLobby';
 //import TraineeLobby from './webpages/TraineeLobby';
 import CourseView from './webcomponents/CourseView';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { useState } from 'react';
 import InstructorRating from './webcomponents/InstructorRating';
 import CorpTraineeView from './webcomponents/CorpTraineeView';
 import CorpTraineeForm from './webcomponents/CorpTraineeForm';
@@ -40,26 +43,43 @@ import AdminRouter from './webcomponents/AdminRouter'
 import TraineeRouter from './webcomponents/TraineeRouter';
 import CorpTraineeRouter from './webcomponents/CorpTraineeRouter';
 import InstructorRouter from './webcomponents/InstructorRouter';
-import PrivateRouter from './webcomponents/PrivateRouter';
 import ForceRedirect from './webcomponents/ForceRedirect';
+import { Logout, setUser } from './redux/actions/authActions';
+import { setAuth } from './util/setAuth';
+import store from './redux/store';
+import jwt_decode from 'jwt-decode'
+import { useSelector } from 'react-redux';
+import TraineeReport from './webcomponents/TraineeReport';
+import TraineeViewReports from './webcomponents/TraineeViewReports';
+import CorpTraineeReport from './webcomponents/CorpTraineeReport'; 
+import CorpTraineeViewReports from './webcomponents/CorpTraineeViewReports';
+import InstructorReport from './webcomponents/InstructorReport';
+import InstructorViewReports from './webcomponents/InstructorViewReports';
+import TraineeFollowUp from './webcomponents/TraineeFollowUp';
+import CorpTraineeFollowUp from './webcomponents/CorpTraineeFollowUp';
+import InstructorFollowUp from './webcomponents/InstructorFollowUp';
 import SelectCountry from './webcomponents/SelectCountry';
 import AppNavBar from './webcomponents/AppNavBar';
 
+if(window.localStorage.jwt){
+  const decode = jwt_decode(window.localStorage.jwt)
+  store.dispatch(setUser(decode))
+  setAuth(window.localStorage.jwt)
+  const currentDate = Date.now / 1000
+  if(decode.exp >  currentDate){
+   store.dispatch(Logout())
+  }
+}
 
 function App() {
   const url = 'https://api.exchangerate.host/convert?from=USD&to=';
   const [rateValue, setRateValue] = useState(1);
   const [inputValue, setInputValue] = useState("USD");
-
-  //////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////
-  // CONTROL THE STATE AND ROLE OF USER FROM HERE!///////////////
-  const user = { role: "INSTRUCTOR", isConnected: true };////////
-  //////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////
-
-
-  //const [error,setError] = useState(null);
+  const auth = useSelector(state => state.auth)
+  const user = {
+    isConnected: auth.isConnected,
+    role: auth.user.role
+  }
 
   const fetchCurrencyRate = async (val) => {
         console.log("Val", val);
@@ -101,12 +121,117 @@ function App() {
               />
 
               <Route
+                path="/corptraineereport"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeReport
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corptraineeviewreports"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeViewReports
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+              <Route
+                path="/corptraineefollowup"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <CorpTraineeFollowUp
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/instructorreport"
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorReport
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorviewreports"
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorViewReports
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorfollowup"
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorFollowUp
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/traineereport"
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeReport
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </TraineeRouter>
+                }
+              />
+              <Route
+                path="/traineeviewreports"
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeViewReports
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </TraineeRouter>
+                }
+              />
+              <Route
+                path="/traineefollowup"
+                element={
+                  <TraineeRouter user={user}>
+                    <TraineeFollowUp
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </TraineeRouter>
+                }
+              />
+              <Route
                 path="/traineeoptions"
                 element={
                   <TraineeRouter user={user}>
                     <TraineeCreditOptions
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      token={window.localStorage.jwt}
                     />
                   </TraineeRouter>
                 }
@@ -408,6 +533,7 @@ function App() {
                     <TraineeLobby
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      token={window.localStorage.jwt}
                     />
                   </TraineeRouter>
                 }

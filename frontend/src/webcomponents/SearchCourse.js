@@ -512,13 +512,15 @@ const SearchCourse = (props) => {
                   </box>
                 ))}
             </box>
-            <p>
+            <button onClick={() => window.location.href = `/instructorreport?courseId=${course._id}&instructorId=${instruId}`}>Report Course</button>
+          <p>
               <strong>
                 ============================================================================================================
               </strong>
             </p>
           </box>
         ))}
+       <button onClick={() => window.location.href = `/instructorreports?instructorId=${instruId}`}>View Reports</button>    
     </box>
   );
 };

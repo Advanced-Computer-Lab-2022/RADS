@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-//import { Logout } from "../redux/actions/authActions";
+import { Logout } from "../redux/actions/authActions";
 
 function Navbar({ user }) {
-  //const dispatch = useDispatch()
-  // const LogoutHanlder = ()=>{
-  //    dispatch(Logout())
-  // }
+  const dispatch = useDispatch()
+  const LogoutHanlder = ()=>{
+     dispatch(Logout())
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -91,7 +91,7 @@ function Navbar({ user }) {
                     </Link>
                   </>
                 ) : (
-                  <Link className="btn btn-outline-primary" to="#" onClick={{/*LogoutHanlder*/ }}>
+                  <Link className="btn btn-outline-primary" to="#" onClick={LogoutHanlder}>
                     Logout
                   </Link>
                 )

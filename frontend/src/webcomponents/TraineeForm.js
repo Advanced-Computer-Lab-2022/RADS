@@ -9,6 +9,8 @@ const TraineeForm = (props) => {
   const [courses, setCourses] = useState([]);
   const [coursesIds, setCoursesIds] = useState([]);
   const todayDate = new Date();
+  const [trainee,setTrainee] = useState([]);
+
 
   useEffect(() => {
     const viewRegistered = async () => {
@@ -23,6 +25,20 @@ const TraineeForm = (props) => {
     };
     viewRegistered();
   }, []);
+    useEffect(()=>{
+        const viewRegistered = async () => {
+            const response = await fetch(`/trainee/${traineeId}`);
+            const json = await response.json();
+            console.log(json.courses);
+            if(response.ok){
+                fetchCourses(json.courses);
+                console.log(json.courses);
+                setCoursesIds(json.courses)
+                setTrainee(json);
+            }
+        }
+        viewRegistered();
+    }, [])
 
   const fetchCourses = async (ids) => {
     let courseIds = { ids };
@@ -65,10 +81,24 @@ const TraineeForm = (props) => {
                   courseView2={courseView2}
                   id={traineeId}
                 />
+                <button
+                  onClick={() =>
+                    (window.location.href = `/traineereport?courseId=${course._id}&traineeId=${traineeId}`)
+                  }
+                >
+                  Report Course
+                </button>
               </box>
             ))}
         </box>
       )}
+      <button
+        onClick={() =>
+          (window.location.href = `/traineeviewreports?traineeId=${traineeId}`)
+        }
+      >
+        View Reports
+      </button>
     </box>
   );
 };

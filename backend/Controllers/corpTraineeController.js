@@ -256,6 +256,45 @@ const updateExamGrade = async(req, res) => {
 }
 
 
+const postNote = async(req, res) => {
+    const { courseId, note } = req.body;
+    const newNote = {
+        notes: {
+            courseId: courseId,
+            note: note
+        }
+    };
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const dbResp = await CorpTrainee.findOneAndUpdate({ "_id": id }, { $push: newNote }, { new: true }).lean(true);
+        if (dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(201).json(newNote);
+        } else {
+            res.status(400).json({ message: 'Not able to add note' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+const getCourseNotes = async(req, res) => {
+    const { courseId } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const dbResp = await CorpTrainee.find({ _id: id });
+        let result = dbResp.notes.filter((item) => (item["courseId"].toString().toLowerCase().includes(courseId.toString().toLowerCase())));
+        if (!dbResp) {
+            // dbResp will be entire updated document, we're just returning newly added message which is input.
+            res.status(400).json({ message: 'Not able to find notes' });
+        } else {
+            res.status(200).json(result);
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 module.exports = {
     getCTrainees,
@@ -273,5 +312,7 @@ module.exports = {
     updateSolvedExercises,
     updateCourseProgress,
     updateSolvedExam,
-    updateExamGrade
+    updateExamGrade,
+    postNote,
+    getCourseNotes
 }
