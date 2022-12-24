@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import axios from "axios";
 
 const TraineeReport = (props) => {
     const {
@@ -54,21 +55,27 @@ const TraineeReport = (props) => {
 
 
     const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setTrainee(json);
-            setTraineeCourses(json.courses);
-            setTraineeBalance(json.balance);
-        }
+        axios
+            .get(`/trainee/${traineeId}`)
+            .then((res) => {
+                setTrainee(res.data);
+            setTraineeCourses(res.data.courses);
+            setTraineeBalance(res.data.balance);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
+        axios
+            .get(`/instructor/${instID}`)
+            .then((res) => {
+                setinstructorName(res.data.firstName + " " + res.data.lastName);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     const postRequest = async () => {

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import { TextField } from "@mui/material";
-
+import axios from "axios";
 
 const InstructorFollowUp = (props) => {
     const {
@@ -18,12 +18,15 @@ const InstructorFollowUp = (props) => {
 
     useEffect(() => {
         const fetchInstructor = async () => {
-            const response = await fetch(`/instructor/${instructorId}`);
-            const json = await response.json();
-            if (response.ok) {
-                setInstructor(json);
+            axios
+            .get(`/instructor/${instructorId}`)
+            .then((res) => {
+                setInstructor(res.data);
                 fetchReport();
-            }
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         }
         fetchInstructor();
     }, [])

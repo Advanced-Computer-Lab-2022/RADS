@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 
 
 const CorpTraineeSubmitAccess = (props) => {
@@ -33,27 +33,30 @@ const CorpTraineeSubmitAccess = (props) => {
     }, [])
 
 
-    const fetchCorpTrainee = async() => {
-        const response = await fetch(`/corptrainee/${corpTraineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setCorpTrainee(json);
-        }
+    const fetchCorpTrainee = async () => {
+        axios
+            .get(`/corptrainee/${corpTraineeId}`)
+            .then((res) => {
+                setCorpTrainee(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
-
-    const fetchInstructor = async(instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
+    const fetchInstructor = async (instID) => {
+        axios
+            .get(`/instructor/${instID}`)
+            .then((res) => {
+                setinstructorName(res.data.firstName + " " + res.data.lastName);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
-
 
     const handleAccessRequest = async() => {
         let requestType = "Access";
-        console.log(corpTraineeComment);
-        const body = { corpTraineeId, corpTraineeComment, courseId, requestType }
+        const body = { corpTraineeId, courseId, requestType }
         const response = await fetch(`/report/postrequest`, {
             method: 'POST',
             body: JSON.stringify(body),
@@ -64,8 +67,23 @@ const CorpTraineeSubmitAccess = (props) => {
         })
         const json = await response.json();
         if (response.ok) {
+            postComment(json);
+        }
+    }
+
+    const postComment = async (reportId) => {
+        const body = { corpTraineeComment }
+        const response = await fetch(`/report/corptraineepostcomment/${reportId}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
+        if (response.ok) {
             setHtml("Request Sent Successfully!");
-            setCorpTraineeComment('');
         }
     }
 

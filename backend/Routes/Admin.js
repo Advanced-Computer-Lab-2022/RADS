@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/RoleMiddleware");
-const { postAdmin, postCTrainee, postInstructor, editAdmin, getAdmins, login, logout } = require('../Controllers/adminController');
+const { postAdmin, postCTrainee, postInstructor, editAdmin, getAdmins } = require('../Controllers/adminController');
 
 const router = express.Router();
 
@@ -10,22 +10,22 @@ router.get('/',
     inRole(ROLES.ADMIN),
     getAdmins);
 
-router.post('/addAdmin',
+router.post('/addadmin',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.ADMIN),
     postAdmin);
 
-router.post('/addCTrainee',
+router.post('/addctrainee',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.ADMIN),
     postCTrainee);
 
-router.post('/addInstructor',
+router.post('/addinstructor',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.ADMIN),
     postInstructor);
 
-router.patch('/editAdmin/:id',
+router.patch('/editadmin/:id',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.ADMIN),
     editAdmin);

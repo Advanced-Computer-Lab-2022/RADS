@@ -122,7 +122,7 @@ const HomeSearch = (props) => {
       const json = await response.json();
       if (response.ok) {
         setCourses(json);
-        setCourseSubjects(getCourseSubjects(json));
+        getCourseSubjects();
         findMaxPrice();
         getMostViewed();
       }
@@ -157,16 +157,14 @@ const HomeSearch = (props) => {
       setHighestViewedCourses(json);
     }
   };
-  //GET all course subjects
-  const getCourseSubjects = (arr) => {
-    const newArray = [];
-    for (let i = 0; i < arr.length; i++) {
-      if (!newArray.includes(arr[i].subject)) {
-        newArray[i] = arr[i].subject;
-      }
+  
+  const getCourseSubjects = async() =>{
+    const response = await fetch("/course/get/coursesubjects");
+    const json = await response.json();
+    if (response.ok) {
+      setCourseSubjects(json);
     }
-    return newArray;
-  };
+  }
 
   // to Perform the intersection between the search elements and filter elements
 

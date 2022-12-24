@@ -1,6 +1,8 @@
 // import axios from 'axios';
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
+import axios from "axios";
+
 
 const TraineeForm = (props) => {
   const { rateVal, currencyVal } = props;
@@ -11,34 +13,24 @@ const TraineeForm = (props) => {
   const todayDate = new Date();
   const [trainee,setTrainee] = useState([]);
 
-
   useEffect(() => {
     const viewRegistered = async () => {
-      const response = await fetch(`/trainee/${traineeId}`);
-      const json = await response.json();
-      console.log(json.courses);
-      if (response.ok) {
-        fetchCourses(json.courses);
-        console.log(json.courses);
-        setCoursesIds(json.courses);
-      }
+      axios
+      .get(`/trainee/${traineeId}`)
+      .then((res) => {
+        fetchCourses(res.data.courses);
+        console.log(res.data.courses);
+        setCoursesIds(res.data.courses);
+        setTrainee(res.data);
+      })
+      .catch((error) => {
+          console.error(error)
+      })   
+    
     };
     viewRegistered();
   }, []);
-    useEffect(()=>{
-        const viewRegistered = async () => {
-            const response = await fetch(`/trainee/${traineeId}`);
-            const json = await response.json();
-            console.log(json.courses);
-            if(response.ok){
-                fetchCourses(json.courses);
-                console.log(json.courses);
-                setCoursesIds(json.courses)
-                setTrainee(json);
-            }
-        }
-        viewRegistered();
-    }, [])
+    
 
   const fetchCourses = async (ids) => {
     let courseIds = { ids };

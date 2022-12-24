@@ -8,18 +8,19 @@ import InstructorUpdateBio from "../webcomponents/InstructorUpdateBio"
 const InstructorLobby = (props) => {
     const {
         rateVal,
-        currencyVal
+        currencyVal,
+        token
     } = props;
     
 
     return ( <div className = "lobby" >
-        <SearchCourse rateVal = {props.rateVal} currencyVal = { props.currencyVal }/> 
+        <SearchCourse rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token}/> 
         <div className = "course-add" >
-        <CourseCreate rateVal = {props.rateVal} currencyVal = {props.currencyVal}/>
+        <CourseCreate rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token}/>
          </div>
-          <InstructorUpdateEmail />
-        <InstructorUpdatePassword />
-        <InstructorUpdateBio /> {
+          <InstructorUpdateEmail rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token} />
+        <InstructorUpdatePassword rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token} />
+        <InstructorUpdateBio rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token} /> {
             /* <div className="instructor-list">
                                     <ViewProfileButton />
                                     </div> */

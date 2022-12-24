@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
-
+import axios from "axios";
 
 const TraineeViewReports = (props) => {
     const {
@@ -17,33 +17,41 @@ const TraineeViewReports = (props) => {
 
     useEffect(() => {
         const fetchTrainee = async () => {
-            const response = await fetch(`/trainee/${traineeId}`);
-            const json = await response.json();
-            if (response.ok) {
-                setTrainee(json);
+            axios
+            .get(`/trainee/${traineeId}`)
+            .then((res) => {
+                setTrainee(res.data);
                 findResolvedCurrentReports();
                 findUnresolvedCurrentReports();
-            }
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         }
         fetchTrainee();
     }, [])
 
 
     const findResolvedCurrentReports = async () => {
-        const response = await fetch(`/report/gettraineeresolved/${traineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            console.log("resolved", json);
-            setResolvedReports(json);
-        }
+        axios
+            .get(`/report/gettraineeresolved/${traineeId}`)
+            .then((res) => {
+                setResolvedReports(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     const findUnresolvedCurrentReports = async () => {
-        const response = await fetch(`/report/gettraineeunresolved/${traineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setUnResolvedReports(json);
-        }
+        axios
+        .get(`/report/gettraineeunresolved/${traineeId}`)
+        .then((res) => {
+            setUnResolvedReports(res.data);
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }
     return (
         <div>

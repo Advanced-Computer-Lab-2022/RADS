@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import axios from "axios";
 
 const InstructorReport = (props) => {
     const {
@@ -24,7 +25,6 @@ const InstructorReport = (props) => {
     const [reports, setReports] = useState([]);
     const [requestType, setRequestType] = useState('');
     const [instructorComment, setInstructorComment] = useState('');
-
     const [html, setHtml] = useState('');
 
 
@@ -42,13 +42,16 @@ const InstructorReport = (props) => {
 
 
     const fetchInstructor = async () => {
-        const response = await fetch(`/instructor/${instructorId}`);
-        const json = await response.json();
-        if (response.ok) {
-           setInstructor(json);
-        }
+        axios
+        .get(`/instructor/${instructorId}`)
+        .then((res) => {
+            setInstructor(res.data);
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }
-
+    
     const postRequest = async () => {
         const info = {instructorComment,requestType,instructorId,courseId}
         const response = await fetch(`/report/postrequest`, {

@@ -4,6 +4,7 @@ import Rating from '@mui/material/Rating';
 //import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import axios from 'axios';
 
 const labels = {
     0.5: 'Useless',
@@ -58,48 +59,44 @@ const TraineeRating = (props) => {
     }, [])
 
     const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
+        axios
+            .get(`/instructor/${instID}`)
+            .then((res) => {
+                setinstructorName(res.data.firstName + " " + res.data.lastName);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
+
     const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setTrainee(json);
-        }
+        axios
+            .get(`/trainee/${traineeId}`)
+            .then((res) => {
+                setTrainee(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
-
-
+    
     const submitReviewInstructor = async (e) => {
         e.preventDefault()
         const review = { iRating, iReview, traineeId, corpTraineeId };
-        console.log("here", JSON.stringify(review));
-        console.log("here", review);
-        console.log("inst id", course.instructor);
-        const response = await fetch(`/instructor/review/${instructorId}`, {
-            method: 'POST',
-            body: JSON.stringify(review),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json();
-        if (!response.ok) {
-            setError1(json.error);
-        }
-        if (response.ok) {
+        axios
+        .post(`/instructor/review/${instructorId}`, review)
+        .then((res) => {
             setIReview('');
             setIRating(0);
-            console.log("New review Added for Instructor", json);
+            console.log("New review Added for Instructor", res.data);
             //refresh page on successful submission
             window.location.reload();
-        }
-
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }
+
     const submitReviewCourse = async (e) => {
         e.preventDefault()
         const review = { cRating, cReview, traineeId, corpTraineeId };

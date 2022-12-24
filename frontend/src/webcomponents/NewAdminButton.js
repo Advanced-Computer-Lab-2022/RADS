@@ -1,7 +1,15 @@
 import { useState } from "react"
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 
-const NewAdminButton = () => {
-    
+const NewAdminButton = (props) => {
+    const {
+        rateVal,
+        currencyVal,
+        token
+    } = props;
+    const decode = jwt_decode(token);
+    const adminId = decode.id;
     const [firstName,setFirstName] = useState('');
     const [lastName,setLastName] = useState('');
     const [error,setError] = useState(null);
@@ -10,29 +18,19 @@ const NewAdminButton = () => {
         e.preventDefault() //prevent form submission
         
         const admin = {firstName,lastName};
-        const response = await fetch('/Admin/addAdmin',{
-            method:'POST',
-            body: JSON.stringify(admin),
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
-        
-        const json = await response.json();
-
-        if(!response.ok){
-            setError(json.error);
-        }
-        if(response.ok){   
+        axios
+        .post('/admin/addAdmin', admin)
+        .then((res) => {
             setFirstName('');
             setLastName(''); 
             setError(null);
-            console.log("New Admin Posted", json);
-            
+            console.log("New Admin Posted", res.data);
             //refresh page on successful submission
             window.location.reload();
-        }
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }    
 
     return (

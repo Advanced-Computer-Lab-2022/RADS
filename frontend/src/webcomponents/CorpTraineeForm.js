@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
-
+import axios from "axios";
 
 const CorpTraineeForm = (props) => {
   const { rateVal, currencyVal } = props;
@@ -12,14 +12,15 @@ const CorpTraineeForm = (props) => {
 
   useEffect(() => {
     const viewRegistered = async () => {
-      const response = await fetch(`/corptrainee/${corpTraineeId}`);
-      const json = await response.json();
-      console.log(json.courses);
-      if (response.ok) {
-        fetchCourses(json.courses);
-        console.log(json.courses);
-        setCoursesIds(json.courses);
-      }
+      axios
+            .get(`/corptrainee/${corpTraineeId}`)
+            .then((res) => {
+              fetchCourses(res.data.courses);
+              setCoursesIds(res.data.courses);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     };
     viewRegistered();
   }, []);

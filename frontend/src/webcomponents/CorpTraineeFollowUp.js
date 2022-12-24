@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import { TextField } from "@mui/material";
-
+import axios from "axios";
 
 const CorpTraineeFollowUp = (props) => {
     const {
@@ -18,12 +18,15 @@ const CorpTraineeFollowUp = (props) => {
 
     useEffect(() => {
         const fetchCorpTrainee = async () => {
-            const response = await fetch(`/corptrainee/${corpTraineeId}`);
-            const json = await response.json();
-            if (response.ok) {
-                setCorpTrainee(json);
+            axios
+            .get(`/corptrainee/${corpTraineeId}`)
+            .then((res) => {
+                setCorpTrainee(res.data);
                 fetchReport();
-            }
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         }
         fetchCorpTrainee();
     }, [])

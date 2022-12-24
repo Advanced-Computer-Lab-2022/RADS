@@ -4,6 +4,7 @@ import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import CourseCard from "./CourseCard";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -129,7 +130,7 @@ const TraineeSearch = (props) => {
       const json = await response.json();
       if (response.ok) {
         setCourses(json);
-        setCourseSubjects(getCourseSubjects(json));
+        getCourseSubjects();
         fetchTrainee();
         getMostViewed();
       }
@@ -146,23 +147,24 @@ const TraineeSearch = (props) => {
   };
 
   const fetchTrainee = async () => {
-    const response = await fetch(`/trainee/${traineeId}`);
-    const json = await response.json();
-    if (response.ok) {
-      let x = json.firstName + " " + json.lastName;
+    axios
+    .get(`/trainee/${traineeId}`)
+    .then((res) => {
+      let x = res.data.firstName + " " + res.data.lastName;
       setTraineeName(x);
-    }
+    })
+    .catch((error) => {
+        console.error(error)
+    })
   };
   //GET all course subjects
-  const getCourseSubjects = (arr) => {
-    const newArray = [];
-    for (let i = 0; i < arr.length; i++) {
-      if (!newArray.includes(arr[i].subject)) {
-        newArray[i] = arr[i].subject;
-      }
+  const getCourseSubjects = async() =>{
+    const response = await fetch("/course/get/coursesubjects");
+    const json = await response.json();
+    if (response.ok) {
+      setCourseSubjects(json);
     }
-    return newArray;
-  };
+  }
 
   // to Perform the intersection between the search elements and filter elements
 
@@ -192,6 +194,7 @@ const TraineeSearch = (props) => {
       )
     );
   };
+  
   // Price filter method
   const filterMethodOnPrice = (courseData) => {
     if (!queryF2 || queryF2 === Math.ceil(7000 * rateVal)) {

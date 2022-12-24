@@ -1,5 +1,6 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CorpTraineeSolve = (props) => {
     const {
@@ -14,24 +15,16 @@ const CorpTraineeSolve = (props) => {
     const [corpTrainee, setCorpTrainee] = useState([]);
     const [instructorName, setinstructorName] = useState([]);
     const [instructorId, setInstructorId] = useState('');
-
-
-    const [oldGrade, setOldGrade] = useState(0);
-
     const [exercisesGradeFinal, setExercisesGradeFinal] = useState(0);
     const [oldExercisesGrade, setOldExercisesGrade] = useState(0);
-
-    const [choicesChecked, setChoicesChecked] = useState([]);
     const [choices, setChoices] = useState([]);
-    const [firstChoices, setFirstChoices] = useState([]);
-    const [secondChoices, setSecondChoices] = useState([]);
-    const [thirdChoices, setThirdChoices] = useState([]);
-    const [fourthChoices, setFourthChoices] = useState([]);
     const [grades, setGrades] = useState([]);
     const [corrects, setCorrects] = useState([]);
     const [status, setStatus] = useState(false);
     const [showButton, setShowButton] = useState(true);
     const [solved, setSolved] = useState(false);
+
+
     useEffect(() => {
         const fetchCourse = async () => {
             const response = await fetch(`/course/${courseId}`);
@@ -49,53 +42,50 @@ const CorpTraineeSolve = (props) => {
         fetchCourse();
     }, [])
 
-    const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
-    }
     const fetchCorpTrainee = async () => {
-        const response = await fetch(`/corptrainee/${corpTraineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setCorpTrainee(json);
-        }
+        axios
+            .get(`/corptrainee/${corpTraineeId}`)
+            .then((res) => {
+                setCorpTrainee(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
+    const fetchInstructor = async (instID) => {
+        axios
+            .get(`/instructor/${instID}`)
+            .then((res) => {
+                setinstructorName(res.data.firstName + " " + res.data.lastName);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    
 
     const updateSolvingStatus = async () => {
         const info = { courseId };
-        const response = await fetch(`/corptrainee/updateexercisesstatus/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/corptrainee/updateexercisesstatus/${corpTraineeId}`, info)
+        .then((res) => {
+            console.log(res.data)
         })
-        const json = await response.json();
-        console.log(json);
-        if (response.ok) {
-            console.log(json);
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     const getSolvingStatus = async () => {
         const info = { courseId };
-        const response = await fetch(`/corptrainee/checkexstatus/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/corptrainee/checkexstatus/${corpTraineeId}`, info)
+        .then((res) => {
+            setStatus(res.data)
         })
-        const json = await response.json();
-        console.log("status", json);
-        if (response.ok) {
-            setStatus(json)
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     const handleChoice = (e, exIndex) => {
@@ -110,19 +100,14 @@ const CorpTraineeSolve = (props) => {
     }
     const findExercisesLastGrade = async () => {
         const info = { courseId };
-        const response = await fetch(`/corptrainee/findgrade/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/corptrainee/findgrade/${corpTraineeId}`, info)
+        .then((res) => {
+            setOldExercisesGrade(res.data)
         })
-        const json = await response.json();
-        console.log("oldgrade", json);
-        if (response.ok) {
-            setOldExercisesGrade(json)
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     
@@ -131,18 +116,14 @@ const CorpTraineeSolve = (props) => {
         let currentChapter = course.subtitles.length + 1
         let totalChapters = course.subtitles.length + 2;
         const info = { courseId, currentChapter, totalChapters }
-        const response = await fetch(`/corptrainee/updateprogress/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/corptrainee/updateprogress/${corpTraineeId}`, info)
+        .then((res) => {
+            console.log(res.data);
         })
-        const json = await response.json();
-        if (response.ok) {
-            console.log(json);
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
 
@@ -173,17 +154,14 @@ const CorpTraineeSolve = (props) => {
         console.log(finalgrade);
         let exercisesGrade = finalgrade
         const info = { courseId, exercisesGrade };
-        const response = await fetch(`/corptrainee/updateexercisesgrade/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/corptrainee/updateexercisesgrade/${corpTraineeId}`, info)
+        .then((res) => {
+            console.log(res.data);
         })
-        if (response.ok) {
-            console.log("Done");
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     const handleSubmit = (e) => {
