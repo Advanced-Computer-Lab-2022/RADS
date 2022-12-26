@@ -41,7 +41,7 @@ const CorpTraineeCourse = (props) => {
             if (response.ok) {
                 setCourse(json);
                 fetchInstructor(json.instructor);
-                fetchCorpTrainee();
+                fetchCorpTrainee(json.courseTitle);
                 getAllNotes();
             }
         }
@@ -49,13 +49,14 @@ const CorpTraineeCourse = (props) => {
     }, [])
 
 
-    const fetchCorpTrainee = async () => {
+    const fetchCorpTrainee = async (courseTitle) => {
         axios
             .get(`/corptrainee/${corpTraineeId}`)
             .then((res) => {
                 setCorpTrainee(res.data);
                 setCorpTraineeCourses(res.data.courses);
-                findCurrentProgress(course.courseTitle, res.data.email, res.data.firstName, res.data.lastName);
+                createCertificate(res.data.firstName, res.data.lastName, courseTitle)
+                findCurrentProgress(courseTitle, res.data.email, res.data.firstName, res.data.lastName);
             })
             .catch((error) => {
                 console.error(error)
@@ -72,21 +73,20 @@ const CorpTraineeCourse = (props) => {
             })
     }
 
-    const fetchCertificateState = async (courseTitle, email, firstName, lastName) => {
+    const fetchCertificateState = async (courseTitle, email) => {
         const info = { courseId }
         axios
             .post(`/corptrainee/checkcertstate/${corpTraineeId}`, info)
             .then((res) => {
-                sendCompletionEmail(res.data, courseTitle, email, firstName, lastName);
+                sendCompletionEmail(res.data, courseTitle, email,);
             })
             .catch((error) => {
                 console.error(error)
             })
     }
 
-    const sendCompletionEmail = async (state, courseTitle, email, firstName, lastName) => {
+    const sendCompletionEmail = async (state, courseTitle, email) => {
         if (state === false) {
-            await createCertificate(firstName, lastName, courseTitle);
             let courseName = courseTitle;
             const info = { email, courseName }
             axios
@@ -210,17 +210,15 @@ const CorpTraineeCourse = (props) => {
 
     const generatePDF = async (e) => {
         e.preventDefault();
-        await createCertificate(corpTrainee.firstName, corpTrainee.lastName, course.courseTitle).then(
-            axios
-                .get(`/corptrainee/cert/getpdf`, { responseType: 'blob' })
-                .then((res) => {
-                    const blob = new Blob([res.data], { type: 'application/pdf' })
-                    saveAs(blob, "certificate.pdf")
-                })
-                .catch((error) => {
-                    console.error(error)
-                })
-        );
+        axios
+            .get(`/corptrainee/cert/getpdf`, { responseType: 'blob' })
+            .then((res) => {
+                const blob = new Blob([res.data], { type: 'application/pdf' })
+                saveAs(blob, "certificate.pdf")
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     return (
