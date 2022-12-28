@@ -905,13 +905,13 @@ const countries = [
       "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/IE.svg",
   },
   {
-    country: "Israel",
+    country: "Palestine",
     currency_code: "ILS",
-    code: "IL",
-    emoji: "🇮🇱",
-    unicode: "U+1F1EE U+1F1F1",
+    code: "PS",
+    emoji: "🇵🇸",
+    unicode: "U+1F1F5 U+1F1F8",
     image:
-      "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/IL.svg",
+      "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/PS.svg",
   },
   {
     country: "Italy",

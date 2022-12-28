@@ -19,11 +19,12 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import SelectCountry from "./SelectCountry";
+import SearchBar from "./SearchBar";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [];
 const settings = ["Profile", "Lobby", "Logout"];
 
-const AppNavBar = ({ handleSelection }) => {
+const AppNavBar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -89,6 +90,8 @@ const AppNavBar = ({ handleSelection }) => {
             LOGO
           </Typography> */}
 
+          <SearchBar rateVal={props.rateValue} currencyVal={props.currencyVal} />
+
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -140,7 +143,7 @@ const AppNavBar = ({ handleSelection }) => {
 
           <SelectCountry
             sx={{ marginRight: 10 }}
-            handleSelection={handleSelection}
+            handleSelection={props.handleSelection}
           />
 
           <Box sx={{ flexGrow: 0, marginLeft: 5 }}>

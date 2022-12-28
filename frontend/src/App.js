@@ -10,8 +10,6 @@ import CorpTraineeLobby from './webpages/CorpTraineeLobby';
 import CourseView from './webcomponents/CourseView';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import { useState } from 'react';
 import InstructorRating from './webcomponents/InstructorRating';
 import CorpTraineeView from './webcomponents/CorpTraineeView';
@@ -58,8 +56,8 @@ import InstructorViewReports from './webcomponents/InstructorViewReports';
 import TraineeFollowUp from './webcomponents/TraineeFollowUp';
 import CorpTraineeFollowUp from './webcomponents/CorpTraineeFollowUp';
 import InstructorFollowUp from './webcomponents/InstructorFollowUp';
-import SelectCountry from './webcomponents/SelectCountry';
 import AppNavBar from './webcomponents/AppNavBar';
+import SearchPage from './webcomponents/SearchPage';
 
 if(window.localStorage.jwt){
   const decode = jwt_decode(window.localStorage.jwt)
@@ -99,19 +97,19 @@ function App() {
     fetchCurrencyRate(inputValue);
   }
   return (
-    <div className="App">
+    <Box className="App">
       <BrowserRouter>
-        <div className="bg-light" style={{ height: "100vh" }}>
+        <Box className="bg-light" style={{ height: "100vh" }}>
           <AppNavBar
             rateValue={rateValue}
-            inputValue={inputValue}
+            currencyVal={inputValue}
             handleSelection={handleSelection}
           />
           <Navbar user={user} />
-          <div className="home-lobby">
+          <Box className="home-lobby card-container">
             <h2>Welcome to RADS Online Course Provider</h2>
-          </div>
-          <div className="webpages">
+          </Box>
+          <Box className="webpages">
             <Routes>
               <Route
                 path="/noaccess"
@@ -129,6 +127,13 @@ function App() {
                       currencyVal={inputValue}
                     />
                   </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/search"
+                element={
+                    <SearchPage rateVal={rateValue} currencyVal={inputValue} />
                 }
               />
 
@@ -581,10 +586,10 @@ function App() {
                 }
               />
             </Routes>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </BrowserRouter>
-    </div>
+    </Box>
   );
 }
 

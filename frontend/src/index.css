@@ -1,74 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 /* base styles */
 * {
-    margin: 0;
-    font-family: "Quicksand";
-    color: #222222;
+  margin: 0;
+  font-family: "Quicksand";
+  color: #222222;
 }
 
 .card-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    height: auto;
-    margin: 1.5em;
-    background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: auto;
+  margin: 1.5em;
+  background: #ffffff;
 }
 
 .card {
-    width: 300px;
-    height: auto;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 3px 4px 10px 3px rgba(34, 34, 34, 0.36);
-    flex-grow: 1;
-    margin: 1em;
-    transition: 0.3s;
+  width: 300px;
+  height: auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 3px 4px 10px 3px rgba(34, 34, 34, 0.36);
+  flex-grow: 1;
+  margin: 1em;
+  transition: 0.3s;
 }
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 3px 4px 15px 3px rgba(34, 34, 34, 0.36);;
+  transform: scale(1.05);
+  box-shadow: 3px 4px 15px 3px rgba(34, 34, 34, 0.36);
 }
 /* promotion price css */
 .course-promo-card {
-    color: #D80621;
-    font-size: 1em;
-    font-weight: 600;
-    font-family: Quicksand;
+  color: #d80621;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: Quicksand;
 }
 
 .navbar {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    width: auto;
-    margin: 0 auto;
-    border-bottom: 1px solid #ffffff;
+    position: sticky;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: auto;
+  margin: 0 auto;
+  background-color: #d80621;
 }
 
 .navbar h1 {
-    color: #D80621;
+  color: #d80621;
 }
 
 .navbar .links {
-    margin-left: auto;
+  margin-left: auto;
+  font-weight: 400;
+  font-style: bold;
 }
 
 .navbar a {
-    margin-left: 16px;
-    text-decoration: none;
-    padding: 6px;
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  font-weight: 900;
 }
 
 .navbar a:hover {
-    color: #D80621;
+  color: #ffffff;
 }
 
 .content {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
+  /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
