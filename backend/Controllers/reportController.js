@@ -55,6 +55,14 @@ const getReportedCoursesInstructor = async(req, res) => {
     res.status(200).json(requests);
 }
 
+const getReportedProblems = async(req, res) => {
+    const requests = await Report.find({ requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId requestType reportStatus adminCommment');
+    if (!requests) {
+        return res.status(404).json({ error: 'No courses' });
+    }
+    res.status(200).json(requests);
+}
+
 const getRefundRequests = async(req, res) => {
     const requests = await Report.find({ requestType: "Refund" }).sort({ createdAt: -1 });
     if (!requests) {
@@ -189,60 +197,64 @@ const updateRequest = async(req, res) => {
 }
 
 
-
-
 const getTraineeUnresolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ reportStatus: ['pending', 'unseen'] }, { requestType: ['Other', 'Financial', 'Technical'] }, { traineeId: id }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminCommment');
+    let result = requests.filter((item) => item["reportStatus"].includes("unseen") || item["reportStatus"].includes("pending"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
     }
-    res.status(200).json(requests);
+    res.status(200).json(result);
 }
 
 const getCorpTraineeUnresolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ reportStatus: ['pending', 'unseen'] }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }, { corpTraineeId: id }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminCommment');
+    let result = requests.filter((item) => item["reportStatus"].includes("unseen") || item["reportStatus"].includes("pending"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
     }
-    res.status(200).json(requests);
+    res.status(200).json(result);
 }
 
 const getInstructorUnresolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ reportStatus: ['pending', 'unseen'] }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }, { instructorId: id }).select('instructorId instructorComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('instructorId instructorComments courseId reportStatus requestType adminCommment');
+    let result = requests.filter((item) => item["reportStatus"].includes("unseen") || item["reportStatus"].includes("pending"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
     }
-    res.status(200).json(requests);
+    res.status(200).json(result);
 }
 
 const getTraineeResolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ reportStatus: 'resolved' }, { requestType: ['Other', 'Financial', 'Technical'] }, { traineeId: id }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminCommment');
+    let result = requests.filter((item) => item["reportStatus"].includes("resolved"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
     }
-    res.status(200).json(requests);
+    res.status(200).json(result);
 }
 
 const getCorpTraineeResolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ reportStatus: 'resolved' }, { requestType: ['Other', 'Financial', 'Technical'] }, { corpTraineeId: id }).sort({ createdAt: -1 }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminCommment');
+    let result = requests.filter((item) => item["reportStatus"].includes("resolved"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
     }
-    res.status(200).json(requests);
+    res.status(200).json(result);
 }
 
 const getInstructorResolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ reportStatus: 'resolved' }, { requestType: ['Other', 'Financial', 'Technical'] }, { instructorId: id }).sort({ createdAt: -1 }).select('instructorId instructorComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('instructorId instructorComments courseId reportStatus requestType adminCommment');
+    let result = requests.filter((item) => item["reportStatus"].includes("resolved"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
     }
-    res.status(200).json(requests);
+    res.status(200).json(result);
 }
 
 
@@ -270,4 +282,5 @@ module.exports = {
     getCorpTraineeUnresolvedRequests,
     getInstructorResolvedRequests,
     getInstructorUnresolvedRequests,
+    getReportedProblems
 }

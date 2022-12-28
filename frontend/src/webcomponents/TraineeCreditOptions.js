@@ -23,20 +23,6 @@ const TraineeCreditOptions = (props) => {
     const navigate = useNavigate();
     const todayDate = new Date();
 
-    // useEffect(() => {
-    //     const fetchTrainee = async () => {
-    //         const response = await fetch(`/trainee/${traineeId}`, { method: 'GET', headers: { 'Authorization': `Bearer ${token}` } });
-    //         const json = await response.json();
-    //         if (response.ok) {
-    //             console.log("HEREEEEE1");
-    //             setTrainee(json);
-    //             setTraineeCards(json.creditCards);
-    //             fetchCourse();
-    //         }
-    //     }
-    //     fetchTrainee();
-    // }, [])
-
     useEffect(() => {
         const fetchTrainee = () => {
             axios
@@ -53,80 +39,83 @@ const TraineeCreditOptions = (props) => {
         fetchTrainee();
     }, []);
 
-    const fetchCourse = async () => {
-        const response = await fetch(`/course/${courseId}`, { method: 'GET', headers: { 'Authorization': `Bearer ${token}` } });
-        const json = await response.json();
-        if (response.ok) {
-            setCourse(json);
-        }
+
+
+    const fetchCourse = () => {
+        axios
+            .get(`/course/${courseId}`)
+            .then((res) => {
+                setCourse(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
+
+    const updateInstructorBalance = async (priceVal) => {
+        let balanceValue = priceVal - priceVal*0.1;
+        let info = {balanceValue}
+        axios
+            .post(`/instructor/updatebalance/${course.instructor}`,info)
+            .then((res) => {
+                console.log("updated balance", res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     const updateBalance = async (priceVal) => {
         let balanceValue = priceVal;
-        const info = { balanceValue };
-        const response = await fetch(`/trainee/updatebalance/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        if (response.ok) {
-            console.log("updated balance");
-        }
+        axios
+            .post(`/trainee/updatebalance/${traineeId}`, { balanceValue })
+            .then((res) => {
+                console.log("updated balance", res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     const registerCourse = async () => {
         let courseGrade = 0;
         let courseProgress = 0;
         const info = { courseId, courseGrade, courseProgress };
-        const response = await fetch(`/trainee/register/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        const json = await response.json();
-        if (response.ok) {
-            setHtml('Purchase was done successfully !');
-            setButton(true);
-            // navigate(`/traineeform?traineeId=${traineeId}`);
-        }
-
-        else if (!response.ok && json.message === 'already in db') {
-            setHtml('You already bought the course');
-        }
+        console.log("here");
+        axios
+            .post(`/trainee/register/${traineeId}`, info)
+            .then((res) => {
+                setHtml('Purchase was done successfully !');
+                setButton(true);
+            })
+            .catch((error) => {
+                setHtml('You already bought the course');
+                console.error(error)
+            })
     }
 
 
     const checkExpiryDate = async (id) => {
         let creditCardId = id;
         const body = { creditCardId };
-        const response = await fetch(`/trainee/findcreditcard/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        const json = await response.json();
-        if (response.ok) {
-            const newDate = new Date(json);
-            if (newDate >= todayDate) {
-                registerCourse();
-                setPurchased(true);
-            }
-            else {
-                setHtml("Cannot perform purschase, The Card is Expired")
-            }
-        }
+        axios
+            .post(`/trainee/findcreditcard/${traineeId}`, body)
+            .then((res) => {
+                if (res.data.ok) {
+                    const newDate = new Date(json);
+                    if (newDate >= todayDate) {
+                        registerCourse();
+                        setPurchased(true);
+                    }
+                    else {
+                        setHtml("Cannot perform purschase, The Card is Expired")
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
 
@@ -138,8 +127,9 @@ const TraineeCreditOptions = (props) => {
         else if (checkedCard === "balance" && !purchased) {
             if (trainee.balance >= course.price) {
                 registerCourse();
-                let price = (course.price * -1);
-                updateBalance(price);
+                let finalPrice = (course.price * -1);
+                updateBalance(finalPrice);
+                updateInstructorBalance(-1*finalPrice)
                 setPurchased(true);
             }
             else {
@@ -165,19 +155,14 @@ const TraineeCreditOptions = (props) => {
     const removeCard = async (value) => {
         let creditCardId = value;
         let body = { creditCardId };
-        const response = await fetch(`/trainee/deletecard/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        const json = await response.json();
-        if (response.ok) {
-            window.location.reload();
-        }
+        axios
+            .post(`/trainee/deletecard/${traineeId}`, body)
+            .then((res) => {
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
 

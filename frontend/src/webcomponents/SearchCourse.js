@@ -8,6 +8,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ReactPlayer from "react-player";
 import CourseCard from "./CourseCard";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -106,11 +108,11 @@ function valueStar(value) {
 }
 
 const SearchCourse = (props) => {
-  const { rateVal, currencyVal } = props;
+  const { rateVal, currencyVal, token } = props;
 
   //const params = new URLSearchParams(window.location.search);
-
-  const instruId = "638c11d6147e2173163fd962";
+  const decode = jwt_decode(token);
+  const instruId = decode.id;
   const [queryS, setQueryS] = useState("");
   const [queryF2, setQueryF2] = useState("");
   const [queryF3, setQueryF3] = useState("");
@@ -137,23 +139,24 @@ const SearchCourse = (props) => {
       if (response.ok) {
         console.log(json);
         setCourses(json);
-        setCourseSubjects(getCourseSubjects(json));
+        getCourseSubjects();
         getMostViewed();
+        fetchInstructor();
       }
     };
     fetchCourses();
   }, []);
 
-  useEffect(() => {
-    const fetchInstructor = async () => {
-      const response = await fetch(`/instructor/${instruId}`);
-      const json = await response.json();
-      if (response.ok) {
-        setinstructorName(json.firstName + " " + json.lastName);
-      }
-    };
-    fetchInstructor();
-  }, []);
+  const fetchInstructor = async () => {
+    axios
+      .get(`/instructor/${instruId}`)
+      .then((res) => {
+        setinstructorName(res.data.firstName + " " + res.data.lastName);
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
 
   const getMostViewed = async () => {
     const response = await fetch("/course/highest/views");
@@ -162,16 +165,16 @@ const SearchCourse = (props) => {
       setHighestViewedCourses(json);
     }
   };
-  //GET all course subjects
-  const getCourseSubjects = (arr) => {
-    const newArray = [];
-    for (let i = 0; i < arr.length; i++) {
-      if (!newArray.includes(arr[i].subject)) {
-        newArray[i] = arr[i].subject;
-      }
+
+  
+  //GET all course subjects taught by instructor
+  const getCourseSubjects = async() =>{
+    const response = await fetch(`/course/getinstructor/coursesubjects/${instruId}`);
+    const json = await response.json();
+    if (response.ok) {
+      setCourseSubjects(json);
     }
-    return newArray;
-  };
+  }
 
   const performIntersection = (arr1, arr2, arr3, arr4) => {
     const intersectionResult1 = arr1.filter((x) => arr2.indexOf(x) !== -1);
@@ -263,9 +266,7 @@ const SearchCourse = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //prevent form submission
-
     const promo = { promotionStartDate, promotionEndDate, promotionRate };
-    console.log(promo);
     const response = await fetch(`/course/promo/${selectedCourseId}`, {
       method: "POST",
       body: JSON.stringify(promo),
@@ -348,6 +349,13 @@ const SearchCourse = (props) => {
           }
         >
           View rating & reviews
+        </button>
+        <button
+          onClick={() =>
+            (window.location.href = `/instructormonthly?instructorId=${instruId}`)
+          }
+        >
+          View Monthly Earnings
         </button>
       </box>
       <box className="search-component">
@@ -513,14 +521,14 @@ const SearchCourse = (props) => {
                 ))}
             </box>
             <button onClick={() => window.location.href = `/instructorreport?courseId=${course._id}&instructorId=${instruId}`}>Report Course</button>
-          <p>
+            <p>
               <strong>
                 ============================================================================================================
               </strong>
             </p>
           </box>
         ))}
-       <button onClick={() => window.location.href = `/instructorreports?instructorId=${instruId}`}>View Reports</button>    
+      <button onClick={() => window.location.href = `/instructorviewreports?instructorId=${instruId}`}>View Reports</button>
     </box>
   );
 };

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import CourseCard from "./CourseCard";
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const ratingMarks = [
   {
@@ -60,7 +62,13 @@ function valueStar(value) {
 }
 
 const CorpTraineeSearch = (props) => {
-  const corpTraineeId = "639c996288853b0c6ec77018";
+  const {
+    rateVal,
+    currencyVal,
+    token
+  } = props;
+  const decode = jwt_decode(token);
+  const corpTraineeId = decode.id;
   const [queryS, setQueryS] = useState("");
   const [queryF2, setQueryF2] = useState("");
   const [queryF3, setQueryF3] = useState("");
@@ -70,7 +78,6 @@ const CorpTraineeSearch = (props) => {
   const [checkedSubjects, setCheckedSubjects] = useState([]);
   const [courseSubjects, setCourseSubjects] = useState([]);
   const [corpTraineeName, setCorpTraineeName] = useState("");
-  const { rateVal, currencyVal } = props;
   const todayDate = new Date();
   const [highestViewedCourses, setHighestViewedCourses] = useState([]);
 
@@ -81,7 +88,7 @@ const CorpTraineeSearch = (props) => {
       const json = await response.json();
       if (response.ok) {
         setCourses(json);
-        setCourseSubjects(getCourseSubjects(json));
+        getCourseSubjects();
         fetchCorpTrainee();
         getMostViewed();
       }
@@ -90,23 +97,24 @@ const CorpTraineeSearch = (props) => {
   }, []);
 
   const fetchCorpTrainee = async () => {
-    const response = await fetch(`/corptrainee/${corpTraineeId}`);
-    const json = await response.json();
-    if (response.ok) {
-      let x = json.firstName + " " + json.lastName;
+    axios
+    .get(`/corptrainee/${corpTraineeId}`)
+    .then((res) => {
+      let x = res.data.firstName + " " + res.data.lastName;
       setCorpTraineeName(x);
-    }
+    })
+    .catch((error) => {
+        console.error(error)
+    })
   };
   //GET all course subjects
-  const getCourseSubjects = (arr) => {
-    const newArray = [];
-    for (let i = 0; i < arr.length; i++) {
-      if (!newArray.includes(arr[i].subject)) {
-        newArray[i] = arr[i].subject;
-      }
+  const getCourseSubjects = async() =>{
+    const response = await fetch("/course/get/coursesubjects");
+    const json = await response.json();
+    if (response.ok) {
+      setCourseSubjects(json);
     }
-    return newArray;
-  };
+  }
 
   const getMostViewed = async () => {
     const response = await fetch("/course/highest/views");

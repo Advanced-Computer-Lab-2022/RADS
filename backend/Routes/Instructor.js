@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/RoleMiddleware");
-const { getInstructor, getInstructors, deleteInstructor, updateInstructor, postInstructor, postInstructorReview, getInstructorRating, forgotPassword, updatePassword, login, logout } = require('../Controllers/instructorController');
+const { getInstructor, getInstructors, deleteInstructor, updateInstructor, postInstructor, postInstructorReview, forgotPassword, updatePassword, updateInstructorBalance } = require('../Controllers/instructorController');
 const router = express.Router();
 
 // GET all instructors info
@@ -13,19 +13,19 @@ router.get('/',
 // GET a single instructor's info 
 router.get('/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR, ROLES.TRAINEE),
+    inRole(ROLES.INSTRUCTOR, ROLES.TRAINEE, ROLES.CORP_TRAINEE),
     getInstructor);
 
 // Post an instructor
 router.get('/add',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR),
+    inRole(ROLES.INSTRUCTOR, ROLES.ADMIN),
     postInstructor);
 
 // DELETE an instructor
 router.delete('/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR),
+    inRole(ROLES.INSTRUCTOR, ROLES.ADMIN),
     deleteInstructor);
 
 
@@ -46,19 +46,23 @@ router.patch('/password/:id',
 // POST a new Review
 router.post('/review/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR),
+    inRole(ROLES.INSTRUCTOR, ROLES.TRAINEE, ROLES.CORP_TRAINEE),
     postInstructorReview);
 
-// GET a single Course's rating 
-router.get('/rating/:id',
-    passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.INSTRUCTOR),
-    getInstructorRating);
 
+
+// POST forget password 
 router.post('/forgot/:id',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.INSTRUCTOR),
     forgotPassword);
+
+
+// POST forget password 
+router.post('/updatebalance/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.INSTRUCTOR, ROLES.TRAINEE, ROLES.CORP_TRAINEE, ROLES.ADMIN),
+    updateInstructorBalance);
 
 
 module.exports = router;

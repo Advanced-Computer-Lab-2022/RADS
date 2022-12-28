@@ -49,7 +49,7 @@ import jwt_decode from 'jwt-decode'
 import { useSelector } from 'react-redux';
 import TraineeReport from './webcomponents/TraineeReport';
 import TraineeViewReports from './webcomponents/TraineeViewReports';
-import CorpTraineeReport from './webcomponents/CorpTraineeReport'; 
+import CorpTraineeReport from './webcomponents/CorpTraineeReport';
 import CorpTraineeViewReports from './webcomponents/CorpTraineeViewReports';
 import InstructorReport from './webcomponents/InstructorReport';
 import InstructorViewReports from './webcomponents/InstructorViewReports';
@@ -57,15 +57,19 @@ import TraineeFollowUp from './webcomponents/TraineeFollowUp';
 import CorpTraineeFollowUp from './webcomponents/CorpTraineeFollowUp';
 import InstructorFollowUp from './webcomponents/InstructorFollowUp';
 import AppNavBar from './webcomponents/AppNavBar';
+import InstructorMonthly from './webcomponents/InstructorMonthly';
+import CorpTraineeInsert from './webcomponents/CorpTraineeInsert';
+import AdminProblems from './webcomponents/AdminProblems';
+import AdminPromotion from './webcomponents/AdminPromotion';
 import SearchPage from './webcomponents/SearchPage';
 
-if(window.localStorage.jwt){
+if (window.localStorage.jwt) {
   const decode = jwt_decode(window.localStorage.jwt)
   store.dispatch(setUser(decode))
   setAuth(window.localStorage.jwt)
   const currentDate = Date.now / 1000
-  if(decode.exp >  currentDate){
-   store.dispatch(Logout())
+  if (decode.exp > currentDate) {
+    store.dispatch(Logout())
   }
 }
 
@@ -80,15 +84,15 @@ function App() {
   }
 
   const fetchCurrencyRate = async (val) => {
-        console.log("Val", val);
-        const response = await fetch(url + val);
-        const json = await response.json();
-        console.log(json);
-        if (response.ok) {
-        setRateValue(json.result);
-        console.log(json.result);
-        }
+    console.log("Val", val);
+    const response = await fetch(url + val);
+    const json = await response.json();
+    console.log(json);
+    if (response.ok) {
+      setRateValue(json.result);
+      console.log(json.result);
     }
+  }
 
   //a function that handles the selection of the currency
   const handleSelection = (inputValue) => {
@@ -177,6 +181,18 @@ function App() {
                 element={
                   <InstructorRouter user={user}>
                     <InstructorViewReports
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructormonthly"
+                element={
+                  <InstructorRouter user={user}>
+                    <InstructorMonthly
                       rateVal={rateValue}
                       currencyVal={inputValue}
                     />
@@ -295,6 +311,44 @@ function App() {
                 element={
                   <AdminRouter user={user}>
                     <AdminReports
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </AdminRouter>
+                }
+              />
+
+              <Route
+                path="/adminproblems"
+                element={
+                  <AdminRouter user={user}>
+                    <AdminProblems
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </AdminRouter>
+                }
+              />
+
+              <Route
+                path="/adminpromotion"
+                element={
+                  <AdminRouter user={user}>
+                    <AdminPromotion
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </AdminRouter>
+                }
+              />
+
+
+
+              <Route
+                path="/admininsertcorp"
+                element={
+                  <AdminRouter user={user}>
+                    <CorpTraineeInsert
                       rateVal={rateValue}
                       currencyVal={inputValue}
                     />
@@ -474,6 +528,7 @@ function App() {
                     <InstructorLobby
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      token={window.localStorage.jwt}
                     />
                   </InstructorRouter>
                 }
@@ -483,7 +538,7 @@ function App() {
                 path="/adminlobby"
                 element={
                   <AdminRouter user={user}>
-                    <Admin rateVal={rateValue} currencyVal={inputValue} />
+                    <Admin rateVal={rateValue} currencyVal={inputValue} token={window.localStorage.jwt} />
                   </AdminRouter>
                 }
               />
@@ -514,6 +569,7 @@ function App() {
                     <CorpTraineeLobby
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      token={window.localStorage.jwt}
                     />
                   </CorpTraineeRouter>
                 }

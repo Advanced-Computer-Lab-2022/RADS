@@ -1,5 +1,5 @@
 const express = require('express');
-const { getRequest, getRefundRequests, getAccessRequests, postRequest, deleteRequest, getReportedCoursesCorpTrainee, getReportedCoursesInstructor, getReportedCoursesTrainee, updateRequest, postCommentCorpTrainee, postCommentTrainee, postCommentInstructor, getCorpTraineeResolvedRequests, getCorpTraineeUnresolvedRequests, getInstructorResolvedRequests, getInstructorUnresolvedRequests, getTraineeResolvedRequests, getTraineeUnresolvedRequests } = require('../Controllers/reportController');
+const { getRequest, getRefundRequests, getAccessRequests, postRequest, deleteRequest, getReportedProblems, getReportedCoursesCorpTrainee, getReportedCoursesInstructor, getReportedCoursesTrainee, updateRequest, postCommentCorpTrainee, postCommentTrainee, postCommentInstructor, getCorpTraineeResolvedRequests, getCorpTraineeUnresolvedRequests, getInstructorResolvedRequests, getInstructorUnresolvedRequests, getTraineeResolvedRequests, getTraineeUnresolvedRequests } = require('../Controllers/reportController');
 
 const router = express.Router();
 
@@ -15,18 +15,13 @@ router.patch("/updaterequest/:id", updateRequest);
 router.post("/traineepostcomment/:id", postCommentTrainee);
 router.post("/corptraineepostcomment/:id", postCommentCorpTrainee);
 router.post("/instructorpostcomment/:id", postCommentInstructor);
-
-
 router.get("/getinstructorunresolved/:id", getInstructorUnresolvedRequests)
 router.get("/getinstructorresolved/:id", getInstructorResolvedRequests)
 router.get("/getcorptraineeunresolved/:id", getCorpTraineeUnresolvedRequests)
 router.get("/getcorptraineeresolved/:id", getCorpTraineeResolvedRequests)
 router.get("/gettraineeunresolved/:id", getTraineeUnresolvedRequests)
 router.get("/gettraineeresolved/:id", getTraineeResolvedRequests)
-
-
-
-
+router.get("/requests/allproblems", getReportedProblems)
 
 
 module.exports = router;

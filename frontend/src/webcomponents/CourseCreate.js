@@ -5,25 +5,30 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const CourseCreate = (props) => {
+    const {
+        rateVal,
+        currencyVal,
+        token
+    } = props;
+    const decode = jwt_decode(token);
+    const instructorId = decode.id;
     const [courseTitle, setCourseTitle] = useState('');
     const [subtitles, setSubtitles] = useState([{ subTitle: "", description: "", videoLink: "", hours: "" }]);
     const [price, setPrice] = useState('');
     const [shortSummary, setShortSummary] = useState('');
     const [subject, setSubject] = useState('');
     const [totalHours, setTotalHours] = useState('');
-    const [instructor, setInstructor] = useState('');
     const [courseExercises, setCourseExercises] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
-    const [exam, setExam] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}]);
+    const [exam, setExam] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
     const [coursePreview, setCoursePreview] = useState('');
     const [error, setError] = useState(null);
-    const {
-        rateVal,
-        currencyVal
-    } = props;
     const handleSubmit = async (e) => {
         e.preventDefault() //prevent form submission   
+        let instructor = instructorId;
         const course = { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, exam, coursePreview };
         const response = await fetch('/course/add', {
             method: 'POST',
@@ -45,9 +50,8 @@ const CourseCreate = (props) => {
             setShortSummary('');
             setSubject('');
             setTotalHours('');
-            setInstructor('');
-            setCourseExercises([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}]);
-            setExam([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}]);
+            setCourseExercises([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
+            setExam([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
             setCoursePreview('');
             setError(null);
             console.log("New Course Added", json);
@@ -86,10 +90,10 @@ const CourseCreate = (props) => {
         list[index][name] = value;
         setSubtitles(list);
     }
-  
+
 
     const handleExerciseAdd = () => {
-        setCourseExercises([...courseExercises, { question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}])
+        setCourseExercises([...courseExercises, { question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }])
     }
     const setQuestion = (e, index2) => {
         const { name, value } = e.target;
@@ -137,7 +141,7 @@ const CourseCreate = (props) => {
     }
 
     const handleExamExerciseAdd = () => {
-        setExam([...exam, { question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: ""}])
+        setExam([...exam, { question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }])
     }
     const setEQuestion = (e, index3) => {
         const { name, value } = e.target;
@@ -184,7 +188,7 @@ const CourseCreate = (props) => {
         setExam(list);
     }
 
-   
+
     return (
         <div>
             <form className="create-course" onSubmit={handleSubmit}>
@@ -218,11 +222,6 @@ const CourseCreate = (props) => {
                 <label>Total Hours of the course: </label>
                 <input type="number" onChange={(e) => setTotalHours(e.target.value)}
                     value={totalHours}
-                />
-
-                <label>Instructor of the course: </label>
-                <input type="text" onChange={(e) => setInstructor(e.target.value)}
-                    value={instructor}
                 />
                 <br></br>
 

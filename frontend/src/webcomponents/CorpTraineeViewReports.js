@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
-
+import axios from "axios";
 
 const CorpTraineeViewReports = (props) => {
     const {
@@ -15,16 +15,18 @@ const CorpTraineeViewReports = (props) => {
     const [unResolvedReports, setUnResolvedReports] = useState([]);
 
 
-
     useEffect(() => {
         const fetchCorpTrainee = async () => {
-            const response = await fetch(`/corptrainee/${corpTraineeId}`);
-            const json = await response.json();
-            if (response.ok) {
-                setCorpTrainee(json);
+            axios
+            .get(`/corptrainee/${corpTraineeId}`)
+            .then((res) => {
+                setCorpTrainee(res.data);
                 findResolvedCurrentReports();
                 findUnresolvedCurrentReports();
-            }
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         }
         fetchCorpTrainee();
     }, [])

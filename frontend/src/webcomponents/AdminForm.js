@@ -1,40 +1,34 @@
+import axios from "axios";
 import { useState } from "react"
-import {  } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
-const AdminForm = () => {
-
+const AdminForm = (props) => {
+    const {
+        rateVal,
+        currencyVal,
+        token
+    } = props;
+    const decode = jwt_decode(token);
+    const adminId = decode.id;
     const [userName,setUserName] = useState('');
     const [password,setPassword] = useState('');
     const [error,setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
-        
         const admin = {userName,password};
-
-        const response = await fetch('/Admin/editAdmin/:id',{
-            method:'PATCH',
-            body: JSON.stringify(admin),
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
-        
-        const json = await response.json();
-
-        if(!response.ok){
-            setError(json.error);
-        }
-        if(response.ok){    
+        axios
+        .patch(`/admin/editAdmin/${adminId}`, admin)
+        .then((res) => {
             setUserName('');
             setPassword('');
             setError(null);
-            console.log("Admin Info Changed", json);
-            
-            //refresh page on successful submission
+            console.log("Admin Info Changed", res.data);
             window.location.reload();
-        }
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }    
 
     return (

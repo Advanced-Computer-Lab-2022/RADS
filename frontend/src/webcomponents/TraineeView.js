@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
-
+import axios from 'axios';
 const TraineeView = (props) => {
     const {
         rateVal,
@@ -16,8 +16,8 @@ const TraineeView = (props) => {
     const [instructorName, setinstructorName] = useState([]);
     const [traineeBalance, setTraineeBalance] = useState(0);
     const [exists, setExists] = useState(false);
-    const [balanceHtml,setBalanceHtml] = useState("");
-    
+    const [balanceHtml, setBalanceHtml] = useState("");
+
     // const todayDate = new Date();
     // console.log(todayDate);
     // console.log(json.promotionEndDate);
@@ -42,21 +42,27 @@ const TraineeView = (props) => {
 
 
     const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setTrainee(json);
-            setTraineeCourses(json.courses);
-            setTraineeBalance(json.balance);
-        }
+        axios
+            .get(`/trainee/${traineeId}`)
+            .then((res) => {
+                setTrainee(res.data);
+                setTraineeCourses(res.data.courses);
+                setTraineeBalance(res.data.balance);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
+        axios
+        .get(`/instructor/${instID}`)
+        .then((res) => {
+            setinstructorName(res.data.firstName + " " + res.data.lastName);
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     const incrementViews = async () => {
@@ -80,18 +86,14 @@ const TraineeView = (props) => {
 
     const findRegistered = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/checkregister/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/trainee/checkregister/${traineeId}`,info)
+        .then((res) => {
+            setExists(res.data);
         })
-        const json = await response.json();
-        if (response.ok) {
-            setExists(json);
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
     const CheckRegistered = () => {
         findRegistered();
@@ -110,9 +112,9 @@ const TraineeView = (props) => {
         }
     }
 
-    const handleClick = (e) =>{
+    const handleClick = (e) => {
         e.preventDefault();
-        let x = `Balance: ${Math.ceil(traineeBalance*rateVal)} ${currencyVal}`;
+        let x = `Balance: ${Math.ceil(traineeBalance * rateVal)} ${currencyVal}`;
         setBalanceHtml(x);
     }
     return (
@@ -123,8 +125,8 @@ const TraineeView = (props) => {
             </div>
             <h4>The information of course: {course.courseTitle} </h4>
             <div><CheckRegistered /></div>
-         
-            <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true}/>
+
+            <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true} />
             <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
                 <div>
                     <p>{subtitle.subTitle}</p>

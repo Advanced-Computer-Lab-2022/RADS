@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
-
+import axios from 'axios';
 
 const CourseView = (props) => {
     const {
@@ -28,14 +28,18 @@ const CourseView = (props) => {
         fetchCourse();
     }, [])
 
-    const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
-    }
 
+    const fetchInstructor = async (instID) => {
+        axios
+            .get(`/instructor/${instID}`)
+            .then((res) => {
+                setinstructorName(res.data.firstName + " " + res.data.lastName);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    
     const incrementViews = async () => {
         const response = await fetch(`/course/updateviews/${courseId}`, {
             method: 'PATCH',

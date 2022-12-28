@@ -36,6 +36,10 @@ const courseSchema = new Schema({
     solvedExam: {
         type: Boolean,
         default: false
+    },
+    receivedCertificate: {
+        type: Boolean,
+        default: false
     }
 })
 

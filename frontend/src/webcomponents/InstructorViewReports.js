@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
-
+import axios from "axios";
 
 const InstructorViewReports = (props) => {
     const {
@@ -17,13 +17,16 @@ const InstructorViewReports = (props) => {
 
     useEffect(() => {
         const fetchInstructor = async () => {
-            const response = await fetch(`/instructor/${instructorId}`);
-            const json = await response.json();
-            if (response.ok) {
-               setInstructor(json);
-               findResolvedCurrentReports();
-               findUnresolvedCurrentReports();
-            }
+            axios
+            .get(`/instructor/${instructorId}`)
+            .then((res) => {
+                setInstructor(res.data);
+                findResolvedCurrentReports();
+                findUnresolvedCurrentReports();
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         }
         fetchInstructor();
     }, [])
@@ -32,6 +35,7 @@ const InstructorViewReports = (props) => {
     const findResolvedCurrentReports = async () => {
         const response = await fetch(`/report/getinstructorresolved/${instructorId}`);
         const json = await response.json();
+        console.log(json);
         if (response.ok) {
             setResolvedReports(json);
         }
@@ -39,7 +43,9 @@ const InstructorViewReports = (props) => {
 
     const findUnresolvedCurrentReports = async () => {
         const response = await fetch(`/report/getinstructorunresolved/${instructorId}`);
+      
         const json = await response.json();
+        console.log(json)
         if (response.ok) {
             setUnResolvedReports(json);
         }

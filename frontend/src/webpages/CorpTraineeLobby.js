@@ -7,7 +7,8 @@ import AppBar  from "../webcomponents/AppNavBar";
 const CorpTraineeLobby = (props) => {
     const {
         rateVal,
-        currencyVal
+        currencyVal,
+        token
     } = props;
     const [courses, setCourses] = useState(null);
     const [corpTrainee, setPassword] = useState(null);
@@ -49,8 +50,8 @@ const CorpTraineeLobby = (props) => {
     <div className = "home-lobby" >
         {/* <AppBar /> */}
         Welcome to RADS Online Course Provider(CorpTraineeLobby side) 
-        <CorpTraineeSearch rateVal = { props.rateVal } currencyVal = { props.currencyVal }/> 
-        <CorpTraineePassword />
+        <CorpTraineeSearch rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/> 
+        <CorpTraineePassword rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/>
         </div>
     )
 }

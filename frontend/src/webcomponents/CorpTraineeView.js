@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
+import axios from "axios";
 
 const CorpTraineeView = (props) => {
     const {
@@ -31,22 +32,27 @@ const CorpTraineeView = (props) => {
     }, [])
 
     const fetchCorpTrainee = async () => {
-        const response = await fetch(`/corptrainee/${corpTraineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setCorpTrainee(json);
-            setCorpTraineeCourses(json.courses);
-        }
+        axios
+            .get(`/corptrainee/${corpTraineeId}`)
+            .then((res) => {
+                setCorpTrainee(res.data);
+            setCorpTraineeCourses(res.data.courses);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    const fetchInstructor = async (instID) => {
+        axios
+            .get(`/instructor/${instID}`)
+            .then((res) => {
+                setinstructorName(res.data.firstName + " " + res.data.lastName);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
-    const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
-    }
-    
     const incrementViews = async () => {
         const response = await fetch(`/course/updateviews/${courseId}`, {
             method: 'PATCH',
@@ -68,18 +74,14 @@ const CorpTraineeView = (props) => {
 
     const findAccessed = async () => {
         const info = { courseId };
-        const response = await fetch(`/corptrainee/checkaccess/${corpTraineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/corptrainee/checkaccess/${corpTraineeId}`, info)
+        .then((res) => {
+            setExists(res.data);
         })
-        const json = await response.json();
-        if (response.ok) {
-            setExists(json);
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
         
     const CheckHaveAccess = () => {

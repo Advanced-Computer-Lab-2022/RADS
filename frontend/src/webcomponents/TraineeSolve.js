@@ -1,5 +1,6 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const TraineeSolve = (props) => {
     const {
@@ -49,53 +50,54 @@ const TraineeSolve = (props) => {
         }
         fetchCourse();
     }, [])
+    
+
 
     const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
+        axios
+            .get(`/instructor/${instID}`)
+            .then((res) => {
+                setinstructorName(res.data.firstName + " " + res.data.lastName);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
+
     const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setTrainee(json);
-        }
+        axios
+            .get(`/trainee/${traineeId}`)
+            .then((res) => {
+                setTrainee(res.data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
+
+   
     const updateSolvingStatus = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/updateexercisesstatus/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/trainee/updateexercisesstatus/${traineeId}`, info)
+        .then((res) => {
+            console.log(res.data);
         })
-        const json = await response.json();
-        console.log(json);
-        if (response.ok) {
-            console.log(json);
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     const getSolvingStatus = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/checkexstatus/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/trainee/checkexstatus/${traineeId}`, info)
+        .then((res) => {
+            setStatus(res.data)
         })
-        const json = await response.json();
-        console.log("status",json);
-        if (response.ok) {
-            setStatus(json)
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     const handleChoice = (e, exIndex) => {
@@ -110,37 +112,28 @@ const TraineeSolve = (props) => {
     }
     const findExercisesLastGrade = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/findgrade/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/trainee/findgrade/${traineeId}`, info)
+        .then((res) => {
+            setOldExercisesGrade(res.data)
         })
-        const json = await response.json();
-        console.log("oldgrade",json);
-        if (response.ok) {
-            setOldExercisesGrade(json)
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
     const handleEnding = async() =>{
         // const 
         let currentChapter = course.subtitles.length+1
         let totalChapters = course.subtitles.length+2;
         const info = { courseId, currentChapter, totalChapters }
-        const response = await fetch(`/trainee/updateprogress/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/trainee/updateprogress/${traineeId}`, info)
+        .then((res) => {
+            console.log(res.data)
         })
-        const json = await response.json();
-        if (response.ok) {
-            console.log(json);
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
 
