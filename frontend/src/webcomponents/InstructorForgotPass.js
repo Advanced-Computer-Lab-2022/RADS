@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useState } from "react"
 import { useParams } from "react-router-dom";
 
@@ -52,7 +53,7 @@ const InstructorForgotPass = (props) => {
             />
             <button>Submit</button>
             <p>{html}</p>
-            {error && <div className="error">{error}</div>}
+            {error && <Box className="error">{error}</Box>}
         </form>
     )
 }

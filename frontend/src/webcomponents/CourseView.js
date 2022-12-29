@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
+import { Box } from '@mui/material';
 
 const CourseView = (props) => {
     const {
@@ -63,26 +64,26 @@ const CourseView = (props) => {
 
    
     return (
-        <div>
+        <Box>
             <h4>The information of course: {course.courseTitle} </h4>
             <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width= '20%' height='100%' controls={true}/>
-            <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
-                <div>
+            <Box><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
+                <Box>
                     <p>{subtitle.subTitle}</p>
                     <p>Description:{subtitle.description}</p>
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
-                </div>
-            ))}</div>
+                </Box>
+            ))}</Box>
             <p><strong>Price: </strong>{Math.ceil(course.price * rateVal)}{" "}{currencyVal}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
-            <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
-                <div>
+            <Box><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
+                <Box>
                     <p>Question: {exercise.question}</p>
-                </div>
-            ))}</div>
+                </Box>
+            ))}</Box>
             <p><strong>============================================================================================================</strong></p>
-        </div>
+        </Box>
     )
 }
 

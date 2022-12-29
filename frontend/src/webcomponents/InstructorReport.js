@@ -91,7 +91,7 @@ const InstructorReport = (props) => {
     }
 
     return (
-        <div>
+        <Box>
             <h3>Report a problem</h3>
             <p><strong>In course: {course.courseTitle}</strong></p>
             <br/>
@@ -122,7 +122,7 @@ const InstructorReport = (props) => {
             </form>
 
             <p><strong>{html}</strong></p>
-        </div>
+        </Box>
     )
 }
 

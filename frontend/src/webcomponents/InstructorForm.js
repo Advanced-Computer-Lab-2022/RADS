@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { Box } from "@mui/material";
 
 const InstructorForm = (props) => {
     const {
@@ -104,7 +105,7 @@ const InstructorForm = (props) => {
             />
 
             <button>Submit</button>
-            {error && <div className="error">{error}</div>}
+            {error && <Box className="error">{error}</Box>}
         </form>
     )
 }

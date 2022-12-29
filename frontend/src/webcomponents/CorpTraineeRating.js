@@ -122,8 +122,8 @@ const CorpTraineeRating = (props) => {
 
 
     return (
-        <div>
-            <div key={course._id}>
+        <Box>
+            <Box key={course._id}>
                 <h4>Course: {course.courseTitle} </h4>
                 <p><strong>Rating of the course: </strong>{course.courseRating} Out of 5</p>
                 <form className='rating-instructor' onSubmit={submitReviewInstructor}>
@@ -179,8 +179,8 @@ const CorpTraineeRating = (props) => {
                     <button>Submit</button>
                 </form>
                 <p><strong>{html2}</strong></p>
-            </div>
-        </div>
+            </Box>
+        </Box>
     )
 }
 

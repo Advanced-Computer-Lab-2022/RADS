@@ -1,4 +1,5 @@
 // import axios from 'axios';
+import { Box } from '@mui/material';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { json, useNavigate } from 'react-router-dom';
@@ -167,17 +168,17 @@ const TraineeCreditOptions = (props) => {
 
 
     return (
-        <div>
+        <Box>
             <h1><strong>Select a payment method:</strong></h1>
-            <div>
+            <Box>
                 <p><strong>Course Information:</strong></p>
                 <p>Course name: {course.courseTitle} </p>
                 <p>Price: {Math.ceil(course.price * rateVal)} {currencyVal} </p>
-            </div>
+            </Box>
             <form onSubmit={handleSubmit}>
-                <div className='Cards'>
+                <Box className='Cards'>
                     {traineeCards && traineeCards.map((card, index) => (
-                        <div>
+                        <Box>
                             <fieldset id={card._id}>
                                 <p><strong>Card {index + 1} information:</strong></p>
                                 <p>Name on card: {card.cardName}</p>
@@ -188,7 +189,7 @@ const TraineeCreditOptions = (props) => {
                                 <br />
                                 <button value={card._id} onClick={(e) => removeCard(e.target.value)}>Remove</button>
                             </fieldset>
-                        </div>
+                        </Box>
                     ))}
                     <fieldset>
                         <p>Current Balance: {Math.ceil(trainee.balance * rateVal)} {currencyVal}</p>
@@ -197,12 +198,12 @@ const TraineeCreditOptions = (props) => {
                     <button id="pay">Purchase</button>
                     <p><strong>{html}</strong></p>
                     <p><strong>{html2}</strong></p>
-                </div>
+                </Box>
             </form>
             <p><strong>{noCreditCard}</strong></p>
             {button === true ? (<button onClick={() => window.location.href = `/traineeform?traineeId=${traineeId}`} >View your courses</button>) : (<p></p>)}
             <button id="newcard" onClick={() => window.location.href = `/traineecredit?courseId=${courseId}&traineeId=${traineeId}`}>Add new credit/debit card</button>
-        </div>
+        </Box>
     )
 }
 

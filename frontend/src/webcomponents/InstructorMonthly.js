@@ -41,7 +41,7 @@ const InstructorMonthly = (props) => {
 
 
     return (
-        <div>
+        <Box>
             <Box>
                 <Box sx={{
                     width: 200,
@@ -60,7 +60,7 @@ const InstructorMonthly = (props) => {
                     <p>{Math.ceil(instructor.balance*rateVal)} {currencyVal}</p>
                 </Box>
             </Box>
-        </div>
+        </Box>
     )
 }
 

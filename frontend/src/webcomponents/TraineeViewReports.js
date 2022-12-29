@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import axios from "axios";
+import { Box } from "@mui/material";
 
 const TraineeViewReports = (props) => {
     const {
@@ -54,45 +55,45 @@ const TraineeViewReports = (props) => {
         })
     }
     return (
-        <div>
+        <Box>
             <h3><strong>VIEW YOUR REPORTS</strong></h3>
-            {resolvedReports.length === 0 && unResolvedReports.length  === 0 ? (<div>You dont have any reports.</div>) : (<div>
+            {resolvedReports.length === 0 && unResolvedReports.length  === 0 ? (<Box>You dont have any reports.</Box>) : (<Box>
 
-                {resolvedReports.length !== 0 ? (<div><h4>Resolved Reports</h4>
+                {resolvedReports.length !== 0 ? (<Box><h4>Resolved Reports</h4>
 
                     {resolvedReports && resolvedReports.map((report, index) => (
-                        <div className="some-container">
+                        <Box className="some-container">
                             <p><strong>Information of Report {index + 1}:</strong></p>
                             <p>Sender: {trainee.firstName} {trainee.lastName}</p>
                             <p>Type of problem: {report.requestType}</p>
-                            <div>Comment/Comments: {report.traineeComments && report.traineeComments.map((comment, index2) => (<p><strong>Comment {index2 + 1}: </strong>{comment.traineeComment}</p>))}</div>
+                            <Box>Comment/Comments: {report.traineeComments && report.traineeComments.map((comment, index2) => (<p><strong>Comment {index2 + 1}: </strong>{comment.traineeComment}</p>))}</Box>
                             <p>Report Status: <strong>{report.reportStatus}</strong></p>
                             {console.log(report.reportStatus)}
-                            {report.adminCommment ? (<div><p>Admin Reply:{report.adminCommment} </p></div>)
+                            {report.adminCommment ? (<Box><p>Admin Reply:{report.adminCommment} </p></Box>)
                                 : (
                                     "No Admin Reply"
                                 )}
-                        </div>
-                    ))}</div>)
+                        </Box>
+                    ))}</Box>)
                     : (
                         ""
                     )}
-                {unResolvedReports.length !==0 ? (<div><h4>Unresolved Reports</h4>
+                {unResolvedReports.length !==0 ? (<Box><h4>Unresolved Reports</h4>
                     {unResolvedReports && unResolvedReports.map((report, index1) => (
-                        <div className="some-container">
+                        <Box className="some-container">
                             <p><strong>Information of Report {index1 + 1}:</strong></p>
                             <p>Sender: {trainee.firstName} {trainee.lastName}</p>
                             <p>Type of problem: {report.requestType}</p>
-                            <div>Comment/Comments: {report.traineeComments && report.traineeComments.map((comment, index2) => (<p><strong>Comment {index2 + 1}: </strong>{comment.traineeComment}</p>))}</div>
+                            <Box>Comment/Comments: {report.traineeComments && report.traineeComments.map((comment, index2) => (<p><strong>Comment {index2 + 1}: </strong>{comment.traineeComment}</p>))}</Box>
                             <button onClick={() => window.location.href = `/traineefollowup?reportId=${report._id}&traineeId=${traineeId}`}>Follow Up</button>
-                        </div>
-                    ))}</div>)
+                        </Box>
+                    ))}</Box>)
                     : (
                         ""
                     )}
 
-            </div>)}
-        </div>
+            </Box>)}
+        </Box>
 
     )
 }

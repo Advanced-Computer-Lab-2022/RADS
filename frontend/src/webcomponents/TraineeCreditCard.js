@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Box } from '@mui/material';
 const TraineeCreditCard = (props) => {
     const {
         rateVal,
@@ -51,7 +52,7 @@ const TraineeCreditCard = (props) => {
 
 
     return (
-        <div>
+        <Box>
             <p><strong>Add a credit or debit card </strong></p>
             <form onSubmit={handleSubmit}>
                 <fieldset>
@@ -70,7 +71,7 @@ const TraineeCreditCard = (props) => {
                 </fieldset>
                 <button>Add</button>
             </form>
-        </div>
+        </Box>
     )
 }
 

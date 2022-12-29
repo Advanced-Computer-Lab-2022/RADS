@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
+import { Box } from '@mui/material';
 const TraineeView = (props) => {
     const {
         rateVal,
@@ -98,16 +99,16 @@ const TraineeView = (props) => {
     const CheckRegistered = () => {
         findRegistered();
         if (exists) {
-            return (<div>
+            return (<Box>
                 <p><bold>Registered</bold></p>
                 <button onClick={() => window.location.href = `/traineecourse?courseId=${courseId}&traineeId=${traineeId}`}>Go to course</button>
-            </div>)
+            </Box>)
         }
         else {
             return (
-                <div>
+                <Box>
                     <button onClick={() => window.location.href = `/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key={courseId}>Register in Course <strong>{course.courseTitle}</strong></button>
-                </div>
+                </Box>
             )
         }
     }
@@ -118,32 +119,32 @@ const TraineeView = (props) => {
         setBalanceHtml(x);
     }
     return (
-        <div>
-            <div className='wallet-div'>
+        <Box>
+            <Box className='wallet-div'>
                 <button onClick={handleClick}><strong>Wallet</strong></button>
                 <p>{balanceHtml}</p>
-            </div>
+            </Box>
             <h4>The information of course: {course.courseTitle} </h4>
-            <div><CheckRegistered /></div>
+            <Box><CheckRegistered /></Box>
 
             <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true} />
-            <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
-                <div>
+            <Box><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
+                <Box>
                     <p>{subtitle.subTitle}</p>
                     <p>Description:{subtitle.description}</p>
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
-                </div>
-            ))}</div>
+                </Box>
+            ))}</Box>
             <p><strong>Price: </strong>{Math.ceil(course.price * rateVal)}{" "}{currencyVal}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
-            <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
-                <div>
+            <Box><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
+                <Box>
                     <p>Question: {exercise.question}</p>
-                </div>
-            ))}</div>
+                </Box>
+            ))}</Box>
             <p><strong>============================================================================================================</strong></p>
-        </div>
+        </Box>
     )
 }
 

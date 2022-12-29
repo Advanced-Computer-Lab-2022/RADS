@@ -1,6 +1,7 @@
 import { useState,useEffect} from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 const InstructorUpdatePassword = (props) => {
     const {
@@ -71,11 +72,11 @@ const InstructorUpdatePassword = (props) => {
     // } 
 
     return (
-       <div> 
-        <div>
+       <Box> 
+        <Box>
         {/* <button type="text" onClick={forgotPassword}>Forget Password</button>  */}
         <p><strong>{html2}</strong></p>
-        </div>
+        </Box>
         <form className="change-info" onSubmit={handleSubmit}>
            
             <h3>Change Your Password</h3>
@@ -92,7 +93,7 @@ const InstructorUpdatePassword = (props) => {
             
         </form>
         <p><strong>{html1}</strong></p>
-        </div>
+        </Box>
     )
 }
 

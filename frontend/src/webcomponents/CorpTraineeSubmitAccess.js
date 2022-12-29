@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 
 const CorpTraineeSubmitAccess = (props) => {
@@ -93,7 +94,7 @@ const CorpTraineeSubmitAccess = (props) => {
     }
 
     return (
-       <div>
+       <Box>
         <h1><bold><strong>Access Form</strong></bold></h1>
         <form onSubmit={handleAccess}>
             <p><strong>Course <strong>{course.courseTitle}</strong></strong></p>
@@ -102,7 +103,7 @@ const CorpTraineeSubmitAccess = (props) => {
             <button>Send</button>
         </form>
         <p><strong>{html}</strong></p>
-    </div>
+    </Box>
     )
 }
 

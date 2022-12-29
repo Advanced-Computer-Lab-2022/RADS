@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 
 const TraineeSubmitRefund = (props) => {
@@ -117,7 +118,7 @@ const TraineeSubmitRefund = (props) => {
     }
 
     return (
-        <div>
+        <Box>
             <h1><bold><strong>Refund Form</strong></bold></h1>
             <form onSubmit={handleRefund}>
                 <p><strong>Course: {course.courseTitle}</strong></p>
@@ -127,7 +128,7 @@ const TraineeSubmitRefund = (props) => {
                 <button>Refund</button>
             </form>
             <p><strong>{html}</strong></p>
-        </div>
+        </Box>
     )
 }
 

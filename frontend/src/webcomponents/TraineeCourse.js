@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
 import jsPDF from 'jspdf';
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { saveAs } from 'file-saver';
 
 const TraineeCourse = (props) => {
@@ -241,34 +241,34 @@ const TraineeCourse = (props) => {
     }
 
     return (
-        <div>
-            <div className='wallet-div'>
+        <Box>
+            <Box className='wallet-div'>
                 <h1><strong>Welcome back, current course progress is {currentProgress}%,{currentProgress === 100 ? (
-                    <div>
+                    <Box>
                         <p>Congratulations on finishing the Course.</p>
                         <Button variant="contained" onClick={generatePDF}>Download Certificate</Button>
-                    </div>)
+                    </Box>)
                     : (<p>Keep going, ur doing great.</p>)}</strong></h1>
 
-                {currentProgress && currentProgress > 50 ? (<div><p> </p></div>)
+                {currentProgress && currentProgress > 50 ? (<Box><p> </p></Box>)
                     : (
                         <button onClick={() => window.location.href = `/traineesubmitrefund?traineeId=${traineeId}&courseId=${courseId}`}><strong>Request Refund</strong></button>
                     )}
-                <div>
+                <Box>
                     <button onClick={handleClick}><strong>{buttonText2}</strong></button>
                     {newDiv && <p>{Math.ceil(traineeBalance * rateVal)} {currencyVal}</p>}
-                </div>
-            </div>
+                </Box>
+            </Box>
             <h4>Welcome to course: {course.courseTitle} </h4>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
             {course.subtitles && course.subtitles.map((subtitle, index) => (
-                <div>
+                <Box>
                     <p>Subtitle: {subtitle.subTitle}</p>
                     <p>Description:{subtitle.description}</p>
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
                     <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={subtitle.videoLink} width='20%' height='100%' controls={true} onEnded={async () => (handleEnding(index))} />
                     <br />
-                </div>
+                </Box>
             ))}
             <form onSubmit={subSubmit}>
                 <TextField value={note} label="Enter a note" onChange={(e) => setNote(e.target.value)} placeholder="Ex: Priority Inversion is when two...."></TextField>
@@ -276,21 +276,21 @@ const TraineeCourse = (props) => {
             </form>
 
 
-            {showNotes && <div>
+            {showNotes && <Box>
                 <p>Your Notes</p>
                 {notes && notes.map((note, index1) => (
-                    <div>
+                    <Box>
                         <p>Note {index1 + 1}: {note.note}</p>
-                    </div>
+                    </Box>
                 ))}
-            </div>
+            </Box>
             }
             <button onClick={handleNoteClick}>{buttonText}</button>
             <button onClick={handleDownloadNotes}>Download Notes</button>
             <button onClick={() => window.location.href = `/traineerate?traineeId=${traineeId}&courseId=${courseId}`}>Rate Course</button>
             <button onClick={() => window.location.href = `/traineesolve?traineeId=${traineeId}&courseId=${courseId}`}>Solve Exercises</button>
             <button onClick={() => window.location.href = `/traineexam?traineeId=${traineeId}&courseId=${courseId}`}>Solve Final Exam</button>
-        </div>
+        </Box>
     )
 }
 

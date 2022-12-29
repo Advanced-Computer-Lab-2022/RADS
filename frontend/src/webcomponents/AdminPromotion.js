@@ -75,7 +75,7 @@ const AdminPromotion = (props) => {
     };
 
     return (
-        <div>
+        <Box>
 
             <box className="admin-promo">
                 <box className="list-container-promo">
@@ -117,13 +117,13 @@ const AdminPromotion = (props) => {
                     />
                     <p>Value: {promotionRate}</p>
                     
-                    {checkedCourses.length === 0? (<div><strong>Select the Courses you want to promote.</strong></div>) : (<button type='submit' onClick={handleSubmit} >Submit</button>)}
+                    {checkedCourses.length === 0? (<Box><strong>Select the Courses you want to promote.</strong></Box>) : (<button type='submit' onClick={handleSubmit} >Submit</button>)}
                 </FormControl>
                 <p>
                     <strong>{text}</strong>
                 </p>
             </Box>
-        </div>
+        </Box>
     )
 }
 

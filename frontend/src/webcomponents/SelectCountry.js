@@ -17,8 +17,8 @@ const SelectCountry = ({ handleSelection}) => {
     // }
     
     return ( 
-        //{/* <div>{`rate value: ${rateValue !== null ? `'${rateValue}'` : '1'}`}</div> */}
-        <div className="page-element">
+        //{/* <Box>{`rate value: ${rateValue !== null ? `'${rateValue}'` : '1'}`}</Box> */}
+        <Box className="page-element">
             <Autocomplete
                 id="country-select"
                 className="page-element"
@@ -60,7 +60,7 @@ const SelectCountry = ({ handleSelection}) => {
                 />
                 )}
             />
-        </div>
+        </Box>
      );
 }
 

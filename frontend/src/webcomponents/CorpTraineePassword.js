@@ -1,6 +1,7 @@
 import { useState } from "react"
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Box } from "@mui/material";
 const CorpTraineePassword = (props) => {
     const {
         rateVal,
@@ -41,7 +42,7 @@ const CorpTraineePassword = (props) => {
             />
 
             <button>Submit</button>
-            {error && <div className="error">{error}</div>}
+            {error && <Box className="error">{error}</Box>}
         </form>
     )
 }

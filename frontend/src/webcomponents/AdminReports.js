@@ -1,4 +1,4 @@
-import { Button, Link } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
@@ -54,45 +54,45 @@ const AdminReports = (props) => {
         }
     }
     return (
-        <div>
-            <div>
+        <Box>
+            <Box>
                 <h3><strong>View all requests:</strong></h3>
-                <div>
+                <Box>
                     <p><strong>Refund Requests</strong></p>
                     {refundRequests && refundRequests.map((request, index) => (
-                        <div>
+                        <Box>
                             <Link onClick={() => window.location.href = `/adminrefunds?adminId=${adminId}&courseId=${request.courseId}&traineeId=${request.traineeId}&requestId=${request._id}`}>Request {index + 1}, Status: {request.reportStatus}</Link>
                             <button value = {request._id} onClick={handleDelete}>Delete Request/Report</button>
                             <br />
-                        </div>
+                        </Box>
                     ))}
-                </div>
+                </Box>
                 <br />
-                <div>
+                <Box>
                     <p><strong>Access Requests</strong></p>
                     {accessRequests && accessRequests.map((request, index1) => (
-                        <div>
+                        <Box>
                             <Link onClick={() => window.location.href = `/adminaccess?adminId=${adminId}&courseId=${request.courseId}&corptraineeId=${request.corpTraineeId}&requestId=${request._id}`}>Request {index1 + 1}, Status: {request.reportStatus}</Link>
                             <button value = {request._id} onClick={handleDelete}>Delete Request/Report</button>
                             <br />
-                        </div>
+                        </Box>
                     ))}
-                </div>
+                </Box>
                 <br />
-                <div>
+                <Box>
                     <p><strong>Reported Problems</strong></p>
                     {problems && problems.map((problem, index2) => (
-                        <div>
+                        <Box>
                             <Link onClick={() => window.location.href = `/adminproblems?adminId=${adminId}&courseId=${problem.courseId}&requestId=${problem._id}`}>Request {index2 + 1}, Status: {problem.reportStatus}</Link>
                             <button value = {problem._id} onClick={handleDelete}>Delete Request/Report</button>
                             <br />
-                        </div>
+                        </Box>
                     ))}
-                </div>
-            </div>
+                </Box>
+            </Box>
            
 
-        </div>
+        </Box>
     )
 }
 

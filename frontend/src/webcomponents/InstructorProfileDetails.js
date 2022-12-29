@@ -1,7 +1,9 @@
+import { Box } from "@mui/material";
+
 const courses = ["Media and Network Lab, ", " Concepts of Programming Languages, ", " Computer Graphics"]
 
 export const InstructorProfile = ({instructor}) => {
-  return  <div className="instructor-profile">
+  return  <Box className="instructor-profile">
             <h4>The information of user: {instructor.userName}</h4>
             <p><strong>First Name: </strong>{instructor.firstName}</p>
             <p><strong>Last Name: </strong>{instructor.lastName}</p>
@@ -9,7 +11,7 @@ export const InstructorProfile = ({instructor}) => {
             <p><strong>Phone Number: </strong>{instructor.phoneNumber}</p>
             <p><strong>Address: </strong>{instructor.address}</p>
             <p><strong>Courses taught: </strong>{courses} </p>
-        </div>
+        </Box>
 }
 
 export default InstructorProfile;

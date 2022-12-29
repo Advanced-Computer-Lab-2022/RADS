@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
@@ -94,9 +94,9 @@ const AdminAccess = (props) => {
     }
 
     return (
-        <div>
+        <Box>
             <h3><strong>Request Information:</strong></h3>
-            <div>
+            <Box>
                 <p>Corporate Trainee Name: {corpTrainee.firstName} {corpTrainee.lastName}</p>
                 <p>Course Name: {course.courseTitle} </p>
                 <p>{corpTrainee.firstName}'s reason/reasons for accessing the course:
@@ -105,11 +105,11 @@ const AdminAccess = (props) => {
                     ))}
                 </p>
                 <p>Request Type: {request.requestType} Request</p>
-            </div>
+            </Box>
             <button onClick={handleAccept}>Grant Access</button>
             <button onClick={handleReject}>Block Access</button>
             <p>{html}</p>
-        </div>
+        </Box>
     )
 }
 

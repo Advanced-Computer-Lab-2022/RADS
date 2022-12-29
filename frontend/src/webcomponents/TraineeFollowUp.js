@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import axios from "axios";
 
 const TraineeFollowUp = (props) => {
@@ -61,15 +61,15 @@ const TraineeFollowUp = (props) => {
 
 
     return (
-        <div>
+        <Box>
             <h3><strong>Report Follow up:</strong></h3>
-            <div className="some-container">
+            <Box className="some-container">
                 <p><strong>Information of The Report</strong></p>
                 <p>Sender: {trainee.firstName} {trainee.lastName}</p>
                 <p>Type of problem: {report.requestType}</p>
-                <div>Comment/Comments: {report.traineeComments && report.traineeComments.map((comment, index2) => (<p><strong>Comment {index2 + 1}: </strong>{comment.traineeComment}</p>))}</div>
+                <Box>Comment/Comments: {report.traineeComments && report.traineeComments.map((comment, index2) => (<p><strong>Comment {index2 + 1}: </strong>{comment.traineeComment}</p>))}</Box>
                 <p>Report Status:<strong>{report.reportStatus}</strong></p>
-                {report.adminCommment ? (<div><p>Admin Reply:{report.adminCommment} </p></div>)
+                {report.adminCommment ? (<Box><p>Admin Reply:{report.adminCommment} </p></Box>)
                     : (
                         "No Admin Reply"
                     )}
@@ -77,8 +77,8 @@ const TraineeFollowUp = (props) => {
                     <TextField label="Add another comment" value={traineeComment} onChange={(e) => setTraineeComment(e.target.value)}></TextField>
                     <button type="submit">Submit</button>
                 </form>
-            </div>
-        </div>
+            </Box>
+        </Box>
 
     )
 }
