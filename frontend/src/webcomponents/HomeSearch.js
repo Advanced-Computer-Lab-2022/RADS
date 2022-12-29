@@ -253,17 +253,19 @@ const HomeSearch = (props) => {
   return (
     <Box>
       <Box className="homesearch-component">
-        <TextField
-          hiddenLabel
-          id="filled-search"
-          type="search"
-          size="small"
-          variant="filled"
-          onChange={(e) => setQueryS(e.target.value)}
-          InputProps={{
-            startAdornment: <SearchIcon sx={{ marginRight: 2 }} />,
-          }}
-        />
+        <Box className="search">
+          <TextField
+            hiddenLabel
+            id="filled-search"
+            type="search"
+            size="small"
+            variant="filled"
+            onChange={(e) => setQueryS(e.target.value)}
+            InputProps={{
+              startAdornment: <SearchIcon sx={{ marginRight: 2 }} />,
+            }}
+          />
+        </Box>
 
         <Box className="highestviewed-courses card-container">
           <Box className="highview-p">

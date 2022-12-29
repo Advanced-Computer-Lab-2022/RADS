@@ -41,14 +41,15 @@
 }
 
 .navbar {
-    position: sticky;
+  position: sticky;
   padding: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: auto;
   margin: 0 auto;
   background-color: #d80621;
+  min-width: 200px;
 }
 
 .navbar h1 {
@@ -86,6 +87,15 @@
 #content-wrap {
   padding-bottom: 2.5rem;
   /* Footer height */
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin: 0 auto;
+  min-width: 200px;
 }
 
 #footer {

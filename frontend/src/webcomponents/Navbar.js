@@ -11,7 +11,6 @@ function Navbar({ user }) {
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Box className="container-fluid navbar">
         {!user.isConnected ? (
           <>
             <Link to="/">
@@ -20,11 +19,9 @@ function Navbar({ user }) {
           </>
         ) : (
           <Link to="/home">
-            RADS
+            Home
           </Link>
         )}
-        <Box className="collapse navbar-collapse" id="navbarSupportedContent">
-          <Box className="navbar-nav me-auto mb-2 mb-lg-0">
             {user.role === "ADMIN" ? (
               <>
                 <Link className="nav-link active" aria-current="page" to="/adminlobby">
@@ -34,8 +31,6 @@ function Navbar({ user }) {
             ) : (
               ""
             )}
-          </Box>
-          <Box className="navbar-nav me-auto mb-2 mb-lg-0">
             {user.role === "TRAINEE" ? (
               <>
                 <Link className="nav-link active" aria-current="page" to="/traineelobby">
@@ -45,8 +40,6 @@ function Navbar({ user }) {
             ) : (
               ""
             )}
-          </Box>
-          <Box className="navbar-nav me-auto mb-2 mb-lg-0">
             {user.role === "INSTRUCTOR" ? (
               <>
                 <Link className="nav-link active" aria-current="page" to="/instructorlobby">
@@ -56,8 +49,6 @@ function Navbar({ user }) {
             ) : (
               ""
             )}
-          </Box>
-          <Box className="navbar-nav me-auto mb-2 mb-lg-0">
             {user.role === "CORP_TRAINEE" ? (
               <>
                 <Link className="nav-link active" aria-current="page" to="/corptraineelobby">
@@ -67,9 +58,6 @@ function Navbar({ user }) {
             ) : (
               ""
             )}
-          </Box>
-          <Box className="d-flex">
-            <Box className="mx-4">
               {
                 !user.isConnected ? (
                   <>
@@ -86,10 +74,6 @@ function Navbar({ user }) {
                   </Link>
                 )
               }
-            </Box>
-          </Box>
-        </Box>
-      </Box>
     </nav>
   );
 }
