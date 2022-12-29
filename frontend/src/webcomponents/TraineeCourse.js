@@ -246,16 +246,19 @@ const TraineeCourse = (props) => {
                 <h1><strong>Welcome back, current course progress is {currentProgress}%,{currentProgress === 100 ? (
                     <Box>
                         <p>Congratulations on finishing the Course.</p>
-                        <Button variant="contained" onClick={generatePDF}>Download Certificate</Button>
+                        <Button
+          variant="contained" onClick={generatePDF}>Download Certificate</Button>
                     </Box>)
                     : (<p>Keep going, ur doing great.</p>)}</strong></h1>
 
                 {currentProgress && currentProgress > 50 ? (<Box><p> </p></Box>)
                     : (
-                        <button onClick={() => window.location.href = `/traineesubmitrefund?traineeId=${traineeId}&courseId=${courseId}`}><strong>Request Refund</strong></button>
+                        <Button
+          variant="contained" onClick={() => window.location.href = `/traineesubmitrefund?traineeId=${traineeId}&courseId=${courseId}`}><strong>Request Refund</strong></Button>
                     )}
                 <Box>
-                    <button onClick={handleClick}><strong>{buttonText2}</strong></button>
+                    <Button
+          variant="contained" onClick={handleClick}><strong>{buttonText2}</strong></Button>
                     {newDiv && <p>{Math.ceil(traineeBalance * rateVal)} {currencyVal}</p>}
                 </Box>
             </Box>
@@ -272,7 +275,8 @@ const TraineeCourse = (props) => {
             ))}
             <form onSubmit={subSubmit}>
                 <TextField value={note} label="Enter a note" onChange={(e) => setNote(e.target.value)} placeholder="Ex: Priority Inversion is when two...."></TextField>
-                <button type="submit">Add note</button>
+                <Button
+          variant="contained" type="submit">Add note</Button>
             </form>
 
 
@@ -285,11 +289,16 @@ const TraineeCourse = (props) => {
                 ))}
             </Box>
             }
-            <button onClick={handleNoteClick}>{buttonText}</button>
-            <button onClick={handleDownloadNotes}>Download Notes</button>
-            <button onClick={() => window.location.href = `/traineerate?traineeId=${traineeId}&courseId=${courseId}`}>Rate Course</button>
-            <button onClick={() => window.location.href = `/traineesolve?traineeId=${traineeId}&courseId=${courseId}`}>Solve Exercises</button>
-            <button onClick={() => window.location.href = `/traineexam?traineeId=${traineeId}&courseId=${courseId}`}>Solve Final Exam</button>
+            <Button
+          variant="contained" onClick={handleNoteClick}>{buttonText}</Button>
+            <Button
+          variant="contained" onClick={handleDownloadNotes}>Download Notes</Button>
+            <Button
+          variant="contained" onClick={() => window.location.href = `/traineerate?traineeId=${traineeId}&courseId=${courseId}`}>Rate Course</Button>
+            <Button
+          variant="contained" onClick={() => window.location.href = `/traineesolve?traineeId=${traineeId}&courseId=${courseId}`}>Solve Exercises</Button>
+            <Button
+          variant="contained" onClick={() => window.location.href = `/traineexam?traineeId=${traineeId}&courseId=${courseId}`}>Solve Final Exam</Button>
         </Box>
     )
 }

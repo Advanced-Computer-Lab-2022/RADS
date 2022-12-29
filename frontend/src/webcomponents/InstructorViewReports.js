@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import axios from "axios";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 const InstructorViewReports = (props) => {
     const {
@@ -81,7 +81,8 @@ const InstructorViewReports = (props) => {
                         <p>Sender: {instructor.firstName} {instructor.lastName}</p>
                         <p>Type of problem: {report.requestType}</p>
                         <Box>Comment/Comments: {report.instructorComments && report.instructorComments.map((comment, index2) => (<p><strong>Comment {index2 + 1}: </strong>{comment.instructorComment}</p>))}</Box>
-                        <button onClick={() => window.location.href = `/instructorfollowup?reportId=${report._id}&instructorId=${instructorId}`}>Follow Up</button>
+                        <Button
+          variant="contained" onClick={() => window.location.href = `/instructorfollowup?reportId=${report._id}&instructorId=${instructorId}`}>Follow Up</Button>
                     </Box>
                 ))}</Box>)
                 : (

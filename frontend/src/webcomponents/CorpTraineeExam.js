@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 const CorpTraineeExam = (props) => {
     const {
@@ -205,7 +205,8 @@ const CorpTraineeExam = (props) => {
                                 </fieldset>
                                 </Box>
                             ))}
-                            {showButton && <button type='submit'>Submit</button>}
+                            {showButton && <Button
+          variant="contained" type='submit'>Submit</Button>}
                         </form>
                     </Box >
                     <Box className='solution-form'>

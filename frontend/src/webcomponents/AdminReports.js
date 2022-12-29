@@ -62,7 +62,8 @@ const AdminReports = (props) => {
                     {refundRequests && refundRequests.map((request, index) => (
                         <Box>
                             <Link onClick={() => window.location.href = `/adminrefunds?adminId=${adminId}&courseId=${request.courseId}&traineeId=${request.traineeId}&requestId=${request._id}`}>Request {index + 1}, Status: {request.reportStatus}</Link>
-                            <button value = {request._id} onClick={handleDelete}>Delete Request/Report</button>
+                            <Button
+          variant="contained" value = {request._id} onClick={handleDelete}>Delete Request/Report</Button>
                             <br />
                         </Box>
                     ))}
@@ -73,7 +74,8 @@ const AdminReports = (props) => {
                     {accessRequests && accessRequests.map((request, index1) => (
                         <Box>
                             <Link onClick={() => window.location.href = `/adminaccess?adminId=${adminId}&courseId=${request.courseId}&corptraineeId=${request.corpTraineeId}&requestId=${request._id}`}>Request {index1 + 1}, Status: {request.reportStatus}</Link>
-                            <button value = {request._id} onClick={handleDelete}>Delete Request/Report</button>
+                            <Button
+          variant="contained" value = {request._id} onClick={handleDelete}>Delete Request/Report</Button>
                             <br />
                         </Box>
                     ))}
@@ -84,7 +86,8 @@ const AdminReports = (props) => {
                     {problems && problems.map((problem, index2) => (
                         <Box>
                             <Link onClick={() => window.location.href = `/adminproblems?adminId=${adminId}&courseId=${problem.courseId}&requestId=${problem._id}`}>Request {index2 + 1}, Status: {problem.reportStatus}</Link>
-                            <button value = {problem._id} onClick={handleDelete}>Delete Request/Report</button>
+                            <Button
+          variant="contained" value = {problem._id} onClick={handleDelete}>Delete Request/Report</Button>
                             <br />
                         </Box>
                     ))}

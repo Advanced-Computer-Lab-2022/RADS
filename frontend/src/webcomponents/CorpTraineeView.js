@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import axios from "axios";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 const CorpTraineeView = (props) => {
     const {
@@ -90,13 +90,15 @@ const CorpTraineeView = (props) => {
         if (exists) {
             return (<Box>
                 <p><bold>Enrolled</bold></p>
-                <button onClick={() => window.location.href = `/corptraineecourse?courseId=${courseId}&corpTraineeId=${corpTraineeId}`}>Go to course</button>
+                <Button
+          variant="contained" onClick={() => window.location.href = `/corptraineecourse?courseId=${courseId}&corpTraineeId=${corpTraineeId}`}>Go to course</Button>
             </Box>)
         }
         else {
             return (
                 <Box>
-                   {<button onClick={() => window.location.href = `/corptraineesubmitaccess?courseId=${courseId}&corpTraineeId=${corpTraineeId}`} key={courseId}>Request Access for <strong>{course.courseTitle}</strong></button>}
+                   {<Button
+          variant="contained" onClick={() => window.location.href = `/corptraineesubmitaccess?courseId=${courseId}&corpTraineeId=${corpTraineeId}`} key={courseId}>Request Access for <strong>{course.courseTitle}</strong></Button>}
                 </Box>
             )
         }

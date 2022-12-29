@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const InstructorReport = (props) => {
     const {
@@ -118,7 +119,8 @@ const InstructorReport = (props) => {
                 <br/>
                 <TextField  multiline rows={4} label="Enter Your Comment/Reasoning" sx={{minWidth:300,minHeight:100}}  type="text" value= {instructorComment} onChange={(e)=>setInstructorComment(e.target.value)} />
                 </Box>
-                <button type="submit">Submit</button>
+                <Button
+          variant="contained" type="submit">Submit</Button>
             </form>
 
             <p><strong>{html}</strong></p>

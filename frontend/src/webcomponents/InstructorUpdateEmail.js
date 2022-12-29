@@ -1,6 +1,7 @@
 import { useState } from "react"
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const InstructorUpdateEmail = (props) => {
     const {
@@ -35,7 +36,8 @@ const InstructorUpdateEmail = (props) => {
             <input type="text" onChange={(e) =>  setEmail(e.target.value)}
             value= {email}
             />
-            <button>Submit</button>
+            <Button
+          variant="contained">Submit</Button>
         </form>
     )
 }

@@ -132,6 +132,7 @@ const AppNavBar = (props) => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
+          variant="contained"
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "#D80621", display: "block" }}

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 const TraineeCreditCard = (props) => {
     const {
         rateVal,
@@ -69,7 +69,8 @@ const TraineeCreditCard = (props) => {
                     CVV:
                     <input className="inputCard" type="text" pattern="[0-9]*{3}" maxLength="3" name="cvv" inputMode='numeric' value={cardCVV} onChange={(e) => { setCardCVV(e.target.value) }} placeholder="XXX" required />
                 </fieldset>
-                <button>Add</button>
+                <Button
+          variant="contained">Add</Button>
             </form>
         </Box>
     )

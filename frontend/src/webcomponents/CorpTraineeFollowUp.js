@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player';
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import axios from "axios";
 
 const CorpTraineeFollowUp = (props) => {
@@ -75,7 +75,8 @@ const CorpTraineeFollowUp = (props) => {
                                 )}
                             <form onSubmit={handleSubmit}>
                             <TextField label="Add another comment"value ={corpTraineeComment} onChange={(e) =>setCorpTraineeComment(e.target.value)}></TextField>
-                            <button type="submit">Submit</button>
+                            <Button
+          variant="contained" type="submit">Submit</Button>
                             </form>
                         </Box>
         </Box>

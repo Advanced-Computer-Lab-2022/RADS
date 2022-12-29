@@ -1,4 +1,4 @@
-import { Box, Link } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
@@ -106,8 +106,10 @@ const AdminAccess = (props) => {
                 </p>
                 <p>Request Type: {request.requestType} Request</p>
             </Box>
-            <button onClick={handleAccept}>Grant Access</button>
-            <button onClick={handleReject}>Block Access</button>
+            <Button
+          variant="contained" onClick={handleAccept}>Grant Access</Button>
+            <Button
+          variant="contained" onClick={handleReject}>Block Access</Button>
             <p>{html}</p>
         </Box>
     )

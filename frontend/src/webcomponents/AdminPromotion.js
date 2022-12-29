@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
@@ -117,7 +117,8 @@ const AdminPromotion = (props) => {
                     />
                     <p>Value: {promotionRate}</p>
                     
-                    {checkedCourses.length === 0? (<Box><strong>Select the Courses you want to promote.</strong></Box>) : (<button type='submit' onClick={handleSubmit} >Submit</button>)}
+                    {checkedCourses.length === 0? (<Box><strong>Select the Courses you want to promote.</strong></Box>) : (<Button
+          variant="contained" type='submit' onClick={handleSubmit} >Submit</Button>)}
                 </FormControl>
                 <p>
                     <strong>{text}</strong>

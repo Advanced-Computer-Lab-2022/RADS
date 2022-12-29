@@ -1,4 +1,4 @@
-import { Box, Link } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
@@ -137,7 +137,8 @@ const AdminProblems = (props) => {
                                 <fieldset>
                                     <label><input id='comment' type='text' value={adminComment} name='adminComment' onChange={e => { setAdminComment(e.target.value) }} />Enter a reply.</label>
                                 </fieldset>
-                                <button type='submit'>Submit</button>
+                                <Button
+          variant="contained" type='submit'>Submit</Button>
                             </form>
                         </Box>
                         <p>{html}</p>
@@ -175,7 +176,8 @@ const AdminProblems = (props) => {
                                 <fieldset>
                                     <label><input id='comment' type='text' value={adminComment} name='adminComment' onChange={e => { setAdminComment(e.target.value) }} />Enter a reply.</label>
                                 </fieldset>
-                                <button type='submit'>Submit</button>
+                                <Button
+          variant="contained" type='submit'>Submit</Button>
                             </form>
                         </Box>
                         <p>{html}</p>
@@ -215,7 +217,8 @@ const AdminProblems = (props) => {
                                 <fieldset>
                                     <label><input id='comment' type='text' value={adminComment} name='adminComment' onChange={e => { setAdminComment(e.target.value) }} />Enter a reply.</label>
                                 </fieldset>
-                                <button type='submit'>Submit</button>
+                                <Button
+          variant="contained" type='submit'>Submit</Button>
                             </form>
                         </Box>
                         <p>{html}</p>

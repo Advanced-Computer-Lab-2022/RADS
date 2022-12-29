@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 const CorpTraineeInsert = (props) => {
     const {
@@ -96,7 +96,8 @@ const CorpTraineeInsert = (props) => {
                 value={email}
             />
 
-            <button>Submit</button>
+            <Button
+          variant="contained">Submit</Button>
             {error && <Box className="error">{error}</Box>}
         </form>
     )

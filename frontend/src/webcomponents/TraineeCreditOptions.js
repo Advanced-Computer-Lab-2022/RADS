@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { json, useNavigate } from 'react-router-dom';
@@ -187,7 +187,8 @@ const TraineeCreditOptions = (props) => {
                                 {card.cardExpiryDate && new Date(card.cardExpiryDate) >= todayDate ? (<p></p>) : (<p>Card Expired</p>)}
                                 <label><input id={`first${index}`} type='radio' value={card._id} name={card.cardName} checked={checkedCard === card._id} onChange={e => { setCheckedCard(e.target.value) }} />Select</label>
                                 <br />
-                                <button value={card._id} onClick={(e) => removeCard(e.target.value)}>Remove</button>
+                                <Button
+          variant="contained" value={card._id} onClick={(e) => removeCard(e.target.value)}>Remove</Button>
                             </fieldset>
                         </Box>
                     ))}
@@ -195,14 +196,17 @@ const TraineeCreditOptions = (props) => {
                         <p>Current Balance: {Math.ceil(trainee.balance * rateVal)} {currencyVal}</p>
                         <label><input id='balance-pay' type='radio' value="balance" name="balance" checked={checkedCard === "balance"} onChange={e => { setCheckedCard(e.target.value) }} />Select</label>
                     </fieldset>
-                    <button id="pay">Purchase</button>
+                    <Button
+          variant="contained" id="pay">Purchase</Button>
                     <p><strong>{html}</strong></p>
                     <p><strong>{html2}</strong></p>
                 </Box>
             </form>
             <p><strong>{noCreditCard}</strong></p>
-            {button === true ? (<button onClick={() => window.location.href = `/traineeform?traineeId=${traineeId}`} >View your courses</button>) : (<p></p>)}
-            <button id="newcard" onClick={() => window.location.href = `/traineecredit?courseId=${courseId}&traineeId=${traineeId}`}>Add new credit/debit card</button>
+            {button === true ? (<Button
+          variant="contained" onClick={() => window.location.href = `/traineeform?traineeId=${traineeId}`} >View your courses</Button>) : (<p></p>)}
+            <Button
+          variant="contained" id="newcard" onClick={() => window.location.href = `/traineecredit?courseId=${courseId}&traineeId=${traineeId}`}>Add new credit/debit card</Button>
         </Box>
     )
 }

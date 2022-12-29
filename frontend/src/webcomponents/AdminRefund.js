@@ -1,4 +1,4 @@
-import { Box, Link } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
@@ -121,8 +121,10 @@ const AdminRefund = (props) => {
                 </p>
                 <p>Request Type: {request.requestType} Request</p>
             </Box>
-            <button onClick={handleAccept}>Accept Refund</button>
-            <button onClick={handleReject}>Reject Refund</button>
+            <Button
+          variant="contained" onClick={handleAccept}>Accept Refund</Button>
+            <Button
+          variant="contained" onClick={handleReject}>Reject Refund</Button>
             <p>{html}</p>
         </Box>
     )

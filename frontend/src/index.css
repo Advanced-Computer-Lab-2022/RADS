@@ -67,10 +67,13 @@
   text-decoration: none;
   padding: 6px;
   font-weight: 900;
+  color:#ffffff;
 }
 
 .navbar a:hover {
-  color: #ffffff;
+  color: #FFF;
+background-color: #d80621;
+text-shadow: 0 0 10px #FFFFFF;
 }
 
 .content {
@@ -98,6 +101,14 @@
   min-width: 200px;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-bottom: 0.5em  auto;
+  min-width: 200px;
+}
 #footer {
   position: absolute;
   right: 0;

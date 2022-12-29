@@ -227,7 +227,8 @@ const CorpTraineeCourse = (props) => {
                 <h1><strong>Welcome back, current course progress is {currentProgress}%,{currentProgress === 100 ? (
                     <Box>
                         <p>Congratulations on finishing the Course.</p>
-                        <Button variant="contained" onClick={generatePDF}>Download Certificate</Button>
+                        <Button
+          variant="contained" onClick={generatePDF}>Download Certificate</Button>
                     </Box>)
                     : (<p>Keep going, ur doing great.</p>)}</strong></h1>
             </Box>
@@ -244,7 +245,8 @@ const CorpTraineeCourse = (props) => {
             ))}
             <form onSubmit={subSubmit}>
                 <TextField value={note} label="Enter a note" onChange={(e) => setNote(e.target.value)} placeholder="Ex: Priority Inversion is when two...."></TextField>
-                <button type="submit">Add note</button>
+                <Button
+          variant="contained" type="submit">Add note</Button>
             </form>
 
             {showNotes && <Box>
@@ -257,11 +259,16 @@ const CorpTraineeCourse = (props) => {
             </Box>
             }
 
-            <button onClick={handleNoteClick}>{buttonText}</button>
-            <button onClick={handleDownloadNotes}>Download Notes</button>
-            <button onClick={() => window.location.href = `/corptraineerating?corpTraineeId=${corpTraineeId}&courseId=${courseId}`}>Rate Course</button>
-            <button onClick={() => window.location.href = `/corptraineesolve?corpTraineeId=${corpTraineeId}&courseId=${courseId}`}>Solve Exercises</button>
-            <button onClick={() => window.location.href = `/corptraineexam?corpTraineeId=${corpTraineeId}&courseId=${courseId}`}>Solve Final Exam</button>
+            <Button
+          variant="contained" onClick={handleNoteClick}>{buttonText}</Button>
+            <Button
+          variant="contained" onClick={handleDownloadNotes}>Download Notes</Button>
+            <Button
+          variant="contained" onClick={() => window.location.href = `/corptraineerating?corpTraineeId=${corpTraineeId}&courseId=${courseId}`}>Rate Course</Button>
+            <Button
+          variant="contained" onClick={() => window.location.href = `/corptraineesolve?corpTraineeId=${corpTraineeId}&courseId=${courseId}`}>Solve Exercises</Button>
+            <Button
+          variant="contained" onClick={() => window.location.href = `/corptraineexam?corpTraineeId=${corpTraineeId}&courseId=${courseId}`}>Solve Final Exam</Button>
         </Box>
     )
 }

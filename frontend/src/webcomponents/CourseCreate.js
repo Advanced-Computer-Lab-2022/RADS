@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const CourseCreate = (props) => {
     const {
@@ -250,7 +251,8 @@ const CourseCreate = (props) => {
                                     value={subtitle.hours}
                                 />
                                 {subtitles.length - 1 === index &&
-                                    (<button type="button" className="add-btn" onClick={handleSubtitleAdd}><span>Add a Subtitle</span></button>)}
+                                    (<Button
+          variant="contained" type="button" className="add-btn" onClick={handleSubtitleAdd}><span>Add a Subtitle</span></Button>)}
                             </Box>
                         </Box>
                     ))}
@@ -295,7 +297,8 @@ const CourseCreate = (props) => {
 
 
                                 {courseExercises.length - 1 === index2 &&
-                                    (<button type="button" className="add-btn" onClick={handleExerciseAdd}><span>Add an Exercise</span></button>)}
+                                    (<Button
+          variant="contained" type="button" className="add-btn" onClick={handleExerciseAdd}><span>Add an Exercise</span></Button>)}
                             </Box>
                         </Box>
                     ))}
@@ -340,12 +343,14 @@ const CourseCreate = (props) => {
 
 
                                 {exam.length - 1 === index3 &&
-                                    (<button type="button" className="add-btn" onClick={handleExamExerciseAdd}><span>Add an Exercise</span></button>)}
+                                    (<Button
+          variant="contained" type="button" className="add-btn" onClick={handleExamExerciseAdd}><span>Add an Exercise</span></Button>)}
                             </Box>
                         </Box>
                     ))}
                 </Box>
-                <button>Submit</button>
+                <Button
+          variant="contained">Submit</Button>
                 {error && <Box className="error">{error}</Box>}
             </form>
 

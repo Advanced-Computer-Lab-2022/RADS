@@ -10,6 +10,7 @@ import ReactPlayer from "react-player";
 import CourseCard from "./CourseCard";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { Button } from "@mui/material";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -332,7 +333,8 @@ const SearchCourse = (props) => {
               onChange={HandlePromotionVal}
             />
             <p>Value: {promotionRate}</p>
-            <button onClick={handleSubmit}>Submit</button>
+            <Button
+          variant="contained" onClick={handleSubmit}>Submit</Button>
           </FormControl>
           <p>
             <strong>{text}</strong>
@@ -343,20 +345,22 @@ const SearchCourse = (props) => {
         <p>
           Welcome, <strong>{instructorName}</strong>
         </p>
-        <button
+        <Button
+          variant="contained"
           onClick={() =>
             (window.location.href = `/instructorrating?instructorId=${instruId}`)
           }
         >
           View rating & reviews
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="contained"
           onClick={() =>
             (window.location.href = `/instructormonthly?instructorId=${instruId}`)
           }
         >
           View Monthly Earnings
-        </button>
+        </Button>
       </box>
       <box className="search-component">
         <input
@@ -520,7 +524,8 @@ const SearchCourse = (props) => {
                   </box>
                 ))}
             </box>
-            <button onClick={() => window.location.href = `/instructorreport?courseId=${course._id}&instructorId=${instruId}`}>Report Course</button>
+            <Button
+          variant="contained" onClick={() => window.location.href = `/instructorreport?courseId=${course._id}&instructorId=${instruId}`}>Report Course</Button>
             <p>
               <strong>
                 ============================================================================================================
@@ -528,7 +533,8 @@ const SearchCourse = (props) => {
             </p>
           </box>
         ))}
-      <button onClick={() => window.location.href = `/instructorviewreports?instructorId=${instruId}`}>View Reports</button>
+      <Button
+          variant="contained" onClick={() => window.location.href = `/instructorviewreports?instructorId=${instruId}`}>View Reports</Button>
     </box>
   );
 };

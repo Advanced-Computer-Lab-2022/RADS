@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 const TraineeView = (props) => {
     const {
         rateVal,
@@ -101,13 +101,15 @@ const TraineeView = (props) => {
         if (exists) {
             return (<Box>
                 <p><bold>Registered</bold></p>
-                <button onClick={() => window.location.href = `/traineecourse?courseId=${courseId}&traineeId=${traineeId}`}>Go to course</button>
+                <Button
+          variant="contained" onClick={() => window.location.href = `/traineecourse?courseId=${courseId}&traineeId=${traineeId}`}>Go to course</Button>
             </Box>)
         }
         else {
             return (
                 <Box>
-                    <button onClick={() => window.location.href = `/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key={courseId}>Register in Course <strong>{course.courseTitle}</strong></button>
+                    <Button
+          variant="contained" onClick={() => window.location.href = `/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key={courseId}>Register in Course <strong>{course.courseTitle}</strong></Button>
                 </Box>
             )
         }
@@ -121,7 +123,8 @@ const TraineeView = (props) => {
     return (
         <Box>
             <Box className='wallet-div'>
-                <button onClick={handleClick}><strong>Wallet</strong></button>
+                <Button
+          variant="contained" onClick={handleClick}><strong>Wallet</strong></Button>
                 <p>{balanceHtml}</p>
             </Box>
             <h4>The information of course: {course.courseTitle} </h4>
