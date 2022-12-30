@@ -66,8 +66,8 @@ const Admin = (props) => {
 
     return (<Box className="admin-lobby" >
         <Box className="instructors" >
-            <button onClick={() => window.location.href = `/adminreports?adminId=${adminId}`}>View Requests & Reports</button>
-            <button onClick={() => window.location.href = `/admininsertcorp?adminId=${adminId}`}>Insert a corperate trainee</button>
+            <Button variant="contained" onClick={() => window.location.href = `/adminreports?adminId=${adminId}`}>View Requests & Reports</Button>
+            <Button variant="contained" onClick={() => window.location.href = `/admininsertcorp?adminId=${adminId}`}>Insert a corperate trainee</Button>
             <Box>
                 <h3><strong>Set up promotion for course/courses</strong></h3>
                 <br />

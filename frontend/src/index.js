@@ -19,6 +19,18 @@ const theme = createTheme({
       main: "#222222",
     },
   },
+  components: {
+    // Name of the component
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          margin: "10px",
+        },
+      },
+    },
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

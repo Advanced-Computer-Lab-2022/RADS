@@ -100,18 +100,21 @@ const AdminPromotion = (props) => {
                     <label>Starting Date</label>
                     <input
                         type="date"
+                        required
                         value={promotionStartDate}
                         onChange={(e) => setPromotionStartDate(e.target.value)}
                     />
                     <label>Ending Date</label>
                     <input
                         type="date"
+                        required
                         value={promotionEndDate}
                         onChange={(e) => setPromotionEndDate(e.target.value)}
                     />
                     <label>Promotion Precentage:</label>
                     <input
                         type="range"
+                        required
                         value={promotionRate}
                         onChange={(e) => setPromotionRate(e.target.value)}
                     />

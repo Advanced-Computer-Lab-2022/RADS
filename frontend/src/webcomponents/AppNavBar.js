@@ -21,12 +21,14 @@ import CardContent from "@mui/material/CardContent";
 import SelectCountry from "./SelectCountry";
 import SearchBar from "./SearchBar";
 
-const pages = [];
+const pages = ["Home", "About"];
 const settings = ["Profile", "Lobby", "Logout"];
 
 const AppNavBar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { rateValue, currencyVal, handleSelection, user } = props;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -55,6 +57,7 @@ const AppNavBar = (props) => {
               boxShadow: 0,
               "&:hover, &.Mui-focusVisible": { color: "white" },
             }}
+            onClick={() => (window.location.href = "/home")}
           >
             <CardActionArea>
               <CardMedia
@@ -90,7 +93,7 @@ const AppNavBar = (props) => {
             LOGO
           </Typography> */}
 
-          <SearchBar rateVal={props.rateValue} currencyVal={props.currencyVal} />
+          {/* <SearchBar rateVal={props.rateValue} currencyVal={props.currencyVal} /> */}
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -122,7 +125,11 @@ const AppNavBar = (props) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  variant="outlined"
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -132,10 +139,17 @@ const AppNavBar = (props) => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-          variant="contained"
+                variant="default"
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#D80621", display: "block" }}
+                sx={{
+                  color: "#D80621",
+                  display: "block",
+                  fontSize: 18,
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  textTransform: "none",
+                }}
               >
                 {page}
               </Button>
@@ -143,15 +157,56 @@ const AppNavBar = (props) => {
           </Box>
 
           <SelectCountry
-            sx={{ marginRight: 10 }}
-            handleSelection={props.handleSelection}
+            sx={{ marginRight: 2 }}
+            handleSelection={handleSelection}
           />
 
-          <Box sx={{ flexGrow: 0, marginLeft: 5 }}>
+          <Box sx={{ flexGrow: 0 , display: "flex", marginLeft: 2}}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              {!user.isConnected ? (
+                <>
+                  <Button
+                    sx={{
+                      color: "#D80621",
+                      display: "block",
+                      fontSize: 18,
+                      fontWeight: 500,
+                      textDecoration: "none",
+                      textTransform: "none",
+                    }}
+                    onClick={() => (window.location.href = `/login`)}
+                  >
+                    Log in
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      color: "#D80621",
+                      display: "block",
+                      fontSize: 18,
+                      fontWeight: 500,
+                      textDecoration: "none",
+                      textTransform: "none",
+                    }}
+                    onClick={() => (window.location.href = `/signup`)}
+                  >
+                    Sign up
+                  </Button>
+                </>
+              ) : (
+                <IconButton sx={{ p: 0 }}>
+                  <Avatar
+                    alt={user.firstName}
+                    src="/static/images/avatar/2.jpg"
+                  />
+                </IconButton>
+              )}
+              {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar
+                  alt={props.user.firstName}
+                  src="/static/images/avatar/2.jpg"
+                />
+              </IconButton> */}
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
