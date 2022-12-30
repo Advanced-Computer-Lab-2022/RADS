@@ -3,7 +3,7 @@
 /* base styles */
 * {
   margin: 0;
-  font-family: "Quicksand";
+  font-family: "Arial";
   color: #222222;
 }
 
@@ -66,7 +66,6 @@
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
-  font-weight: 900;
   color:#ffffff;
 }
 

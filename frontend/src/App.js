@@ -668,71 +668,12 @@ function App() {
                 path="/"
                 element={
                   <Box>
-                    <AdminRouter user={user}>
-                      <Header
-                        rateVal={rateValue}
-                        currencyVal={inputValue}
-                        handleSelection={handleSelection}
-                        user={user}
-                        drawerList={adminDrawerList}
-                        token={window.localStorage.jwt}
-                        page="homeAdmin"
-                        subpage="adminproblems"
-                        drawerFlag={true}
-                      />
-                    </AdminRouter>
-                    <InstructorRouter user={user}>
-                      <Header
-                        rateVal={rateValue}
-                        currencyVal={inputValue}
-                        handleSelection={handleSelection}
-                        user={user}
-                        drawerList={adminDrawerList}
-                        token={window.localStorage.jwt}
-                        page="homeInstructor"
-                        subpage="adminproblems"
-                        drawerFlag={true}
-                      />
-                    </InstructorRouter>
-                    <TraineeRouter user={user}>
-                      <Header
-                        rateVal={rateValue}
-                        currencyVal={inputValue}
-                        handleSelection={handleSelection}
-                        user={user}
-                        drawerList={adminDrawerList}
-                        token={window.localStorage.jwt}
-                        page="homeTrainee"
-                        subpage="adminproblems"
-                        drawerFlag={true}
-                      />
-                    </TraineeRouter>
-                    <CorpTraineeRouter user={user}>
-                      <Header
-                        rateVal={rateValue}
-                        currencyVal={inputValue}
-                        handleSelection={handleSelection}
-                        user={user}
-                        drawerList={adminDrawerList}
-                        token={window.localStorage.jwt}
-                        page="homeCorpTrainee"
-                        subpage="adminproblems"
-                        drawerFlag={true}
-                      />
-                    </CorpTraineeRouter>
-                    <TraineeRouter user={user}>
-                      <Header
-                        rateVal={rateValue}
-                        currencyVal={inputValue}
-                        handleSelection={handleSelection}
-                        user={user}
-                        drawerList={adminDrawerList}
-                        token={window.localStorage.jwt}
-                        page="homeTrainee"
-                        subpage="adminproblems"
-                        drawerFlag={true}
-                      />
-                    </TraineeRouter>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                    />
                     <Box className="home-lobby card-container">
                       <h2>Welcome to RADS Online Course Provider</h2>
                     </Box>
