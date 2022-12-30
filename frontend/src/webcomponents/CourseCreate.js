@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const CourseCreate = (props) => {
     const {
@@ -190,7 +191,7 @@ const CourseCreate = (props) => {
 
 
     return (
-        <div>
+        <Box>
             <form className="create-course" onSubmit={handleSubmit}>
                 <h3>Insert Course Information</h3>
 
@@ -225,11 +226,11 @@ const CourseCreate = (props) => {
                 />
                 <br></br>
 
-                <div>
+                <Box>
                     <label>Subtitles: </label>
                     {subtitles.map((subtitle, index) => (
-                        <div key={index} className="subtitles">
-                            <div className="add-subtitle">
+                        <Box key={index} className="subtitles">
+                            <Box className="add-subtitle">
                                 <label>Title :</label>
                                 <input name="subTitle" type="text" onChange={(e) => setCourseSubTitle(e, index)}
                                     value={subtitle.subTitle}
@@ -250,19 +251,20 @@ const CourseCreate = (props) => {
                                     value={subtitle.hours}
                                 />
                                 {subtitles.length - 1 === index &&
-                                    (<button type="button" className="add-btn" onClick={handleSubtitleAdd}><span>Add a Subtitle</span></button>)}
-                            </div>
-                        </div>
+                                    (<Button
+          variant="contained" type="button" className="add-btn" onClick={handleSubtitleAdd}><span>Add a Subtitle</span></Button>)}
+                            </Box>
+                        </Box>
                     ))}
                     <br></br>
-                </div>
+                </Box>
 
 
-                <div>
+                <Box>
                     <label>Subtitle Exercises: </label>
                     {courseExercises.map((exercise, index2) => (
-                        <div key={index2} className="exercises">
-                            <div className="add-exercise">
+                        <Box key={index2} className="exercises">
+                            <Box className="add-exercise">
                                 <label>Question :</label>
                                 <input name="question" type="text" onChange={(e) => setQuestion(e, index2)}
                                     value={exercise.question}
@@ -295,19 +297,20 @@ const CourseCreate = (props) => {
 
 
                                 {courseExercises.length - 1 === index2 &&
-                                    (<button type="button" className="add-btn" onClick={handleExerciseAdd}><span>Add an Exercise</span></button>)}
-                            </div>
-                        </div>
+                                    (<Button
+          variant="contained" type="button" className="add-btn" onClick={handleExerciseAdd}><span>Add an Exercise</span></Button>)}
+                            </Box>
+                        </Box>
                     ))}
-                </div>
+                </Box>
 
 
 
-                <div>
+                <Box>
                     <label>Exam Exercises: </label>
                     {exam.map((exercise, index3) => (
-                        <div key={index3} className="exam=exercises">
-                            <div className="add-exercise">
+                        <Box key={index3} className="exam=exercises">
+                            <Box className="add-exercise">
                                 <label>Question :</label>
                                 <input name="question" type="text" onChange={(e) => setEQuestion(e, index3)}
                                     value={exercise.question}
@@ -340,17 +343,19 @@ const CourseCreate = (props) => {
 
 
                                 {exam.length - 1 === index3 &&
-                                    (<button type="button" className="add-btn" onClick={handleExamExerciseAdd}><span>Add an Exercise</span></button>)}
-                            </div>
-                        </div>
+                                    (<Button
+          variant="contained" type="button" className="add-btn" onClick={handleExamExerciseAdd}><span>Add an Exercise</span></Button>)}
+                            </Box>
+                        </Box>
                     ))}
-                </div>
-                <button>Submit</button>
-                {error && <div className="error">{error}</div>}
+                </Box>
+                <Button
+          variant="contained">Submit</Button>
+                {error && <Box className="error">{error}</Box>}
             </form>
 
             <p> <strong>____________________________________________________________________________________________</strong></p>
-        </div>
+        </Box>
     )
 }
 

@@ -1,6 +1,8 @@
+import { Box } from "@mui/material";
+
 const TraineeDetails = ({Trainee}) =>{
     return(
-        <div className="corpTrainee-details">
+        <Box className="corpTrainee-details">
             <h4>The information of user: {Trainee.userName}</h4>
             <p><strong>First Name: </strong>{Trainee.firstName}</p>
             <p><strong>Last Name: </strong>{Trainee.lastName}</p>
@@ -8,7 +10,7 @@ const TraineeDetails = ({Trainee}) =>{
             <p><strong>Phone Number: </strong>{Trainee.phoneNumber}</p>
             <p><strong>address: </strong>{Trainee.address}</p>
             <p><strong>courses: </strong>{Trainee.courses}</p>
-        </div>
+        </Box>
     )
 }
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 // components
 import InstructorDetails from '../webcomponents/InstructorDetails'
 import CorpTraineeDetails from '../webcomponents/CorpTraineeDetails'
-import { Button } from "@mui/material"
+import { Box, Button } from "@mui/material"
 import InstructorForm from "../webcomponents/InstructorForm"
 import CorpTraineeForm from "../webcomponents/CorpTraineeForm"
 import AdminForm from "../webcomponents/AdminForm"
@@ -64,15 +64,15 @@ const Admin = (props) => {
         fetchAdmins();
     }, [])
 
-    return (<div className="admin-lobby" >
-        <div className="instructors" >
-            <button onClick={() => window.location.href = `/adminreports?adminId=${adminId}`}>View Requests & Reports</button>
-            <button onClick={() => window.location.href = `/admininsertcorp?adminId=${adminId}`}>Insert a corperate trainee</button>
-            <div>
+    return (<Box className="admin-lobby" >
+        <Box className="instructors" >
+            <Button variant="contained" onClick={() => window.location.href = `/adminreports?adminId=${adminId}`}>View Requests & Reports</Button>
+            <Button variant="contained" onClick={() => window.location.href = `/admininsertcorp?adminId=${adminId}`}>Insert a corperate trainee</Button>
+            <Box>
                 <h3><strong>Set up promotion for course/courses</strong></h3>
                 <br />
                 <Button variant="contained"  onClick={() => window.location.href = `/adminpromotion?adminId=${adminId}`}>Add Promo</Button>
-            </div>
+            </Box>
             <h2 > Admins: </h2> {
                 admin && admin.map((admin) => (
                     <AdminDetails key={admin._id} admin={admin} />
@@ -90,13 +90,13 @@ const Admin = (props) => {
                 ))
             }
       
-        </div> <InstructorForm rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/>
+        </Box> <InstructorForm rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/>
         <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
         <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
         <AdminForm rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token} />
         <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
         <h2> Add new admin: </h2> <NewAdminButton rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/>
-    </div>
+    </Box>
     )
 }
 

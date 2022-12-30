@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import axios from "axios";
+import { Box, Button } from "@mui/material";
 
 const CorpTraineeView = (props) => {
     const {
@@ -87,43 +88,45 @@ const CorpTraineeView = (props) => {
     const CheckHaveAccess = () => {
         findAccessed();
         if (exists) {
-            return (<div>
+            return (<Box>
                 <p><bold>Enrolled</bold></p>
-                <button onClick={() => window.location.href = `/corptraineecourse?courseId=${courseId}&corpTraineeId=${corpTraineeId}`}>Go to course</button>
-            </div>)
+                <Button
+          variant="contained" onClick={() => window.location.href = `/corptraineecourse?courseId=${courseId}&corpTraineeId=${corpTraineeId}`}>Go to course</Button>
+            </Box>)
         }
         else {
             return (
-                <div>
-                   {<button onClick={() => window.location.href = `/corptraineesubmitaccess?courseId=${courseId}&corpTraineeId=${corpTraineeId}`} key={courseId}>Request Access for <strong>{course.courseTitle}</strong></button>}
-                </div>
+                <Box>
+                   {<Button
+          variant="contained" onClick={() => window.location.href = `/corptraineesubmitaccess?courseId=${courseId}&corpTraineeId=${corpTraineeId}`} key={courseId}>Request Access for <strong>{course.courseTitle}</strong></Button>}
+                </Box>
             )
         }
     }
 
     return (
-        <div>
+        <Box>
             <h4>The information of course: {course.courseTitle} </h4>
-            <div>
+            <Box>
                 <CheckHaveAccess />
-            </div>
+            </Box>
             <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true}/>
-            <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
-                <div>
+            <Box><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
+                <Box>
                     <p>{subtitle.subTitle}</p>
                     <p>Description:{subtitle.description}</p>
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
-                </div>
-            ))}</div>
+                </Box>
+            ))}</Box>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
-            <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
-                <div>
+            <Box><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
+                <Box>
                     <p>Question: {exercise.question}</p>
-                </div>
-            ))}</div>
+                </Box>
+            ))}</Box>
             <p><strong>============================================================================================================</strong></p>
-        </div>
+        </Box>
     )
 }
 

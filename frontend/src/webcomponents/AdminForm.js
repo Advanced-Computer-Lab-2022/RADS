@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react"
 import jwt_decode from "jwt-decode";
+import { Box, Button } from "@mui/material";
 
 const AdminForm = (props) => {
     const {
@@ -45,8 +46,9 @@ const AdminForm = (props) => {
             value= {password}
             />
 
-            <button>Submit</button>
-            {error && <div className="error">{error}</div>}
+            <Button
+          variant="contained">Submit</Button>
+            {error && <Box className="error">{error}</Box>}
         </form>
     )
 }

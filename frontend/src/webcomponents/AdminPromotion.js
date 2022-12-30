@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
@@ -75,7 +75,7 @@ const AdminPromotion = (props) => {
     };
 
     return (
-        <div>
+        <Box>
 
             <box className="admin-promo">
                 <box className="list-container-promo">
@@ -100,30 +100,34 @@ const AdminPromotion = (props) => {
                     <label>Starting Date</label>
                     <input
                         type="date"
+                        required
                         value={promotionStartDate}
                         onChange={(e) => setPromotionStartDate(e.target.value)}
                     />
                     <label>Ending Date</label>
                     <input
                         type="date"
+                        required
                         value={promotionEndDate}
                         onChange={(e) => setPromotionEndDate(e.target.value)}
                     />
                     <label>Promotion Precentage:</label>
                     <input
                         type="range"
+                        required
                         value={promotionRate}
                         onChange={(e) => setPromotionRate(e.target.value)}
                     />
                     <p>Value: {promotionRate}</p>
                     
-                    {checkedCourses.length === 0? (<div><strong>Select the Courses you want to promote.</strong></div>) : (<button type='submit' onClick={handleSubmit} >Submit</button>)}
+                    {checkedCourses.length === 0? (<Box><strong>Select the Courses you want to promote.</strong></Box>) : (<Button
+          variant="contained" type='submit' onClick={handleSubmit} >Submit</Button>)}
                 </FormControl>
                 <p>
                     <strong>{text}</strong>
                 </p>
             </Box>
-        </div>
+        </Box>
     )
 }
 

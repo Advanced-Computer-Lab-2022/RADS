@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Box, Button } from "@mui/material";
 
 
 const CorpTraineeSubmitAccess = (props) => {
@@ -93,16 +94,17 @@ const CorpTraineeSubmitAccess = (props) => {
     }
 
     return (
-       <div>
+       <Box>
         <h1><bold><strong>Access Form</strong></bold></h1>
         <form onSubmit={handleAccess}>
             <p><strong>Course <strong>{course.courseTitle}</strong></strong></p>
             <label>Enter a reason why you would like to access the Course.</label>
             <input type="text" value={corpTraineeComment} onChange={(e) => setCorpTraineeComment(e.target.value)}></input>
-            <button>Send</button>
+            <Button
+          variant="contained">Send</Button>
         </form>
         <p><strong>{html}</strong></p>
-    </div>
+    </Box>
     )
 }
 

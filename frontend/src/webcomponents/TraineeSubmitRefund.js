@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Box, Button } from "@mui/material";
 
 
 const TraineeSubmitRefund = (props) => {
@@ -117,17 +118,18 @@ const TraineeSubmitRefund = (props) => {
     }
 
     return (
-        <div>
+        <Box>
             <h1><bold><strong>Refund Form</strong></bold></h1>
             <form onSubmit={handleRefund}>
                 <p><strong>Course: {course.courseTitle}</strong></p>
                 <p><strong>Refund Amount: {Math.ceil(course.price * rateVal)} {currencyVal}</strong></p>
                 <label>Enter a reason why you would like to refund the Course.</label>
                 <input type="text" value={traineeComment} onChange={(e) => setTraineeComment(e.target.value)}></input>
-                <button>Refund</button>
+                <Button
+          variant="contained">Refund</Button>
             </form>
             <p><strong>{html}</strong></p>
-        </div>
+        </Box>
     )
 }
 

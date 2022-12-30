@@ -1,6 +1,7 @@
 // import axios from 'axios';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import { Box } from '@mui/material';
 const InstructorRating =(props)=>{
     const{
         rateVal,
@@ -63,37 +64,37 @@ const InstructorRating =(props)=>{
     //     return (<strong>{result}</strong>);
     // }
 return(
-    <div>
-    <div>
+    <Box>
+    <Box>
             <p><strong>Reviews & Ratings of instructor: {instructor.firstName} {' '} {instructor.lastName}</strong></p>
             <p>Current Total Rating: {instructor.instructorRating} out of 5.</p>
             {reviews && reviews.map((review,index)=>(
-                 <div>
+                 <Box>
                  <p>Review {index + 1}: Rating: {review.iRating} out of 5.</p>
                  <p>{review.iReview}</p>
                  {/* <p>{review.traineeId}</p>
                  <p>{review.corpTraineeId}</p> */}
-                 </div>
+                 </Box>
             ))}
-    </div>
+    </Box>
 
-    <div>
+    <Box>
         <p><strong>Reviews & Ratings of instructor courses</strong></p>
     {courses && courses.map((course,index)=>(
-          <div key = {course._id}>
+          <Box key = {course._id}>
           <h4>Course {index + 1}:<strong> {course.courseTitle} </strong></h4>
           <p>Current Total Rating: {course.courseRating} out of 5.</p>
           {course.reviews && course.reviews.map((review,index)=>(
-                <div>
+                <Box>
                 <p>Rating {index+1}: {review.cRating} out of 5.</p>
                 <p>Review {index+1}: {review.cReview}</p>
-                </div>
+                </Box>
              ))}
             <p><strong>============================================================================================================</strong></p>
-                </div>
+                </Box>
              ))}
-    </div>
-    </div>
+    </Box>
+    </Box>
 )
 }
 

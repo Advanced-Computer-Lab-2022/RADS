@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import CourseCard from "./CourseCard";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const ratingMarks = [
   {
@@ -191,11 +192,11 @@ const CorpTraineeSearch = (props) => {
   const courseView2 = "&corpTraineeId=";
 
   return (
-    <box>
+    <Box>
       <p>
         <strong>Welcome {corpTraineeName}</strong>
       </p>
-      <box className="homesearch-component">
+      <Box className="homesearch-component">
         <input
           type="text"
           placeholder="Search Course..."
@@ -203,13 +204,13 @@ const CorpTraineeSearch = (props) => {
           onChange={(e) => setQueryS(e.target.value)}
         />
 
-        <box className="highestviewed-courses ">
+        <Box className="highestviewed-courses ">
           <p className="highview-p">
             <strong>Highest Viewed Courses</strong>
           </p>
-          <box className="card-container">
+          <Box className="card-container">
             {highestViewedCourses.map((course) => (
-              <box>
+              <Box>
                 <CourseCard
                   course={course}
                   rateVal={rateVal}
@@ -219,23 +220,24 @@ const CorpTraineeSearch = (props) => {
                   courseView2={courseView2}
                   id={corpTraineeId}
                 />
-              </box>
+              </Box>
             ))}
-          </box>
-        </box>
+          </Box>
+        </Box>
         <br />
 
-        <button
+        <Button
+          variant="contained"
           onClick={() =>
             (window.location.href = `/corptraineeform?corpTraineeId=${corpTraineeId}`)
           }
         >
           View my Courses
-        </button>
-        <box className="filter-component1">
-          <box className="list-container">
+        </Button>
+        <Box className="filter-component1">
+          <Box className="list-container">
             {courseSubjects.map((course) => (
-              <box>
+              <Box>
                 <input
                   value={course}
                   name={course}
@@ -246,12 +248,12 @@ const CorpTraineeSearch = (props) => {
                 />
                 <span>{course}</span>
                 {/* <span className= {isChecked(course)}>{course.subject}</span> */}
-              </box>
+              </Box>
             ))}
-          </box>
-        </box>
-        <box>{/* {`Subjects checked are: ${checkedItems}`} */}</box>
-        <box className="homefilter-component3">
+          </Box>
+        </Box>
+        <Box>{/* {`Subjects checked are: ${checkedItems}`} */}</Box>
+        <Box className="homefilter-component3">
           <p>
             <strong>Rating Filter</strong>
           </p>
@@ -273,8 +275,8 @@ const CorpTraineeSearch = (props) => {
               }}
             />
           </Box>
-        </box>
-        <box className="home-search card-container">
+        </Box>
+        <Box className="home-search card-container">
           {performIntersection(
             searchMethod(courses),
             filterMethodOnRating(courses),
@@ -285,7 +287,7 @@ const CorpTraineeSearch = (props) => {
               filterMethodOnRating(courses),
               checkedSubjects
             ).map((course) => (
-              <box>
+              <Box>
                 <CourseCard
                   course={course}
                   rateVal={rateVal}
@@ -295,11 +297,11 @@ const CorpTraineeSearch = (props) => {
                   courseView2={courseView2}
                   id={corpTraineeId}
                 />
-              </box>
+              </Box>
             ))}
-        </box>
-      </box>
-    </box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

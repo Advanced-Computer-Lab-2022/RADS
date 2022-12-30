@@ -18,19 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignUpAction } from '../redux/actions/authActions';
-
-function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://github.com/Advanced-Computer-Lab-2022/RADS">
-                RADS
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import Footer from '../webcomponents/Footer';
 
 const theme = createTheme({
   palette: {
@@ -193,7 +181,7 @@ export default function SignUp() {
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 5 }} />
+                <Footer />
             </Container>
         </ThemeProvider>
     );

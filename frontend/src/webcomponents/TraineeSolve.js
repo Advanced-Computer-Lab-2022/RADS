@@ -1,6 +1,7 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Box, Button } from '@mui/material';
 
 const TraineeSolve = (props) => {
     const {
@@ -187,29 +188,30 @@ const TraineeSolve = (props) => {
 
 
     return (
-        <div>
-            {status && status === true ? (<div><p><strong>Already Solved the course exercises</strong></p>
-                <p><strong>Exercises Grade was: {Math.ceil(oldExercisesGrade * 2)}%</strong></p></div>)
+        <Box>
+            {status && status === true ? (<Box><p><strong>Already Solved the course exercises</strong></p>
+                <p><strong>Exercises Grade was: {Math.ceil(oldExercisesGrade * 2)}%</strong></p></Box>)
                 : (
-                    <div>
+                    <Box>
 
-                        <div className='quiz-form'>
+                        <Box className='quiz-form'>
                             <h1>Subtitle Exercises:</h1>
                             <form onSubmit={handleSubmit}>
                                 {exercises && exercises.map((exercise, index) => (
-                                    <div> <fieldset id={exercise._id}>
+                                    <Box> <fieldset id={exercise._id}>
                                         <p><strong>Exercise {index + 1}: {exercise.question}</strong></p>
                                         <label><input id={`first${index}`} type='radio' value={exercise.firstChoice} name={exercise.firstChoice} checked={choices[index] === exercise.firstChoice} onChange={e => { handleChoice(e, index) }} /> {exercise.firstChoice}</label>
                                         <label><input id={`second${index}`} type='radio' value={exercise.secondChoice} name={exercise.secondChoice} checked={choices[index] === exercise.secondChoice} onChange={e => { handleChoice(e, index) }} />{exercise.secondChoice}</label>
                                         <label><input id={`third${index}`} type='radio' value={exercise.thirdChoice} name={exercise.thirdChoice} checked={choices[index] === exercise.thirdChoice} onChange={e => { handleChoice(e, index) }} />{exercise.thirdChoice}</label>
                                         <label><input id={`forth${index}`} type='radio' value={exercise.fourthChoice} name={exercise.fourthChoice} checked={choices[index] === exercise.fourthChoice} onChange={e => { handleChoice(e, index) }} />{exercise.fourthChoice}</label>
                                     </fieldset>
-                                    </div>
+                                    </Box>
                                 ))}
-                               {showButton && <button id = "submit-solve"type='submit'>Submit</button>}
+                               {showButton && <Button
+          variant="contained" id = "submit-solve"type='submit'>Submit</Button>}
                             </form>
-                        </div >
-                        <div className='solution-form'>
+                        </Box >
+                        <Box className='solution-form'>
                             {solved && grades && grades.map((grade, index2) => (
                                 <p>Q{index2 + 1}: {grade} out of 1</p>
                             ))}
@@ -217,9 +219,9 @@ const TraineeSolve = (props) => {
                                 <p>A{index3 + 1}: {correct}</p>
                             ))}
                             <p><strong>Exercises Grade: {Math.ceil(exercisesGradeFinal * 2)}%</strong></p>
-                        </div>
-                    </div>)}
-        </div>
+                        </Box>
+                    </Box>)}
+        </Box>
     )
 }
 

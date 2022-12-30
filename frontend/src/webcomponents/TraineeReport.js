@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const TraineeReport = (props) => {
     const {
@@ -119,7 +120,7 @@ const TraineeReport = (props) => {
 
 
     return (
-        <div>
+        <Box>
             <h3>Report a problem</h3>
             <p><strong>In course: {course.courseTitle}</strong></p>
             <br/>
@@ -146,11 +147,12 @@ const TraineeReport = (props) => {
                 <br/>
                 <TextField  multiline rows={4} label="Enter Your Comment/Reasoning" sx={{minWidth:300,minHeight:100}}  type="text" value= {traineeComment} onChange={(e)=>setTraineeComment(e.target.value)} />
                 </Box>
-                <button type="submit">Submit</button>
+                <Button
+          variant="contained" type="submit">Submit</Button>
             </form>
 
             <p><strong>{html}</strong></p>
-        </div>
+        </Box>
     )
 }
 

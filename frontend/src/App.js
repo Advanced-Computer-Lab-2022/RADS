@@ -1,89 +1,94 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './webcomponents/Navbar';
-import InstructorLobby from './webpages/InstructorLobby';
-import TraineeLobby from './webpages/TraineeLobby';
-import Contract from './webpages/Contract';
-import Home from './webpages/Home';
-import Admin from './webpages/Admin';
-import CorpTraineeLobby from './webpages/CorpTraineeLobby';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./webcomponents/Navbar";
+import InstructorLobby from "./webpages/InstructorLobby";
+import TraineeLobby from "./webpages/TraineeLobby";
+import Contract from "./webpages/Contract";
+import Home from "./webpages/Home";
+import Admin from "./webpages/Admin";
+import CorpTraineeLobby from "./webpages/CorpTraineeLobby";
 //import TraineeLobby from './webpages/TraineeLobby';
-import CourseView from './webcomponents/CourseView';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import { useState } from 'react';
-import InstructorRating from './webcomponents/InstructorRating';
-import CorpTraineeView from './webcomponents/CorpTraineeView';
-import CorpTraineeForm from './webcomponents/CorpTraineeForm';
-import CorpTraineeSolve from './webcomponents/CorpTraineeSolve';
-import TraineeView from './webcomponents/TraineeView';
-import TraineeForm from './webcomponents/TraineeForm';
-import TraineeRating from './webcomponents/TraineeRating';
-import TraineeSolve from './webcomponents/TraineeSolve';
-import InstructorForgotPass from './webcomponents/InstructorForgotPass';
-import TraineeForgotPass from './webcomponents/TraineeForgotPass';
-import TraineeCreditCard from './webcomponents/TraineeCreditCard';
-import TraineeCreditOptions from './webcomponents/TraineeCreditOptions';
-import TraineeCourse from './webcomponents/TraineeCourse';
-import TraineeExam from './webcomponents/TraineeExam';
-import AdminRefund from './webcomponents/AdminRefund';
-import AdminAccess from './webcomponents/AdminAccess';
-import AdminReports from './webcomponents/AdminReports';
-import TraineeSubmitRefund from './webcomponents/TraineeSubmitRefund';
-import CorpTraineeExam from './webcomponents/CorpTraineeExam';
-import CorpTraineeSubmitAccess from './webcomponents/CorpTraineeSubmitAccess';
-import CorpTraineeCourse from './webcomponents/CorpTraineeCourse';
-import CorpTraineeRating from './webcomponents/CorpTraineeRating';
-import SignUp from './webpages/SignUp';
-import LogIn from './webpages/LogIn';
-import NotFound from './webpages/NotFound';
-import NoAccess from './webpages/NoAccess';
-import AdminRouter from './webcomponents/AdminRouter'
-import TraineeRouter from './webcomponents/TraineeRouter';
-import CorpTraineeRouter from './webcomponents/CorpTraineeRouter';
-import InstructorRouter from './webcomponents/InstructorRouter';
-import ForceRedirect from './webcomponents/ForceRedirect';
-import { Logout, setUser } from './redux/actions/authActions';
-import { setAuth } from './util/setAuth';
-import store from './redux/store';
-import jwt_decode from 'jwt-decode'
-import { useSelector } from 'react-redux';
-import TraineeReport from './webcomponents/TraineeReport';
-import TraineeViewReports from './webcomponents/TraineeViewReports';
-import CorpTraineeReport from './webcomponents/CorpTraineeReport';
-import CorpTraineeViewReports from './webcomponents/CorpTraineeViewReports';
-import InstructorReport from './webcomponents/InstructorReport';
-import InstructorViewReports from './webcomponents/InstructorViewReports';
-import TraineeFollowUp from './webcomponents/TraineeFollowUp';
-import CorpTraineeFollowUp from './webcomponents/CorpTraineeFollowUp';
-import InstructorFollowUp from './webcomponents/InstructorFollowUp';
-import SelectCountry from './webcomponents/SelectCountry';
-import AppNavBar from './webcomponents/AppNavBar';
-import InstructorMonthly from './webcomponents/InstructorMonthly';
-import CorpTraineeInsert from './webcomponents/CorpTraineeInsert';
-import AdminProblems from './webcomponents/AdminProblems';
-import AdminPromotion from './webcomponents/AdminPromotion';
+import CourseView from "./webcomponents/CourseView";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import { useState } from "react";
+import InstructorRating from "./webcomponents/InstructorRating";
+import CorpTraineeView from "./webcomponents/CorpTraineeView";
+import CorpTraineeForm from "./webcomponents/CorpTraineeForm";
+import CorpTraineeSolve from "./webcomponents/CorpTraineeSolve";
+import TraineeView from "./webcomponents/TraineeView";
+import TraineeForm from "./webcomponents/TraineeForm";
+import TraineeRating from "./webcomponents/TraineeRating";
+import TraineeSolve from "./webcomponents/TraineeSolve";
+import InstructorForgotPass from "./webcomponents/InstructorForgotPass";
+import TraineeForgotPass from "./webcomponents/TraineeForgotPass";
+import TraineeCreditCard from "./webcomponents/TraineeCreditCard";
+import TraineeCreditOptions from "./webcomponents/TraineeCreditOptions";
+import TraineeCourse from "./webcomponents/TraineeCourse";
+import TraineeExam from "./webcomponents/TraineeExam";
+import AdminRefund from "./webcomponents/AdminRefund";
+import AdminAccess from "./webcomponents/AdminAccess";
+import AdminReports from "./webcomponents/AdminReports";
+import TraineeSubmitRefund from "./webcomponents/TraineeSubmitRefund";
+import CorpTraineeExam from "./webcomponents/CorpTraineeExam";
+import CorpTraineeSubmitAccess from "./webcomponents/CorpTraineeSubmitAccess";
+import CorpTraineeCourse from "./webcomponents/CorpTraineeCourse";
+import CorpTraineeRating from "./webcomponents/CorpTraineeRating";
+import SignUp from "./webpages/SignUp";
+import LogIn from "./webpages/LogIn";
+import NotFound from "./webpages/NotFound";
+import NoAccess from "./webpages/NoAccess";
+import AdminRouter from "./webcomponents/AdminRouter";
+import TraineeRouter from "./webcomponents/TraineeRouter";
+import CorpTraineeRouter from "./webcomponents/CorpTraineeRouter";
+import InstructorRouter from "./webcomponents/InstructorRouter";
+import ForceRedirect from "./webcomponents/ForceRedirect";
+import { Logout, setUser } from "./redux/actions/authActions";
+import { setAuth } from "./util/setAuth";
+import store from "./redux/store";
+import jwt_decode from "jwt-decode";
+import { useSelector } from "react-redux";
+import TraineeReport from "./webcomponents/TraineeReport";
+import TraineeViewReports from "./webcomponents/TraineeViewReports";
+import CorpTraineeReport from "./webcomponents/CorpTraineeReport";
+import CorpTraineeViewReports from "./webcomponents/CorpTraineeViewReports";
+import InstructorReport from "./webcomponents/InstructorReport";
+import InstructorViewReports from "./webcomponents/InstructorViewReports";
+import TraineeFollowUp from "./webcomponents/TraineeFollowUp";
+import CorpTraineeFollowUp from "./webcomponents/CorpTraineeFollowUp";
+import InstructorFollowUp from "./webcomponents/InstructorFollowUp";
+import AppNavBar from "./webcomponents/AppNavBar";
+import InstructorMonthly from "./webcomponents/InstructorMonthly";
+import CorpTraineeInsert from "./webcomponents/CorpTraineeInsert";
+import AdminProblems from "./webcomponents/AdminProblems";
+import AdminPromotion from "./webcomponents/AdminPromotion";
+import SearchPage from "./webcomponents/SearchPage";
+import UserDrawer from "./webcomponents/UserDrawer";
+import Header from "./webcomponents/Header";
+
+const adminDrawerList = ["Profile", "Issues", "Promotion"];
+const instructorDrawerList = ["Profile", "Reports", "Follow Up", "Monthly"];
+const traineeDrawerList = ["Profile", "Reports", "Follow Up"];
+const corpTraineeDrawerList = ["Profile", "Reports", "Follow Up"];
 
 if (window.localStorage.jwt) {
-  const decode = jwt_decode(window.localStorage.jwt)
-  store.dispatch(setUser(decode))
-  setAuth(window.localStorage.jwt)
-  const currentDate = Date.now / 1000
+  const decode = jwt_decode(window.localStorage.jwt);
+  store.dispatch(setUser(decode));
+  setAuth(window.localStorage.jwt);
+  const currentDate = Date.now / 1000;
   if (decode.exp > currentDate) {
-    store.dispatch(Logout())
+    store.dispatch(Logout());
   }
 }
 
 function App() {
-  const url = 'https://api.exchangerate.host/convert?from=USD&to=';
+  const url = "https://api.exchangerate.host/convert?from=USD&to=";
   const [rateValue, setRateValue] = useState(1);
   const [inputValue, setInputValue] = useState("USD");
-  const auth = useSelector(state => state.auth)
+  const auth = useSelector((state) => state.auth);
   const user = {
     isConnected: auth.isConnected,
-    role: auth.user.role
-  }
+    role: auth.user.role,
+  };
 
   const fetchCurrencyRate = async (val) => {
     console.log("Val", val);
@@ -94,29 +99,34 @@ function App() {
       setRateValue(json.result);
       console.log(json.result);
     }
-  }
+  };
 
   //a function that handles the selection of the currency
   const handleSelection = (inputValue) => {
     console.log("inputValue", inputValue);
     setInputValue(inputValue);
     fetchCurrencyRate(inputValue);
-  }
+  };
   return (
-    <div className="App">
+    <Box className="App">
       <BrowserRouter>
-        <div className="bg-light" style={{ height: "100vh" }}>
-          <AppNavBar
-            rateValue={rateValue}
-            inputValue={inputValue}
-            handleSelection={handleSelection}
-          />
-          <Navbar user={user} />
-          <div className="home-lobby">
+        <Box className="bg-light" style={{ height: "100vh" }}>
+          {/* <Box className="side-bar">
+            <AppNavBar
+              rateValue={rateValue}
+              currencyVal={inputValue}
+              handleSelection={handleSelection}
+              user={user}
+            />
+            <UserDrawer user={user} />
+          </Box> */}
+          {/* <Box className="home-lobby card-container">
             <h2>Welcome to RADS Online Course Provider</h2>
-          </div>
-          <div className="webpages">
+          </Box> */}
+          <Box className="webpages">
             <Routes>
+              <Route path="/userdrawer" element={<UserDrawer user={user} />} />
+
               <Route
                 path="/noaccess"
                 element={
@@ -133,6 +143,13 @@ function App() {
                       currencyVal={inputValue}
                     />
                   </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/search"
+                element={
+                  <SearchPage rateVal={rateValue} currencyVal={inputValue} />
                 }
               />
 
@@ -305,9 +322,15 @@ function App() {
                 path="/adminreports"
                 element={
                   <AdminRouter user={user}>
-                    <AdminReports
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="adminreports"
+                      drawerFlag={true}
                     />
                   </AdminRouter>
                 }
@@ -317,9 +340,16 @@ function App() {
                 path="/adminproblems"
                 element={
                   <AdminRouter user={user}>
-                    <AdminProblems
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subadmin"
+                      subpage="adminproblems"
+                      drawerFlag={true}
                     />
                   </AdminRouter>
                 }
@@ -329,23 +359,34 @@ function App() {
                 path="/adminpromotion"
                 element={
                   <AdminRouter user={user}>
-                    <AdminPromotion
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="adminpromotion"
+                      drawerFlag={true}
                     />
                   </AdminRouter>
                 }
               />
 
-
-
               <Route
                 path="/admininsertcorp"
                 element={
                   <AdminRouter user={user}>
-                    <CorpTraineeInsert
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subadmin"
+                      subpage="admininsertcorp"
+                      drawerFlag={true}
                     />
                   </AdminRouter>
                 }
@@ -355,7 +396,17 @@ function App() {
                 path="/adminrefunds"
                 element={
                   <AdminRouter user={user}>
-                    <AdminRefund rateVal={rateValue} currencyVal={inputValue} />
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subadmin"
+                      subpage="adminrefunds"
+                      drawerFlag={true}
+                    />
                   </AdminRouter>
                 }
               />
@@ -364,7 +415,17 @@ function App() {
                 path="/adminaccess"
                 element={
                   <AdminRouter user={user}>
-                    <AdminAccess rateVal={rateValue} currencyVal={inputValue} />
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subadmin"
+                      subpage="adminaccess"
+                      drawerFlag={true}
+                    />
                   </AdminRouter>
                 }
               />
@@ -533,7 +594,15 @@ function App() {
                 path="/adminlobby"
                 element={
                   <AdminRouter user={user}>
-                    <Admin rateVal={rateValue} currencyVal={inputValue} token={window.localStorage.jwt} />
+                    <Header
+                      className="header"
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                    />
                   </AdminRouter>
                 }
               />
@@ -597,18 +666,50 @@ function App() {
 
               <Route
                 path="/"
-                element={<Home rateVal={rateValue} currencyVal={inputValue} />}
+                element={
+                  <Box>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                    />
+                    <Box className="home-lobby card-container">
+                      <h2>Welcome to RADS Online Course Provider</h2>
+                    </Box>
+                    <Home rateVal={rateValue} currencyVal={inputValue} />
+                  </Box>
+                }
               />
 
               <Route
                 path="/home"
-                element={<Home rateVal={rateValue} currencyVal={inputValue} />}
+                element={
+                  <Box>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                    />
+                    <Box className="home-lobby card-container">
+                      <h2>Welcome to RADS Online Course Provider</h2>
+                    </Box>
+                    <Home rateVal={rateValue} currencyVal={inputValue} />
+                  </Box>
+                }
               />
 
               <Route
                 path="/login"
                 element={
                   <ForceRedirect user={user}>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                    />
                     <LogIn rateVal={rateValue} currencyVal={inputValue} />
                   </ForceRedirect>
                 }
@@ -618,6 +719,12 @@ function App() {
                 path="/signup"
                 element={
                   <ForceRedirect user={user}>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                    />
                     <SignUp rateVal={rateValue} currencyVal={inputValue} />
                   </ForceRedirect>
                 }
@@ -637,10 +744,10 @@ function App() {
                 }
               />
             </Routes>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </BrowserRouter>
-    </div>
+    </Box>
   );
 }
 

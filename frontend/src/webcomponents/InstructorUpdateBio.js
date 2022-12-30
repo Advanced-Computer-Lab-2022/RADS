@@ -1,6 +1,7 @@
 import { useState } from "react"
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 
 const InstructorUpdateBio = (props) => {
@@ -34,7 +35,8 @@ const InstructorUpdateBio = (props) => {
             <input type="text" onChange={(e) => setBio(e.target.value)}
             value= {bio}
             />
-            <button>Submit</button>
+            <Button
+          variant="contained">Submit</Button>
         </form>
     )
 }

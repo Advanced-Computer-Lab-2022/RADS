@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardMedia, CardContent, CardActions } from "@mui/material";
+import { Card, CardMedia, CardContent, CardActions, Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
@@ -36,7 +36,7 @@ const CourseCard = ({
         <Typography gutterBottom variant="h5" component="div">
           Course: {course.courseTitle}
         </Typography>
-        <div>
+        <Box>
           <Typography variant="body2" color="text.secondary">
             <p className="course-hours-card">
               Total Hours: {course.totalHours}
@@ -56,10 +56,9 @@ const CourseCard = ({
           ) : (
             <br />
           )}
-        </div>
+        </Box>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
         <Button
           size="small"
           onClick={() => {

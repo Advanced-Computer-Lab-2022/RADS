@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
@@ -106,12 +106,12 @@ const AdminProblems = (props) => {
     }
 
     return (
-        <div>
-            <div>
+        <Box>
+            <Box>
                 {isTrainee && !isInstructor && !isCorpTrainee ? (
-                    <div>
+                    <Box>
                         <h3><strong>Request Information:</strong></h3>
-                        <div>
+                        <Box>
                             <p>Trainee Name: {trainee.firstName} {trainee.lastName}</p>
                             <p>Course Name: {course.courseTitle} </p>
                             <p>{trainee.firstName}'s Comments for the problem:
@@ -121,12 +121,12 @@ const AdminProblems = (props) => {
                             </p>
                             <p>Request Type: {request.requestType} Request</p>
                             <p>Request Status: {request.reportStatus}</p>
-                            {request.adminCommment ? (<div><p>Your Reply:{request.adminCommment} </p></div>)
+                            {request.adminCommment ? (<Box><p>Your Reply:{request.adminCommment} </p></Box>)
                                 : (
                                     "You did not reply yet."
                                 )}
-                        </div>
-                        <div>
+                        </Box>
+                        <Box>
                             <form onSubmit={handleMark}>
                                 <fieldset>
                                     <label><input id='option1' type='checkbox' value="resolved" name="resolved" checked={checkedOption === "resolved"} onChange={e => { setCheckedOption(e.target.value) }} />Mark as Resolved</label>
@@ -137,19 +137,20 @@ const AdminProblems = (props) => {
                                 <fieldset>
                                     <label><input id='comment' type='text' value={adminComment} name='adminComment' onChange={e => { setAdminComment(e.target.value) }} />Enter a reply.</label>
                                 </fieldset>
-                                <button type='submit'>Submit</button>
+                                <Button
+          variant="contained" type='submit'>Submit</Button>
                             </form>
-                        </div>
+                        </Box>
                         <p>{html}</p>
-                    </div>)
+                    </Box>)
                     : ('')}
-            </div>
+            </Box>
 
-            <div>
+            <Box>
                 {!isTrainee && isInstructor && !isCorpTrainee ? (
-                    <div>
+                    <Box>
                         <h3><strong>Request Information:</strong></h3>
-                        <div>
+                        <Box>
                             <p>Instructor Name: {instructor.firstName} {instructor.lastName}</p>
                             <p>Course Name: {course.courseTitle} </p>
                             <p>{instructor.firstName}'s Comments for the problem:
@@ -159,12 +160,12 @@ const AdminProblems = (props) => {
                             </p>
                             <p>Request Type: {request.requestType} Request</p>
                             <p>Request Status: {request.reportStatus}</p>
-                            {request.adminCommment ? (<div><p>Your Reply:{request.adminCommment} </p></div>)
+                            {request.adminCommment ? (<Box><p>Your Reply:{request.adminCommment} </p></Box>)
                                 : (
                                     "You did not reply yet."
                                 )}
-                        </div>
-                        <div>
+                        </Box>
+                        <Box>
                             <form onSubmit={handleMark}>
                                 <fieldset>
                                     <label><input id='option1' type='checkbox' value="resolved" name="resolved" checked={checkedOption === "resolved"} onChange={e => { setCheckedOption(e.target.value) }} />Mark as Resolved</label>
@@ -175,21 +176,22 @@ const AdminProblems = (props) => {
                                 <fieldset>
                                     <label><input id='comment' type='text' value={adminComment} name='adminComment' onChange={e => { setAdminComment(e.target.value) }} />Enter a reply.</label>
                                 </fieldset>
-                                <button type='submit'>Submit</button>
+                                <Button
+          variant="contained" type='submit'>Submit</Button>
                             </form>
-                        </div>
+                        </Box>
                         <p>{html}</p>
-                    </div>)
+                    </Box>)
                     : ('')}
-            </div>
+            </Box>
 
 
 
-            <div>
+            <Box>
                 {!isTrainee && !isInstructor && isCorpTrainee ? (
-                    <div>
+                    <Box>
                         <h3><strong>Request Information:</strong></h3>
-                        <div>
+                        <Box>
                             <p>Corporate Trainee Name: {corpTrainee.firstName} {corpTrainee.lastName}</p>
                             <p>Course Name: {course.courseTitle} </p>
                             <p>{corpTrainee.firstName}'s Comments for the problem:
@@ -199,12 +201,12 @@ const AdminProblems = (props) => {
                             </p>
                             <p>Request Type: {request.requestType} Request</p>
                             <p>Request Status: {request.reportStatus}</p>
-                            {request.adminCommment ? (<div><p>Your Reply:{request.adminCommment} </p></div>)
+                            {request.adminCommment ? (<Box><p>Your Reply:{request.adminCommment} </p></Box>)
                                 : (
                                     "You did not reply yet."
                                 )}
-                        </div>
-                        <div>
+                        </Box>
+                        <Box>
                             <form onSubmit={handleMark}>
                                 <fieldset>
                                     <label><input id='option1' type='checkbox' value="resolved" name="resolved" checked={checkedOption === "resolved"} onChange={e => { setCheckedOption(e.target.value) }} />Mark as Resolved</label>
@@ -215,14 +217,15 @@ const AdminProblems = (props) => {
                                 <fieldset>
                                     <label><input id='comment' type='text' value={adminComment} name='adminComment' onChange={e => { setAdminComment(e.target.value) }} />Enter a reply.</label>
                                 </fieldset>
-                                <button type='submit'>Submit</button>
+                                <Button
+          variant="contained" type='submit'>Submit</Button>
                             </form>
-                        </div>
+                        </Box>
                         <p>{html}</p>
-                    </div>)
+                    </Box>)
                     : ('')}
-            </div>
-        </div>
+            </Box>
+        </Box>
     )
 }
 

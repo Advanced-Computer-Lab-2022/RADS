@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { LogInAction } from '../redux/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
+import Footer from '../webcomponents/Footer';
 
 function Copyright(props) {
     return (
@@ -128,7 +129,7 @@ export default function LogIn() {
               </Grid>
             </Box>
           </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
+          <Footer sx={{ mt: 8, mb: 4 }} />
         </Container>
       </ThemeProvider>
     );

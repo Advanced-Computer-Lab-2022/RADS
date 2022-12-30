@@ -5,6 +5,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import axios from 'axios';
+import { Button } from '@mui/material';
 const labels = {
     0.5: 'Useless',
     1: 'Useless+',
@@ -122,8 +123,8 @@ const CorpTraineeRating = (props) => {
 
 
     return (
-        <div>
-            <div key={course._id}>
+        <Box>
+            <Box key={course._id}>
                 <h4>Course: {course.courseTitle} </h4>
                 <p><strong>Rating of the course: </strong>{course.courseRating} Out of 5</p>
                 <form className='rating-instructor' onSubmit={submitReviewInstructor}>
@@ -149,7 +150,8 @@ const CorpTraineeRating = (props) => {
                     </Box>
                     <label>Enter a review on instructor: {instructorName}</label>
                     <input type="text" onChange={(e) => setIReview(e.target.value)} value={iReview}></input>
-                    <button>Submit</button>
+                    <Button
+          variant="contained">Submit</Button>
                 </form>
                 <p><strong>{html1}</strong></p>
                 <form className='rating-course' onSubmit={submitReviewCourse}>
@@ -176,11 +178,12 @@ const CorpTraineeRating = (props) => {
                     </Box>
                     <label>Enter a review on the course:</label>
                     <input type="text" onChange={(e) => setCReview(e.target.value)} value={cReview}></input>
-                    <button>Submit</button>
+                    <Button
+          variant="contained">Submit</Button>
                 </form>
                 <p><strong>{html2}</strong></p>
-            </div>
-        </div>
+            </Box>
+        </Box>
     )
 }
 

@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import CourseCard from "./CourseCard";
-import jwt_decode from "jwt-decode";
-import axios from "axios";
-import HighestViewedCourses from "./HighestViewedCourses";
-import { Button } from "@mui/material";
+import { TextField } from "@mui/material";
+import { InputAdornment } from "@mui/material";
+import { IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputLabel } from "@mui/material";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -104,27 +105,21 @@ function valueStar(value) {
 function valueDollar(value, currencyVal) {
   return `${value} ${currencyVal}`;
 }
-const TraineeSearch = (props) => {
-  const {
-    rateVal,
-    currencyVal,
-    token
-  } = props;
-  const decode = jwt_decode(token);
-  const traineeId = decode.id;
+const SearchPage = (props) => {
   const [queryS, setQueryS] = useState("");
   const [queryF2, setQueryF2] = useState("");
   const [queryF3, setQueryF3] = useState("");
   const [courses, setCourses] = useState([]);
+  const [highestViewedCourses, setHighestViewedCourses] = useState([]);
   const keys = ["courseTitle", "subject", "instructor"];
   const newKeys = ["subject"];
   const [checkedSubjects, setCheckedSubjects] = useState([]);
-  const [highestViewedCourses, setHighestViewedCourses] = useState([]);
   const [courseSubjects, setCourseSubjects] = useState([]);
-  const [traineeName, setTraineeName] = useState("");
+  const [error, setError] = useState(null);
+  const [maxPrice, setMaxPrice] = useState(0);
+  const { rateVal, currencyVal } = props;
+
   const todayDate = new Date();
-
-
   // To fetch all the courses and put the results in courses
   useEffect(() => {
     const fetchCourses = async () => {
@@ -132,41 +127,42 @@ const TraineeSearch = (props) => {
       const json = await response.json();
       if (response.ok) {
         setCourses(json);
-        getCourseSubjects();
-        fetchTrainee();
-        getMostViewed();
+        setCourseSubjects(getCourseSubjects(json));
+        findMaxPrice();
       }
     };
     fetchCourses();
   }, []);
 
-  const getMostViewed = async () => {
-    const response = await fetch("/course/highest/views");
+  const findMaxPrice = async () => {
+    const response = await fetch("/course/max", {
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
     const json = await response.json();
-    if (response.ok) {
-      setHighestViewedCourses(json);
+    if (!response.ok) {
+      setError(json.error);
     }
-  };
-
-  const fetchTrainee = async () => {
-    axios
-    .get(`/trainee/${traineeId}`)
-    .then((res) => {
-      let x = res.data.firstName + " " + res.data.lastName;
-      setTraineeName(x);
-    })
-    .catch((error) => {
-        console.error(error)
-    })
+    if (response.ok) {
+      setMaxPrice(json);
+      setError(null);
+      console.log("max price added", json);
+    }
   };
   //GET all course subjects
-  const getCourseSubjects = async() =>{
-    const response = await fetch("/course/get/coursesubjects");
-    const json = await response.json();
-    if (response.ok) {
-      setCourseSubjects(json);
+  const getCourseSubjects = (arr) => {
+    const newArray = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (!newArray.includes(arr[i].subject)) {
+        newArray[i] = arr[i].subject;
+      }
     }
-  }
+    return newArray;
+  };
 
   // to Perform the intersection between the search elements and filter elements
 
@@ -196,7 +192,7 @@ const TraineeSearch = (props) => {
       )
     );
   };
-  
+
   // Price filter method
   const filterMethodOnPrice = (courseData) => {
     if (!queryF2 || queryF2 === Math.ceil(7000 * rateVal)) {
@@ -207,7 +203,6 @@ const TraineeSearch = (props) => {
       );
     }
   };
-
   // Rating filter method
   const filterMethodOnRating = (courseData) => {
     console.log(queryF3);
@@ -245,43 +240,24 @@ const TraineeSearch = (props) => {
     setCheckedSubjects(updatedSubList);
   };
 
-  var courseView1 = "/traineeview?courseId=";
-  var courseView2 = "&traineeId=";
+  const courseView1 = "/filter?courseId=";
+  const courseView2 = "";
 
   return (
     <Box>
-      <div className="center">
-        <p>
-          <strong>Welcome {traineeName}</strong>
-        </p>
-      </div>
-      <Box>
-        <input
-          type="text"
-          placeholder="Search Course..."
-          className="search"
+      <Box className="homesearch-component">
+        <TextField
+          hiddenLabel
+          id="filled-search"
+          type="search"
+          size="small"
+          variant="filled"
           onChange={(e) => setQueryS(e.target.value)}
-        />
-        <HighestViewedCourses
-          highestViewedCourses={highestViewedCourses}
-          rateVal={rateVal}
-          currencyVal={currencyVal}
-          todayDate={todayDate}
-          courseView1={courseView1}
-          courseView2={courseView2}
-          id={traineeId}
+          InputProps={{
+            startAdornment: <SearchIcon sx={{ marginRight: 2 }} />,
+          }}
         />
 
-        <br />
-
-        <Button
-          variant="contained"
-          onClick={() =>
-            (window.location.href = `/traineeform?traineeId=${traineeId}`)
-          }
-        >
-          View my Courses
-        </Button>
         <Box className="filter-component1">
           <Box className="list-container">
             {courseSubjects.map((course) => (
@@ -303,9 +279,9 @@ const TraineeSearch = (props) => {
         <Box>{/* {`Subjects checked are: ${checkedItems}`} */}</Box>
 
         <Box className="filter-component2">
-          <p>
+          <Box>
             <strong>Price Filter</strong>
-          </p>
+          </Box>
           <Box className="price-box" sx={{ width: 430 }}>
             <Slider
               className="price-slider"
@@ -326,9 +302,9 @@ const TraineeSearch = (props) => {
           </Box>
         </Box>
         <Box className="homefilter-component3">
-          <p>
+          <Box>
             <strong>Rating Filter</strong>
-          </p>
+          </Box>
           <Box className="rating-box" sx={{ width: 430 }}>
             <Slider
               className="rating-slider"
@@ -369,7 +345,6 @@ const TraineeSearch = (props) => {
                   todayDate={todayDate}
                   courseView1={courseView1}
                   courseView2={courseView2}
-                  id={traineeId}
                 />
               </Box>
             ))}
@@ -382,4 +357,4 @@ const TraineeSearch = (props) => {
   );
 };
 
-export default TraineeSearch;
+export default SearchPage;

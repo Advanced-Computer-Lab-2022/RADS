@@ -1,10 +1,12 @@
+import { Box } from "@mui/material";
+
 const AdminDetails = ({admin}) =>{
     return(
-        <div className="admin-details">
+        <Box className="admin-details">
             <h4><strong>username: {admin.userName}</strong></h4>
             <p><strong>password: </strong>{admin.password}</p>
            
-        </div>
+        </Box>
     )
 }
 

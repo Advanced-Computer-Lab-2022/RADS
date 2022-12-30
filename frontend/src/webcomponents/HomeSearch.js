@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
 import CourseCard from "./CourseCard";
+import { TextField } from "@mui/material";
+import { InputAdornment } from "@mui/material";
+import { IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputLabel } from "@mui/material";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -246,22 +251,29 @@ const HomeSearch = (props) => {
   const courseView2 = "";
 
   return (
-    <box>
-      <box className="homesearch-component">
-        <input
-          type="text"
-          placeholder="Search Course..."
-          className="search"
-          onChange={(e) => setQueryS(e.target.value)}
-        />
+    <Box>
+      <Box className="homesearch-component">
+        <Box className="search">
+          <TextField
+            hiddenLabel
+            id="filled-search"
+            type="search"
+            size="small"
+            variant="filled"
+            onChange={(e) => setQueryS(e.target.value)}
+            InputProps={{
+              startAdornment: <SearchIcon sx={{ marginRight: 2 }} />,
+            }}
+          />
+        </Box>
 
-        <box className="highestviewed-courses">
-          <p className="highview-p">
+        <Box className="highestviewed-courses card-container">
+          <Box className="highview-p">
             <strong>Highest Viewed Courses</strong>
-          </p>
-          <box className="card-container">
+          </Box>
+          <Box className="card-container">
             {highestViewedCourses.map((course) => (
-              <box>
+              <Box>
                 <CourseCard
                   course={course}
                   rateVal={rateVal}
@@ -270,16 +282,16 @@ const HomeSearch = (props) => {
                   courseView1={courseView1}
                   courseView2={courseView2}
                 />
-              </box>
+              </Box>
             ))}
-          </box>
-        </box>
+          </Box>
+        </Box>
         <br />
 
-        <box className="filter-component1">
-          <box className="list-container">
+        <Box className="filter-component1">
+          <Box className="list-container">
             {courseSubjects.map((course) => (
-              <box>
+              <Box>
                 <input
                   value={course}
                   name={course}
@@ -290,16 +302,16 @@ const HomeSearch = (props) => {
                 />
                 <span>{course}</span>
                 {/* <span className= {isChecked(course)}>{course.subject}</span> */}
-              </box>
+              </Box>
             ))}
-          </box>
-        </box>
-        <box>{/* {`Subjects checked are: ${checkedItems}`} */}</box>
+          </Box>
+        </Box>
+        <Box>{/* {`Subjects checked are: ${checkedItems}`} */}</Box>
 
-        <box className="filter-component2">
-          <p>
+        <Box className="filter-component2">
+          <Box>
             <strong>Price Filter</strong>
-          </p>
+          </Box>
           <Box className="price-box" sx={{ width: 430 }}>
             <Slider
               className="price-slider"
@@ -318,11 +330,11 @@ const HomeSearch = (props) => {
               }}
             />
           </Box>
-        </box>
-        <box className="homefilter-component3">
-          <p>
+        </Box>
+        <Box className="homefilter-component3">
+          <Box>
             <strong>Rating Filter</strong>
-          </p>
+          </Box>
           <Box className="rating-box" sx={{ width: 430 }}>
             <Slider
               className="rating-slider"
@@ -341,8 +353,8 @@ const HomeSearch = (props) => {
               }}
             />
           </Box>
-        </box>
-        <box className="home-search card-container">
+        </Box>
+        <Box className="home-search card-container">
           {performIntersection(
             filterMethodOnPrice(courses),
             searchMethod(courses),
@@ -355,7 +367,7 @@ const HomeSearch = (props) => {
               filterMethodOnRating(courses),
               checkedSubjects
             ).map((course) => (
-              <box>
+              <Box>
                 <CourseCard
                   course={course}
                   rateVal={rateVal}
@@ -364,14 +376,14 @@ const HomeSearch = (props) => {
                   courseView1={courseView1}
                   courseView2={courseView2}
                 />
-              </box>
+              </Box>
             ))}
-        </box>
-        {/* <box>
+        </Box>
+        {/* <Box>
               <Link onClick={() => window.location.href=`/instructorlobby`}>here</Link>
-              </box>  */}
-      </box>
-    </box>
+              </Box>  */}
+      </Box>
+    </Box>
   );
 };
 

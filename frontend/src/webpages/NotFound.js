@@ -1,10 +1,11 @@
+import { Box } from "@mui/material";
 import React from "react";
 
 function NotFound() {
   return (
-    <div className="container p-4">
+    <Box className="container p-4">
       <h2>Not Found</h2>
-    </div>
+    </Box>
   );
 }
 

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 
 const TraineeForm = (props) => {
@@ -73,24 +74,26 @@ const TraineeForm = (props) => {
                   courseView2={courseView2}
                   id={traineeId}
                 />
-                <button
+                <Button
+          variant="contained"
                   onClick={() =>
                     (window.location.href = `/traineereport?courseId=${course._id}&traineeId=${traineeId}`)
                   }
                 >
                   Report Course
-                </button>
+                </Button>
               </box>
             ))}
         </box>
       )}
-      <button
+      <Button
+          variant="contained"
         onClick={() =>
           (window.location.href = `/traineeviewreports?traineeId=${traineeId}`)
         }
       >
         View Reports
-      </button>
+      </Button>
     </box>
   );
 };

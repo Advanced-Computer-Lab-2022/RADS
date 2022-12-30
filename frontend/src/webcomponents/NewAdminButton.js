@@ -1,6 +1,7 @@
 import { useState } from "react"
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Box, Button } from "@mui/material";
 
 const NewAdminButton = (props) => {
     const {
@@ -44,8 +45,9 @@ const NewAdminButton = (props) => {
             <input type="text" onChange={(e) => setLastName(e.target.value)}
             value= {lastName}
             />
-            <button>Create Admin</button>
-            {error && <div className="error">{error}</div>}
+            <Button
+          variant="contained">Create Admin</Button>
+            {error && <Box className="error">{error}</Box>}
         </form>
     )
 }

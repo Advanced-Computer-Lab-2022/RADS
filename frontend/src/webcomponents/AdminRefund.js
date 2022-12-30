@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import { useState, useEffect } from "react"
 import axios from "axios";
 
@@ -107,9 +107,9 @@ const AdminRefund = (props) => {
     }
 
     return (
-        <div>
+        <Box>
             <h3><strong>Request Information:</strong></h3>
-            <div>
+            <Box>
                 <p>Trainee Name: {trainee.firstName} {trainee.lastName}</p>
                 <p>Course Name: {course.courseTitle} </p>
                 <p>Current progress: {request.courseProgress}%</p>
@@ -120,11 +120,13 @@ const AdminRefund = (props) => {
                     ))}
                 </p>
                 <p>Request Type: {request.requestType} Request</p>
-            </div>
-            <button onClick={handleAccept}>Accept Refund</button>
-            <button onClick={handleReject}>Reject Refund</button>
+            </Box>
+            <Button
+          variant="contained" onClick={handleAccept}>Accept Refund</Button>
+            <Button
+          variant="contained" onClick={handleReject}>Reject Refund</Button>
             <p>{html}</p>
-        </div>
+        </Box>
     )
 }
 
