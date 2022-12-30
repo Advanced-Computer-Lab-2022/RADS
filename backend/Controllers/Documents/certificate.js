@@ -50,7 +50,7 @@ module.exports = ({ name, courseTitle }) => {
     <body>
         <div class="container">
             <div class="logo">
-                RADS
+            <img src="https://cancham.org.eg/upload/logo.png" height="200" width="600">    
             </div>
 
             <div class="marquee">
