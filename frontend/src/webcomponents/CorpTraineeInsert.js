@@ -55,75 +55,95 @@ const CorpTraineeInsert = (props) => {
   };
 
   return (
-    <form className="create-corptrainee" onSubmit={handleSubmit}>
-      <h3>Corporate Trainee: Insert Your Information</h3>
+    <Box className="card-border">
+      <form className="create-corptrainee column" onSubmit={handleSubmit}>
+        <h3>Corporate Trainee: Insert Your Information</h3>
 
-      <label>First name:</label>
-      <input
-        type="text"
-        onChange={(e) => setFirstName(e.target.value)}
-        value={firstName}
-      />
+        <Box className="column-child">
+          <label>First name:</label>
+          <input
+            type="text"
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
+        </Box>
 
-      <label>Last name:</label>
-      <input
-        type="text"
-        onChange={(e) => setLastName(e.target.value)}
-        value={lastName}
-      />
+        <Box className="column-child">
+          <label>Last name:</label>
+          <input
+            type="text"
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
+        </Box>
 
-      <label>User name:</label>
-      <input
-        type="text"
-        onChange={(e) => setUserName(e.target.value)}
-        value={userName}
-      />
+        <Box className="column-child">
+          <label>User name:</label>
+          <input
+            type="text"
+            onChange={(e) => setUserName(e.target.value)}
+            value={userName}
+          />
+        </Box>
 
-      <label>Gender:</label>
-      <input
-        type="text"
-        onChange={(e) => setGender(e.target.value)}
-        value={gender}
-      />
+        <Box className="column-child">
+          <label>Gender:</label>
+          <input
+            type="text"
+            onChange={(e) => setGender(e.target.value)}
+            value={gender}
+          />
+        </Box>
 
-      <label>Password:</label>
-      <input
-        type="text"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
+        <Box className="column-child">
+          <label>Password:</label>
+          <input
+            type="text"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </Box>
 
-      <label>Country:</label>
-      <input
-        type="text"
-        onChange={(e) => setCountry(e.target.value)}
-        value={country}
-      />
+        <Box className="column-child">
+          <label>Country:</label>
+          <input
+            type="text"
+            onChange={(e) => setCountry(e.target.value)}
+            value={country}
+          />
+        </Box>
 
-      <label>Phone Number:</label>
-      <input
-        type="number"
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        value={phoneNumber}
-      />
+        <Box className="column-child">
+          <label>Phone Number:</label>
+          <input
+            type="number"
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={phoneNumber}
+          />
+        </Box>
 
-      <label>Address:</label>
-      <input
-        type="text"
-        onChange={(e) => setAddress(e.target.value)}
-        value={address}
-      />
+        <Box className="column-child">
+          <label>Address:</label>
+          <input
+            type="text"
+            onChange={(e) => setAddress(e.target.value)}
+            value={address}
+          />
+        </Box>
 
-      <label>Email: </label>
-      <input
-        type="text"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
+        <Box className="column-child">
+          <label>Email: </label>
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+        </Box>
 
-      <Button variant="contained">Submit</Button>
-      {error && <Box className="error">{error}</Box>}
-    </form>
+        <Box className="column-child"><Button variant="contained" type="submit">Submit</Button></Box>
+        {error && <Box className="error">{error}</Box>}
+      </form>
+    </Box>
   );
 };
 

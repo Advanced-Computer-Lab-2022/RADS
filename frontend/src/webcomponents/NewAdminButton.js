@@ -35,7 +35,7 @@ const NewAdminButton = (props) => {
     }    
 
     return (
-      <div>
+      <div className="card-border">
         <h2> Add new admin: </h2>
         <form className="create-admin" onSubmit={handleSubmit}>
           <label>First name:</label>

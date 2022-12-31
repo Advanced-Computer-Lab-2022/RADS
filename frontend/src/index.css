@@ -7,6 +7,20 @@
   color: #222222;
 }
 
+.column {
+  display: block;
+  
+  height: auto;
+  margin: 1.5em;
+  background: #ffffff;
+}
+p {
+  font-size: 1em;
+  font-weight: 400;
+  font-family: Quicksand;
+  color: #222222;
+}
+
 .card-border {
   border: 3px solid #d80621;
   border-radius: 10px;
