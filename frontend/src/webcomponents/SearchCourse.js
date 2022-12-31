@@ -52,16 +52,8 @@ const setRate = (val) => {
 
 const ratingMarks = [
   {
-    value: -0.5,
-    label: "StartStart",
-  },
-  {
     value: 0,
-    label: "0",
-  },
-  {
-    value: 0.5,
-    label: "0.5",
+    label: "All Ratings",
   },
   {
     value: 1,
@@ -95,17 +87,9 @@ const ratingMarks = [
     value: 4.5,
     label: "4.5",
   },
-  {
-    value: 5,
-    label: "5",
-  },
 ];
-
 function valueDollar(value) {
   return `${value}$`;
-}
-function valueStar(value) {
-  return `${value}`;
 }
 
 const SearchCourse = (props) => {
@@ -119,7 +103,7 @@ const SearchCourse = (props) => {
   const [queryF3, setQueryF3] = useState("");
   const [courses, setCourses] = useState([]);
   const [instructorName, setinstructorName] = useState("");
-  const keys = ["courseTitle", "subject", "instructor"];
+  const keys = ["courseTitle", "subject", "instructorName"];
   const newKeys = ["subject"];
   const [checkedSubjects, setCheckedSubjects] = useState([]);
   const [courseSubjects, setCourseSubjects] = useState([]);
@@ -176,7 +160,6 @@ const SearchCourse = (props) => {
       setCourseSubjects(json);
     }
   }
-
   const performIntersection = (arr1, arr2, arr3, arr4) => {
     const intersectionResult1 = arr1.filter((x) => arr2.indexOf(x) !== -1);
     const intersectionResult2 = intersectionResult1.filter(
@@ -215,14 +198,11 @@ const SearchCourse = (props) => {
   };
 
   // Rating filter method
-  const filterMethodOnRating = (courseData) => {
-    console.log(queryF3);
-    if (!queryF3 || queryF3 === 5) {
-      return courseData;
-    } else {
-      return courseData.filter((item) => item.courseRating <= queryF3);
-    }
+  const filterMethodOnRating = (courses) => {
+    let ratings = courses.filter((item) => item.courseRating >= queryF3);
+    return ratings;
   };
+
 
   // Subject filter
   const filterMethodOnSubject = (event) => {
@@ -437,30 +417,30 @@ const SearchCourse = (props) => {
         </Box>
       </box>
 
-      <box className="filter-component3">
-        <p>
-          <strong>Rating Filter</strong>
-        </p>
-        <Box className="rating-box" sx={{ width: 430 }}>
-          <Slider
-            className="rating-slider"
-            aria-label="Always visible"
-            getAriaValueText={valueStar}
-            defaultValue={5}
-            marks={ratingMarks}
-            valueLabelDisplay="on"
-            size="small"
-            max={5}
-            step={0.1}
-            min={0}
-            name="Rating-filter"
-            onChangeCommitted={(e, v) => {
-              setQueryF3(v);
-            }}
-          />
+      <Box className="homefilter-component3">
+          <p>
+            <strong>Rating Filter</strong>
+          </p>
+          <Box className="list-container">
+            {ratingMarks.map((mark,index) => (
+              <Box className="rate-box">
+                <input             
+                  value={mark.value}
+                  name={mark.label}
+                  className = 'rate-input'
+                  checked={queryF3.toString().toLowerCase() === mark.value.toString().toLowerCase() || (!queryF3 && index === 0)}
+                  type="radio"
+                  onChange={(e) => {setQueryF3(e.target.value)}}
+                />
+                {mark.value === 0 ? (
+                  <span>{mark.label}</span>
+                ) : (
+                  <span>{mark.label} and Up</span>
+                )}
+              </Box>
+            ))}
+          </Box>
         </Box>
-      </box>
-      {/* <CourseTable data={performIntersection(filterMethodOnPrice(courses),searchMethod(courses),filterMethodOnRating(courses))} />    */}
       {performIntersection(
         filterMethodOnPrice(courses),
         searchMethod(courses),

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,10 +27,27 @@ const CourseCreate = (props) => {
     const [exam, setExam] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
     const [coursePreview, setCoursePreview] = useState('');
     const [error, setError] = useState(null);
+    const [instructorName,setinstructorName] = useState("");
+
+    useEffect(() => {
+        const fetchInstructor = async () => {
+            axios
+                .get(`/instructor/${instructorId}`)
+                .then((res) => {
+                    setinstructorName(res.data.firstName + " " + res.data.lastName);
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+        }
+        fetchInstructor();
+    }, [])
+
+
     const handleSubmit = async (e) => {
         e.preventDefault() //prevent form submission   
         let instructor = instructorId;
-        const course = { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, exam, coursePreview };
+        const course = { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor,instructorName, courseExercises, exam, coursePreview };
         const response = await fetch('/course/add', {
             method: 'POST',
             body: JSON.stringify(course),

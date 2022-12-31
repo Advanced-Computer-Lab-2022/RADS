@@ -69,8 +69,7 @@ const TraineeCreditCard = (props) => {
                     CVV:
                     <input className="inputCard" type="text" pattern="[0-9]*{3}" maxLength="3" name="cvv" inputMode='numeric' value={cardCVV} onChange={(e) => { setCardCVV(e.target.value) }} placeholder="XXX" required />
                 </fieldset>
-                <Button
-          variant="contained">Add</Button>
+                <Button type='submit' variant="contained">Add</Button>
             </form>
         </Box>
     )
