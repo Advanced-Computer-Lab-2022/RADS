@@ -1,72 +1,62 @@
-import { useState } from "react";
-import * as React from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { useState,useEffect } from "react"
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { Button } from "@mui/material";
 
 const CourseCreate = (props) => {
-  const { rateVal, currencyVal, token } = props;
-  const decode = jwt_decode(token);
-  const instructorId = decode.id;
-  const [courseTitle, setCourseTitle] = useState("");
-  const [subtitles, setSubtitles] = useState([
-    { subTitle: "", description: "", videoLink: "", hours: "" },
-  ]);
-  const [price, setPrice] = useState("");
-  const [shortSummary, setShortSummary] = useState("");
-  const [subject, setSubject] = useState("");
-  const [totalHours, setTotalHours] = useState("");
-  const [courseExercises, setCourseExercises] = useState([
-    {
-      question: "",
-      firstChoice: "",
-      secondChoice: "",
-      thirdChoice: "",
-      fourthChoice: "",
-      answer: "",
-    },
-  ]);
-  const [exam, setExam] = useState([
-    {
-      question: "",
-      firstChoice: "",
-      secondChoice: "",
-      thirdChoice: "",
-      fourthChoice: "",
-      answer: "",
-    },
-  ]);
-  const [coursePreview, setCoursePreview] = useState("");
-  const [error, setError] = useState(null);
-  const handleSubmit = async (e) => {
-    e.preventDefault(); //prevent form submission
-    let instructor = instructorId;
-    const course = {
-      courseTitle,
-      subtitles,
-      price,
-      shortSummary,
-      subject,
-      totalHours,
-      instructor,
-      courseExercises,
-      exam,
-      coursePreview,
-    };
-    const response = await fetch("/course/add", {
-      method: "POST",
-      body: JSON.stringify(course),
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
-    const json = await response.json();
+    const {
+        rateVal,
+        currencyVal,
+        token
+    } = props;
+    const decode = jwt_decode(token);
+    const instructorId = decode.id;
+    const [courseTitle, setCourseTitle] = useState('');
+    const [subtitles, setSubtitles] = useState([{ subTitle: "", description: "", videoLink: "", hours: "" }]);
+    const [price, setPrice] = useState('');
+    const [shortSummary, setShortSummary] = useState('');
+    const [subject, setSubject] = useState('');
+    const [totalHours, setTotalHours] = useState('');
+    const [courseExercises, setCourseExercises] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
+    const [exam, setExam] = useState([{ question: "", firstChoice: "", secondChoice: "", thirdChoice: "", fourthChoice: "", answer: "" }]);
+    const [coursePreview, setCoursePreview] = useState('');
+    const [error, setError] = useState(null);
+    const [instructorName,setinstructorName] = useState("");
+
+    useEffect(() => {
+        const fetchInstructor = async () => {
+            axios
+                .get(`/instructor/${instructorId}`)
+                .then((res) => {
+                    setinstructorName(res.data.firstName + " " + res.data.lastName);
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+        }
+        fetchInstructor();
+    }, [])
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault() //prevent form submission   
+        let instructor = instructorId;
+        const course = { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor,instructorName, courseExercises, exam, coursePreview };
+        const response = await fetch('/course/add', {
+            method: 'POST',
+            body: JSON.stringify(course),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'
+            }
+        })
+        const json = await response.json();
 
     if (!response.ok) {
       setError(json.error);

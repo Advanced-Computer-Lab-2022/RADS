@@ -104,7 +104,7 @@ const getCoursesByInstructor = async(req, res) => {
 // POST new course
 //////////////////////////////////
 const postCourse = async(req, res) => {
-    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, courseExercises, exam, coursePreview } = req.body;
+    const { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, instructorName, courseExercises, exam, coursePreview } = req.body;
     try {
         const course = await Course.create({
             courseTitle,
@@ -113,6 +113,7 @@ const postCourse = async(req, res) => {
             shortSummary,
             subject,
             totalHours,
+            instructorName,
             instructor,
             courseExercises,
             exam,

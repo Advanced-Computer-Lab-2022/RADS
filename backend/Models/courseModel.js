@@ -85,6 +85,9 @@ const courseSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'instructorModel'
     },
+    instructorName: {
+        type: String
+    },
     courseExercises: {
         type: [exerciseSchema]
     },

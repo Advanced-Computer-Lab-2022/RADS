@@ -48,16 +48,8 @@ const setRate = (val) => {
 
 const ratingMarks = [
   {
-    value: -0.5,
-    label: "StartStart",
-  },
-  {
     value: 0,
-    label: "0",
-  },
-  {
-    value: 0.5,
-    label: "0.5",
+    label: "All Ratings",
   },
   {
     value: 1,
@@ -91,39 +83,28 @@ const ratingMarks = [
     value: 4.5,
     label: "4.5",
   },
-  {
-    value: 5,
-    label: "5",
-  },
 ];
 
-function valueStar(value) {
-  return `${value}`;
-}
+
 
 function valueDollar(value, currencyVal) {
   return `${value} ${currencyVal}`;
 }
 const TraineeSearch = (props) => {
-  const {
-    rateVal,
-    currencyVal,
-    token
-  } = props;
+  const { rateVal, currencyVal, token } = props;
   const decode = jwt_decode(token);
   const traineeId = decode.id;
   const [queryS, setQueryS] = useState("");
   const [queryF2, setQueryF2] = useState("");
   const [queryF3, setQueryF3] = useState("");
   const [courses, setCourses] = useState([]);
-  const keys = ["courseTitle", "subject", "instructor"];
+  const keys = ["courseTitle", "subject", "instructorName"];
   const newKeys = ["subject"];
   const [checkedSubjects, setCheckedSubjects] = useState([]);
   const [highestViewedCourses, setHighestViewedCourses] = useState([]);
   const [courseSubjects, setCourseSubjects] = useState([]);
   const [traineeName, setTraineeName] = useState("");
   const todayDate = new Date();
-
 
   // To fetch all the courses and put the results in courses
   useEffect(() => {
@@ -150,23 +131,23 @@ const TraineeSearch = (props) => {
 
   const fetchTrainee = async () => {
     axios
-    .get(`/trainee/${traineeId}`)
-    .then((res) => {
-      let x = res.data.firstName + " " + res.data.lastName;
-      setTraineeName(x);
-    })
-    .catch((error) => {
-        console.error(error)
-    })
+      .get(`/trainee/${traineeId}`)
+      .then((res) => {
+        let x = res.data.firstName + " " + res.data.lastName;
+        setTraineeName(x);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   //GET all course subjects
-  const getCourseSubjects = async() =>{
+  const getCourseSubjects = async () => {
     const response = await fetch("/course/get/coursesubjects");
     const json = await response.json();
     if (response.ok) {
       setCourseSubjects(json);
     }
-  }
+  };
 
   // to Perform the intersection between the search elements and filter elements
 
@@ -196,7 +177,7 @@ const TraineeSearch = (props) => {
       )
     );
   };
-  
+
   // Price filter method
   const filterMethodOnPrice = (courseData) => {
     if (!queryF2 || queryF2 === Math.ceil(7000 * rateVal)) {
@@ -205,17 +186,6 @@ const TraineeSearch = (props) => {
       return courseData.filter(
         (item) => Math.ceil(item.price * rateVal) <= queryF2
       );
-    }
-  };
-
-  // Rating filter method
-  const filterMethodOnRating = (courseData) => {
-    console.log(queryF3);
-    if (!queryF3 || queryF3 === 5) {
-      return courseData;
-    } else {
-      //console.log("here",queryF3 - 3);
-      return courseData.filter((item) => item.courseRating <= queryF3);
     }
   };
 
@@ -233,16 +203,22 @@ const TraineeSearch = (props) => {
     if (event.target.checked) {
       updatedSubList = [...checkedSubjects].concat(subjects);
     } else {
-      console.log(updatedSubList.length);
       for (let i = 0; i < updatedSubList.length; i++) {
-        if (updatedSubList[i]["subject"] === event.target.value) {
-          console.log(updatedSubList[i]["subject"] + " at " + i);
+        if (
+          updatedSubList[i]["subject"].toString().toLowerCase() ===
+          event.target.value.toString().toLowerCase()
+        ) {
           updatedSubList.splice(i, 1);
           i--;
         }
       }
     }
     setCheckedSubjects(updatedSubList);
+  };
+
+  const filterMethodOnRating = (courses) => {
+    let ratings = courses.filter((item) => item.courseRating >= queryF3);
+    return ratings;
   };
 
   var courseView1 = "/traineeview?courseId=";
@@ -329,23 +305,24 @@ const TraineeSearch = (props) => {
           <p>
             <strong>Rating Filter</strong>
           </p>
-          <Box className="rating-box" sx={{ width: 430 }}>
-            <Slider
-              className="rating-slider"
-              aria-label="Always visible"
-              getAriaValueText={valueStar}
-              defaultValue={5}
-              marks={ratingMarks}
-              valueLabelDisplay="on"
-              size="small"
-              max={5}
-              step={0.1}
-              min={0}
-              name="Rating-filter"
-              onChangeCommitted={(e, v) => {
-                setQueryF3(v);
-              }}
-            />
+          <Box className="list-container">
+            {ratingMarks.map((mark,index) => (
+              <Box className="rate-box">
+                <input             
+                  value={mark.value}
+                  name={mark.label}
+                  className = 'rate-input'
+                  checked={queryF3.toString().toLowerCase() === mark.value.toString().toLowerCase() || (!queryF3 && index === 0)}
+                  type="radio"
+                  onChange={(e) => {setQueryF3(e.target.value)}}
+                />
+                {mark.value === 0 ? (
+                  <span>{mark.label}</span>
+                ) : (
+                  <span>{mark.label} and Up</span>
+                )}
+              </Box>
+            ))}
           </Box>
         </Box>
         <Box className="home-search card-container">

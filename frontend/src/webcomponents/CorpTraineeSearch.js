@@ -9,16 +9,8 @@ import { Button } from "@mui/material";
 
 const ratingMarks = [
   {
-    value: -0.5,
-    label: "StartStart",
-  },
-  {
     value: 0,
-    label: "0",
-  },
-  {
-    value: 0.5,
-    label: "0.5",
+    label: "All Ratings",
   },
   {
     value: 1,
@@ -52,26 +44,19 @@ const ratingMarks = [
     value: 4.5,
     label: "4.5",
   },
-  {
-    value: 5,
-    label: "5",
-  },
 ];
 
-function valueStar(value) {
-  return `${value}`;
-}
 
 const CorpTraineeSearch = (props) => {
   const { rateVal, currencyVal, token } = props;
   const decode = jwt_decode(token);
   const corpTraineeId = decode.id;
   const [queryS, setQueryS] = useState("");
-  const [queryF2, setQueryF2] = useState("");
   const [queryF3, setQueryF3] = useState("");
   const [courses, setCourses] = useState([]);
-  const keys = ["courseTitle", "subject", "instructor"];
+  const keys = ["courseTitle", "subject", "instructorName"];
   const newKeys = ["subject"];
+  const newKeys2 = ["courseRating"];
   const [checkedSubjects, setCheckedSubjects] = useState([]);
   const [courseSubjects, setCourseSubjects] = useState([]);
   const [corpTraineeName, setCorpTraineeName] = useState("");
@@ -147,15 +132,9 @@ const CorpTraineeSearch = (props) => {
     );
   };
 
-  // Rating filter method
-  const filterMethodOnRating = (courseData) => {
-    console.log(queryF3);
-    if (!queryF3 || queryF3 === 5) {
-      return courseData;
-    } else {
-      //console.log("here",queryF3 - 3);
-      return courseData.filter((item) => item.courseRating <= queryF3);
-    }
+  const filterMethodOnRating = (courses) => {
+    let ratings = courses.filter((item) => item.courseRating >= queryF3);
+    return ratings;
   };
 
   // Subject filter
@@ -172,10 +151,8 @@ const CorpTraineeSearch = (props) => {
     if (event.target.checked) {
       updatedSubList = [...checkedSubjects].concat(subjects);
     } else {
-      console.log(updatedSubList.length);
       for (let i = 0; i < updatedSubList.length; i++) {
         if (updatedSubList[i]["subject"] === event.target.value) {
-          console.log(updatedSubList[i]["subject"] + " at " + i);
           updatedSubList.splice(i, 1);
           i--;
         }
@@ -183,6 +160,9 @@ const CorpTraineeSearch = (props) => {
     }
     setCheckedSubjects(updatedSubList);
   };
+
+
+
 
   const courseView1 = "/corptraineeview?courseId=";
   const courseView2 = "&corpTraineeId=";
@@ -243,7 +223,6 @@ const CorpTraineeSearch = (props) => {
                   }}
                 />
                 <span>{course}</span>
-                {/* <span className= {isChecked(course)}>{course.subject}</span> */}
               </Box>
             ))}
           </Box>
@@ -253,23 +232,24 @@ const CorpTraineeSearch = (props) => {
           <p>
             <strong>Rating Filter</strong>
           </p>
-          <Box sx={{ width: 950 }}>
-            <Slider
-              className="rating-slider"
-              aria-label="Always visible"
-              getAriaValueText={valueStar}
-              defaultValue={5}
-              marks={ratingMarks}
-              valueLabelDisplay="on"
-              size="small"
-              max={5}
-              step={0.1}
-              min={0}
-              name="Rating-filter"
-              onChangeCommitted={(e, v) => {
-                setQueryF3(v);
-              }}
-            />
+          <Box className="list-container">
+            {ratingMarks.map((mark,index) => (
+              <Box className="rate-box">
+                <input             
+                  value={mark.value}
+                  name={mark.label}
+                  className = 'rate-input'
+                  checked={queryF3.toString().toLowerCase() === mark.value.toString().toLowerCase() || (!queryF3 && index === 0)}
+                  type="radio"
+                  onChange={(e) => {setQueryF3(e.target.value)}}
+                />
+                {mark.value === 0 ? (
+                  <span>{mark.label}</span>
+                ) : (
+                  <span>{mark.label} and Up</span>
+                )}
+              </Box>
+            ))}
           </Box>
         </Box>
         <Box className="home-search card-container">
