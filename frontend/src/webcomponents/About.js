@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 
 const About = () => {
     return (
-      <Box>
+      <Box className="card-border">
         <Typography variant="paragraph">
           About Us Canadian Chamber of Commerce in Egypt was
           officially inaugurated on the 31st of May 2006. It was established in
