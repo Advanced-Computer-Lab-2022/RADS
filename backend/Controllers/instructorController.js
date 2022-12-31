@@ -60,10 +60,6 @@ const deleteInstructor = async(req, res) => {
     res.status(200).json(instructor);
 }
 
-
-
-
-
 // UPDATE an instructor
 const updateInstructor = async(req, res) => {
     const { id } = req.params;
@@ -73,7 +69,8 @@ const updateInstructor = async(req, res) => {
     const instructor = await Instructor.findByIdAndUpdate({ _id: id }, {
         email: req.body.email,
         bio: req.body.bio,
-        password: req.body.password
+        password: req.body.password,
+        verified: req.body.verified
     });
     if (!instructor) {
         return res.status(404).json({ error: 'No such instructor' });
@@ -96,18 +93,6 @@ const updatePassword = async(req, res) => {
     }
     res.status(200).json(trainee);
 }
-
-
-// FILTER a course based on instructor
-/*const filterCourses = async(req, res) => {
-    const instructorId = req.query.courseId;
-    if (instructorId) {
-        const result = await Course.find({ instructor: mongoose.Types.ObjectId(instructorId) }).populate('instructor');
-        res.status(200).json(result)
-    } else {
-        res.status(400).json({ error: "courseId is required" })
-    }
-} */
 
 
 //add promotionrate and promotionenddate in course
@@ -159,13 +144,37 @@ const forgotPassword = async(req, res) => {
     res.status(200).json({ message: "sent successfully" });
 }
 
-
-// GET a single course rating
-const getInstructorRating = async(req, res) => {
-    const id = mongoose.Types.ObjectId(req.params.id);
-    const instructor = await Instructor.findById({ "_id": id })
-    currentOverallRating = instructor.courseRating.rating
-    res.status(200).json("Course Rating is: " + currentOverallRating)
+const updateInstructorBalance = async(req, res) => {
+    const { balanceValue } = req.body;
+    try {
+        let currentMonth = (new Date().getMonth()) % 12 + 1;
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const instructor = await Instructor.findById(id);
+        let monthValue = instructor.monthlyDate;
+        if (currentMonth === 12 && monthValue === 1) {
+            let monthlyBalanceValue = instructor.monthlyBalance;
+            let newMonthlyBalance = balanceValue + monthlyBalanceValue
+            instructor.monthlyBalance = newMonthlyBalance;
+        } else {
+            if (monthValue > currentMonth) {
+                let monthlyBalanceValue = instructor.monthlyBalance;
+                let newMonthlyBalance = balanceValue + monthlyBalanceValue
+                instructor.monthlyBalance = newMonthlyBalance;
+            } else {
+                let oldMonth = instructor.monthlyDate;
+                let newMonth = (oldMonth + 1) % 12;
+                instructor.monthlyDate = newMonth;
+                instructor.monthlyBalance = 0;
+            }
+        }
+        let oldBalance = instructor.balance;
+        let newBalance = oldBalance + balanceValue;
+        instructor.balance = newBalance;
+        await instructor.save();
+        res.status(201).json("Successfull update!!");
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 }
 
 
@@ -177,7 +186,7 @@ module.exports = {
     deleteInstructor,
     updateInstructor,
     postInstructorReview,
-    getInstructorRating,
     forgotPassword,
     updatePassword,
+    updateInstructorBalance
 }

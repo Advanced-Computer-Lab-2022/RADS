@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/RoleMiddleware");
-const { getTrainees, updatePassword, getTrainee, postCourseRegister, updateSolvedExercises, checkExercisesSolvingStatus, checkSolvingStatus, getTraineeCourses, postTrainee, deleteCreditCard, forgotPassword, findExercisesGrade, postCreditCard, checkRegistered, updateCourseProgress, checkCourseProgress, refundCourse, updateTraineeBalance, updateSolvedExam, updateExamGrade, updateExercisesGrade, findExamGrade, findCreditCard } = require('../Controllers/traineeController');
+const { getTrainees, updatePassword, getTrainee, postCourseRegister, getCertificate, createCertificate, updateSolvedExercises, emailPDF, checkExercisesSolvingStatus, checkSolvingStatus, getTraineeCourses, postTrainee, deleteCreditCard, forgotPassword, findExercisesGrade, postCreditCard, checkRegistered, updateCourseProgress, checkCourseProgress, refundCourse, updateTraineeBalance, updateSolvedExam, updateExamGrade, updateExercisesGrade, findExamGrade, findCreditCard, getCourseNotes, postNote, checkCertificateState, updateCertificateState } = require('../Controllers/traineeController');
 const router = express.Router();
 
 router.get('/',
@@ -11,7 +11,7 @@ router.get('/',
 
 router.get('/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE),
+    inRole(ROLES.TRAINEE, ROLES.ADMIN),
     getTrainee);
 
 router.get('/getcourses/:id',
@@ -96,7 +96,7 @@ router.post('/updateexercisesstatus/:id',
 
 router.post('/refund/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.TRAINEE),
+    inRole(ROLES.TRAINEE, ROLES.ADMIN),
     refundCourse);
 
 router.post('/checkstatus/:id',
@@ -118,6 +118,42 @@ router.post('/deletecard/:id',
     passport.authenticate('jwt', { session: false }),
     inRole(ROLES.TRAINEE),
     deleteCreditCard);
+
+router.post('/postnote/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    postNote);
+
+router.post('/getnotes/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    getCourseNotes);
+
+
+router.post('/emailpdf/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    emailPDF);
+
+router.post('/checkcertstate/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    checkCertificateState);
+
+router.post('/updatecertstate/:id',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    updateCertificateState);
+
+router.get('/cert/getpdf',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    getCertificate);
+
+router.post('/createpdf',
+    passport.authenticate('jwt', { session: false }),
+    inRole(ROLES.TRAINEE),
+    createCertificate);
 
 
 module.exports = router;

@@ -35,7 +35,7 @@ const adminSchema = new Schema({
     },
     role: {
         type: String,
-        required: true
+        default: 'ADMIN'
     },
     requests: {
         type: [requestSchema]

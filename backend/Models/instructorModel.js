@@ -1,6 +1,7 @@
 const { time } = require('console');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const currentDate = new Date();
 
 const ReviewSchema = mongoose.Schema({
     iRating: {
@@ -70,7 +71,23 @@ const instructorSchema = new Schema({
     },
     role: {
         type: String,
-        required: true
+        default: "INSTRUCTOR"
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    balance: {
+        type: Number,
+        default: 0
+    },
+    monthlyBalance: {
+        type: Number,
+        default: 0
+    },
+    monthlyDate: {
+        type: Number,
+        default: (new Date().getMonth() + 1) % 12 + 1
     }
 }, { timestamps: true })
 

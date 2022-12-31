@@ -20,6 +20,30 @@ const maxPrice = async(req, res) => {
     res.status(200).json(course[0].price);
 }
 
+//find price maximum value
+const getAllCourseSubjects = async(req, res) => {
+    const courses = await Course.find().sort({ createdAt: -1 }).select("subject");
+    let result = [...new Map(courses.map(item => [item['subject'], item])).values()];
+    let result2 = result.map(course => course.subject);
+    if (!courses) {
+        return res.status(404).json({ error: 'No such courses' });
+    }
+    res.status(200).json(result2);
+}
+
+
+const getAllCourseSubjectsByInstructor = async(req, res) => {
+    const { id } = req.params;
+    const courses = await Course.find({ instructor: id }).sort({ createdAt: -1 }).select("subject");
+    let result = [...new Map(courses.map(item => [item['subject'], item])).values()];
+    let result2 = result.map(course => course.subject);
+    if (!courses) {
+        return res.status(404).json({ error: 'No such courses' });
+    }
+    res.status(200).json(result2);
+}
+
+
 //////////////////////////////////
 // GET a single course
 //////////////////////////////////
@@ -39,15 +63,8 @@ const getCourse = async(req, res) => {
 //Get a subset of courses using a subset of ids
 const getCourseSubset = async(req, res) => {
     const { ids } = req.body
-        //const courses = await Course.find({ '_id': "ids.courseId" });
-        //const courses = await Course.find({ _id, "ids.courseId": _id });
-        //const courses = await Course.find().where('_id').in(ids);
-    let onlyIds = [] // declaring array to store only _ids
-    for (let i = 0; i < ids.length; i++) {
-        if (!onlyIds.includes(ids[i].courseId)) //checking id exist in array, if not exist push _id to onlyIds aarray
-            onlyIds.push(ids[i].courseId); //push _id
-    }
-    const courses = await Course.find().where('_id').in(onlyIds);
+    let first = ids.map(oid => oid.courseId);
+    let courses = await Course.find({ _id: { $in: first } }, { multi: true }).select("_id courseTitle subtitles price shortSummary subject totalHours instructor courseExercises exam coursePreview courseRating ratersCount reviews promotionRate promotionEndDate promotionStartDate view");
     if (!courses) {
         return res.status(404).json({ error: 'No courses' });
     }
@@ -242,6 +259,24 @@ const postPromotion = async(req, res) => {
     }
 }
 
+
+const postPromotionCourses = async(req, res) => {
+    const { ids, promotionStartDate, promotionEndDate, promotionRate } = req.body;
+    try {
+        let courses = await Course.updateMany({ _id: { $in: ids } }, { $set: { promotionStartDate: promotionStartDate } }, { multi: true });
+        courses = await Course.updateMany({ _id: { $in: ids } }, { $set: { promotionEndDate: promotionEndDate } }, { multi: true });
+        courses = await Course.updateMany({ _id: { $in: ids } }, { $set: { promotionRate: promotionRate } }, { multi: true });
+        if (courses) {
+            res.status(200).json({ message: "Promotion Added successfully." });
+        } else {
+            res.status(404).json({ error: "Cannot add promotion." });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
 //////////////////////////////////
 // Export the functions
 //////////////////////////////////
@@ -259,5 +294,8 @@ module.exports = {
     maxPrice,
     getCourseSubset,
     updateViews,
-    getHighestViewedCourses
+    getHighestViewedCourses,
+    getAllCourseSubjects,
+    getAllCourseSubjectsByInstructor,
+    postPromotionCourses
 }

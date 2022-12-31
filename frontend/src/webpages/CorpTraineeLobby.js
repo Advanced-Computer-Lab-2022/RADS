@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import CorpTraineeSearch from "../webcomponents/CorpTraineeSearch";
 import CorpTraineePassword from "../webcomponents/CorpTraineePassword";
-import AppBar  from "../webcomponents/AppBar";
+import AppBar  from "../webcomponents/AppNavBar";
+import { Box } from "@mui/material";
 
 
 const CorpTraineeLobby = (props) => {
     const {
         rateVal,
-        currencyVal
+        currencyVal,
+        token
     } = props;
     const [courses, setCourses] = useState(null);
     const [corpTrainee, setPassword] = useState(null);
@@ -46,12 +48,12 @@ const CorpTraineeLobby = (props) => {
     //     )
 
     return ( 
-    <div className = "home-lobby" >
+    <Box className = "home-lobby" >
         {/* <AppBar /> */}
         Welcome to RADS Online Course Provider(CorpTraineeLobby side) 
-        <CorpTraineeSearch rateVal = { props.rateVal } currencyVal = { props.currencyVal }/> 
-        <CorpTraineePassword />
-        </div>
+        <CorpTraineeSearch rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/> 
+        <CorpTraineePassword rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/>
+        </Box>
     )
 }
 

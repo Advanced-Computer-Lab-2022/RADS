@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import HomeSearch from "../webcomponents/HomeSearch";
 
 const Home = (props) => {
@@ -6,9 +7,9 @@ const Home = (props) => {
         currencyVal
     } = props;
     return (
-        <div>
+        <Box>
             <HomeSearch rateVal = {props.rateVal} currencyVal={props.currencyVal}/>
-        </div>
+        </Box>
     )
 }
 

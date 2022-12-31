@@ -1,119 +1,136 @@
-import * as React from 'react';
-import { useEffect, useState } from "react"
-import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Link from '@mui/material/Link';
-import ReactPlayer from 'react-player';
-
-
+import { Button, Link } from "@mui/material";
+import { useState, useEffect } from "react";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import axios from "axios";
 const AdminPromotion = (props) => {
-    const {
-        rateVal,
-        currencyVal
-      } = props;
-      const [selectedCourseId, setSelectedCourseId] = useState('');
-    const [promotionStartDate, setPromotionStartDate] = useState('');
-    const [promotionEndDate, setPromotionEndDate] = useState('');
-    const [promotionRate, setPromotionRate] = useState('');
-    const [error, setError] = useState(null);
-    const [text, setText] = useState('');
-    const [courses, setCourses] = useState([]);
+  const { rateVal, currencyVal } = props;
+  const params = new URLSearchParams(window.location.search);
+  const adminId = params.get("adminId");
+  const [courses, setCourses] = useState([]);
+  const [trainee, setTrainee] = useState([]);
+  const [request, setRequest] = useState([]);
+  const [checkedCourses, setCheckedCourses] = useState([]);
+  const newKeys = ["_id"];
+  const [promotionStartDate, setPromotionStartDate] = useState("");
+  const [promotionEndDate, setPromotionEndDate] = useState("");
+  const [promotionRate, setPromotionRate] = useState("");
+  const [text, setText] = useState("");
 
-    useEffect(() => {
-        const fetchCourses = async () => {
-          const response = await fetch(`/course/`);
-          const json = await response.json();
-          if (response.ok) {
-            console.log(json);
-            setCourses(json)
-          //  setCourseSubjects(getCourseSubjects(json));
-            //getMostViewed();
-          }
-        }
-        fetchCourses();
-      }, [])
-    const handleChange = (e) => {
-        setSelectedCourseId(e.target.value);
-        console.log(e.target.value);
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const response = await fetch(`/course`);
+      const json = await response.json();
+      if (response.ok) {
+        setCourses(json);
       }
-      const HandleStartDate = (e) => {
-        setPromotionStartDate(e.target.value);
-      }
-      const HandleEndDate = (e) => {
-        setPromotionEndDate(e.target.value);
-      }
-      const HandlePromotionVal = (e) => {
-        console.log(e.target.value);
-        setPromotionRate(e.target.value);
-      }
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault() //prevent form submission
-    
-        const promo = { promotionStartDate, promotionEndDate, promotionRate };
-        console.log(promo);
-        const response = await fetch(`/course/promo/${selectedCourseId}`, {
-          method: 'POST',
-          body: JSON.stringify(promo),
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            'Content-Type': 'application/json'
-          }
+    };
+    fetchCourse();
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const ids = checkedCourses;
+    let body = { ids, promotionStartDate, promotionEndDate, promotionRate };
+    if (ids === []) {
+      setText("No courses selected.");
+    } else {
+      axios
+        .post(`/course/coursespostpromotion`, body)
+        .then((res) => {
+          setText(res.data.message);
         })
-        const json = await response.json();
-        if (!response.ok) {
-          setError(json.error);
-          setText('error');
-          //refresh
-          //window.location.reload();
-            
-
-        }
-        if (response.ok) {
-          setSelectedCourseId('');
-          setPromotionStartDate('');
-          setPromotionEndDate('');
-          setPromotionRate('');
-          setText('Promotion inserted !');
-          setError(null);
-          console.log("New promotion Added", json);
-          //window.location.reload();
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+  const handlePromotion = (e) => {
+    var updatedCourseList = [...checkedCourses];
+    let current = courses.filter((item) =>
+      newKeys.some((key) =>
+        item[key]
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toString().toLowerCase())
+      )
+    );
+    if (e.target.checked) {
+      updatedCourseList = [...checkedCourses].concat(current);
+    } else {
+      console.log(updatedCourseList.length);
+      for (let i = 0; i < updatedCourseList.length; i++) {
+        if (updatedCourseList[i]["_id"] === e.target.value) {
+          console.log(updatedCourseList[i]["_id"] + " at " + i);
+          updatedCourseList.splice(i, 1);
+          i--;
         }
       }
-        return (
-            <div>
-                  <div className='admin-promotion'>
-        <p><strong>Enter a promotion for a course:</strong></p>
-        <Box sx={{ minWidth: 120 }}>
-          <FormControl sx={{ width: 300 }} className="create-promotion">
-            <InputLabel id="demo-simple-select-label">Course</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={selectedCourseId}
-              label="Course"
-              onChange={handleChange}>
-              {courses.map((course) => (
-                <MenuItem value={course._id}> {course.courseTitle}</MenuItem>
-              ))}
-            </Select>
-            <label>Starting Date</label>
-            <input type='date' value={promotionStartDate} onChange={HandleStartDate} />
-            <label>Ending Date</label>
-            <input type='date' value={promotionEndDate} onChange={HandleEndDate} />
-            <label>Promotion Precentage:</label>
-            <input type='range' value={promotionRate} onChange={HandlePromotionVal} />
-            <p>Value: {promotionRate}</p>
-            <button onClick={handleSubmit}>Submit</button>
-          </FormControl>
-          <p><strong>{text}</strong></p>
-        </Box>
-      </div>
-            </div>
-        )
-}
+    }
+    setCheckedCourses(updatedCourseList);
+  };
+
+  return (
+    <Box>
+      <box className="admin-promo">
+        <box className="list-container-promo">
+          {courses.map((course) => (
+            <box>
+              <span>{course.courseTitle}</span>
+              <input
+                value={course._id}
+                name={course.courseTitle}
+                type="checkbox"
+                onChange={(e) => {
+                  handlePromotion(e);
+                }}
+              />
+              <br />
+            </box>
+          ))}
+        </box>
+      </box>
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl sx={{ width: 300 }} className="create-promotion">
+          <label>Starting Date</label>
+          <input
+            type="date"
+            required
+            value={promotionStartDate}
+            onChange={(e) => setPromotionStartDate(e.target.value)}
+          />
+          <label>Ending Date</label>
+          <input
+            type="date"
+            required
+            value={promotionEndDate}
+            onChange={(e) => setPromotionEndDate(e.target.value)}
+          />
+          <label>Promotion Precentage:</label>
+          <input
+            type="range"
+            required
+            value={promotionRate}
+            onChange={(e) => setPromotionRate(e.target.value)}
+          />
+          <p>Value: {promotionRate}</p>
+
+          {checkedCourses.length === 0 ? (
+            <Box>
+              <strong>Select the Courses you want to promote.</strong>
+            </Box>
+          ) : (
+            <Button variant="contained" type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          )}
+        </FormControl>
+        <p>
+          <strong>{text}</strong>
+        </p>
+      </Box>
+    </Box>
+  );
+};
+
 export default AdminPromotion;

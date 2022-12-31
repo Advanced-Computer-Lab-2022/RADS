@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
-
+const bodyParser = require('body-parser');
 // Require the dotenv to attach environment variables to the process object
 require('dotenv').config();
 
@@ -15,11 +15,14 @@ const MongoURI = process.env.MONGO_URI;
 // Middle-Ware
 // Log Requests
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use((req, res, next) => {
     console.log(req.path, res.path);
     next();
 })
 app.use(cors());
+
 
 // Importing Routes
 const guestRoute = require('./Routes/Guest');

@@ -1,7 +1,8 @@
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
-
+import axios from 'axios';
+import { Box, Button } from '@mui/material';
 const TraineeView = (props) => {
     const {
         rateVal,
@@ -16,8 +17,8 @@ const TraineeView = (props) => {
     const [instructorName, setinstructorName] = useState([]);
     const [traineeBalance, setTraineeBalance] = useState(0);
     const [exists, setExists] = useState(false);
-    const [balanceHtml,setBalanceHtml] = useState("");
-    
+    const [balanceHtml, setBalanceHtml] = useState("");
+
     // const todayDate = new Date();
     // console.log(todayDate);
     // console.log(json.promotionEndDate);
@@ -42,21 +43,27 @@ const TraineeView = (props) => {
 
 
     const fetchTrainee = async () => {
-        const response = await fetch(`/trainee/${traineeId}`);
-        const json = await response.json();
-        if (response.ok) {
-            setTrainee(json);
-            setTraineeCourses(json.courses);
-            setTraineeBalance(json.balance);
-        }
+        axios
+            .get(`/trainee/${traineeId}`)
+            .then((res) => {
+                setTrainee(res.data);
+                setTraineeCourses(res.data.courses);
+                setTraineeBalance(res.data.balance);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     const fetchInstructor = async (instID) => {
-        const response = await fetch(`/instructor/${instID}`);
-        const json = await response.json();
-        if (response.ok) {
-            setinstructorName(json.firstName + " " + json.lastName);
-        }
+        axios
+        .get(`/instructor/${instID}`)
+        .then((res) => {
+            setinstructorName(res.data.firstName + " " + res.data.lastName);
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
     const incrementViews = async () => {
@@ -80,68 +87,67 @@ const TraineeView = (props) => {
 
     const findRegistered = async () => {
         const info = { courseId };
-        const response = await fetch(`/trainee/checkregister/${traineeId}`, {
-            method: 'POST',
-            body: JSON.stringify(info),
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
+        axios
+        .post(`/trainee/checkregister/${traineeId}`,info)
+        .then((res) => {
+            setExists(res.data);
         })
-        const json = await response.json();
-        if (response.ok) {
-            setExists(json);
-        }
+        .catch((error) => {
+            console.error(error)
+        })
     }
     const CheckRegistered = () => {
         findRegistered();
         if (exists) {
-            return (<div>
+            return (<Box>
                 <p><bold>Registered</bold></p>
-                <button onClick={() => window.location.href = `/traineecourse?courseId=${courseId}&traineeId=${traineeId}`}>Go to course</button>
-            </div>)
+                <Button
+          variant="contained" onClick={() => window.location.href = `/traineecourse?courseId=${courseId}&traineeId=${traineeId}`}>Go to course</Button>
+            </Box>)
         }
         else {
             return (
-                <div>
-                    <button onClick={() => window.location.href = `/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key={courseId}>Register in Course <strong>{course.courseTitle}</strong></button>
-                </div>
+                <Box>
+                    <Button
+          variant="contained" onClick={() => window.location.href = `/traineeoptions?courseId=${courseId}&traineeId=${traineeId}`} key={courseId}>Register in Course <strong>{course.courseTitle}</strong></Button>
+                </Box>
             )
         }
     }
 
-    const handleClick = (e) =>{
+    const handleClick = (e) => {
         e.preventDefault();
-        let x = `Balance: ${Math.ceil(traineeBalance*rateVal)} ${currencyVal}`;
+        let x = `Balance: ${Math.ceil(traineeBalance * rateVal)} ${currencyVal}`;
         setBalanceHtml(x);
     }
     return (
-        <div>
-            <div className='wallet-div'>
-                <button onClick={handleClick}><strong>Wallet</strong></button>
+        <Box>
+            <Box className='wallet-div'>
+                <Button
+          variant="contained" onClick={handleClick}><strong>Wallet</strong></Button>
                 <p>{balanceHtml}</p>
-            </div>
+            </Box>
             <h4>The information of course: {course.courseTitle} </h4>
-            <div><CheckRegistered /></div>
-         
-            <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true}/>
-            <div><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
-                <div>
+            <Box><CheckRegistered /></Box>
+
+            <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true} />
+            <Box><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
+                <Box>
                     <p>{subtitle.subTitle}</p>
                     <p>Description:{subtitle.description}</p>
                     <p>Total Hours of the Chapter: {subtitle.hours}</p>
-                </div>
-            ))}</div>
-            <p><strong>Price: </strong>{course.price * rateVal}{" "}{currencyVal}</p>
+                </Box>
+            ))}</Box>
+            <p><strong>Price: </strong>{Math.ceil(course.price * rateVal)}{" "}{currencyVal}</p>
             <p><strong>Instructor of the course: </strong>{instructorName}</p>
             <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
-            <div><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
-                <div>
+            <Box><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
+                <Box>
                     <p>Question: {exercise.question}</p>
-                </div>
-            ))}</div>
+                </Box>
+            ))}</Box>
             <p><strong>============================================================================================================</strong></p>
-        </div>
+        </Box>
     )
 }
 

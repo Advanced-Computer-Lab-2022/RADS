@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import InstructorProfileDetails from './InstructorProfileDetails'
 import InstructorDetails from './InstructorDetails'
+import { Box, Button } from "@mui/material";
 
 const ViewProfileButton = () => {
 
@@ -26,17 +27,18 @@ const ViewProfileButton = () => {
     }, [])
 
     return (
-        <div className="view-profile">
-        <div>
+        <Box className="view-profile">
+        <Box>
             {instructors && instructors.map((instructor)=>(
-                     <div>
+                     <Box>
                      <InstructorDetails key={instructor._id} instructor={instructor} />
-                     <button  className={instructor._id} onClick={()=>{setModal(true)}}>View Profile</button>
+                     <Button
+          variant="contained"  className={instructor._id} onClick={()=>{setModal(true)}}>View Profile</Button>
                      {modal && <InstructorProfileDetails key = {instructor._id} instructor = {instructor}  />}
-                     </div>
+                     </Box>
                 ))}
-        </div>
-        </div>
+        </Box>
+        </Box>
     )
 }
 

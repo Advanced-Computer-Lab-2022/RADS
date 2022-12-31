@@ -3,106 +3,163 @@ import { useEffect, useState } from "react"
 // components
 import InstructorDetails from '../webcomponents/InstructorDetails'
 import CorpTraineeDetails from '../webcomponents/CorpTraineeDetails'
-
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, Typography } from "@mui/material"
 import InstructorForm from "../webcomponents/InstructorForm"
 import CorpTraineeForm from "../webcomponents/CorpTraineeForm"
 import AdminForm from "../webcomponents/AdminForm"
 import NewAdminButton from "../webcomponents/NewAdminButton"
 import AdminDetails from "../webcomponents/AdminDetails"
+import jwt_decode from "jwt-decode";
+import axios from "axios"
+import { ExpandMore } from "@mui/icons-material"
+import { color } from "@mui/system"
 
 const Admin = (props) => {
-        const {
-            rateVal,
-            currencyVal
-        } = props;
-        const [instructors, setInstructors] = useState(null);
-        const [corpTrainees, setCorpTrainees] = useState(null);
-        const [admin, editAdmin] = useState(null);
-        useEffect(() => {
-            const fetchCorpTrainees = async() => {
-                const response = await fetch('/corpTrainee');
-                const json = await response.json();
+    const {
+        rateVal,
+        currencyVal,
+        token
+    } = props;
+    const decode = jwt_decode(token);
+    const adminId = decode.id;
+    const [instructors, setInstructors] = useState(null);
+    const [corpTrainees, setCorpTrainees] = useState(null);
+    const [admin, editAdmin] = useState(null);
+    useEffect(() => {
+        const fetchCorpTrainees = async () => {
+            axios
+                .get('/corptrainee')
+                .then((res) => {
+                    setCorpTrainees(res.data);
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+        }
+        fetchCorpTrainees();
+    }, [])
 
-                if (response.ok) {
-                    setCorpTrainees(json)
+    useEffect(() => {
+        const fetchInstructors = async () => {
+            axios
+                .get('/instructor')
+                .then((res) => {
+                    setInstructors(res.data)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+        }
+        fetchInstructors();
+    }, [])
+    useEffect(() => {
+        const fetchAdmins = async () => {
+            axios
+                .get('/admin')
+                .then((res) => {
+                    editAdmin(res.data)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+        }
+        fetchAdmins();
+    }, [])
 
-                }
-            }
-            fetchCorpTrainees();
-        }, [])
-
-        useEffect(() => {
-            const fetchInstructors = async() => {
-                const response = await fetch('/Instructor');
-                const json = await response.json();
-
-                if (response.ok) {
-                    setInstructors(json)
-
-                }
-            }
-            fetchInstructors();
-        }, [])
-        useEffect(() => {
-            const fetchAdmins = async() => {
-                const response = await fetch('/Admin');
-                const json = await response.json();
-
-                if (response.ok) {
-                    editAdmin(json)
-
-                }
-            }
-            fetchAdmins();
-        }, [])
-        useEffect(() => {
-            const fetchAdmins = async() => {
-                const response = await fetch('/Admin');
-                const json = await response.json();
-
-                if (response.ok) {
-                    editAdmin(json)
-
-                }
-            }
-            fetchAdmins();
-        }, [])
-
-        return ( <div className = "admin-lobby" >
-                <div className = "instructors" >
-                <button onClick={() => window.location.href = `/adminreports`}>View Requests</button>
-                <button onClick={() => window.location.href = `/adminproblems`}>View Reported Problems</button>
-                <button onClick={() => window.location.href = `/adminpromotion`}>Set Promotion</button>
-                <h2 > Admins: </h2> {
-                admin && admin.map((admin) => (
-
-                    <AdminDetails key = { admin._id } admin = { admin }/>
-                ))
-            } <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
-
-
-
-        <h2 >corpTrainees: </h2> {
-        corpTrainees && corpTrainees.map((corpTrainee) => (
-
-            <CorpTraineeDetails key = { corpTrainee._id } corpTrainee = { corpTrainee }/>
-        ))
-    } <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
-    <h2>Instructors: </h2> {
-instructors && instructors.map((instructor) => (
-    // <p key = {instructor._id}>{instructor.userName}</p>
-    <InstructorDetails key = { instructor._id } instructor = { instructor }/>
-))
-}
-
-</div> <InstructorForm />
-    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
-    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2> 
-    <AdminForm/>
-    <h2> === === === === === === === === === === === === === === === === === === === === === = </h2>
-     <h2> Add new admin: </h2> <NewAdminButton/>
-    </div>
-)
+    return (
+      <Box className="admin-lobby">
+        <Box className="instructors">
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMore />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>
+                <p className="highview-p">
+                  <strong>Admins List</strong>
+                </p>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <Box className="card-container">
+                  {admin &&
+                    admin.map((admin) => (
+                      <Box sx={{ margin: "2rem" }} className="card-border">
+                        <AdminDetails key={admin._id} admin={admin} />
+                      </Box>
+                    ))}
+                </Box>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMore />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>
+                <p className="highview-p">
+                  <strong>Corprate Trainees List</strong>
+                </p>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <Box className="card-container">
+                  {corpTrainees &&
+                    corpTrainees.map((corpTrainee) => (
+                      <Box sx={{ margin: "2rem" }} className="card-border">
+                        <CorpTraineeDetails
+                          key={corpTrainee._id}
+                          corpTrainee={corpTrainee}
+                        />
+                      </Box>
+                    ))}
+                </Box>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMore />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>
+                <p className="highview-p">
+                  <strong>Instructors List</strong>
+                </p>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <Box className="card-container">
+                  {instructors &&
+                    instructors.map((instructor) => (
+                      <Box sx={{ margin: "2rem" }} className="card-border">
+                        <InstructorDetails
+                          key={instructor._id}
+                          instructor={instructor}
+                        />
+                      </Box>
+                    ))}
+                </Box>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Box className="card-border">
+            <AdminForm
+              rateVal={props.rateVal}
+              currencyVal={props.currencyVal}
+              token={props.token}
+            />
+          </Box>
+        </Box>
+      </Box>
+    );
 }
 
 

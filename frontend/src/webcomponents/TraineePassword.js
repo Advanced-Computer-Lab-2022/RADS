@@ -1,82 +1,71 @@
 import { useState,useEffect } from "react"
-
-
-const TraineePassword = () => {
-    const [password, setPassword] = useState('');
-    const [error,setError] = useState(null);
-    const traineeId = "639ad07efd79849d06521f53";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import { Box, Button } from "@mui/material";
+const TraineePassword = (props) => {
+    const {
+        rateVal,
+        currencyVal,
+        token
+      } = props;
+    const decode = jwt_decode(token);
+    const traineeId = decode.id;
+    const [password, setPassword] = useState('');  
     const [email,setEmail] = useState('');
     const [html1,setHtml1] = useState('');
     const [html2,setHtml2] = useState('');
 
 
     useEffect(() => {
-        const fetchTrainee = async() => {
-            const response = await fetch(`/trainee/${traineeId}`);
-            const json = await response.json();
-            if (response.ok) {
-                console.log(json.email);
-                setEmail(json.email);
-            }
+        const fetchTrainee = async () => {
+            axios
+                .get(`/trainee/${traineeId}`)
+                .then((res) => {
+                    setEmail(res.data.email);
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }
         fetchTrainee();
     }, [])
 
     const handleSubmit = async (e) =>{
         e.preventDefault() //prevent form submission
-        
         const trainee = {password};
-
-        const response = await fetch(`/trainee/password/${traineeId}`,{
-            method:'PATCH',
-            body: JSON.stringify(trainee),
-            headers:{
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': 'application/json'
-            }
-        })
-        
-        const json = await response.json();
-
-        if(!response.ok){
-            setError(json.error);
-        }
-        if(response.ok){    
+        axios
+        .post(`/trainee/password/${traineeId}`, trainee)
+        .then((res) => {
             setPassword('');
-            setError(null);
-            console.log("Info Changed", json);
+            console.log("Info Changed", res.data);
             setHtml1("Password Changed Successfully.");
-        }
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }    
 
     const forgotPassword = async(e) =>{
         //prevent form submission 
         e.preventDefault()
          const trainEmail = {email};
-         const response = await fetch(`/trainee/forgot/${traineeId}`,{
-             method:'POST',
-             body: JSON.stringify(trainEmail),
-             headers:{
-                 "Access-Control-Allow-Origin": "*",
-                 'Content-Type': 'application/json'
-             }
-         })
-         const json = await response.json();
-         if(!response.ok){
-             setError(json.error);
-         }
-         if(response.ok){
-             setError(null);
-             console.log("Info Changed", json);
-             setHtml2("A link was sent on your email to verify");
-         }
+         axios
+        .post(`/trainee/forgot/${traineeId}`, trainEmail)
+        .then((res) => {
+            console.log("Info Changed", res.data);
+            setHtml2("A link was sent on your email to verify");
+        })
+        .catch((error) => {
+            console.error(error)
+        })
      } 
     return (
-        <div>
-        <div>
-        <button type="text" onClick={forgotPassword}>Forget Password</button> 
+        <Box>
+        <Box>
+        <Button
+          variant="contained" type="text" onClick={forgotPassword}>Forget Password</Button> 
         <p><strong>{html2}</strong></p>
-        </div>
+        </Box>
         <form className="change-info" onSubmit={handleSubmit}>
             <h3>Change Your Information</h3>
             <h3>Change Your Password</h3>
@@ -85,11 +74,12 @@ const TraineePassword = () => {
             value= {password}
             />
 
-            <button>Submit</button>
-            {error && <div className="error">{error}</div>}
+            <Button
+          variant="contained">Submit</Button>
+           
         </form>
         <p><strong>{html1}</strong></p>
-        </div>
+        </Box>
     )
 }
 

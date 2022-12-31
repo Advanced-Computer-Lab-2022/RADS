@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCourses, getCourse, postCourse, deleteCourse, updateCourse, getCoursesByInstructor, postCourseReview, getCourseRating, postPromotion, deletePromo, maxPrice, getCourseSubset, updateViews, getHighestViewedCourses } = require('../Controllers/courseController');
+const { getCourses, getCourse, postCourse, deleteCourse, postPromotionCourses, updateCourse, getAllCourseSubjectsByInstructor, getCoursesByInstructor, postCourseReview, getCourseRating, postPromotion, deletePromo, maxPrice, getCourseSubset, updateViews, getHighestViewedCourses, getAllCourseSubjects } = require('../Controllers/courseController');
 
 
 const router = express.Router();
@@ -45,5 +45,20 @@ router.patch('/updateviews/:id', updateViews);
 
 // GET Highest viewed courses
 router.get('/highest/views', getHighestViewedCourses);
+
+// GET All Course Subjects
+router.get('/get/coursesubjects', getAllCourseSubjects);
+
+// GET All Course Subjects taught by instructor
+router.get('/getinstructor/coursesubjects/:id', getAllCourseSubjectsByInstructor);
+
+// POST Promo on several courses
+router.post('/coursespostpromotion', postPromotionCourses);
+
+
+
+
+
+
 
 module.exports = router;
