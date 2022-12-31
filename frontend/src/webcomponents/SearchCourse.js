@@ -155,9 +155,9 @@ const SearchCourse = (props) => {
         setinstructorName(res.data.firstName + " " + res.data.lastName);
       })
       .catch((error) => {
-        console.error(error)
-      })
-  }
+        console.error(error);
+      });
+  };
 
   const getMostViewed = async () => {
     const response = await fetch("/course/highest/views");
@@ -167,15 +167,16 @@ const SearchCourse = (props) => {
     }
   };
 
-  
   //GET all course subjects taught by instructor
-  const getCourseSubjects = async() =>{
-    const response = await fetch(`/course/getinstructor/coursesubjects/${instruId}`);
+  const getCourseSubjects = async () => {
+    const response = await fetch(
+      `/course/getinstructor/coursesubjects/${instruId}`
+    );
     const json = await response.json();
     if (response.ok) {
       setCourseSubjects(json);
     }
-  }
+  };
 
   const performIntersection = (arr1, arr2, arr3, arr4) => {
     const intersectionResult1 = arr1.filter((x) => arr2.indexOf(x) !== -1);
@@ -333,8 +334,9 @@ const SearchCourse = (props) => {
               onChange={HandlePromotionVal}
             />
             <p>Value: {promotionRate}</p>
-            <Button
-          variant="contained" onClick={handleSubmit}>Submit</Button>
+            <Button variant="contained" onClick={handleSubmit}>
+              Submit
+            </Button>
           </FormControl>
           <p>
             <strong>{text}</strong>
@@ -525,7 +527,13 @@ const SearchCourse = (props) => {
                 ))}
             </box>
             <Button
-          variant="contained" onClick={() => window.location.href = `/instructorreport?courseId=${course._id}&instructorId=${instruId}`}>Report Course</Button>
+              variant="contained"
+              onClick={() =>
+                (window.location.href = `/instructorreport?courseId=${course._id}&instructorId=${instruId}`)
+              }
+            >
+              Report Course
+            </Button>
             <p>
               <strong>
                 ============================================================================================================
@@ -534,7 +542,13 @@ const SearchCourse = (props) => {
           </box>
         ))}
       <Button
-          variant="contained" onClick={() => window.location.href = `/instructorviewreports?instructorId=${instruId}`}>View Reports</Button>
+        variant="contained"
+        onClick={() =>
+          (window.location.href = `/instructorviewreports?instructorId=${instruId}`)
+        }
+      >
+        View Reports
+      </Button>
     </box>
   );
 };

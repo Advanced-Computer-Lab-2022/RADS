@@ -13,14 +13,14 @@ const CorpTraineeForm = (props) => {
   useEffect(() => {
     const viewRegistered = async () => {
       axios
-            .get(`/corptrainee/${corpTraineeId}`)
-            .then((res) => {
-              fetchCourses(res.data.courses);
-              setCoursesIds(res.data.courses);
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+        .get(`/corptrainee/${corpTraineeId}`)
+        .then((res) => {
+          fetchCourses(res.data.courses);
+          setCoursesIds(res.data.courses);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
     viewRegistered();
   }, []);

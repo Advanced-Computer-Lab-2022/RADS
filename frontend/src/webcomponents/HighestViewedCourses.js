@@ -1,9 +1,23 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Typography,
+} from "@mui/material";
 import CourseCard from "./CourseCard";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const HighestViewedCourses = (props) => {
-    const { highestViewedCourses, rateVal, currencyVal, todayDate, courseView1, courseView2, traineeId } = props;
+  const {
+    highestViewedCourses,
+    rateVal,
+    currencyVal,
+    todayDate,
+    courseView1,
+    courseView2,
+    traineeId,
+  } = props;
   return (
     <Accordion>
       <AccordionSummary
@@ -41,5 +55,5 @@ const HighestViewedCourses = (props) => {
     </Accordion>
   );
 };
- 
+
 export default HighestViewedCourses;
