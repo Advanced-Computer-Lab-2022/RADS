@@ -39,6 +39,7 @@ import CorpTraineeInsert from "./CorpTraineeInsert";
 import AdminAccess from "./AdminAccess";
 import NewAdminButton from "./NewAdminButton";
 import InstructorForm from "./InstructorForm";
+import TraineeDetails from "./TraineeDetails";
 
 const drawerWidth = 240;
 
@@ -383,49 +384,216 @@ export default function PersistentDrawerLeft(props) {
       <Main open={open}>
         <DrawerHeader />
         <Box>
-          {page === "adminreports" ? (
-            <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
-          ) : page === "adminProfile" ? (
-            ///////////////////////////////////////////////
-            <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
-          ) : page === "adminrefunds" ? (
-            <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
-          ) : page === "adminadd" ? (
-            <NewAdminButton
-              rateVal={rateVal}
-              currencyVal={currencyVal}
-              token={token}
-            />
-          ) : page === "admininsertcorp" ? (
-            <CorpTraineeInsert
-              rateVal={rateVal}
-              currencyVal={currencyVal}
-              token={token}
-            />
-          ) : page === "admininstructoradd" ? (
-            <InstructorForm
-              rateVal={rateVal}
-              currencyVal={currencyVal}
-              token={token}
-            />
-          ) : page === "subadmin" ? (
-            subpage === "adminproblems" ? (
-              <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
-            ) : subpage === "adminrefunds" ? (
+          {user.role === "ADMIN" ? (
+            page === "adminreports" ? (
+              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminProfile" ? (
+              ///////////////////////////////////////////////
+              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminrefunds" ? (
               <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
-            ) : subpage === "admininsertcorp" ? (
-              <CorpTraineeInsert rateVal={rateVal} currencyVal={currencyVal} />
-            ) : subpage === "adminaccess" ? (
-              <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminadd" ? (
+              <NewAdminButton
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininsertcorp" ? (
+              <CorpTraineeInsert
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininstructoradd" ? (
+              <InstructorForm
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "subadmin" ? (
+              subpage === "adminproblems" ? (
+                <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "adminrefunds" ? (
+                <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "admininsertcorp" ? (
+                <CorpTraineeInsert
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "adminaccess" ? (
+                <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+              ) : (
+                <> </>
+              )
+            ) : page === "adminpromotion" ? (
+              <AdminPromotion rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "null" ? (
+              <></>
             ) : (
-              <> </>
+              <Admin
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
             )
-          ) : page === "adminpromotion" ? (
-            <AdminPromotion rateVal={rateVal} currencyVal={currencyVal} />
-          ) : page === "null" ? (
-            <></>
+          ) : user.role === "TRAINEE" ? (
+            page === "adminreports" ? (
+              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "traineeprofile" ? (
+              ///////////////////////////////////////////////
+              <TraineeDetails />
+            ) : page === "adminrefunds" ? (
+              <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminadd" ? (
+              <NewAdminButton
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininsertcorp" ? (
+              <CorpTraineeInsert
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininstructoradd" ? (
+              <InstructorForm
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "subtrainee" ? (
+              subpage === "adminproblems" ? (
+                <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "adminrefunds" ? (
+                <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "admininsertcorp" ? (
+                <CorpTraineeInsert
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "adminaccess" ? (
+                <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+              ) : (
+                <> </>
+              )
+            ) : page === "adminpromotion" ? (
+              <AdminPromotion rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "null" ? (
+              <></>
+            ) : (
+              <Admin
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            )
+          ) : user.role === "CORP_TRAINEE" ? (
+            page === "adminreports" ? (
+              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminProfile" ? (
+              ///////////////////////////////////////////////
+              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminrefunds" ? (
+              <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminadd" ? (
+              <NewAdminButton
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininsertcorp" ? (
+              <CorpTraineeInsert
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininstructoradd" ? (
+              <InstructorForm
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "subcorptrainee" ? (
+              subpage === "adminproblems" ? (
+                <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "adminrefunds" ? (
+                <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "admininsertcorp" ? (
+                <CorpTraineeInsert
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "adminaccess" ? (
+                <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+              ) : (
+                <> </>
+              )
+            ) : page === "adminpromotion" ? (
+              <AdminPromotion rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "null" ? (
+              <></>
+            ) : (
+              <Admin
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            )
+          ) : user.role === "INSTRUCTOR" ? (
+            page === "adminreports" ? (
+              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminProfile" ? (
+              ///////////////////////////////////////////////
+              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminrefunds" ? (
+              <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "adminadd" ? (
+              <NewAdminButton
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininsertcorp" ? (
+              <CorpTraineeInsert
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "admininstructoradd" ? (
+              <InstructorForm
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "subinstructor" ? (
+              subpage === "adminproblems" ? (
+                <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "adminrefunds" ? (
+                <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "admininsertcorp" ? (
+                <CorpTraineeInsert
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "adminaccess" ? (
+                <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+              ) : (
+                <> </>
+              )
+            ) : page === "adminpromotion" ? (
+              <AdminPromotion rateVal={rateVal} currencyVal={currencyVal} />
+            ) : page === "null" ? (
+              <></>
+            ) : (
+              <Admin
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            )
           ) : (
-            <Admin rateVal={rateVal} currencyVal={currencyVal} token={token} />
+            <></>
           )}
         </Box>
       </Main>
