@@ -15,7 +15,7 @@ const SearchBar = (props) => {
         variant="filled"
         placeholder="Search"
         InputProps={{
-          startAdornment: <SearchIcon sx={{ marginRight: 2 }} />
+          startAdornment: <SearchIcon sx={{ marginRight: 2 }} />,
         }}
         onKeyPress={(ev) => {
           console.log(`Pressed keyCode ${ev.key}`);
@@ -28,5 +28,5 @@ const SearchBar = (props) => {
     </Box>
   );
 };
- 
+
 export default SearchBar;

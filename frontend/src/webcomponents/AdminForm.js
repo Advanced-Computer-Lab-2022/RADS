@@ -34,7 +34,7 @@ const AdminForm = (props) => {
 
     return (
         <form className="create-admin" onSubmit={handleSubmit}>
-            <h3>Admin: Insert Your New Information</h3>
+            <h3>Admin: Update Your Information</h3>
            
             <label>Username:</label>
             <input type="text" onChange={(e) => setUserName(e.target.value)}
@@ -47,7 +47,7 @@ const AdminForm = (props) => {
             />
 
             <Button
-          variant="contained">Submit</Button>
+          variant="contained" type="submit">Submit</Button>
             {error && <Box className="error">{error}</Box>}
         </form>
     )

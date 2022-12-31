@@ -35,21 +35,27 @@ const NewAdminButton = (props) => {
     }    
 
     return (
+      <div>
+        <h2> Add new admin: </h2>
         <form className="create-admin" onSubmit={handleSubmit}>
-            <label>First name:</label>
-            <input type="text" onChange={(e) => setFirstName(e.target.value)}
-            value= {firstName}
-            />
+          <label>First name:</label>
+          <input
+            type="text"
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
 
-            <label>Last name:</label>
-            <input type="text" onChange={(e) => setLastName(e.target.value)}
-            value= {lastName}
-            />
-            <Button
-          variant="contained">Create Admin</Button>
-            {error && <Box className="error">{error}</Box>}
+          <label>Last name:</label>
+          <input
+            type="text"
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
+          <Button variant="contained" type="submit">Create Admin</Button>
+          {error && <Box className="error">{error}</Box>}
         </form>
-    )
+      </div>
+    );
 }
 
 
