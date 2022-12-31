@@ -267,7 +267,6 @@ const HomeSearch = (props) => {
           </Box>
         </Box>
         <br />
-
         <Box className="filter-component1">
           <Box className="list-container">
             {courseSubjects.map((course) => (
