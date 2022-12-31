@@ -1,68 +1,86 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import { useState, useEffect } from 'react';
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import { useState, useEffect } from "react";
 
-const SelectCountry = ({ handleSelection}) => {
-    // const flag = () => {
-    //     return (
-    //         <img
-    //             loading="lazy"
-    //             width="20"
-    //             src={`https://flagcdn.com/w20/${option.country.toLowerCase()}.png`}
-    //             srcSet={`https://flagcdn.com/w40/${option.country.toLowerCase()}.png 2x`}
-    //             alt=""
-    //         />
-    //     );
-    // }
-    
-    return ( 
-        //{/* <Box>{`rate value: ${rateValue !== null ? `'${rateValue}'` : '1'}`}</Box> */}
-        <Box className="page-element">
-            <Autocomplete
-                id="country-select"
-                className="page-element"
-                onChange={(event, inputValue) => {
-                    if (inputValue !== null) {
-                        if(['Belarus', 'Ecuador', 'Guatemala', 'Guinea-Bissau', 'Latvia', 'Lithuania', 'Madagascar', 'Mauritania', 'Myanmar', 'Palestine', 'Venezuela', 'Zimbabwe'].includes(inputValue.country)){
-                            handleSelection("USD");
-                        }   
-                        else{
-                            handleSelection(inputValue.currency_code);
-                        }
-                    }
-                    console.log(event);
-                }}
-                sx={{ width: 200 }}
-                options={countries}
-                autoHighlight
-                getOptionLabel={(option) => option.country}
-                renderOption={(props, option) => (
-                <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                    <img
-                    loading="lazy"
-                    width="20"
-                    src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                    srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                    alt=""
-                    />
-                    {option.country} ({option.currency_code})
-                </Box>
-                )}
-                renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label="Choose a country"
-                    inputProps={{
-                    ...params.inputProps,
-                    autoComplete: 'new-password', // disable autocomplete and autofill
-                    }}
-                />
-                )}
+const SelectCountry = ({ handleSelection }) => {
+  // const flag = () => {
+  //     return (
+  //         <img
+  //             loading="lazy"
+  //             width="20"
+  //             src={`https://flagcdn.com/w20/${option.country.toLowerCase()}.png`}
+  //             srcSet={`https://flagcdn.com/w40/${option.country.toLowerCase()}.png 2x`}
+  //             alt=""
+  //         />
+  //     );
+  // }
+
+  return (
+    //{/* <Box>{`rate value: ${rateValue !== null ? `'${rateValue}'` : '1'}`}</Box> */}
+    <Box className="page-element">
+      <Autocomplete
+        id="country-select"
+        className="page-element"
+        onChange={(event, inputValue) => {
+          if (inputValue !== null) {
+            if (
+              [
+                "Belarus",
+                "Ecuador",
+                "Guatemala",
+                "Guinea-Bissau",
+                "Latvia",
+                "Lithuania",
+                "Madagascar",
+                "Mauritania",
+                "Myanmar",
+                "Palestine",
+                "Venezuela",
+                "Zimbabwe",
+              ].includes(inputValue.country)
+            ) {
+              handleSelection("USD");
+            } else {
+              handleSelection(inputValue.currency_code);
+            }
+          }
+          console.log(event);
+        }}
+        sx={{ width: 200 }}
+        options={countries}
+        autoHighlight
+        getOptionLabel={(option) => option.country}
+        renderOption={(props, option) => (
+          <Box
+            component="li"
+            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            {...props}
+          >
+            <img
+              loading="lazy"
+              width="20"
+              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+              alt=""
             />
-        </Box>
-     );
-}
+            {option.country} ({option.currency_code})
+          </Box>
+        )}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Choose a country"
+            inputProps={{
+              ...params.inputProps,
+              autoComplete: "new-password", // disable autocomplete and autofill
+            }}
+          />
+        )}
+      />
+    </Box>
+  );
+};
 
 export default SelectCountry;
 

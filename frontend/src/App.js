@@ -64,6 +64,9 @@ import AdminPromotion from "./webcomponents/AdminPromotion";
 import SearchPage from "./webcomponents/SearchPage";
 import UserDrawer from "./webcomponents/UserDrawer";
 import Header from "./webcomponents/Header";
+import Footer from "./webcomponents/Footer";
+import About from "./webcomponents/About";
+import TraineeDetails from "./webcomponents/TraineeDetails";
 
 const adminDrawerList = ["Profile", "Issues", "Promotion"];
 const instructorDrawerList = ["Profile", "Reports", "Follow Up", "Monthly"];
@@ -319,6 +322,24 @@ function App() {
               />
 
               <Route
+                path="/traineeprofile"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="traineeprofile"
+                      drawerFlag={true}
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
                 path="/adminreports"
                 element={
                   <AdminRouter user={user}>
@@ -374,6 +395,42 @@ function App() {
               />
 
               <Route
+                path="/adminadd"
+                element={
+                  <AdminRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="adminadd"
+                      drawerFlag={true}
+                    />
+                  </AdminRouter>
+                }
+              />
+
+              <Route
+                path="/admininstructoradd"
+                element={
+                  <AdminRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="admininstructoradd"
+                      drawerFlag={true}
+                    />
+                  </AdminRouter>
+                }
+              />
+
+              <Route
                 path="/admininsertcorp"
                 element={
                   <AdminRouter user={user}>
@@ -384,8 +441,7 @@ function App() {
                       user={user}
                       drawerList={adminDrawerList}
                       token={window.localStorage.jwt}
-                      page="subadmin"
-                      subpage="admininsertcorp"
+                      page="admininsertcorp"
                       drawerFlag={true}
                     />
                   </AdminRouter>
@@ -673,7 +729,9 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
+                      token={window.localStorage.jwt}
                     />
+                    <Navbar user={user} />
                     <Box className="home-lobby card-container">
                       <h2>Welcome to RADS Online Course Provider</h2>
                     </Box>
@@ -691,7 +749,9 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
+                      token={window.localStorage.jwt}
                     />
+                    <Navbar user={user} />
                     <Box className="home-lobby card-container">
                       <h2>Welcome to RADS Online Course Provider</h2>
                     </Box>
@@ -710,6 +770,7 @@ function App() {
                       handleSelection={handleSelection}
                       user={user}
                     />
+                    <Navbar user={user} />
                     <LogIn rateVal={rateValue} currencyVal={inputValue} />
                   </ForceRedirect>
                 }
@@ -725,8 +786,25 @@ function App() {
                       handleSelection={handleSelection}
                       user={user}
                     />
+                    <Navbar user={user} />
                     <SignUp rateVal={rateValue} currencyVal={inputValue} />
                   </ForceRedirect>
+                }
+              />
+
+              <Route
+                path="/about"
+                element={
+                  <Box>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      token={window.localStorage.jwt}
+                    />
+                    <Navbar user={user} />
+                    <About />
+                  </Box>
                 }
               />
 

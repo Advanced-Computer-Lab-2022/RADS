@@ -20,15 +20,19 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import SelectCountry from "./SelectCountry";
 import SearchBar from "./SearchBar";
+import jwt_decode from "jwt-decode";
 
-const pages = ["Home", "About"];
+const pages = ["About"];
 const settings = ["Profile", "Lobby", "Logout"];
 
 const AppNavBar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const { rateValue, currencyVal, handleSelection, user } = props;
+  const { rateValue, currencyVal, handleSelection, user, token } = props;
+
+  const decode = jwt_decode(token);
+  const userId = decode.id;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -46,7 +50,7 @@ const AppNavBar = (props) => {
   };
 
   return (
-    <AppBar color="text" position="sticky" className="navbar">
+    <AppBar color="text" position="sticky" className="appnavbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Card
@@ -141,7 +145,7 @@ const AppNavBar = (props) => {
               <Button
                 variant="default"
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => (window.location.href = "/about")}
                 sx={{
                   color: "#D80621",
                   display: "block",
@@ -161,7 +165,7 @@ const AppNavBar = (props) => {
             handleSelection={handleSelection}
           />
 
-          <Box sx={{ flexGrow: 0 , display: "flex", marginLeft: 2}}>
+          <Box sx={{ flexGrow: 0, display: "flex", marginLeft: 2 }}>
             <Tooltip title="Open settings">
               {!user.isConnected ? (
                 <>
@@ -193,13 +197,56 @@ const AppNavBar = (props) => {
                     Sign up
                   </Button>
                 </>
-              ) : (
-                <IconButton sx={{ p: 0 }}>
+              ) : user.role === "ADMIN" ? (
+                <IconButton
+                  sx={{ p: 0 }}
+                  onClick={() =>
+                    (window.location.href = `/adminprofile?adminId=${userId}`)
+                  }
+                >
                   <Avatar
                     alt={user.firstName}
                     src="/static/images/avatar/2.jpg"
                   />
                 </IconButton>
+              ) : user.role === "TRAINEE" ? (
+                <IconButton
+                  sx={{ p: 0 }}
+                  onClick={() =>
+                    (window.location.href = `/traineeprofile?traineeId=${userId}`)
+                  }
+                >
+                  <Avatar
+                    alt={user.firstName}
+                    src="/static/images/avatar/2.jpg"
+                  />
+                </IconButton>
+              ) : user.role === "CORP_TRAINEE" ? (
+                <IconButton
+                  sx={{ p: 0 }}
+                  onClick={() =>
+                    (window.location.href = `/corptraineeprofile?corptraineeId=${userId}`)
+                  }
+                >
+                  <Avatar
+                    alt={user.firstName}
+                    src="/static/images/avatar/2.jpg"
+                  />
+                </IconButton>
+              ) : user.role === "INSTRUCTOR" ? (
+                <IconButton
+                  sx={{ p: 0 }}
+                  onClick={() =>
+                    (window.location.href = `/instructorprofile?instructorId=${userId}`)
+                  }
+                >
+                  <Avatar
+                    alt={user.firstName}
+                    src="/static/images/avatar/2.jpg"
+                  />
+                </IconButton>
+              ) : (
+                <></>
               )}
               {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar

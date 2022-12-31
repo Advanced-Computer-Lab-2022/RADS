@@ -10,7 +10,7 @@ function Navbar({ user }) {
      dispatch(Logout())
   }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar">
         {!user.isConnected ? (
           <>
             <Link to="/">

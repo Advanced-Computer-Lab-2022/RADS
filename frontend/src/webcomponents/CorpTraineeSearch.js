@@ -63,11 +63,7 @@ function valueStar(value) {
 }
 
 const CorpTraineeSearch = (props) => {
-  const {
-    rateVal,
-    currencyVal,
-    token
-  } = props;
+  const { rateVal, currencyVal, token } = props;
   const decode = jwt_decode(token);
   const corpTraineeId = decode.id;
   const [queryS, setQueryS] = useState("");
@@ -99,23 +95,23 @@ const CorpTraineeSearch = (props) => {
 
   const fetchCorpTrainee = async () => {
     axios
-    .get(`/corptrainee/${corpTraineeId}`)
-    .then((res) => {
-      let x = res.data.firstName + " " + res.data.lastName;
-      setCorpTraineeName(x);
-    })
-    .catch((error) => {
-        console.error(error)
-    })
+      .get(`/corptrainee/${corpTraineeId}`)
+      .then((res) => {
+        let x = res.data.firstName + " " + res.data.lastName;
+        setCorpTraineeName(x);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   //GET all course subjects
-  const getCourseSubjects = async() =>{
+  const getCourseSubjects = async () => {
     const response = await fetch("/course/get/coursesubjects");
     const json = await response.json();
     if (response.ok) {
       setCourseSubjects(json);
     }
-  }
+  };
 
   const getMostViewed = async () => {
     const response = await fetch("/course/highest/views");
