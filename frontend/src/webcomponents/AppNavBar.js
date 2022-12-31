@@ -31,8 +31,13 @@ const AppNavBar = (props) => {
 
   const { rateValue, currencyVal, handleSelection, user, token } = props;
 
-  const decode = jwt_decode(token);
-  const userId = decode.id;
+  var userId = 0;
+  React.useEffect(() => {
+    if (user.isConnected) {
+      const decode = jwt_decode(token);
+      userId = decode.id;
+    }
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -197,7 +202,7 @@ const AppNavBar = (props) => {
                     Sign up
                   </Button>
                 </>
-              ) : user.role === "ADMIN" ? (
+              ) : ( user.role === "ADMIN" ? (
                 <IconButton
                   sx={{ p: 0 }}
                   onClick={() =>
@@ -247,7 +252,7 @@ const AppNavBar = (props) => {
                 </IconButton>
               ) : (
                 <></>
-              )}
+              ))}
               {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt={props.user.firstName}

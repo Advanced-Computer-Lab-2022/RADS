@@ -769,6 +769,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
+                      token={window.localStorage.jwt}
                     />
                     <Navbar user={user} />
                     <LogIn rateVal={rateValue} currencyVal={inputValue} />
@@ -785,6 +786,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
+                      token={window.localStorage.jwt}
                     />
                     <Navbar user={user} />
                     <SignUp rateVal={rateValue} currencyVal={inputValue} />
