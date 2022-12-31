@@ -802,6 +802,7 @@ function App() {
                       rateValue={rateValue}
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
+                      user={user}
                       token={window.localStorage.jwt}
                     />
                     <Navbar user={user} />
