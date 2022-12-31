@@ -23,7 +23,7 @@ const TraineeDetails = () => {
   }, []);
 
   return (
-    <Box className="corpTrainee-details">
+    <Box className="corpTrainee-details card-border">
       <h4>The information of user: {Trainee.userName}</h4>
       <p>
         <strong>First Name: </strong>

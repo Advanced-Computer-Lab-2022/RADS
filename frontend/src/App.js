@@ -325,7 +325,16 @@ function App() {
                 path="/traineeprofile"
                 element={
                   <TraineeRouter user={user}>
-                    <TraineeDetails />
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="traineeprofile"
+                      drawerFlag={true}
+                    />
                   </TraineeRouter>
                 }
               />

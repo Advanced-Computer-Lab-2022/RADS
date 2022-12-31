@@ -42,6 +42,7 @@ import InstructorForm from "./InstructorForm";
 
 const drawerWidth = 240;
 
+
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
@@ -105,6 +106,7 @@ export default function PersistentDrawerLeft(props) {
 
   React.useEffect(() => {
     drawerFlag ? handleDrawerOpen() : handleDrawerClose()
+
   }, []);
 
   return (
