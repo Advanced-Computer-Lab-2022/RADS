@@ -3,84 +3,62 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { Box, Button } from "@mui/material";
 const TraineePassword = (props) => {
-    const {
-        rateVal,
-        currencyVal,
-        token
-      } = props;
+    const { rateVal, currencyVal, token } = props;
     const decode = jwt_decode(token);
     const traineeId = decode.id;
-    const [password, setPassword] = useState('');  
-    const [email,setEmail] = useState('');
-    const [html1,setHtml1] = useState('');
-    const [html2,setHtml2] = useState('');
-
-
-    useEffect(() => {
-        const fetchTrainee = async () => {
-            axios
-                .get(`/trainee/${traineeId}`)
-                .then((res) => {
-                    setEmail(res.data.email);
-                })
-                .catch((error) => {
-                    console.error(error)
-                })
-        }
-        fetchTrainee();
-    }, [])
-
-    const handleSubmit = async (e) =>{
-        e.preventDefault() //prevent form submission
-        const trainee = {password};
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [confirm, setConfirm] = useState("");
+    const [html,setHtml] = useState('');
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault(); //prevent form submission
+      if (password !== confirm) {
+        setHtml("Password do not match");
+      } else {
+        let id = traineeId;
+        const info = { id, password };
         axios
-        .post(`/trainee/password/${traineeId}`, trainee)
-        .then((res) => {
-            setPassword('');
-            console.log("Info Changed", res.data);
-            setHtml1("Password Changed Successfully.");
-        })
-        .catch((error) => {
-            console.error(error)
-        })
-    }    
-
-    const forgotPassword = async(e) =>{
-        //prevent form submission 
-        e.preventDefault()
-         const trainEmail = {email};
-         axios
-        .post(`/trainee/forgot/${traineeId}`, trainEmail)
-        .then((res) => {
-            console.log("Info Changed", res.data);
-            setHtml2("A link was sent on your email to verify");
-        })
-        .catch((error) => {
-            console.error(error)
-        })
-     } 
+          .post("/guest/changepassword", info)
+          .then((res) => {
+            setPassword("");
+            setConfirm("");
+            setError("");
+            setHtml("Password changed successfully");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    };
+  
     return (
-        <Box>
-        <Box>
-        <Button
-          variant="contained" type="text" onClick={forgotPassword}>Forget Password</Button> 
-        <p><strong>{html2}</strong></p>
-        </Box>
-        <form className="change-info" onSubmit={handleSubmit}>
-            <h3>Change Your Information</h3>
-            <h3>Change Your Password</h3>
-            <label>Password:</label>
-            <input type="text" onChange={(e) => setPassword(e.target.value)}
-            value= {password}
-            />
-
-            <Button
-          variant="contained">Submit</Button>
-           
-        </form>
-        <p><strong>{html1}</strong></p>
-        </Box>
-    )
+      <form className="change-info" onSubmit={handleSubmit}>
+        <fieldset>
+          <h3>Enter your new password</h3>
+          <input
+            type="password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </fieldset>
+        <fieldset>
+          <h3>Re-enter new password</h3>
+          <input
+            type="password"
+            required
+            onChange={(e) => setConfirm(e.target.value)}
+            value={confirm}
+          />
+        </fieldset>
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+        <p><strong>{html}</strong></p>
+        {error !== "" && <p><strong>{error}</strong></p>}
+      </form>
+    );
 }
 
 

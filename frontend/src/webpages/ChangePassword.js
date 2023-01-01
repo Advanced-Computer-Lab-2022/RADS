@@ -32,11 +32,6 @@ const ChangePassword = (props) => {
           })
           .catch((error) => {
             console.log(error);
-            // if(!error.response.data.email){
-            //   setError(error.response.data.email)
-            // }else{
-            //   setError("Missing Fields")
-            // }
           });
         }
     }    
