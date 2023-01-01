@@ -49,8 +49,6 @@ const CorpTraineeLobby = (props) => {
 
     return ( 
     <Box className = "home-lobby" >
-        {/* <AppBar /> */}
-        Welcome to RADS Online Course Provider(CorpTraineeLobby side) 
         <CorpTraineeSearch rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/> 
         <CorpTraineePassword rateVal = { props.rateVal } currencyVal = { props.currencyVal } token ={props.token}/>
         </Box>

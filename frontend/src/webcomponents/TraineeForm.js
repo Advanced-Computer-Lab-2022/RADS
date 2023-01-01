@@ -86,14 +86,6 @@ const TraineeForm = (props) => {
             ))}
         </box>
       )}
-      <Button
-          variant="contained"
-        onClick={() =>
-          (window.location.href = `/traineeviewreports?traineeId=${traineeId}`)
-        }
-      >
-        View Reports
-      </Button>
     </box>
   );
 };

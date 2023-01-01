@@ -150,8 +150,11 @@ const AppNavBar = (props) => {
               <Button
                 variant="default"
                 key={page}
-                onClick={page === "Home" ? () => (window.location.href = "/") :
-                  () => (window.location.href = "/about")}
+                onClick={
+                  page === "Home"
+                    ? () => (window.location.href = "/")
+                    : () => (window.location.href = "/about")
+                }
                 sx={{
                   color: "#D80621",
                   display: "block",
@@ -203,7 +206,7 @@ const AppNavBar = (props) => {
                     Sign up
                   </Button>
                 </>
-              ) : ( user.role === "ADMIN" ? (
+              ) : user.role === "ADMIN" ? (
                 <IconButton
                   sx={{ p: 0 }}
                   onClick={() =>
@@ -231,7 +234,7 @@ const AppNavBar = (props) => {
                 <IconButton
                   sx={{ p: 0 }}
                   onClick={() =>
-                    (window.location.href = `/corptraineeprofile?corptraineeId=${userId}`)
+                    (window.location.href = `/corpTraineeProfile?corptraineeId=${userId}`)
                   }
                 >
                   <Avatar
@@ -253,7 +256,7 @@ const AppNavBar = (props) => {
                 </IconButton>
               ) : (
                 <></>
-              ))}
+              )}
               {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt={props.user.firstName}

@@ -37,7 +37,7 @@ const CorpTraineePassword = (props) => {
         value={password}
       />
 
-      <Button variant="contained">Submit</Button>
+      <Button variant="contained" type="submit">Submit</Button>
       {error && <Box className="error">{error}</Box>}
     </form>
   );

@@ -38,6 +38,14 @@ const TraineeDetails = () => {
         {Trainee.country}
       </p>
       <p>
+        <strong>Gender: </strong>
+        {Trainee.gender}
+      </p>
+      <p>
+        <strong>Email: </strong>
+        {Trainee.email}
+      </p>
+      <p>
         <strong>Phone Number: </strong>
         {Trainee.phoneNumber}
       </p>

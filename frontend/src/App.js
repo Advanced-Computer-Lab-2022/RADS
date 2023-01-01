@@ -72,8 +72,8 @@ import ChangePassword from "./webpages/ChangePassword";
 
 const adminDrawerList = ["Profile", "Issues", "Promotion"];
 const instructorDrawerList = ["Profile", "Reports", "Follow Up", "Monthly"];
-const traineeDrawerList = ["Profile", "Reports", "Follow Up"];
-const corpTraineeDrawerList = ["Profile", "Reports", "Follow Up"];
+const traineeDrawerList = ["Profile", "My Courses", "Reports"];
+const corpTraineeDrawerList = ["Profile", "My Courses", "Reports"];
 
 if (window.localStorage.jwt) {
   const decode = jwt_decode(window.localStorage.jwt);
@@ -216,7 +216,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineecourse"
@@ -234,7 +234,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineereport"
@@ -252,7 +252,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineeviewreports"
@@ -269,7 +269,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineefollowup"
@@ -287,7 +287,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineexam"
@@ -305,7 +305,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineesubmitaccess"
@@ -323,7 +323,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineeview"
@@ -341,7 +341,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineesolve"
@@ -359,7 +359,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineerating"
@@ -378,7 +378,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                     />
                   </CorpTraineeRouter>
@@ -394,10 +394,27 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={corpTraineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subcorptrainee"
                       subpage="corptraineeform"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corpTraineeProfile"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="corpTraineeProfile"
                     />
                   </CorpTraineeRouter>
                 }
@@ -412,7 +429,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineereport"
@@ -429,7 +446,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineeviewreports"
@@ -446,7 +463,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineefollowup"
@@ -463,7 +480,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineeoptions"
@@ -481,7 +498,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineesubmitrefund"
@@ -499,9 +516,9 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
-                      page="traineeprofile"
+                      page="traineeProfile"
                     />
                   </TraineeRouter>
                 }
@@ -516,7 +533,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineexam"
@@ -534,7 +551,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineecourse"
@@ -552,7 +569,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineecredit"
@@ -570,7 +587,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="forgotpasstrainee/:id"
@@ -588,7 +605,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineesolve"
@@ -606,7 +623,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineerate"
@@ -624,7 +641,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineeview"
@@ -642,7 +659,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                       page="subtrainee"
                       subpage="traineeform"
@@ -661,7 +678,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
                     />
                   </TraineeRouter>
@@ -680,6 +697,23 @@ function App() {
                       drawerList={adminDrawerList}
                       token={window.localStorage.jwt}
                       page="adminreports"
+                    />
+                  </AdminRouter>
+                }
+              />
+
+              <Route
+                path="/adminprofile"
+                element={
+                  <AdminRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="adminprofile"
                     />
                   </AdminRouter>
                 }

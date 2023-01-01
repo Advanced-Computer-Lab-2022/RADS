@@ -29,7 +29,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import { Accordion } from "@mui/material";
 import { AccordionSummary } from "@mui/material";
 import { AccordionDetails } from "@mui/material";
-import { ExpandMore, PersonAddAlt1 } from "@mui/icons-material";
+import { ExpandMore, MenuBook, PersonAddAlt1, Report } from "@mui/icons-material";
 import jwt_decode from "jwt-decode";
 import AdminReports from "./AdminReports";
 import AdminPromotion from "./AdminPromotion";
@@ -66,6 +66,8 @@ import CorpTraineeSolve from "./CorpTraineeSolve";
 import CorpTraineeRating from "./CorpTraineeRating";
 import CorpTraineeView from "./CorpTraineeView";
 import CorpTraineeForm from "./CorpTraineeForm";
+import CorpTraineeDetails from "./CorpTraineeDetails";
+import AdminDetails from "./AdminDetails";
 
 const drawerWidth = 240;
 
@@ -203,9 +205,9 @@ export default function PersistentDrawerLeft(props) {
                       index === 0 ? (
                         <AccountCircleIcon />
                       ) : index === 1 ? (
-                        <ReportProblemIcon />
+                        <MenuBook />
                       ) : index === 2 ? (
-                        <PercentIcon />
+                        <Report />
                       ) : (
                         <InboxIcon />
                       )
@@ -213,9 +215,9 @@ export default function PersistentDrawerLeft(props) {
                       index === 0 ? (
                         <AccountCircleIcon />
                       ) : index === 1 ? (
-                        <ReportProblemIcon />
+                        <MenuBook />
                       ) : index === 2 ? (
-                        <PercentIcon />
+                        <Report />
                       ) : (
                         <InboxIcon />
                       )
@@ -252,26 +254,26 @@ export default function PersistentDrawerLeft(props) {
                       ) : user.role === "TRAINEE" ? (
                         index === 0 ? (
                           () =>
-                            (window.location.href = `/traineeprofile?traineeId=${adminId}`)
+                            (window.location.href = `/traineeProfile?traineeId=${adminId}`)
                         ) : index === 1 ? (
                           () =>
-                            (window.location.href = `/adminreports?adminId=${adminId}`)
+                            (window.location.href = `/traineeform?traineeId=${adminId}`)
                         ) : index === 2 ? (
                           () =>
-                            (window.location.href = `/adminpromotion?adminId=${adminId}`)
+                            (window.location.href = `/traineeviewreports?traineeId=${adminId}`)
                         ) : (
                           <></>
                         )
                       ) : user.role === "CORP_TRAINEE" ? (
                         index === 0 ? (
                           () =>
-                            (window.location.href = `/traineeprofile?traineeId=${adminId}`)
+                            (window.location.href = `/corpTraineeProfile?corptraineeId=${adminId}`)
                         ) : index === 1 ? (
                           () =>
-                            (window.location.href = `/adminreports?adminId=${adminId}`)
+                            (window.location.href = `/corptraineeform?corptraineeId=${adminId}`)
                         ) : index === 2 ? (
                           () =>
-                            (window.location.href = `/adminpromotion?adminId=${adminId}`)
+                            (window.location.href = `/corptraineeviewreports?corptraineeId=${adminId}`)
                         ) : (
                           <></>
                         )
@@ -299,113 +301,99 @@ export default function PersistentDrawerLeft(props) {
           </List>
         </Accordion>
         <Divider />
-        <List>
-          {["Add Admin", "Add Corprate Trainee", "Add Instructor"].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {user.role === "ADMIN" ? (
-                      index === 0 ? (
-                        <PersonAddAlt1 />
-                      ) : index === 1 ? (
-                        <PersonAddAlt1 />
-                      ) : (
-                        <PersonAddAlt1 />
-                      )
-                    ) : user.role === "TRAINEE" ? (
-                      index === 0 ? (
-                        <AccountCircleIcon />
-                      ) : index === 1 ? (
-                        <MailIcon />
-                      ) : (
-                        <InboxIcon />
-                      )
-                    ) : user.role === "CORP_TRAINEE" ? (
-                      index === 0 ? (
-                        <AccountCircleIcon />
-                      ) : index === 1 ? (
-                        <MailIcon />
-                      ) : (
-                        <InboxIcon />
-                      )
-                    ) : user.role === "INSTRUCTOR" ? (
-                      index === 0 ? (
-                        <AccountCircleIcon />
-                      ) : index === 1 ? (
-                        <MailIcon />
-                      ) : (
-                        <InboxIcon />
-                      )
-                    ) : (
-                      <></>
-                    )}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={text}
-                    onClick={
-                      user.role === "ADMIN" ? (
+        {user.role === "ADMIN" ? (
+          <List>
+            {["Add Admin", "Add Corprate Trainee", "Add Instructor"].map(
+              (text, index) => (
+                <ListItem key={text} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      {user.role === "ADMIN" ? (
                         index === 0 ? (
-                          () =>
-                            (window.location.href = `/adminadd?adminId=${adminId}`)
+                          <PersonAddAlt1 />
                         ) : index === 1 ? (
-                          () =>
-                            (window.location.href = `/admininsertcorp?adminId=${adminId}`)
-                        ) : index === 2 ? (
-                          () =>
-                            (window.location.href = `/admininstructoradd?adminId=${adminId}`)
+                          <PersonAddAlt1 />
                         ) : (
-                          <></>
+                          <PersonAddAlt1 />
                         )
                       ) : user.role === "TRAINEE" ? (
-                        index === 0 ? (
-                          () =>
-                            (window.location.href = `/traineeprofile?adminId=${adminId}`)
-                        ) : index === 1 ? (
-                          () =>
-                            (window.location.href = `/adminreports?adminId=${adminId}`)
-                        ) : index === 2 ? (
-                          () =>
-                            (window.location.href = `/adminpromotion?adminId=${adminId}`)
-                        ) : (
-                          <></>
-                        )
+                        <></>
                       ) : user.role === "CORP_TRAINEE" ? (
-                        index === 0 ? (
-                          () =>
-                            (window.location.href = `/corptraineeprofile?adminId=${adminId}`)
-                        ) : index === 1 ? (
-                          () =>
-                            (window.location.href = `/adminreports?adminId=${adminId}`)
-                        ) : index === 2 ? (
-                          () =>
-                            (window.location.href = `/adminpromotion?adminId=${adminId}`)
-                        ) : (
-                          <></>
-                        )
+                        <></>
                       ) : user.role === "INSTRUCTOR" ? (
-                        index === 0 ? (
-                          () =>
-                            (window.location.href = `/instructorprofile?adminId=${adminId}`)
-                        ) : index === 1 ? (
-                          () =>
-                            (window.location.href = `/adminreports?adminId=${adminId}`)
-                        ) : index === 2 ? (
-                          () =>
-                            (window.location.href = `/adminpromotion?adminId=${adminId}`)
-                        ) : (
-                          <></>
-                        )
+                        <></>
                       ) : (
                         <></>
-                      )
-                    }
-                  />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
-        </List>
+                      )}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={text}
+                      onClick={
+                        user.role === "ADMIN" ? (
+                          index === 0 ? (
+                            () =>
+                              (window.location.href = `/adminadd?adminId=${adminId}`)
+                          ) : index === 1 ? (
+                            () =>
+                              (window.location.href = `/admininsertcorp?adminId=${adminId}`)
+                          ) : index === 2 ? (
+                            () =>
+                              (window.location.href = `/admininstructoradd?adminId=${adminId}`)
+                          ) : (
+                            <></>
+                          )
+                        ) : user.role === "TRAINEE" ? (
+                          index === 0 ? (
+                            () =>
+                              (window.location.href = `/traineeprofile?adminId=${adminId}`)
+                          ) : index === 1 ? (
+                            () =>
+                              (window.location.href = `/traineecourse?adminId=${adminId}`)
+                          ) : index === 2 ? (
+                            () =>
+                              (window.location.href = `/adminpromotion?adminId=${adminId}`)
+                          ) : (
+                            <></>
+                          )
+                        ) : user.role === "CORP_TRAINEE" ? (
+                          index === 0 ? (
+                            () =>
+                              (window.location.href = `/corptraineeprofile?adminId=${adminId}`)
+                          ) : index === 1 ? (
+                            () =>
+                              (window.location.href = `/adminreports?adminId=${adminId}`)
+                          ) : index === 2 ? (
+                            () =>
+                              (window.location.href = `/adminpromotion?adminId=${adminId}`)
+                          ) : (
+                            <></>
+                          )
+                        ) : user.role === "INSTRUCTOR" ? (
+                          index === 0 ? (
+                            () =>
+                              (window.location.href = `/instructorprofile?adminId=${adminId}`)
+                          ) : index === 1 ? (
+                            () =>
+                              (window.location.href = `/adminreports?adminId=${adminId}`)
+                          ) : index === 2 ? (
+                            () =>
+                              (window.location.href = `/adminpromotion?adminId=${adminId}`)
+                          ) : (
+                            <></>
+                          )
+                        ) : (
+                          <></>
+                        )
+                      }
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )
+            )}
+          </List>
+        ) : (
+          <></>
+        )}
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
@@ -413,9 +401,9 @@ export default function PersistentDrawerLeft(props) {
           {user.role === "ADMIN" ? (
             page === "adminreports" ? (
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
-            ) : page === "adminProfile" ? (
+            ) : page === "adminprofile" ? (
               ///////////////////////////////////////////////
-              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+              <AdminDetails rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminrefunds" ? (
               <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminadd" ? (
@@ -579,7 +567,7 @@ export default function PersistentDrawerLeft(props) {
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "corpTraineeProfile" ? (
               ///////////////////////////////////////////////
-              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+              <CorpTraineeDetails rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminrefunds" ? (
               <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminadd" ? (

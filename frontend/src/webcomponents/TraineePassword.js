@@ -75,7 +75,7 @@ const TraineePassword = (props) => {
             />
 
             <Button
-          variant="contained">Submit</Button>
+          variant="contained" type="submit">Submit</Button>
            
         </form>
         <p><strong>{html1}</strong></p>
