@@ -19,8 +19,6 @@ import TraineeView from "./webcomponents/TraineeView";
 import TraineeForm from "./webcomponents/TraineeForm";
 import TraineeRating from "./webcomponents/TraineeRating";
 import TraineeSolve from "./webcomponents/TraineeSolve";
-import InstructorForgotPass from "./webcomponents/InstructorForgotPass";
-import TraineeForgotPass from "./webcomponents/TraineeForgotPass";
 import TraineeCreditCard from "./webcomponents/TraineeCreditCard";
 import TraineeCreditOptions from "./webcomponents/TraineeCreditOptions";
 import TraineeCourse from "./webcomponents/TraineeCourse";
@@ -190,18 +188,6 @@ function App() {
                       user={user}
                       drawerList={adminDrawerList}
                       token={window.localStorage.jwt}
-                    />
-                  </InstructorRouter>
-                }
-              />
-
-              <Route
-                path="/forgotpassinstructor/:id"
-                element={
-                  <InstructorRouter user={user}>
-                    <InstructorForgotPass
-                      ateVal={rateValue}
-                      currencyVal={inputValue}
                     />
                   </InstructorRouter>
                 }
