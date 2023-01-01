@@ -17,10 +17,14 @@ const CorpTraineeInsert = (props) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
+  const [html,setHtml] = useState("");
+  const [error, setError] = useState("");
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault(); //prevent form submission
+    let role = "CORP_TRAINEE";
+    let confirm = password;
     const corpTrainee = {
       firstName,
       lastName,
@@ -31,9 +35,11 @@ const CorpTraineeInsert = (props) => {
       phoneNumber,
       address,
       email,
+      confirm,
+      role,
     };
     axios
-      .post("/admin/addctrainee", corpTrainee)
+      .post("/create/corptrainee", corpTrainee)
       .then((res) => {
         setFirstName("");
         setLastName("");
@@ -44,13 +50,18 @@ const CorpTraineeInsert = (props) => {
         setPhoneNumber("");
         setAddress("");
         setEmail("");
-        setError(null);
-        console.log("New Instructor Added", res.data);
-        //refresh page on successful submission
-        window.location.reload();
+        setError("");
+        setHtml("New corptrainee Added");
       })
       .catch((error) => {
-        console.error(error);
+        if(!error.response.data.userName && error.response.data.email){
+          setError(error.response.data.email)
+        }
+        else if(error.response.data.userName && !error.response.data.email){
+          setError(error.response.data.userName)
+        }else{
+          setError("Missing Fields")
+        }
       });
   };
 
@@ -65,7 +76,8 @@ const CorpTraineeInsert = (props) => {
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
-          />
+            required
+      />
         </Box>
 
         <Box className="column-child">
@@ -74,7 +86,8 @@ const CorpTraineeInsert = (props) => {
             type="text"
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
-          />
+            required
+      />
         </Box>
 
         <Box className="column-child">
@@ -83,15 +96,7 @@ const CorpTraineeInsert = (props) => {
             type="text"
             onChange={(e) => setUserName(e.target.value)}
             value={userName}
-          />
-        </Box>
-
-        <Box className="column-child">
-          <label>Gender:</label>
-          <input
-            type="text"
-            onChange={(e) => setGender(e.target.value)}
-            value={gender}
+            required
           />
         </Box>
 
@@ -101,6 +106,7 @@ const CorpTraineeInsert = (props) => {
             type="text"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            required
           />
         </Box>
 
@@ -110,7 +116,8 @@ const CorpTraineeInsert = (props) => {
             type="text"
             onChange={(e) => setCountry(e.target.value)}
             value={country}
-          />
+            required
+      />
         </Box>
 
         <Box className="column-child">
@@ -119,7 +126,8 @@ const CorpTraineeInsert = (props) => {
             type="number"
             onChange={(e) => setPhoneNumber(e.target.value)}
             value={phoneNumber}
-          />
+            required
+      />
         </Box>
 
         <Box className="column-child">
@@ -128,7 +136,8 @@ const CorpTraineeInsert = (props) => {
             type="text"
             onChange={(e) => setAddress(e.target.value)}
             value={address}
-          />
+            required
+      />
         </Box>
 
         <Box className="column-child">
@@ -137,11 +146,46 @@ const CorpTraineeInsert = (props) => {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-          />
+            required
+      />
         </Box>
 
-        <Box className="column-child"><Button variant="contained" type="submit">Submit</Button></Box>
-        {error && <Box className="error">{error}</Box>}
+      <fieldset>
+        <label>Gender:</label>
+        <label>
+          <input
+            type="radio"
+            value="male"
+            checked={gender === "male"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Male
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="female"
+            checked={gender === "female"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Female
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="other"
+            checked={gender === "other"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Other
+        </label>
+      </fieldset>
+
+        <Box className="column-child"><Button type='submit' variant="contained">Submit</Button></Box>
+        {error !== "" && <p><strong>{error}</strong></p>}
+      <p><strong>{html}</strong></p>
       </form>
     </Box>
   );

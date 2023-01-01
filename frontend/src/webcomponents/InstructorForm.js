@@ -1,53 +1,69 @@
-import { useState } from "react"
+import { useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { Box, Button } from "@mui/material";
 
 const InstructorForm = (props) => {
-    const {
-        rateVal,
-        currencyVal,
-        token
-    } = props;
-    const decode = jwt_decode(token);
-    const adminId = decode.id;
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [country, setCountry] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [address, setAddress] = useState('');
-    const [email, setEmail] = useState('');
-    const [gender, setGender] = useState('');
-    const [bio, setBio] = useState('');
-    const [error, setError] = useState(null);
+  const { rateVal, currencyVal, token } = props;
+  const decode = jwt_decode(token);
+  const adminId = decode.id;
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [country, setCountry] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [error, setError] = useState("");
+  const [html, setHtml] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault() //prevent form submission
-        const instructor = { firstName, lastName, userName, password, country, phoneNumber, address, email, gender, bio };
-        axios
-            .post('/admin/addinstructor', instructor)
-            .then((res) => {
-                setFirstName('');
-                setLastName('');
-                setUserName('');
-                setPassword('');
-                setCountry('');
-                setPhoneNumber('');
-                setAddress('');
-                setEmail('');
-                setGender('');
-                setBio('');
-                setError(null);
-                console.log("New Instructor Added", res.data);
-                //refresh page on successful submission
-                window.location.reload();
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault(); //prevent form submission
+    let role = "INSTRUCTOR";
+    let confirm = password;
+    let bio = firstName+" "+lastName;
+    const instructor = {
+      firstName,
+      lastName,
+      userName,
+      password,
+      country,
+      phoneNumber,
+      address,
+      email,
+      gender,
+      role,
+      bio,
+      confirm
+    };
+    axios
+      .post("/create/instructor", instructor)
+      .then((res) => {
+        setFirstName("");
+        setLastName("");
+        setUserName("");
+        setPassword("");
+        setCountry("");
+        setPhoneNumber("");
+        setAddress("");
+        setEmail("");
+        setGender("");
+        setError("");
+        setHtml("New Instructor Added");
+      })
+      .catch((error) => {
+        if(!error.response.data.userName && error.response.data.email){
+          setError(error.response.data.email)
+        }
+        else if(error.response.data.userName && !error.response.data.email){
+          setError(error.response.data.userName)
+        }else{
+          setError("Missing Fields")
+        }
+      });
+  };
 
     return (
       <Box className="card-border">
@@ -143,16 +159,6 @@ const InstructorForm = (props) => {
               name="female"
               required
               value={gender}
-            />
-          </Box>
-          <Box className="column-child">
-            <label name="female">female</label>
-            <label>Bio: </label>
-            <input
-              type="text"
-              onChange={(e) => setBio(e.target.value)}
-              required
-              value={bio}
             />
           </Box>
           <Box className="column-child"><Button variant="contained" type="submit">Submit</Button></Box>

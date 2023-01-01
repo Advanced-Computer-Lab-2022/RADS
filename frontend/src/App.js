@@ -67,6 +67,8 @@ import Header from "./webcomponents/Header";
 import Footer from "./webcomponents/Footer";
 import About from "./webcomponents/About";
 import TraineeDetails from "./webcomponents/TraineeDetails";
+import ForgetPassword from "./webpages/ForgetPassword";
+import ChangePassword from "./webpages/ChangePassword";
 
 const adminDrawerList = ["Profile", "Issues", "Promotion"];
 const instructorDrawerList = ["Profile", "Reports", "Follow Up", "Monthly"];
@@ -921,6 +923,46 @@ function App() {
                     />
                     <Navbar user={user} />
                     <LogIn rateVal={rateValue} currencyVal={inputValue} />
+                  </ForceRedirect>
+                }
+              />
+
+              <Route
+                path="/forgotpass"
+                element={
+                  <ForceRedirect user={user}>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      token={window.localStorage.jwt}
+                    />
+                    <Navbar user={user} />
+                    <ForgetPassword
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </ForceRedirect>
+                }
+              />
+
+              <Route
+                path="/changepass/:id"
+                element={
+                  <ForceRedirect user={user}>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      token={window.localStorage.jwt}
+                    />
+                    <Navbar user={user} />
+                    <ChangePassword
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
                   </ForceRedirect>
                 }
               />
