@@ -381,6 +381,3 @@ const AdminProblems = (props) => {
 };
 
 export default AdminProblems;
-
-}
-export default AdminProblems;

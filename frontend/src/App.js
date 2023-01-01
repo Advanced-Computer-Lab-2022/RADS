@@ -102,7 +102,6 @@ function App() {
       setRateValue(json.result);
       console.log(json.result);
     }
-  }
   };
 
   //a function that handles the selection of the currency
