@@ -48,7 +48,6 @@ import TraineeSubmitRefund from "./TraineeSubmitRefund";
 import TraineeCourse from "./TraineeCourse";
 import TraineeLobby from "../webpages/TraineeLobby";
 import InstructorLobby from "../webpages/InstructorLobby";
-import TraineeForgotPass from "./TraineeForgotPass";
 import TraineeForm from "./TraineeForm";
 import TraineeView from "./TraineeView";
 import TraineeRating from "./TraineeRating";
@@ -531,11 +530,6 @@ export default function PersistentDrawerLeft(props) {
                   currencyVal={currencyVal}
                   token={token}
                 />
-              ) : subpage === "forgotpasstrainee/:id" ? (
-                <TraineeForgotPass
-                  rateVal={rateVal}
-                  currencyVal={currencyVal}
-                />
               ) : subpage === "traineesolve" ? (
                 <TraineeSolve
                   rateVal={rateVal}
@@ -633,11 +627,6 @@ export default function PersistentDrawerLeft(props) {
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                   token={token}
-                />
-              ) : subpage === "forgotpasstrainee/:id" ? (
-                <TraineeForgotPass
-                  rateVal={rateVal}
-                  currencyVal={currencyVal}
                 />
               ) : subpage === "corptraineesolve" ? (
                 <CorpTraineeSolve
@@ -745,11 +734,6 @@ export default function PersistentDrawerLeft(props) {
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                   token={token}
-                />
-              ) : subpage === "forgotpasstrainee/:id" ? (
-                <TraineeForgotPass
-                  rateVal={rateVal}
-                  currencyVal={currencyVal}
                 />
               ) : subpage === "traineesolve" ? (
                 <TraineeSolve
