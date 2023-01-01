@@ -12,15 +12,9 @@ function Navbar({ user }) {
   return (
     <nav className="navbar">
         {!user.isConnected ? (
-          <>
-            <Link to="/">
-              Home
-            </Link>
-          </>
+          <></>
         ) : (
-          <Link to="/home">
-            Home
-          </Link>
+          <></>
         )}
             {user.role === "ADMIN" ? (
               <>
@@ -61,12 +55,6 @@ function Navbar({ user }) {
               {
                 !user.isConnected ? (
                   <>
-                    <Link className="btn btn-outline-primary" to="/login">
-                      Login
-                    </Link>
-                    <Link className="btn btn-outline-primary" to="/signup">
-                      Sign Up
-                    </Link>
                   </>
                 ) : (
                   <Link className="btn btn-outline-primary" to="#" onClick={LogoutHanlder}>

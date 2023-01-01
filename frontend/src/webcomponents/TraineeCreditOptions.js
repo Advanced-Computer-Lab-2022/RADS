@@ -233,7 +233,7 @@ const TraineeCreditOptions = (props) => {
               Select
             </label>
           </fieldset>
-          <Button variant="contained" id="pay">
+          <Button variant="contained" id="pay" type="submit">
             Purchase
           </Button>
           <p>

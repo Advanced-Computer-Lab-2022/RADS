@@ -7,38 +7,56 @@ const CorpTraineePassword = (props) => {
   const decode = jwt_decode(token);
   const corpTraineeId = decode.id;
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [html,setHtml] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //prevent form submission
-    const trainee = { password };
-    axios
-      .patch(`/corptrainee/password/${corpTraineeId}`, trainee)
-      .then((res) => {
-        setPassword("");
-        setError(null);
-        console.log("Info Changed", res.data);
-        //refresh page on successful submission
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (password !== confirm) {
+      setHtml("Password do not match");
+    } else {
+      let id = corpTraineeId;
+      const info = { id, password };
+      axios
+        .post("/guest/changepassword", info)
+        .then((res) => {
+          setPassword("");
+          setConfirm("");
+          setError("");
+          setHtml("Password changed successfully");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
     <form className="change-info" onSubmit={handleSubmit}>
-      <h3>Change Your Information</h3>
-
-      <label>Password:</label>
-      <input
-        type="text"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-
-      <Button variant="contained">Submit</Button>
-      {error && <Box className="error">{error}</Box>}
+      <fieldset>
+        <h3>Enter your new password</h3>
+        <input
+          type="password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+      </fieldset>
+      <fieldset>
+        <h3>Re-enter new password</h3>
+        <input
+          type="password"
+          required
+          onChange={(e) => setConfirm(e.target.value)}
+          value={confirm}
+        />
+      </fieldset>
+      <Button type="submit" variant="contained">
+        Submit
+      </Button>
+      <p><strong>{html}</strong></p>
+      {error !== "" && <p><strong>{error}</strong></p>}
     </form>
   );
 };

@@ -80,10 +80,27 @@ const getAdmins = async(req, res) => {
     res.status(200).json(admins);
 }
 
+const getAdmin = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(404)
+      .json({
+        error: "There does not exist an admin with the corresponding id.",
+      });
+  }
+  const admin = await Admin.findById(id);
+  if (!admin) {
+    return res.status(404).json({ error: "No such trainee" });
+  }
+  res.status(200).json(admin);
+};
+
 module.exports = {
     postAdmin,
     postCTrainee,
     postInstructor,
     editAdmin,
-    getAdmins
+    getAdmins,
+    getAdmin
 }

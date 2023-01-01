@@ -7,6 +7,20 @@
   color: #222222;
 }
 
+.column {
+  display: block;
+  
+  height: auto;
+  margin: 1.5em;
+  background: #ffffff;
+}
+p {
+  font-size: 1em;
+  font-weight: 400;
+  font-family: Quicksand;
+  color: #222222;
+}
+
 .card-border {
   border: 3px solid #d80621;
   border-radius: 10px;
@@ -123,7 +137,7 @@ text-shadow: 0 0 10px #FFFFFF;
   align-items: center;
   justify-content: center;
   width: auto;
-  margin: 0 auto;
+  margin: 1.5rem auto;
   min-width: 200px;
 }
 

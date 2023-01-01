@@ -5,7 +5,9 @@ import Box from "@mui/material/Box";
 import CourseCard from "./CourseCard";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Button, TextField, Typography } from "@mui/material";
+import HighestViewedCourses from "./HighestViewedCourses";
+import { Search } from "@mui/icons-material";
 
 const ratingMarks = [
   {
@@ -46,6 +48,11 @@ const ratingMarks = [
   },
 ];
 
+
+///////////////////////////////////////////////////////////////////////
+//Accordion imports
+
+///////////////////////////////////////////////////////////////////////
 
 const CorpTraineeSearch = (props) => {
   const { rateVal, currencyVal, token } = props;
@@ -167,91 +174,129 @@ const CorpTraineeSearch = (props) => {
   const courseView1 = "/corptraineeview?courseId=";
   const courseView2 = "&corpTraineeId=";
 
+
+  ////////////////////////////  Accordion Functions  ////////////////////////////
+const [expanded, setExpanded] = React.useState("");
+
+const handleChange = (panel) => (event, newExpanded) => {
+  setExpanded(newExpanded ? panel : false);
+};
+///////////////////////////////////////////////////////////////////////////////
   return (
     <Box>
-      <p>
-        <strong>Welcome {corpTraineeName}</strong>
-      </p>
-      <Box className="homesearch-component">
-        <input
-          type="text"
-          placeholder="Search Course..."
-          className="search"
-          onChange={(e) => setQueryS(e.target.value)}
-        />
-
-        <Box className="highestviewed-courses ">
-          <p className="highview-p">
-            <strong>Highest Viewed Courses</strong>
-          </p>
-          <Box className="card-container">
-            {highestViewedCourses.map((course) => (
-              <Box>
-                <CourseCard
-                  course={course}
-                  rateVal={rateVal}
-                  currencyVal={currencyVal}
-                  todayDate={todayDate}
-                  courseView1={courseView1}
-                  courseView2={courseView2}
-                  id={corpTraineeId}
-                />
-              </Box>
-            ))}
-          </Box>
+      <div className="center">
+        <p>
+          <strong>Welcome {corpTraineeName}</strong>
+        </p>
+      </div>
+      <Box>
+        <Box className="search">
+          <TextField
+            hiddenLabel
+            id="filled-search"
+            type="search"
+            size="small"
+            variant="filled"
+            placeholder="Search for courses"
+            onChange={(e) => setQueryS(e.target.value)}
+            InputProps={{
+              startAdornment: <Search sx={{ marginRight: 2 }} />,
+            }}
+          />
         </Box>
+        <HighestViewedCourses
+          highestViewedCourses={highestViewedCourses}
+          rateVal={rateVal}
+          currencyVal={currencyVal}
+          todayDate={todayDate}
+          courseView1={courseView1}
+          courseView2={courseView2}
+          id={corpTraineeId}
+        />
         <br />
 
-        <Button
-          variant="contained"
-          onClick={() =>
-            (window.location.href = `/corptraineeform?corpTraineeId=${corpTraineeId}`)
-          }
-        >
-          View my Courses
-        </Button>
-        <Box className="filter-component1">
-          <Box className="list-container">
-            {courseSubjects.map((course) => (
-              <Box>
-                <input
-                  value={course}
-                  name={course}
-                  type="checkbox"
-                  onChange={(e) => {
-                    filterMethodOnSubject(e);
-                  }}
-                />
-                <span>{course}</span>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-        <Box>{/* {`Subjects checked are: ${checkedItems}`} */}</Box>
-        <Box className="homefilter-component3">
-          <p>
-            <strong>Rating Filter</strong>
-          </p>
-          <Box className="list-container">
-            {ratingMarks.map((mark,index) => (
-              <Box className="rate-box">
-                <input             
-                  value={mark.value}
-                  name={mark.label}
-                  className = 'rate-input'
-                  checked={queryF3.toString().toLowerCase() === mark.value.toString().toLowerCase() || (!queryF3 && index === 0)}
-                  type="radio"
-                  onChange={(e) => {setQueryF3(e.target.value)}}
-                />
-                {mark.value === 0 ? (
-                  <span>{mark.label}</span>
-                ) : (
-                  <span>{mark.label} and Up</span>
-                )}
-              </Box>
-            ))}
-          </Box>
-        </Box>
+        <div>
+          <Accordion
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
+          >
+            <AccordionSummary
+              aria-controls="panel1d-content"
+              id="panel1d-header"
+            >
+              <Typography>
+                <strong>Subject Filter</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <Box className="filter-component1">
+                  <Box className="card-container">
+                    {courseSubjects.map((course) => (
+                      <Box>
+                        <input
+                          value={course}
+                          name={course}
+                          type="checkbox"
+                          onChange={(e) => {
+                            filterMethodOnSubject(e);
+                          }}
+                        />
+                        <span>{course}</span>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel2"}
+            onChange={handleChange("panel2")}
+          >
+            <AccordionSummary
+              aria-controls="panel2d-content"
+              id="panel2d-header"
+            >
+              <Typography>
+                <strong>Rating Filter</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <Box className="homefilter-component3">
+                  <Box className="card-container">
+                    {ratingMarks.map((mark, index) => (
+                      <Box className="rate-box">
+                        <input
+                          value={mark.value}
+                          name={mark.label}
+                          className="rate-input"
+                          checked={
+                            queryF3.toString().toLowerCase() ===
+                              mark.value.toString().toLowerCase() ||
+                            (!queryF3 && index === 0)
+                          }
+                          type="radio"
+                          onChange={(e) => {
+                            setQueryF3(e.target.value);
+                          }}
+                        />
+                        {mark.value === 0 ? (
+                          <span>{mark.label}</span>
+                        ) : (
+                          <span>{mark.label} and Up</span>
+                        )}
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+        <br/>
+        <br/>
         <Box className="home-search card-container">
           {performIntersection(
             searchMethod(courses),

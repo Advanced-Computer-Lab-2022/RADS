@@ -29,6 +29,9 @@ const adminSchema = new Schema({
     gender: {
         type: String,
     },
+    email: {
+        type: String
+    },
     password: {
         type: String,
         required: true

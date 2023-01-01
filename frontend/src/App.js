@@ -19,8 +19,6 @@ import TraineeView from "./webcomponents/TraineeView";
 import TraineeForm from "./webcomponents/TraineeForm";
 import TraineeRating from "./webcomponents/TraineeRating";
 import TraineeSolve from "./webcomponents/TraineeSolve";
-import InstructorForgotPass from "./webcomponents/InstructorForgotPass";
-import TraineeForgotPass from "./webcomponents/TraineeForgotPass";
 import TraineeCreditCard from "./webcomponents/TraineeCreditCard";
 import TraineeCreditOptions from "./webcomponents/TraineeCreditOptions";
 import TraineeCourse from "./webcomponents/TraineeCourse";
@@ -67,11 +65,13 @@ import Header from "./webcomponents/Header";
 import Footer from "./webcomponents/Footer";
 import About from "./webcomponents/About";
 import TraineeDetails from "./webcomponents/TraineeDetails";
+import ForgetPassword from "./webpages/ForgetPassword";
+import ChangePassword from "./webpages/ChangePassword";
 
 const adminDrawerList = ["Profile", "Issues", "Promotion"];
 const instructorDrawerList = ["Profile", "Reports", "Follow Up", "Monthly"];
-const traineeDrawerList = ["Profile", "Reports", "Follow Up"];
-const corpTraineeDrawerList = ["Profile", "Reports", "Follow Up"];
+const traineeDrawerList = ["Profile", "My Courses", "Reports"];
+const corpTraineeDrawerList = ["Profile", "My Courses", "Reports"];
 
 if (window.localStorage.jwt) {
   const decode = jwt_decode(window.localStorage.jwt);
@@ -115,71 +115,8 @@ function App() {
     <Box className="App">
       <BrowserRouter>
         <Box className="bg-light" style={{ height: "100vh" }}>
-          {/* <Box className="side-bar">
-            <AppNavBar
-              rateValue={rateValue}
-              currencyVal={inputValue}
-              handleSelection={handleSelection}
-              user={user}
-            />
-            <UserDrawer user={user} />
-          </Box> */}
-          {/* <Box className="home-lobby card-container">
-            <h2>Welcome to RADS Online Course Provider</h2>
-          </Box> */}
           <Box className="webpages">
             <Routes>
-              <Route path="/userdrawer" element={<UserDrawer user={user} />} />
-
-              <Route
-                path="/noaccess"
-                element={
-                  <NoAccess rateVal={rateValue} currencyVal={inputValue} />
-                }
-              />
-
-              <Route
-                path="/corptraineereport"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeReport
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-
-              <Route
-                path="/search"
-                element={
-                  <SearchPage rateVal={rateValue} currencyVal={inputValue} />
-                }
-              />
-
-              <Route
-                path="/corptraineeviewreports"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeViewReports
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-              <Route
-                path="/corptraineefollowup"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeFollowUp
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-
               <Route
                 path="/instructorreport"
                 element={
@@ -229,48 +166,48 @@ function App() {
               />
 
               <Route
-                path="/traineereport"
+                path="/instructorrating"
                 element={
-                  <TraineeRouter user={user}>
-                    <TraineeReport
+                  <InstructorRouter user={user}>
+                    <InstructorRating
                       rateVal={rateValue}
                       currencyVal={inputValue}
                     />
-                  </TraineeRouter>
+                  </InstructorRouter>
                 }
               />
+
               <Route
-                path="/traineeviewreports"
+                path="/instructorlobby"
                 element={
-                  <TraineeRouter user={user}>
-                    <TraineeViewReports
+                  <InstructorRouter user={user}>
+                    <Header
+                      className="header"
                       rateVal={rateValue}
                       currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-              <Route
-                path="/traineefollowup"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeFollowUp
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-              <Route
-                path="/traineeoptions"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeCreditOptions
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
                       token={window.localStorage.jwt}
                     />
-                  </TraineeRouter>
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorprofile"
+                element={
+                  <InstructorRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="instructorprofile"
+                    />
+                  </InstructorRouter>
                 }
               />
 
@@ -278,9 +215,68 @@ function App() {
                 path="/corptraineecourse"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeCourse
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineecourse"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corptraineereport"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineereport"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corptraineeviewreports"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineeviewreports"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+              <Route
+                path="/corptraineefollowup"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineefollowup"
                     />
                   </CorpTraineeRouter>
                 }
@@ -290,9 +286,15 @@ function App() {
                 path="/corptraineexam"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeExam
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineexam"
                     />
                   </CorpTraineeRouter>
                 }
@@ -302,28 +304,128 @@ function App() {
                 path="/corptraineesubmitaccess"
                 element={
                   <CorpTraineeRouter user={user}>
-                    <CorpTraineeSubmitAccess
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineesubmitaccess"
                     />
                   </CorpTraineeRouter>
                 }
               />
 
               <Route
-                path="/traineesubmitrefund"
+                path="/corptraineeview"
                 element={
-                  <TraineeRouter user={user}>
-                    <TraineeSubmitRefund
+                  <CorpTraineeRouter user={user}>
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineeview"
                     />
-                  </TraineeRouter>
+                  </CorpTraineeRouter>
                 }
               />
 
               <Route
-                path="/traineeprofile"
+                path="/corptraineesolve"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineesolve"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corptraineerating"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineerating"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corptraineelobby"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      className="header"
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corptraineeform"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subcorptrainee"
+                      subpage="corptraineeform"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/corpTraineeProfile"
+                element={
+                  <CorpTraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="corpTraineeProfile"
+                    />
+                  </CorpTraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineereport"
                 element={
                   <TraineeRouter user={user}>
                     <Header
@@ -331,10 +433,257 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={traineeDrawerList}
                       token={window.localStorage.jwt}
-                      page="traineeprofile"
-                      drawerFlag={true}
+                      page="subtrainee"
+                      subpage="traineereport"
+                    />
+                  </TraineeRouter>
+                }
+              />
+              <Route
+                path="/traineeviewreports"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineeviewreports"
+                    />
+                  </TraineeRouter>
+                }
+              />
+              <Route
+                path="/traineefollowup"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineefollowup"
+                    />
+                  </TraineeRouter>
+                }
+              />
+              <Route
+                path="/traineeoptions"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineeoptions"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineesubmitrefund"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineesubmitrefund"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineeProfile"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="traineeProfile"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineexam"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineexam"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineecourse"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineecourse"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineecredit"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineecredit"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/forgotpasstrainee/:id"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="forgotpasstrainee/:id"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineesolve"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineesolve"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineerate"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineerate"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineeview"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineeview"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineeform"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subtrainee"
+                      subpage="traineeform"
+                    />
+                  </TraineeRouter>
+                }
+              />
+
+              <Route
+                path="/traineelobby"
+                element={
+                  <TraineeRouter user={user}>
+                    <Header
+                      className="header"
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={traineeDrawerList}
+                      token={window.localStorage.jwt}
                     />
                   </TraineeRouter>
                 }
@@ -352,7 +701,23 @@ function App() {
                       drawerList={adminDrawerList}
                       token={window.localStorage.jwt}
                       page="adminreports"
-                      drawerFlag={true}
+                    />
+                  </AdminRouter>
+                }
+              />
+
+              <Route
+                path="/adminprofile"
+                element={
+                  <AdminRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={adminDrawerList}
+                      token={window.localStorage.jwt}
+                      page="adminprofile"
                     />
                   </AdminRouter>
                 }
@@ -488,182 +853,6 @@ function App() {
               />
 
               <Route
-                path="/adminpromotion"
-                element={
-                  <AdminRouter user={user}>
-                    <AdminPromotion rateVal={rateValue} currencyVal={inputValue} />
-                  </AdminRouter>
-                }
-              />
-              <Route
-                path="/adminproblems"
-                element={
-                  <AdminRouter user={user}>
-                    <AdminProblems rateVal={rateValue} currencyVal={inputValue} />
-                  </AdminRouter>
-                }
-              />
-              <Route
-                path="/traineeoptions"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeCreditOptions
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineexam"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeExam rateVal={rateValue} currencyVal={inputValue} />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineecourse"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeCourse
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineecredit"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeCreditCard
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/forgotpassinstructor/:id"
-                element={
-                  <InstructorRouter user={user}>
-                    <InstructorForgotPass
-                      ateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </InstructorRouter>
-                }
-              />
-
-              <Route
-                path="/forgotpasstrainee/:id"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeForgotPass
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/instructorrating"
-                element={
-                  <InstructorRouter user={user}>
-                    <InstructorRating
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </InstructorRouter>
-                }
-              />
-
-              <Route
-                path="/corptraineerating"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeRating
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineesolve"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeSolve
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/corptraineesolve"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeSolve
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineerate"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeRating
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineeview"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeView rateVal={rateValue} currencyVal={inputValue} />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineeform"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeForm rateVal={rateValue} currencyVal={inputValue} />
-                  </TraineeRouter>
-                }
-              />
-
-              <Route
-                path="/instructorlobby"
-                element={
-                  <InstructorRouter user={user}>
-                    <InstructorLobby
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                      token={window.localStorage.jwt}
-                    />
-                  </InstructorRouter>
-                }
-              />
-
-              <Route
                 path="/adminlobby"
                 element={
                   <AdminRouter user={user}>
@@ -676,7 +865,40 @@ function App() {
                       drawerList={adminDrawerList}
                       token={window.localStorage.jwt}
                     />
+                    <Footer />
                   </AdminRouter>
+                }
+              />
+
+              <Route path="/userdrawer" element={<UserDrawer user={user} />} />
+
+              <Route
+                path="/noaccess"
+                element={
+                  <NoAccess rateVal={rateValue} currencyVal={inputValue} />
+                }
+              />
+
+              <Route
+                path="/search"
+                element={
+                  <SearchPage rateVal={rateValue} currencyVal={inputValue} />
+                }
+              />
+
+              <Route path="/userdrawer" element={<UserDrawer user={user} />} />
+
+              <Route
+                path="/noaccess"
+                element={
+                  <NoAccess rateVal={rateValue} currencyVal={inputValue} />
+                }
+              />
+
+              <Route
+                path="/search"
+                element={
+                  <SearchPage rateVal={rateValue} currencyVal={inputValue} />
                 }
               />
 
@@ -684,56 +906,6 @@ function App() {
                 path="/filter"
                 element={
                   <CourseView rateVal={rateValue} currencyVal={inputValue} />
-                }
-              />
-
-              <Route
-                path="/corptraineeview"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeView
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-
-              <Route
-                path="/corptraineelobby"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeLobby
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                      token={window.localStorage.jwt}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-
-              <Route
-                path="/corptraineeform"
-                element={
-                  <CorpTraineeRouter user={user}>
-                    <CorpTraineeForm
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                    />
-                  </CorpTraineeRouter>
-                }
-              />
-
-              <Route
-                path="/traineelobby"
-                element={
-                  <TraineeRouter user={user}>
-                    <TraineeLobby
-                      rateVal={rateValue}
-                      currencyVal={inputValue}
-                      token={window.localStorage.jwt}
-                    />
-                  </TraineeRouter>
                 }
               />
 
@@ -795,6 +967,46 @@ function App() {
               />
 
               <Route
+                path="/forgotpass"
+                element={
+                  <ForceRedirect user={user}>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      token={window.localStorage.jwt}
+                    />
+                    <Navbar user={user} />
+                    <ForgetPassword
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </ForceRedirect>
+                }
+              />
+
+              <Route
+                path="/changepass/:id"
+                element={
+                  <ForceRedirect user={user}>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      token={window.localStorage.jwt}
+                    />
+                    <Navbar user={user} />
+                    <ChangePassword
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                    />
+                  </ForceRedirect>
+                }
+              />
+
+              <Route
                 path="/signup"
                 element={
                   <ForceRedirect user={user}>
@@ -819,6 +1031,7 @@ function App() {
                       rateValue={rateValue}
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
+                      user={user}
                       token={window.localStorage.jwt}
                     />
                     <Navbar user={user} />

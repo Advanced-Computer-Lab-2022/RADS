@@ -30,7 +30,7 @@ const sendPDF = (toEmail, body) => {
         text: body,
         attachments: [{
             filename: 'certificate.pdf',
-            path: '../backend/Documents/certificate.pdf',
+            path: '../backend/Controllers/Documents/certificate.pdf',
             contentType: 'application/pdf'
         }],
         onError: (e) => console.log(e),

@@ -22,7 +22,7 @@ import SelectCountry from "./SelectCountry";
 import SearchBar from "./SearchBar";
 import jwt_decode from "jwt-decode";
 
-const pages = ["About"];
+const pages = ["Home","About"];
 const settings = ["Profile", "Lobby", "Logout"];
 
 const AppNavBar = (props) => {
@@ -66,7 +66,7 @@ const AppNavBar = (props) => {
               boxShadow: 0,
               "&:hover, &.Mui-focusVisible": { color: "white" },
             }}
-            onClick={() => (window.location.href = "/home")}
+            onClick={() => (window.location.href = "/")}
           >
             <CardActionArea>
               <CardMedia
@@ -150,7 +150,11 @@ const AppNavBar = (props) => {
               <Button
                 variant="default"
                 key={page}
-                onClick={() => (window.location.href = "/about")}
+                onClick={
+                  page === "Home"
+                    ? () => (window.location.href = "/")
+                    : () => (window.location.href = "/about")
+                }
                 sx={{
                   color: "#D80621",
                   display: "block",
@@ -171,7 +175,7 @@ const AppNavBar = (props) => {
           />
 
           <Box sx={{ flexGrow: 0, display: "flex", marginLeft: 2 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="View Profile">
               {!user.isConnected ? (
                 <>
                   <Button
@@ -202,7 +206,7 @@ const AppNavBar = (props) => {
                     Sign up
                   </Button>
                 </>
-              ) : ( user.role === "ADMIN" ? (
+              ) : user.role === "ADMIN" ? (
                 <IconButton
                   sx={{ p: 0 }}
                   onClick={() =>
@@ -230,7 +234,7 @@ const AppNavBar = (props) => {
                 <IconButton
                   sx={{ p: 0 }}
                   onClick={() =>
-                    (window.location.href = `/corptraineeprofile?corptraineeId=${userId}`)
+                    (window.location.href = `/corpTraineeProfile?corptraineeId=${userId}`)
                   }
                 >
                   <Avatar
@@ -252,7 +256,7 @@ const AppNavBar = (props) => {
                 </IconButton>
               ) : (
                 <></>
-              ))}
+              )}
               {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt={props.user.firstName}

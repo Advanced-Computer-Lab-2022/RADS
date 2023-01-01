@@ -12,7 +12,6 @@ const TraineeLobby = (props) => {
 
     return (
         <Box className="home-lobby" >
-            Welcome to RADS Online Course Provider(TraineeLobby side)
             <TraineeSearch rateVal={props.rateVal} currencyVal={props.currencyVal} token={props.token} />
             <TraineePassword rateVal={props.rateVal} currencyVal={props.currencyVal} token={props.token} />
         </Box>
