@@ -1,14 +1,16 @@
 const isEmpty = require("./isEmpty");
 const validator = require("validator");
 
-module.exports = function ValidateSignUp(data) {
+module.exports = function ValidateCreateCorpTrainee(data) {
     let errors = {};
-
     data.firstName = !isEmpty(data.firstName) ? data.firstName : "";
     data.lastName = !isEmpty(data.lastName) ? data.lastName : "";
     data.userName = !isEmpty(data.userName) ? data.userName : "";
     data.email = !isEmpty(data.email) ? data.email : "";
     data.gender = !isEmpty(data.gender) ? data.gender : "";
+    data.country = !isEmpty(data.country) ? data.country : "";
+    data.phoneNumber = !isEmpty(data.phoneNumber) ? data.phoneNumber : "";
+    data.address = !isEmpty(data.address) ? data.address : "";
     data.role = !isEmpty(data.role) ? data.role : "";
     data.password = !isEmpty(data.password) ? data.password : "";
     data.confirm = !isEmpty(data.confirm) ? data.confirm : "";
@@ -31,6 +33,15 @@ module.exports = function ValidateSignUp(data) {
     if (validator.isEmpty(data.gender)) {
         errors.gender = "Required Gender";
     }
+    if (validator.isEmpty(data.country)) {
+        errors.country = "Required Role";
+    }
+    if (validator.isEmpty(data.phoneNumber)) {
+        errors.phoneNumber = "Required Role";
+    }
+    if (validator.isEmpty(data.address)) {
+        errors.address = "Required Role";
+    }
     if (validator.isEmpty(data.role)) {
         errors.role = "Required Role";
     }
@@ -43,7 +54,6 @@ module.exports = function ValidateSignUp(data) {
     if (validator.isEmpty(data.confirm)) {
         errors.confirm = "Required Confirm";
     }
-
     return {
         errors,
         isValid: isEmpty(errors)

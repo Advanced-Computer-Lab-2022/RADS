@@ -96,16 +96,20 @@ const traineeSchema = new Schema({
         required: true
     },
     courses: {
-        type: [courseSchema]
+        type: [courseSchema],
+        default: []
     },
     creditCards: {
-        type: [creditCardSchema]
+        type: [creditCardSchema],
+        default: []
     },
     balance: {
-        type: Number
+        type: Number,
+        default: 0
     },
     notes: {
-        type: [noteSchema]
+        type: [noteSchema],
+        default: []
     },
     role: {
         type: String,
