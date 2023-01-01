@@ -38,16 +38,20 @@ const TraineeDetails = () => {
         {Trainee.country}
       </p>
       <p>
+        <strong>Gender: </strong>
+        {Trainee.gender}
+      </p>
+      <p>
+        <strong>Email: </strong>
+        {Trainee.email}
+      </p>
+      <p>
         <strong>Phone Number: </strong>
         {Trainee.phoneNumber}
       </p>
       <p>
         <strong>address: </strong>
         {Trainee.address}
-      </p>
-      <p>
-        <strong>courses: </strong>
-        {Trainee.courses}
       </p>
     </Box>
   );
