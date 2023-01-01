@@ -53,10 +53,6 @@ const TraineeDetails = () => {
         <strong>address: </strong>
         {Trainee.address}
       </p>
-      <p>
-        <strong>courses: </strong>
-        {Trainee.courses}
-      </p>
     </Box>
   );
 };

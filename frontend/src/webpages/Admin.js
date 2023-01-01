@@ -13,6 +13,9 @@ import jwt_decode from "jwt-decode";
 import axios from "axios"
 import { ExpandMore } from "@mui/icons-material"
 import { color } from "@mui/system"
+import AdminCorpTraineeList from "../webcomponents/AdminCorpTraineeList"
+import AdminInstructorList from "../webcomponents/AdminInstructorList"
+import AdminsList from "../webcomponents/AdminsList"
 
 const Admin = (props) => {
     const {
@@ -87,7 +90,7 @@ const Admin = (props) => {
                   {admin &&
                     admin.map((admin) => (
                       <Box sx={{ margin: "2rem" }} className="card-border">
-                        <AdminDetails key={admin._id} admin={admin} />
+                        <AdminsList key={admin._id} admin={admin} />
                       </Box>
                     ))}
                 </Box>
@@ -112,7 +115,7 @@ const Admin = (props) => {
                   {corpTrainees &&
                     corpTrainees.map((corpTrainee) => (
                       <Box sx={{ margin: "2rem" }} className="card-border">
-                        <CorpTraineeDetails
+                        <AdminCorpTraineeList
                           key={corpTrainee._id}
                           corpTrainee={corpTrainee}
                         />
@@ -140,7 +143,7 @@ const Admin = (props) => {
                   {instructors &&
                     instructors.map((instructor) => (
                       <Box sx={{ margin: "2rem" }} className="card-border">
-                        <InstructorDetails
+                        <AdminInstructorList
                           key={instructor._id}
                           instructor={instructor}
                         />

@@ -194,6 +194,23 @@ function App() {
               />
 
               <Route
+                path="/instructorprofile"
+                element={
+                  <InstructorRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={corpTraineeDrawerList}
+                      token={window.localStorage.jwt}
+                      page="instructorprofile"
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
                 path="/corptraineecourse"
                 element={
                   <CorpTraineeRouter user={user}>
@@ -847,6 +864,7 @@ function App() {
                       drawerList={adminDrawerList}
                       token={window.localStorage.jwt}
                     />
+                    <Footer />
                   </AdminRouter>
                 }
               />

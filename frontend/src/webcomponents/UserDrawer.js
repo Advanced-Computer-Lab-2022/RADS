@@ -67,6 +67,7 @@ import CorpTraineeView from "./CorpTraineeView";
 import CorpTraineeForm from "./CorpTraineeForm";
 import CorpTraineeDetails from "./CorpTraineeDetails";
 import AdminDetails from "./AdminDetails";
+import InstructorDetails from "./InstructorDetails";
 
 const drawerWidth = 240;
 
@@ -370,7 +371,7 @@ export default function PersistentDrawerLeft(props) {
                         ) : user.role === "INSTRUCTOR" ? (
                           index === 0 ? (
                             () =>
-                              (window.location.href = `/instructorprofile?adminId=${adminId}`)
+                              (window.location.href = `/instructorprofile?instructorId=${adminId}`)
                           ) : index === 1 ? (
                             () =>
                               (window.location.href = `/adminreports?adminId=${adminId}`)
@@ -657,9 +658,9 @@ export default function PersistentDrawerLeft(props) {
           ) : user.role === "INSTRUCTOR" ? (
             page === "adminreports" ? (
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
-            ) : page === "instructorProfile" ? (
+            ) : page === "instructorprofile" ? (
               ///////////////////////////////////////////////
-              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+              <InstructorDetails rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminrefunds" ? (
               <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminadd" ? (
