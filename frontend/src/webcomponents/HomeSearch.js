@@ -8,6 +8,7 @@ import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputLabel } from "@mui/material";
+import HighestViewedCourses from "./HighestViewedCourses";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -247,25 +248,14 @@ const HomeSearch = (props) => {
           />
         </Box>
 
-        <Box className="highestviewed-courses card-container">
-          <Box className="highview-p">
-            <strong>Highest Viewed Courses</strong>
-          </Box>
-          <Box className="card-container">
-            {highestViewedCourses.map((course) => (
-              <Box>
-                <CourseCard
-                  course={course}
-                  rateVal={rateVal}
-                  currencyVal={currencyVal}
-                  todayDate={todayDate}
-                  courseView1={courseView1}
-                  courseView2={courseView2}
-                />
-              </Box>
-            ))}
-          </Box>
-        </Box>
+        <HighestViewedCourses
+          highestViewedCourses={highestViewedCourses}
+          rateVal={rateVal}
+          currencyVal={currencyVal}
+          todayDate={todayDate}
+          courseView1={courseView1}
+          courseView2={courseView2}
+        />
         <br />
         <Box className="filter-component1">
           <Box className="list-container">
@@ -289,15 +279,21 @@ const HomeSearch = (props) => {
             <strong>Rating Filter</strong>
           </p>
           <Box className="list-container">
-            {ratingMarks.map((mark,index) => (
+            {ratingMarks.map((mark, index) => (
               <Box className="rate-box">
-                <input             
+                <input
                   value={mark.value}
                   name={mark.label}
-                  className = 'rate-input'
-                  checked={queryF3.toString().toLowerCase() === mark.value.toString().toLowerCase() || (!queryF3 && index === 0)}
+                  className="rate-input"
+                  checked={
+                    queryF3.toString().toLowerCase() ===
+                      mark.value.toString().toLowerCase() ||
+                    (!queryF3 && index === 0)
+                  }
                   type="radio"
-                  onChange={(e) => {setQueryF3(e.target.value)}}
+                  onChange={(e) => {
+                    setQueryF3(e.target.value);
+                  }}
                 />
                 {mark.value === 0 ? (
                   <span>{mark.label}</span>

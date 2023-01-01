@@ -6,7 +6,8 @@ import CourseCard from "./CourseCard";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import HighestViewedCourses from "./HighestViewedCourses";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { Search } from "@mui/icons-material";
 
 const setRate = (val) => {
   const priceMarks = [
@@ -232,12 +233,19 @@ const TraineeSearch = (props) => {
         </p>
       </div>
       <Box>
-        <input
-          type="text"
-          placeholder="Search Course..."
-          className="search"
-          onChange={(e) => setQueryS(e.target.value)}
-        />
+        <Box className="search">
+          <TextField
+            hiddenLabel
+            id="filled-search"
+            type="search"
+            size="small"
+            variant="filled"
+            onChange={(e) => setQueryS(e.target.value)}
+            InputProps={{
+              startAdornment: <Search sx={{ marginRight: 2 }} />,
+            }}
+          />
+        </Box>
         <HighestViewedCourses
           highestViewedCourses={highestViewedCourses}
           rateVal={rateVal}
@@ -306,15 +314,21 @@ const TraineeSearch = (props) => {
             <strong>Rating Filter</strong>
           </p>
           <Box className="list-container">
-            {ratingMarks.map((mark,index) => (
+            {ratingMarks.map((mark, index) => (
               <Box className="rate-box">
-                <input             
+                <input
                   value={mark.value}
                   name={mark.label}
-                  className = 'rate-input'
-                  checked={queryF3.toString().toLowerCase() === mark.value.toString().toLowerCase() || (!queryF3 && index === 0)}
+                  className="rate-input"
+                  checked={
+                    queryF3.toString().toLowerCase() ===
+                      mark.value.toString().toLowerCase() ||
+                    (!queryF3 && index === 0)
+                  }
                   type="radio"
-                  onChange={(e) => {setQueryF3(e.target.value)}}
+                  onChange={(e) => {
+                    setQueryF3(e.target.value);
+                  }}
                 />
                 {mark.value === 0 ? (
                   <span>{mark.label}</span>

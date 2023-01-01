@@ -40,6 +40,32 @@ import AdminAccess from "./AdminAccess";
 import NewAdminButton from "./NewAdminButton";
 import InstructorForm from "./InstructorForm";
 import TraineeDetails from "./TraineeDetails";
+import TraineeExam from "./TraineeExam";
+import TraineeReport from "./TraineeReport";
+import TraineeViewReports from "./TraineeViewReports";
+import TraineeCreditOptions from "./TraineeCreditOptions";
+import TraineeSubmitRefund from "./TraineeSubmitRefund";
+import TraineeCourse from "./TraineeCourse";
+import TraineeLobby from "../webpages/TraineeLobby";
+import InstructorLobby from "../webpages/InstructorLobby";
+import TraineeForgotPass from "./TraineeForgotPass";
+import TraineeForm from "./TraineeForm";
+import TraineeView from "./TraineeView";
+import TraineeRating from "./TraineeRating";
+import TraineeSolve from "./TraineeSolve";
+import TraineeFollowUp from "./TraineeFollowUp";
+import TraineeCreditCard from "./TraineeCreditCard";
+import CorpTraineeLobby from "../webpages/CorpTraineeLobby";
+import CorpTraineeFollowUp from "./CorpTraineeFollowUp";
+import CorpTraineeSubmitAccess from "./CorpTraineeSubmitAccess";
+import CorpTraineeViewReports from "./CorpTraineeViewReports";
+import CorpTraineeReport from "./CorpTraineeReport";
+import CorpTraineeExam from "./CorpTraineeExam";
+import CorpTraineeCourse from "./CorpTraineeCourse";
+import CorpTraineeSolve from "./CorpTraineeSolve";
+import CorpTraineeRating from "./CorpTraineeRating";
+import CorpTraineeView from "./CorpTraineeView";
+import CorpTraineeForm from "./CorpTraineeForm";
 
 const drawerWidth = 240;
 
@@ -226,7 +252,7 @@ export default function PersistentDrawerLeft(props) {
                       ) : user.role === "TRAINEE" ? (
                         index === 0 ? (
                           () =>
-                            (window.location.href = `/traineeprofile?adminId=${adminId}`)
+                            (window.location.href = `/traineeprofile?traineeId=${adminId}`)
                         ) : index === 1 ? (
                           () =>
                             (window.location.href = `/adminreports?adminId=${adminId}`)
@@ -239,7 +265,7 @@ export default function PersistentDrawerLeft(props) {
                       ) : user.role === "CORP_TRAINEE" ? (
                         index === 0 ? (
                           () =>
-                            (window.location.href = `/corptraineeprofile?adminId=${adminId}`)
+                            (window.location.href = `/traineeprofile?traineeId=${adminId}`)
                         ) : index === 1 ? (
                           () =>
                             (window.location.href = `/adminreports?adminId=${adminId}`)
@@ -252,7 +278,7 @@ export default function PersistentDrawerLeft(props) {
                       ) : user.role === "INSTRUCTOR" ? (
                         index === 0 ? (
                           () =>
-                            (window.location.href = `/instructorprofile?adminId=${adminId}`)
+                            (window.location.href = `/instructorprofile?instructorId=${adminId}`)
                         ) : index === 1 ? (
                           () =>
                             (window.location.href = `/adminreports?adminId=${adminId}`)
@@ -439,7 +465,7 @@ export default function PersistentDrawerLeft(props) {
           ) : user.role === "TRAINEE" ? (
             page === "adminreports" ? (
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
-            ) : page === "traineeprofile" ? (
+            ) : page === "traineeProfile" ? (
               ///////////////////////////////////////////////
               <TraineeDetails />
             ) : page === "adminrefunds" ? (
@@ -463,17 +489,77 @@ export default function PersistentDrawerLeft(props) {
                 token={token}
               />
             ) : page === "subtrainee" ? (
-              subpage === "adminproblems" ? (
-                <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
-              ) : subpage === "adminrefunds" ? (
-                <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
-              ) : subpage === "admininsertcorp" ? (
-                <CorpTraineeInsert
+              subpage === "traineesubmitrefund" ? (
+                <TraineeSubmitRefund
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                 />
-              ) : subpage === "adminaccess" ? (
-                <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "traineeoptions" ? (
+                <TraineeCreditOptions
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineefollowup" ? (
+                <TraineeFollowUp rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "traineeviewreports" ? (
+                <TraineeViewReports
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "traineereport" ? (
+                <TraineeReport
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineexam" ? (
+                <TraineeExam
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineecourse" ? (
+                <TraineeCourse
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineecredit" ? (
+                <TraineeCreditCard
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "forgotpasstrainee/:id" ? (
+                <TraineeForgotPass
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "traineesolve" ? (
+                <TraineeSolve
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineerate" ? (
+                <TraineeRating
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineeview" ? (
+                <TraineeView
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineeform" ? (
+                <TraineeForm
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
               ) : (
                 <> </>
               )
@@ -482,7 +568,7 @@ export default function PersistentDrawerLeft(props) {
             ) : page === "null" ? (
               <></>
             ) : (
-              <Admin
+              <TraineeLobby
                 rateVal={rateVal}
                 currencyVal={currencyVal}
                 token={token}
@@ -491,7 +577,7 @@ export default function PersistentDrawerLeft(props) {
           ) : user.role === "CORP_TRAINEE" ? (
             page === "adminreports" ? (
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
-            ) : page === "adminProfile" ? (
+            ) : page === "corpTraineeProfile" ? (
               ///////////////////////////////////////////////
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminrefunds" ? (
@@ -515,17 +601,68 @@ export default function PersistentDrawerLeft(props) {
                 token={token}
               />
             ) : page === "subcorptrainee" ? (
-              subpage === "adminproblems" ? (
-                <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
-              ) : subpage === "adminrefunds" ? (
-                <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
-              ) : subpage === "admininsertcorp" ? (
-                <CorpTraineeInsert
+              subpage === "corptraineesubmitaccess" ? (
+                <CorpTraineeSubmitAccess
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                 />
-              ) : subpage === "adminaccess" ? (
-                <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "corptraineefollowup" ? (
+                <CorpTraineeFollowUp
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "corptraineeviewreports" ? (
+                <CorpTraineeViewReports
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "corptraineereport" ? (
+                <CorpTraineeReport
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "corptraineexam" ? (
+                <CorpTraineeExam
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "corptraineecourse" ? (
+                <CorpTraineeCourse
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "forgotpasstrainee/:id" ? (
+                <TraineeForgotPass
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "corptraineesolve" ? (
+                <CorpTraineeSolve
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "corptraineerating" ? (
+                <CorpTraineeRating
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "corptraineeview" ? (
+                <CorpTraineeView
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "corptraineeform" ? (
+                <CorpTraineeForm
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
               ) : (
                 <> </>
               )
@@ -534,7 +671,7 @@ export default function PersistentDrawerLeft(props) {
             ) : page === "null" ? (
               <></>
             ) : (
-              <Admin
+              <CorpTraineeLobby
                 rateVal={rateVal}
                 currencyVal={currencyVal}
                 token={token}
@@ -543,7 +680,7 @@ export default function PersistentDrawerLeft(props) {
           ) : user.role === "INSTRUCTOR" ? (
             page === "adminreports" ? (
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
-            ) : page === "adminProfile" ? (
+            ) : page === "instructorProfile" ? (
               ///////////////////////////////////////////////
               <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
             ) : page === "adminrefunds" ? (
@@ -567,17 +704,77 @@ export default function PersistentDrawerLeft(props) {
                 token={token}
               />
             ) : page === "subinstructor" ? (
-              subpage === "adminproblems" ? (
-                <AdminProblems rateVal={rateVal} currencyVal={currencyVal} />
-              ) : subpage === "adminrefunds" ? (
-                <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
-              ) : subpage === "admininsertcorp" ? (
-                <CorpTraineeInsert
+              subpage === "traineesubmitrefund" ? (
+                <TraineeSubmitRefund
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                 />
-              ) : subpage === "adminaccess" ? (
-                <AdminAccess rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "traineeoptions" ? (
+                <TraineeCreditOptions
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineefollowup" ? (
+                <TraineeFollowUp rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "traineeviewreports" ? (
+                <TraineeViewReports
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "traineereport" ? (
+                <TraineeReport
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineexam" ? (
+                <TraineeExam
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineecourse" ? (
+                <TraineeCourse
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineecredit" ? (
+                <TraineeCreditCard
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "forgotpasstrainee/:id" ? (
+                <TraineeForgotPass
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                />
+              ) : subpage === "traineesolve" ? (
+                <TraineeSolve
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineerate" ? (
+                <TraineeRating
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineeview" ? (
+                <TraineeView
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "traineeform" ? (
+                <TraineeForm
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
               ) : (
                 <> </>
               )
@@ -586,7 +783,7 @@ export default function PersistentDrawerLeft(props) {
             ) : page === "null" ? (
               <></>
             ) : (
-              <Admin
+              <InstructorLobby
                 rateVal={rateVal}
                 currencyVal={currencyVal}
                 token={token}

@@ -16,7 +16,7 @@ const HighestViewedCourses = (props) => {
     todayDate,
     courseView1,
     courseView2,
-    traineeId,
+    id,
   } = props;
   return (
     <Accordion>
@@ -44,7 +44,7 @@ const HighestViewedCourses = (props) => {
                     todayDate={todayDate}
                     courseView1={courseView1}
                     courseView2={courseView2}
-                    id={traineeId}
+                    id={id}
                   />
                 </Box>
               ))}
