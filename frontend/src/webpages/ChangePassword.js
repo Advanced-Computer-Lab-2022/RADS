@@ -55,7 +55,7 @@ const ChangePassword = (props) => {
         <p><strong>{html}</strong></p>
         {error !== "" && <p><strong>{error}</strong></p>}
     </form>
-    {visible && <Button onClick={() =>(window.location.href = `/login`)}>Go back to Login</Button>}
+    {visible && <Button variant="contained" onClick={() =>(window.location.href = `/login`)}>Go back to Login</Button>}
     </div>
     )
 }
