@@ -45,7 +45,7 @@ const CourseCard = ({
               Rating = {course.courseRating} Out of 5{" "}
             </p>
             <p className="course-price-card">
-              Price = {Math.ceil(course.price * rateVal)} {currencyVal}{" "}
+              Price = {Math.ceil(course.price * rateVal) - Math.ceil(course.price* rateVal * (course.promotionRate/100))} {currencyVal}{" "}
             </p>
           </Typography>
           {course.promotionEndDate &&

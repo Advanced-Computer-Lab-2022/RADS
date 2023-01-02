@@ -115,9 +115,9 @@ const TraineeViewReports = (props) => {
                                   <strong>{report.reportStatus}</strong>
                                 </p>
                                 {console.log(report.reportStatus)}
-                                {report.adminCommment ? (
+                                {report.adminComment ? (
                                   <Box>
-                                    <p>Admin Reply:{report.adminCommment} </p>
+                                    <p>Admin Reply:{report.adminComment} </p>
                                   </Box>
                                 ) : (
                                   "No Admin Reply"

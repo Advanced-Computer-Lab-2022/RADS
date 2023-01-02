@@ -86,9 +86,9 @@ const InstructorViewReports = (props) => {
                     <p>
                       Report Status:<strong>{report.reportStatus}</strong>
                     </p>
-                    {report.adminCommment ? (
+                    {report.adminComment ? (
                       <Box>
-                        <p>Admin Reply:{report.adminCommment} </p>
+                        <p>Admin Reply:{report.adminComment} </p>
                       </Box>
                     ) : (
                       "No Admin Reply"

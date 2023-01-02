@@ -226,9 +226,9 @@ const AdminProblems = (props) => {
               </p>
               <p>Request Type: {request.requestType} Request</p>
               <p>Request Status: {request.reportStatus}</p>
-              {request.adminCommment ? (
+              {request.adminComment ? (
                 <Box>
-                  <p>Your Reply:{request.adminCommment} </p>
+                  <p>Your Reply:{request.adminComment} </p>
                 </Box>
               ) : (
                 "You did not reply yet."

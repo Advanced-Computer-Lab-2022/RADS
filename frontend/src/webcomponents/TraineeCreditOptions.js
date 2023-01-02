@@ -50,6 +50,7 @@ const TraineeCreditOptions = (props) => {
   const updateInstructorBalance = async (priceVal) => {
     let balanceValue = priceVal - priceVal * 0.1;
     let info = { balanceValue };
+    console.log("here");
     axios
       .post(`/instructor/updatebalance/${course.instructor}`, info)
       .then((res) => {
@@ -76,7 +77,6 @@ const TraineeCreditOptions = (props) => {
     let courseGrade = 0;
     let courseProgress = 0;
     const info = { courseId, courseGrade, courseProgress };
-    console.log("here");
     axios
       .post(`/trainee/register/${traineeId}`, info)
       .then((res) => {
@@ -98,6 +98,7 @@ const TraineeCreditOptions = (props) => {
           const newDate = new Date(res.data);
           if (newDate >= todayDate) {
             registerCourse();
+            updateInstructorBalance(course.price)
             setPurchased(true);
           } else {
             setHtml("Cannot perform purschase, The Card is Expired");
