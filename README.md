@@ -148,7 +148,12 @@ Our Project is not applicable for code examples as it is a big web application.
   
 
 # Tests
-No tests performed.
+- When a trainee purchases a course, he is registered in it.
+- Trainee can refund only below 50% progress.
+- corptrainee cannot send access request to already enrolled courses.
+- instructor cannot create an empty course
+- users cannot put invalid informations such as usernames and emails.
+- admins can follow up on reports
 
 # How to use?
 
