@@ -67,9 +67,10 @@ import About from "./webcomponents/About";
 import TraineeDetails from "./webcomponents/TraineeDetails";
 import ForgetPassword from "./webpages/ForgetPassword";
 import ChangePassword from "./webpages/ChangePassword";
+import InstructorView from "./webcomponents/InstructorView";
 
 const adminDrawerList = ["Profile", "Issues", "Promotion"];
-const instructorDrawerList = ["Profile", "Reports", "Follow Up", "Monthly"];
+const instructorDrawerList = ["Profile", "My Courses", "Promotion"];
 const traineeDrawerList = ["Profile", "My Courses", "Reports"];
 const corpTraineeDrawerList = ["Profile", "My Courses", "Reports"];
 
@@ -120,9 +121,15 @@ function App() {
                 path="/instructorreport"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorReport
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subinstructor"
+                      subpage="instructorreport"
                     />
                   </InstructorRouter>
                 }
@@ -132,9 +139,15 @@ function App() {
                 path="/instructorviewreports"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorViewReports
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subinstructor"
+                      subpage="instructorviewreports"
                     />
                   </InstructorRouter>
                 }
@@ -144,9 +157,15 @@ function App() {
                 path="/instructormonthly"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorMonthly
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subinstructor"
+                      subpage="instructormonthly"
                     />
                   </InstructorRouter>
                 }
@@ -156,9 +175,15 @@ function App() {
                 path="/instructorfollowup"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorFollowUp
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subinstructor"
+                      subpage="instructorfollowup"
                     />
                   </InstructorRouter>
                 }
@@ -168,9 +193,32 @@ function App() {
                 path="/instructorrating"
                 element={
                   <InstructorRouter user={user}>
-                    <InstructorRating
+                    <Header
                       rateVal={rateValue}
                       currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="subinstructor"
+                      subpage="instructorrating"
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorpromotion"
+                element={
+                  <InstructorRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="instructorpromotion"
                     />
                   </InstructorRouter>
                 }
@@ -186,7 +234,7 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={adminDrawerList}
+                      drawerList={instructorDrawerList}
                       token={window.localStorage.jwt}
                     />
                   </InstructorRouter>
@@ -202,11 +250,76 @@ function App() {
                       currencyVal={inputValue}
                       handleSelection={handleSelection}
                       user={user}
-                      drawerList={corpTraineeDrawerList}
+                      drawerList={instructorDrawerList}
                       token={window.localStorage.jwt}
                       page="instructorprofile"
                     />
                   </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/coursecreate"
+                element={
+                  <InstructorRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="coursecreate"
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorupdateinfo"
+                element={
+                  <InstructorRouter user={user}>
+                    <Header
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      drawerList={instructorDrawerList}
+                      token={window.localStorage.jwt}
+                      page="instructorupdateinfo"
+                    />
+                  </InstructorRouter>
+                }
+              />
+
+              <Route
+                path="/instructorview"
+                element={
+                  <Header
+                    rateVal={rateValue}
+                    currencyVal={inputValue}
+                    handleSelection={handleSelection}
+                    user={user}
+                    drawerList={instructorDrawerList}
+                    token={window.localStorage.jwt}
+                    page="subinstructor"
+                    subpage="instructorview"
+                  />
+                }
+              />
+
+              <Route
+                path="/instructorcourseform"
+                element={
+                  <Header
+                    rateVal={rateValue}
+                    currencyVal={inputValue}
+                    handleSelection={handleSelection}
+                    user={user}
+                    drawerList={instructorDrawerList}
+                    token={window.localStorage.jwt}
+                    page="instructorcourseform"
+                  />
                 }
               />
 
@@ -904,7 +1017,12 @@ function App() {
               <Route
                 path="/filter"
                 element={
-                  <CourseView rateVal={rateValue} currencyVal={inputValue} />
+                  <CourseView
+                    rateVal={rateValue}
+                    currencyVal={inputValue}
+                    user={user}
+                    token={window.localStorage.jwt}
+                  />
                 }
               />
 

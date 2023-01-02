@@ -29,7 +29,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import { Accordion } from "@mui/material";
 import { AccordionSummary } from "@mui/material";
 import { AccordionDetails } from "@mui/material";
-import { ExpandMore, MenuBook, PersonAddAlt1, Report } from "@mui/icons-material";
+import { AddCircle, Edit, ExpandMore, MenuBook, PersonAddAlt1, Report } from "@mui/icons-material";
 import jwt_decode from "jwt-decode";
 import AdminReports from "./AdminReports";
 import AdminPromotion from "./AdminPromotion";
@@ -68,6 +68,16 @@ import CorpTraineeForm from "./CorpTraineeForm";
 import CorpTraineeDetails from "./CorpTraineeDetails";
 import AdminDetails from "./AdminDetails";
 import InstructorDetails from "./InstructorDetails";
+import InstructorPromotion from "./InstructorPromotion";
+import InstructorView from "./InstructorView";
+import InstructorCourseForm from "./InstructorCourseForm";
+import CourseCreate from "./CourseCreate";
+import InstructorUpdateInfo from "../webpages/InstructorUpdateInfo";
+import InstructorReport from "./InstructorReport";
+import InstructorViewReports from "./InstructorViewReports";
+import InstructorMonthly from "./InstructorMonthly";
+import InstructorFollowUp from "./InstructorFollowUp";
+import InstructorRating from "./InstructorRating";
 
 const drawerWidth = 240;
 
@@ -225,7 +235,7 @@ export default function PersistentDrawerLeft(props) {
                       index === 0 ? (
                         <AccountCircleIcon />
                       ) : index === 1 ? (
-                        <ReportProblemIcon />
+                        <MenuBook />
                       ) : index === 2 ? (
                         <PercentIcon />
                       ) : (
@@ -283,10 +293,10 @@ export default function PersistentDrawerLeft(props) {
                             (window.location.href = `/instructorprofile?instructorId=${adminId}`)
                         ) : index === 1 ? (
                           () =>
-                            (window.location.href = `/adminreports?adminId=${adminId}`)
+                            (window.location.href = `/instructorcourseform?instructorId=${adminId}`)
                         ) : index === 2 ? (
                           () =>
-                            (window.location.href = `/adminpromotion?adminId=${adminId}`)
+                            (window.location.href = `/instructorpromotion?instructorId=${adminId}`)
                         ) : (
                           <></>
                         )
@@ -316,12 +326,6 @@ export default function PersistentDrawerLeft(props) {
                         ) : (
                           <PersonAddAlt1 />
                         )
-                      ) : user.role === "TRAINEE" ? (
-                        <></>
-                      ) : user.role === "CORP_TRAINEE" ? (
-                        <></>
-                      ) : user.role === "INSTRUCTOR" ? (
-                        <></>
                       ) : (
                         <></>
                       )}
@@ -342,45 +346,6 @@ export default function PersistentDrawerLeft(props) {
                           ) : (
                             <></>
                           )
-                        ) : user.role === "TRAINEE" ? (
-                          index === 0 ? (
-                            () =>
-                              (window.location.href = `/traineeprofile?adminId=${adminId}`)
-                          ) : index === 1 ? (
-                            () =>
-                              (window.location.href = `/traineecourse?adminId=${adminId}`)
-                          ) : index === 2 ? (
-                            () =>
-                              (window.location.href = `/adminpromotion?adminId=${adminId}`)
-                          ) : (
-                            <></>
-                          )
-                        ) : user.role === "CORP_TRAINEE" ? (
-                          index === 0 ? (
-                            () =>
-                              (window.location.href = `/corptraineeprofile?adminId=${adminId}`)
-                          ) : index === 1 ? (
-                            () =>
-                              (window.location.href = `/adminreports?adminId=${adminId}`)
-                          ) : index === 2 ? (
-                            () =>
-                              (window.location.href = `/adminpromotion?adminId=${adminId}`)
-                          ) : (
-                            <></>
-                          )
-                        ) : user.role === "INSTRUCTOR" ? (
-                          index === 0 ? (
-                            () =>
-                              (window.location.href = `/instructorprofile?instructorId=${adminId}`)
-                          ) : index === 1 ? (
-                            () =>
-                              (window.location.href = `/adminreports?adminId=${adminId}`)
-                          ) : index === 2 ? (
-                            () =>
-                              (window.location.href = `/adminpromotion?adminId=${adminId}`)
-                          ) : (
-                            <></>
-                          )
                         ) : (
                           <></>
                         )
@@ -390,6 +355,46 @@ export default function PersistentDrawerLeft(props) {
                 </ListItem>
               )
             )}
+          </List>
+        ) : user.role === "INSTRUCTOR" ? (
+          <List>
+            {["Create Course", "Edit Your Information"].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {user.role === "INSTRUCTOR" ? (
+                      index === 0 ? (
+                        <AddCircle />
+                      ) : index === 1 ? (
+                        <Edit />
+                      ) : (
+                        <PersonAddAlt1 />
+                      )
+                    ) : (
+                      <></>
+                    )}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={text}
+                    onClick={
+                      user.role === "INSTRUCTOR" ? (
+                        index === 0 ? (
+                          () =>
+                            (window.location.href = `/coursecreate?instructorId=${adminId}`)
+                        ) : index === 1 ? (
+                          () =>
+                            (window.location.href = `/instructorupdateinfo?instructorId=${adminId}`)
+                        ) : (
+                          <></>
+                        )
+                      ) : (
+                        <></>
+                      )
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
         ) : (
           <></>
@@ -656,21 +661,28 @@ export default function PersistentDrawerLeft(props) {
               />
             )
           ) : user.role === "INSTRUCTOR" ? (
-            page === "adminreports" ? (
-              <AdminReports rateVal={rateVal} currencyVal={currencyVal} />
+            page === "instructorcourseform" ? (
+              <InstructorCourseForm
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+              />
             ) : page === "instructorprofile" ? (
               ///////////////////////////////////////////////
               <InstructorDetails rateVal={rateVal} currencyVal={currencyVal} />
-            ) : page === "adminrefunds" ? (
-              <AdminRefund rateVal={rateVal} currencyVal={currencyVal} />
-            ) : page === "adminadd" ? (
-              <NewAdminButton
+            ) : page === "instructorpromotion" ? (
+              <InstructorPromotion
                 rateVal={rateVal}
                 currencyVal={currencyVal}
                 token={token}
               />
-            ) : page === "admininsertcorp" ? (
-              <CorpTraineeInsert
+            ) : page === "instructorupdateinfo" ? (
+              <InstructorUpdateInfo
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                token={token}
+              />
+            ) : page === "coursecreate" ? (
+              <CourseCreate
                 rateVal={rateVal}
                 currencyVal={currencyVal}
                 token={token}
@@ -682,37 +694,37 @@ export default function PersistentDrawerLeft(props) {
                 token={token}
               />
             ) : page === "subinstructor" ? (
-              subpage === "traineesubmitrefund" ? (
-                <TraineeSubmitRefund
-                  rateVal={rateVal}
-                  currencyVal={currencyVal}
-                />
-              ) : subpage === "traineeoptions" ? (
-                <TraineeCreditOptions
+              subpage === "instructorreport" ? (
+                <InstructorReport rateVal={rateVal} currencyVal={currencyVal} />
+              ) : subpage === "instructorviewreports" ? (
+                <InstructorViewReports
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                   token={token}
                 />
-              ) : subpage === "traineefollowup" ? (
-                <TraineeFollowUp rateVal={rateVal} currencyVal={currencyVal} />
-              ) : subpage === "traineeviewreports" ? (
-                <TraineeViewReports
+              ) : subpage === "instructormonthly" ? (
+                <InstructorMonthly
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                 />
-              ) : subpage === "traineereport" ? (
-                <TraineeReport
+              ) : subpage === "instructorfollowup" ? (
+                <InstructorFollowUp
                   rateVal={rateVal}
                   currencyVal={currencyVal}
-                  token={token}
                 />
-              ) : subpage === "traineexam" ? (
-                <TraineeExam
+              ) : subpage === "instructorrating" ? (
+                <InstructorRating
                   rateVal={rateVal}
                   currencyVal={currencyVal}
                   token={token}
                 />
-              ) : subpage === "traineecourse" ? (
+              ) : subpage === "instructorview" ? (
+                <InstructorView
+                  rateVal={rateVal}
+                  currencyVal={currencyVal}
+                  token={token}
+                />
+              ) : subpage === "instructorcourseform" ? (
                 <TraineeCourse
                   rateVal={rateVal}
                   currencyVal={currencyVal}
