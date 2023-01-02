@@ -15,7 +15,7 @@ const CorpTraineeReport = (props) => {
   const { rateVal, currencyVal } = props;
   const params = new URLSearchParams(window.location.search);
   const courseId = params.get("courseId");
-  const corpTraineeId = params.get("corpTraineeId");
+  const corpTraineeId = params.get("corptraineeId");
   const [course, setCourse] = useState([]);
   const [corpTrainee, setCorpTrainee] = useState([]);
   const [instructorName, setinstructorName] = useState([]);

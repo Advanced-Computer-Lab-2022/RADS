@@ -19,6 +19,7 @@ const AdminProblems = (props) => {
   const [html, setHtml] = useState("");
   const [checkedOption, setCheckedOption] = useState(null);
   const [adminComment, setAdminComment] = useState("");
+  const [adminOldComment, setAdminOldComment] = useState("");
 
   useEffect(() => {
     const fetchRequest = async () => {
@@ -49,6 +50,8 @@ const AdminProblems = (props) => {
           setIsCorpTrainee(true);
         }
         setRequest(json);
+        console.log(json.adminComment)
+        setAdminOldComment(json.adminComment);
         fetchCourse();
       }
     };
@@ -100,6 +103,7 @@ const AdminProblems = (props) => {
     e.preventDefault();
     let reportStatus = checkedOption;
     const body = { reportStatus, adminComment };
+    console.log(body);
     axios
       .patch(`/report/updaterequest/${requestId}`, body)
       .then((res) => {
@@ -311,9 +315,9 @@ const AdminProblems = (props) => {
               </p>
               <p>Request Type: {request.requestType} Request</p>
               <p>Request Status: {request.reportStatus}</p>
-              {request.adminCommment ? (
+              {adminOldComment !== "" ? (
                 <Box>
-                  <p>Your Reply:{request.adminCommment} </p>
+                  <p>Your Reply: <strong>{adminOldComment} </strong> </p>
                 </Box>
               ) : (
                 "You did not reply yet."

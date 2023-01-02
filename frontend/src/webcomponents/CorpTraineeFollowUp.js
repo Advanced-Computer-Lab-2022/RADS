@@ -33,6 +33,7 @@ const CorpTraineeFollowUp = (props) => {
     const json = await response.json();
     if (response.ok) {
       setReport(json);
+      console.log(json.corpTraineeComments);
     }
   };
   const postComment = async () => {
@@ -71,11 +72,11 @@ const CorpTraineeFollowUp = (props) => {
         <p>Type of problem: {report.requestType}</p>
         <Box>
           Comment/Comments:{" "}
-          {report.corptTraineeComments &&
-            report.corptTraineeComments.map((comment, index2) => (
+          {report.corpTraineeComments &&
+            report.corpTraineeComments.map((comment, index2) => (
               <p>
                 <strong>Comment {index2 + 1}: </strong>
-                {comment.corptTraineeComment}
+                {comment.corpTraineeComment}
               </p>
             ))}
         </Box>

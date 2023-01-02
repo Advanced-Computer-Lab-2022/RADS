@@ -60,7 +60,8 @@ const reportSchema = new Schema({
         default: "unseen"
     },
     adminCommment: {
-        type: String
+        type: String,
+        default: ""
     }
 }, { timestamps: true })
 
