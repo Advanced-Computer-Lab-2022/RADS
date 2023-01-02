@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import { Box, Button } from '@mui/material';
+import { Wallet } from '@mui/icons-material';
 const TraineeView = (props) => {
     const {
         rateVal,
@@ -121,10 +122,10 @@ const TraineeView = (props) => {
         setBalanceHtml(x);
     }
     return (
-        <Box>
+        <Box className="card-border">
             <Box className='wallet-div'>
                 <Button
-          variant="contained" onClick={handleClick}><strong>Wallet</strong></Button>
+          variant="contained" onClick={handleClick}> <Wallet sx={{marginRight:"2px"}}/>Wallet</Button>
                 <p>{balanceHtml}</p>
             </Box>
             <h4>The information of course: {course.courseTitle} </h4>
@@ -146,7 +147,6 @@ const TraineeView = (props) => {
                     <p>Question: {exercise.question}</p>
                 </Box>
             ))}</Box>
-            <p><strong>============================================================================================================</strong></p>
         </Box>
     )
 }

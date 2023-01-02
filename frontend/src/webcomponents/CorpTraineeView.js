@@ -120,7 +120,7 @@ const CorpTraineeView = (props) => {
   };
 
   return (
-    <Box>
+    <Box className="card-border">
       <h4>The information of course: {course.courseTitle} </h4>
       <Box>
         <CheckHaveAccess />
@@ -162,11 +162,6 @@ const CorpTraineeView = (props) => {
             </Box>
           ))}
       </Box>
-      <p>
-        <strong>
-          ============================================================================================================
-        </strong>
-      </p>
     </Box>
   );
 };

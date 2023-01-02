@@ -987,23 +987,17 @@ function App() {
               <Route
                 path="/noaccess"
                 element={
-                  <NoAccess rateVal={rateValue} currencyVal={inputValue} />
-                }
-              />
-
-              <Route
-                path="/search"
-                element={
-                  <SearchPage rateVal={rateValue} currencyVal={inputValue} />
-                }
-              />
-
-              <Route path="/userdrawer" element={<UserDrawer user={user} />} />
-
-              <Route
-                path="/noaccess"
-                element={
-                  <NoAccess rateVal={rateValue} currencyVal={inputValue} />
+                  <Box>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      token={window.localStorage.jwt}
+                    />
+                    <Navbar user={user} />
+                    <NoAccess rateVal={rateValue} currencyVal={inputValue} />
+                  </Box>
                 }
               />
 
@@ -1017,12 +1011,22 @@ function App() {
               <Route
                 path="/filter"
                 element={
-                  <CourseView
-                    rateVal={rateValue}
-                    currencyVal={inputValue}
-                    user={user}
-                    token={window.localStorage.jwt}
-                  />
+                  <Box>
+                    <AppNavBar
+                      rateValue={rateValue}
+                      currencyVal={inputValue}
+                      handleSelection={handleSelection}
+                      user={user}
+                      token={window.localStorage.jwt}
+                    />
+                    <Navbar user={user} />
+                    <CourseView
+                      rateVal={rateValue}
+                      currencyVal={inputValue}
+                      user={user}
+                      token={window.localStorage.jwt}
+                    />
+                  </Box>
                 }
               />
 

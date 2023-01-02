@@ -1,7 +1,7 @@
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 const InstructorUpdateBio = (props) => {
   const { rateVal, currencyVal, token } = props;
@@ -24,13 +24,15 @@ const InstructorUpdateBio = (props) => {
   };
 
   return (
-    <form className="change-info" onSubmit={handleSubmit}>
-      <h3>Change Your Bio</h3>
-      <label>Bio:</label>
-      <input type="text" onChange={(e) => setBio(e.target.value)} value={bio} />
-      <Button type = 'submit'variant="contained">Submit</Button>
-      <p><strong>{html}</strong></p>
-    </form>
+    <Box className="card-border">
+      <form className="change-info" onSubmit={handleSubmit}>
+        <h3>Change Your Bio</h3>
+        <label>Bio:</label>
+        <input type="text" onChange={(e) => setBio(e.target.value)} value={bio} />
+        <Button type = 'submit'variant="contained">Submit</Button>
+        <p><strong>{html}</strong></p>
+      </form>
+    </Box>
   );
 };
 

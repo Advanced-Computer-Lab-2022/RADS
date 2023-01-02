@@ -409,30 +409,32 @@ const SearchCourse = (props) => {
       </Box>
 
       <br />
-      {performIntersection(
-        filterMethodOnPrice(courses),
-        searchMethod(courses),
-        filterMethodOnRating(courses),
-        checkedSubjects
-      ) &&
-        performIntersection(
+      <Box className="card-container">
+        {performIntersection(
           filterMethodOnPrice(courses),
           searchMethod(courses),
           filterMethodOnRating(courses),
           checkedSubjects
-        ).map((course) => (
-          <Box>
-            <CourseCard
-              course={course}
-              rateVal={rateVal}
-              currencyVal={currencyVal}
-              todayDate={todayDate}
-              courseView1={courseView1}
-              courseView2={courseView2}
-              id={instruId}
-            />
-          </Box>
-        ))}
+        ) &&
+          performIntersection(
+            filterMethodOnPrice(courses),
+            searchMethod(courses),
+            filterMethodOnRating(courses),
+            checkedSubjects
+          ).map((course) => (
+            <Box>
+              <CourseCard
+                course={course}
+                rateVal={rateVal}
+                currencyVal={currencyVal}
+                todayDate={todayDate}
+                courseView1={courseView1}
+                courseView2={courseView2}
+                id={instruId}
+              />
+            </Box>
+          ))}
+      </Box>
       <Button
         variant="contained"
         onClick={() =>
