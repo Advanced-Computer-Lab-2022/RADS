@@ -7,6 +7,12 @@
   color: #222222;
 }
 
+label .create-course {
+  font-weight: 500;
+  font-size: 1.15em;
+  margin: 5px;
+}
+
 .column {
   display: block;
   

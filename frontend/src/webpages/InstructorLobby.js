@@ -16,16 +16,6 @@ const InstructorLobby = (props) => {
 
     return ( <Box className = "lobby" >
         <SearchCourse rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token}/> 
-        <Box className = "course-add" >
-        <CourseCreate rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token}/>
-         </Box>
-          <InstructorUpdateEmail rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token} />
-        <InstructorUpdatePassword rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token} />
-        <InstructorUpdateBio rateVal = {props.rateVal} currencyVal = { props.currencyVal } token ={props.token} /> {
-            /* <Box className="instructor-list">
-                                    <ViewProfileButton />
-                                    </Box> */
-        }
         </Box>
     )
 }

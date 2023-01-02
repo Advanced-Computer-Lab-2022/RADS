@@ -266,7 +266,7 @@ const TraineeSearch = (props) => {
         />
 
         <br />
-        <div>
+        <Box>
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
@@ -310,6 +310,43 @@ const TraineeSearch = (props) => {
               id="panel2d-header"
             >
               <Typography>
+                <strong>Price Filter</strong>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <Box className="filter-component2">
+                  <Box className="price-box" sx={{ width: 430 }}>
+                    <Slider
+                      className="price-slider"
+                      aria-label="Always visible"
+                      getAriaValueText={valueDollar}
+                      defaultValue={Math.ceil(7000 * rateVal)}
+                      marks={setRate(rateVal)}
+                      valueLabelDisplay="on"
+                      size="small"
+                      max={Math.ceil(7000 * rateVal)}
+                      step={Math.ceil(1 * rateVal)}
+                      min={Math.ceil(0 * rateVal)}
+                      name="Price-filter"
+                      onChangeCommitted={(e, v) => {
+                        setQueryF2(v);
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel3"}
+            onChange={handleChange("panel3")}
+          >
+            <AccordionSummary
+              aria-controls="panel3d-content"
+              id="panel3d-header"
+            >
+              <Typography>
                 <strong>Rating Filter</strong>
               </Typography>
             </AccordionSummary>
@@ -345,7 +382,7 @@ const TraineeSearch = (props) => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-        </div>
+        </Box>
         <br />
         <br />
         <Box className="home-search card-container">
