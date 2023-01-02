@@ -6,6 +6,7 @@ import axios from "axios";
 import jsPDF from "jspdf";
 import { Box, Button } from "@mui/material";
 import { saveAs } from "file-saver";
+import { Wallet } from "@mui/icons-material";
 
 const TraineeCourse = (props) => {
   const { rateVal, currencyVal } = props;
@@ -274,12 +275,12 @@ const TraineeCourse = (props) => {
               (window.location.href = `/traineesubmitrefund?traineeId=${traineeId}&courseId=${courseId}`)
             }
           >
-            <strong>Request Refund</strong>
+            Request Refund
           </Button>
         )}
         <Box>
           <Button variant="contained" onClick={handleClick}>
-            <strong>{buttonText2}</strong>
+            <Wallet sx={{marginRight:"2px"}}/>{buttonText2}
           </Button>
           {newDiv && (
             <p>

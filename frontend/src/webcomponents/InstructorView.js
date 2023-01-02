@@ -45,7 +45,7 @@ const InstructorView = (props) => {
         };
 
     return (
-      <Box className={course._id}>
+      <Box className="card-border">
         <h4>The information of course: {course.courseTitle} </h4>
         <Box>
           <strong>Course Subtitles: </strong>{" "}
@@ -104,11 +104,6 @@ const InstructorView = (props) => {
         >
           Report Course
         </Button>
-        <p>
-          <strong>
-            ============================================================================================================
-          </strong>
-        </p>
       </Box>
     );
 }

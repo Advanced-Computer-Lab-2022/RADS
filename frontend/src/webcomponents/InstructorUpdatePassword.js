@@ -34,31 +34,34 @@ const InstructorUpdatePassword = (props) => {
   };
 
   return (
-    <form className="change-info" onSubmit={handleSubmit}>
-      <fieldset>
-        <h3>Enter your new password</h3>
-        <input
-          type="password"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-      </fieldset>
-      <fieldset>
-        <h3>Re-enter new password</h3>
-        <input
-          type="password"
-          required
-          onChange={(e) => setConfirm(e.target.value)}
-          value={confirm}
-        />
-      </fieldset>
-      <Button type="submit" variant="contained">
-        Submit
-      </Button>
-      <p><strong>{html}</strong></p>
-      {error !== "" && <p><strong>{error}</strong></p>}
-    </form>
+    <Box className="card-border">
+      <form className="change-info" onSubmit={handleSubmit}>
+        <fieldset>
+          <h3>Enter your new password</h3>
+          <input
+            type="password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </fieldset>
+        <br />
+        <fieldset>
+          <h3>Re-enter new password</h3>
+          <input
+            type="password"
+            required
+            onChange={(e) => setConfirm(e.target.value)}
+            value={confirm}
+          />
+        </fieldset>
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+        <p><strong>{html}</strong></p>
+        {error !== "" && <p><strong>{error}</strong></p>}
+      </form>
+    </Box>
   );
 };
 
