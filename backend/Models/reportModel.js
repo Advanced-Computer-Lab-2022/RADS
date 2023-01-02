@@ -59,7 +59,7 @@ const reportSchema = new Schema({
         type: String,
         default: "unseen"
     },
-    adminCommment: {
+    adminComment: {
         type: String,
         default: ""
     }

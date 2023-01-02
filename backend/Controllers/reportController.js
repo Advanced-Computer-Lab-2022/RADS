@@ -22,7 +22,7 @@ const getReportedCoursesTrainee = async(req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'There does not exist a traine with the corresponding id.' });
     }
-    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId reportStatus adminCommment');
+    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId reportStatus adminComment');
     if (!requests) {
         return res.status(404).json({ error: 'No courses' });
     }
@@ -35,7 +35,7 @@ const getReportedCoursesCorpTrainee = async(req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'There does not exist a traine with the corresponding id.' });
     }
-    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId reportStatus adminCommment');
+    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId reportStatus adminComment');
     if (!requests) {
         return res.status(404).json({ error: 'No courses' });
     }
@@ -48,7 +48,7 @@ const getReportedCoursesInstructor = async(req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'There does not exist a traine with the corresponding id.' });
     }
-    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId reportStatus adminCommment');
+    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId reportStatus adminComment');
     if (!requests) {
         return res.status(404).json({ error: 'No courses' });
     }
@@ -56,7 +56,7 @@ const getReportedCoursesInstructor = async(req, res) => {
 }
 
 const getReportedProblems = async(req, res) => {
-    const requests = await Report.find({ requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId requestType reportStatus adminCommment');
+    const requests = await Report.find({ requestType: ['Other', 'Financial', 'Technical'] }).select('traineeId corpTraineeId instructorId traineeComments corpTraineeComments instructorComments courseId requestType reportStatus adminComment');
     if (!requests) {
         return res.status(404).json({ error: 'No courses' });
     }
@@ -148,7 +148,7 @@ const postCommentInstructor = async(req, res) => {
 }
 
 const postRequest = async(req, res) => {
-    const { traineeId, corpTraineeId, instructorId, courseId, courseProgress, refundAmount, requestType, reportStatus, adminCommment } = req.body;
+    const { traineeId, corpTraineeId, instructorId, courseId, courseProgress, refundAmount, requestType, reportStatus, adminComment } = req.body;
     try {
         const request = await Report.create({
             traineeId,
@@ -162,7 +162,7 @@ const postRequest = async(req, res) => {
             refundAmount,
             requestType,
             reportStatus,
-            adminCommment
+            adminComment
         });
         res.status(200).json(request._id);
     } catch (error) {
@@ -199,7 +199,7 @@ const updateRequest = async(req, res) => {
 
 const getTraineeUnresolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminComment');
     let result = requests.filter((item) => item["reportStatus"].includes("unseen") || item["reportStatus"].includes("pending"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
@@ -209,7 +209,7 @@ const getTraineeUnresolvedRequests = async(req, res) => {
 
 const getCorpTraineeUnresolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminComment');
     let result = requests.filter((item) => item["reportStatus"].includes("unseen") || item["reportStatus"].includes("pending"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
@@ -219,7 +219,7 @@ const getCorpTraineeUnresolvedRequests = async(req, res) => {
 
 const getInstructorUnresolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('instructorId instructorComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('instructorId instructorComments courseId reportStatus requestType adminComment');
     let result = requests.filter((item) => item["reportStatus"].includes("unseen") || item["reportStatus"].includes("pending"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
@@ -229,7 +229,7 @@ const getInstructorUnresolvedRequests = async(req, res) => {
 
 const getTraineeResolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ traineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('traineeId traineeComments courseId reportStatus requestType adminComment');
     let result = requests.filter((item) => item["reportStatus"].includes("resolved"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
@@ -239,7 +239,7 @@ const getTraineeResolvedRequests = async(req, res) => {
 
 const getCorpTraineeResolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ corpTraineeId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('corpTraineeId corpTraineeComments courseId reportStatus requestType adminComment');
     let result = requests.filter((item) => item["reportStatus"].includes("resolved"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
@@ -249,7 +249,7 @@ const getCorpTraineeResolvedRequests = async(req, res) => {
 
 const getInstructorResolvedRequests = async(req, res) => {
     const { id } = req.params;
-    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('instructorId instructorComments courseId reportStatus requestType adminCommment');
+    const requests = await Report.find({ instructorId: id }, { requestType: ['Other', 'Financial', 'Technical'] }).sort({ createdAt: -1 }).select('instructorId instructorComments courseId reportStatus requestType adminComment');
     let result = requests.filter((item) => item["reportStatus"].includes("resolved"));
     if (!requests) {
         return res.status(404).json({ error: 'No such request' });
