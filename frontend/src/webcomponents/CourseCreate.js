@@ -17,6 +17,7 @@ const CourseCreate = (props) => {
     } = props;
     const decode = jwt_decode(token);
     const instructorId = decode.id;
+    const [html,setHtml] = useState("");
     const [courseTitle, setCourseTitle] = useState('');
     const [subtitles, setSubtitles] = useState([{ subTitle: "", description: "", videoLink: "", hours: "" }]);
     const [price, setPrice] = useState('');
@@ -62,6 +63,7 @@ const CourseCreate = (props) => {
       setError(json.error);
     }
     if (response.ok) {
+      setHtml("course inserted successfully.");
       setCourseTitle("");
       setSubtitles([
         { subTitle: "", description: "", videoLink: "", hours: "" },
@@ -93,7 +95,6 @@ const CourseCreate = (props) => {
       setCoursePreview("");
       setError(null);
       console.log("New Course Added", json);
-      window.location.reload();
     }
   };
 
@@ -258,6 +259,7 @@ const CourseCreate = (props) => {
           type="text"
           onChange={(e) => setCourseTitle(e.target.value)}
           value={courseTitle}
+          required
         />
 
         <label>Course Preview Video Link: </label>
@@ -265,6 +267,7 @@ const CourseCreate = (props) => {
           type="text"
           onChange={(e) => setCoursePreview(e.target.value)}
           value={coursePreview}
+          required
         />
 
         <label>Price: </label>
@@ -272,6 +275,7 @@ const CourseCreate = (props) => {
           type="number"
           onChange={(e) => setPrice(e.target.value)}
           value={price}
+          required
         />
 
         <label>Short summary about the course: </label>
@@ -279,6 +283,7 @@ const CourseCreate = (props) => {
           type="text"
           onChange={(e) => setShortSummary(e.target.value)}
           value={shortSummary}
+          required
         />
 
         <label>Subject of the course: </label>
@@ -286,6 +291,7 @@ const CourseCreate = (props) => {
           type="text"
           onChange={(e) => setSubject(e.target.value)}
           value={subject}
+          required
         />
 
         <label>Total Hours of the course: </label>
@@ -293,6 +299,7 @@ const CourseCreate = (props) => {
           type="number"
           onChange={(e) => setTotalHours(e.target.value)}
           value={totalHours}
+          required
         />
         <br></br>
 
@@ -483,7 +490,8 @@ const CourseCreate = (props) => {
             </Box>
           ))}
         </Box>
-        <Button variant="contained">Submit</Button>
+        <p><strong>{html}</strong></p>
+        <Button type = 'submit'variant="contained">Submit</Button>
         {error && <Box className="error">{error}</Box>}
       </form>
 

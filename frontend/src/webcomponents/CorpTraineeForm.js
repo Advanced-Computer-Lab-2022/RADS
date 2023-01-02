@@ -5,13 +5,15 @@ import axios from "axios";
 const CorpTraineeForm = (props) => {
   const { rateVal, currencyVal } = props;
   const params = new URLSearchParams(window.location.search);
-  const corpTraineeId = params.get("corpTraineeId");
+  const corpTraineeId = params.get("corptraineeId");
+  console.log(corpTraineeId);
   const [courses, setCourses] = useState([]);
   const [coursesIds, setCoursesIds] = useState([]);
   const todayDate = new Date();
 
   useEffect(() => {
     const viewRegistered = async () => {
+      console.log(corpTraineeId);
       axios
         .get(`/corptrainee/${corpTraineeId}`)
         .then((res) => {

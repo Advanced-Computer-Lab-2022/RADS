@@ -176,6 +176,7 @@ const CorpTraineeCourse = (props) => {
     axios
       .post(`/corptrainee/getnotes/${corpTraineeId}`, info)
       .then((res) => {
+        console.log(res.data);
         setNotes(res.data);
       })
       .catch((error) => {
@@ -204,7 +205,7 @@ const CorpTraineeCourse = (props) => {
     doc.text(90, 60, `Notes for Course ${course.courseTitle}`);
     let x = 60;
     let y = 80;
-    for (let i = 1; i < notes.length; i++) {
+    for (let i = 0; i < notes.length; i++) {
       doc.text(x, y, `Note ${i}: ${notes[i].note}`);
       y += 20;
     }

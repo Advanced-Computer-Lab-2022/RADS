@@ -95,15 +95,13 @@ const TraineeCreditOptions = (props) => {
     axios
       .post(`/trainee/findcreditcard/${traineeId}`, body)
       .then((res) => {
-        if (res.data.ok) {
-          const newDate = new Date(json);
+          const newDate = new Date(res.data);
           if (newDate >= todayDate) {
             registerCourse();
             setPurchased(true);
           } else {
             setHtml("Cannot perform purschase, The Card is Expired");
           }
-        }
       })
       .catch((error) => {
         console.error(error);
@@ -111,6 +109,7 @@ const TraineeCreditOptions = (props) => {
   };
 
   const handleSubmit = (e) => {
+    console.log(checkedCard);
     e.preventDefault(); //prevent form submission
     if (checkedCard === null) {
       setNoCreditCard("You need to enter select a payment method.");

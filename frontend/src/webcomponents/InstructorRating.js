@@ -35,30 +35,7 @@ const InstructorRating = (props) => {
     }
   };
 
-  // const FetchReviewer = async(funcProps) => {
-  //     let result ='';
-  //     const{
-  //         //ctraineeId,
-  //         traineeId
-  //     } = funcProps;
-  //     //if(!ctraineeId || ctraineeId === null){
-  //         const response = await fetch(`/trainee/${traineeId}`);
-  //         const json = await response.json();
-  //         if (response.ok) {
-  //             console.log(json);
-  //             result = `${json.firstName} ${json.lastName}`;
-  //         }
-  //    /* }
-  //    else{
-  //     const response = await fetch(`/corpTrainee/${ctraineeId}`);
-  //     const json = await response.json();
-  //     if (response.ok) {
-  //         console.log(json);
-  //         result = `${json.firstName} ${json.lastName}`;
-  //     }
-  //     }*/
-  //     return (<strong>{result}</strong>);
-  // }
+
   return (
     <Box>
       <Box>

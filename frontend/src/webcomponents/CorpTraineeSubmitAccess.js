@@ -105,7 +105,7 @@ const CorpTraineeSubmitAccess = (props) => {
           value={corpTraineeComment}
           onChange={(e) => setCorpTraineeComment(e.target.value)}
         ></input>
-        <Button variant="contained">Send</Button>
+        <Button type='submit' variant="contained">Send</Button>
       </form>
       <p>
         <strong>{html}</strong>

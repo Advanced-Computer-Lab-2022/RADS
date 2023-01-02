@@ -103,7 +103,7 @@ const CorpTraineeInsert = (props) => {
         <Box className="column-child">
           <label>Password:</label>
           <input
-            type="text"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required

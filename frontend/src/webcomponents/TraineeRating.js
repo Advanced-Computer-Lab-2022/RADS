@@ -151,8 +151,7 @@ const TraineeRating = (props) => {
                     </Box>
                     <label>Enter a review on instructor: {instructorName}</label>
                     <input type="text" onChange={(e) => setIReview(e.target.value)} value={iReview}></input>
-                    <Button
-          variant="contained">Submit</Button>
+                    <Button type='submit' variant="contained">Submit</Button>
                 </form>
 
                 <p><strong>{html1}</strong></p>
@@ -180,8 +179,7 @@ const TraineeRating = (props) => {
                     </Box>
                     <label>Enter a review on the course:</label>
                     <input type="text" onChange={(e) => setCReview(e.target.value)} value={cReview}></input>
-                    <Button
-          variant="contained">Submit</Button>
+                    <Button type='submit' variant="contained">Submit</Button>
                 </form>
                 <p><strong>{html2}</strong></p>
             </Box>

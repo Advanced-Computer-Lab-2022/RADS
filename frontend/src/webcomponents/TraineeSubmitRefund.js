@@ -125,8 +125,7 @@ const TraineeSubmitRefund = (props) => {
                 <p><strong>Refund Amount: {Math.ceil(course.price * rateVal)} {currencyVal}</strong></p>
                 <label>Enter a reason why you would like to refund the Course.</label>
                 <input type="text" value={traineeComment} onChange={(e) => setTraineeComment(e.target.value)}></input>
-                <Button
-          variant="contained">Refund</Button>
+                <Button type='submit' variant="contained">Refund</Button>
             </form>
             <p><strong>{html}</strong></p>
         </Box>

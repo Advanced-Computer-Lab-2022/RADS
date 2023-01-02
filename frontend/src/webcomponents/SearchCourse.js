@@ -249,6 +249,7 @@ const SearchCourse = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault(); //prevent form submission
     const promo = { promotionStartDate, promotionEndDate, promotionRate };
+    console.log(promo);
     const response = await fetch(`/course/promo/${selectedCourseId}`, {
       method: "POST",
       body: JSON.stringify(promo),
@@ -258,6 +259,7 @@ const SearchCourse = (props) => {
       },
     });
     const json = await response.json();
+    console.log(json);
     if (!response.ok) {
       setError(json.error);
     }
@@ -314,7 +316,7 @@ const SearchCourse = (props) => {
               onChange={HandlePromotionVal}
             />
             <p>Value: {promotionRate}</p>
-            <Button variant="contained" onClick={handleSubmit}>
+            <Button type='submit' variant="contained" onClick={handleSubmit}>
               Submit
             </Button>
           </FormControl>
