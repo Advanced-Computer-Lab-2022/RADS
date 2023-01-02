@@ -52,6 +52,9 @@ const AdminAccess = (props) => {
         let courseGrade = 0;
         let courseProgress = 0;
         const info = { courseId, courseGrade, courseProgress };
+
+        console.log(info);
+        console.log(corpTraineeId);
         axios
             .post(`/corptrainee/register/${corpTraineeId}`, info)
             .then((res) => {

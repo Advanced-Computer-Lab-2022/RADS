@@ -281,15 +281,15 @@ const TraineeExam = (props) => {
                   A1{index + 1}: {correct}
                 </p>
               ))}
-            <p>
-              <strong>Exam Grade: {Math.ceil(examGradeFinal * 2)}%</strong>
-            </p>
-            <p>
+           {solved  && <p>
+             <strong>Exam Grade: {Math.ceil(examGradeFinal * 2)}%</strong>
+            </p>}
+           {solved && <p>
               <strong>
                 Total course grade:{" "}
                 {Math.ceil(examGradeFinal + oldExercisesGrade)} out of 100
               </strong>
-            </p>
+            </p>}
           </Box>
         </Box>
       )}

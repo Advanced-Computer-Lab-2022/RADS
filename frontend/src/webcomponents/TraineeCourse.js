@@ -191,7 +191,7 @@ const TraineeCourse = (props) => {
   };
 
   const getAllNotes = async () => {
-    const info = { courseId };
+    const info = { courseId }
     axios
       .post(`/trainee/getnotes/${traineeId}`, info)
       .then((res) => {
@@ -223,7 +223,7 @@ const TraineeCourse = (props) => {
     doc.text(90, 60, `Notes for Course ${course.courseTitle}`);
     let x = 60;
     let y = 80;
-    for (let i = 1; i < notes.length; i++) {
+    for (let i = 0; i < notes.length; i++) {
       doc.text(x, y, `Note ${i}: ${notes[i].note}`);
       y += 20;
     }

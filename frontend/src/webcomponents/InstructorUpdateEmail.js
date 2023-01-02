@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 const InstructorUpdateEmail = (props) => {
   const { rateVal, currencyVal, token } = props;
   const [email, setEmail] = useState("");
+  const [html, setHtml] = useState("");
   const decode = jwt_decode(token);
   const instructorId = decode.id;
   const handleSubmit = async (e) => {
@@ -17,8 +18,7 @@ const InstructorUpdateEmail = (props) => {
       .then((res) => {
         setEmail("");
         console.log("Info Changed", res.data);
-        //refresh page on successful submission
-        window.location.reload();
+        setHtml("Email changed successfully")
       })
       .catch((error) => {
         console.error(error);
@@ -34,7 +34,8 @@ const InstructorUpdateEmail = (props) => {
         onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
-      <Button variant="contained">Submit</Button>
+      <p><strong>{html}</strong></p>
+      <Button type='submit' variant="contained">Submit</Button>
     </form>
   );
 };

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const pdfTemplate = require('../Controllers/Documents/certificate');
+const { sendMail, sendPDF } = require('../Utilities/sendEmail');
 const pdf = require('html-pdf');
 const fs = require('fs');
 
@@ -323,7 +324,8 @@ const getCourseNotes = async(req, res) => {
     try {
         const id = mongoose.Types.ObjectId(req.params.id);
         const dbResp = await CorpTrainee.find({ _id: id });
-        let result = dbResp.notes.filter((item) => (item["courseId"].toString().toLowerCase().includes(courseId.toString().toLowerCase())));
+        console.log(dbResp);
+        let result = dbResp[0].notes.filter((item) => (item["courseId"].toString().toLowerCase().includes(courseId.toString().toLowerCase())));
         if (!dbResp) {
             // dbResp will be entire updated document, we're just returning newly added message which is input.
             res.status(400).json({ message: 'Not able to find notes' });

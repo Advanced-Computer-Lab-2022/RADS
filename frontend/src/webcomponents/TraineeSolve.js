@@ -218,7 +218,7 @@ const TraineeSolve = (props) => {
                             {solved && corrects && corrects.map((correct, index3) => (
                                 <p>A{index3 + 1}: {correct}</p>
                             ))}
-                            <p><strong>Exercises Grade: {Math.ceil(exercisesGradeFinal * 2)}%</strong></p>
+                            {solved && <p><strong>Exercises Grade: {Math.ceil(exercisesGradeFinal * 2)}%</strong></p>}
                         </Box>
                     </Box>)}
         </Box>

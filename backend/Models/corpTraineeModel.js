@@ -80,10 +80,12 @@ const corpTraineeSchema = new Schema({
         required: true
     },
     courses: {
-        type: [courseSchema]
+        type: [courseSchema],
+        default: []
     },
     notes: {
-        type: [noteSchema]
+        type: [noteSchema],
+        default: []
     },
     role: {
         type: String,

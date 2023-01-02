@@ -26,7 +26,7 @@ router.patch('/password/:id',
 
 router.post('/register/:id',
     passport.authenticate('jwt', { session: false }),
-    inRole(ROLES.CORP_TRAINEE),
+    inRole(ROLES.CORP_TRAINEE, ROLES.ADMIN),
     postCourseRegister);
 
 router.post('/checkaccess/:id',

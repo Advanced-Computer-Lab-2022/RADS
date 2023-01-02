@@ -141,28 +141,43 @@ const InstructorForm = (props) => {
               value={email}
             />
           </Box>
-          <Box className="column-child">
-            <label>Gender:</label>
-            <input
-              type="radio"
-              onChange={(e) => setGender(e.target.value)}
-              name="male"
-              required
-              value={gender}
-            />
-          </Box>
-          <Box className="column-child">
-            <label name="male">male</label>
-            <input
-              type="radio"
-              onChange={(e) => setGender(e.target.value)}
-              name="female"
-              required
-              value={gender}
-            />
-          </Box>
+    
+          <fieldset>
+        <label>Gender:</label>
+        <label>
+          <input
+            type="radio"
+            value="male"
+            checked={gender === "male"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Male
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="female"
+            checked={gender === "female"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Female
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="other"
+            checked={gender === "other"}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Other
+        </label>
+      </fieldset>
+
           <Box className="column-child"><Button variant="contained" type="submit">Submit</Button></Box>
-          {error && <Box className="error">{error}</Box>}
+          {error && <p><strong>{error}</strong></p>}
+          <p><strong>{html}</strong></p> 
         </form>
       </Box>
     );

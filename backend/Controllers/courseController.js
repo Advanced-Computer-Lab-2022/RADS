@@ -250,6 +250,7 @@ const postPromotion = async(req, res) => {
         course.promotionEndDate = promotionEndDate;
         course.promotionRate = promotionRate;
         await course.save();
+        res.status(200).json({ message: "updated successfully!" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

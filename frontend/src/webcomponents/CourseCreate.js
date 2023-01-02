@@ -17,6 +17,7 @@ const CourseCreate = (props) => {
     } = props;
     const decode = jwt_decode(token);
     const instructorId = decode.id;
+    const [html,setHtml] = useState("");
     const [courseTitle, setCourseTitle] = useState('');
     const [subtitles, setSubtitles] = useState([{ subTitle: "", description: "", videoLink: "", hours: "" }]);
     const [price, setPrice] = useState('');
@@ -62,6 +63,7 @@ const CourseCreate = (props) => {
       setError(json.error);
     }
     if (response.ok) {
+      setHtml("course inserted successfully.");
       setCourseTitle("");
       setSubtitles([
         { subTitle: "", description: "", videoLink: "", hours: "" },
@@ -93,7 +95,6 @@ const CourseCreate = (props) => {
       setCoursePreview("");
       setError(null);
       console.log("New Course Added", json);
-      window.location.reload();
     }
   };
 
@@ -709,6 +710,7 @@ const CourseCreate = (props) => {
           Submit
         </Button>
         {error && <Box className="error">{error}</Box>}
+        <p><strong>{html}</strong></p>
       </form>
     </Box>
   );

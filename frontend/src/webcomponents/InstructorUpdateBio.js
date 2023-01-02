@@ -8,6 +8,7 @@ const InstructorUpdateBio = (props) => {
   const decode = jwt_decode(token);
   const instructorId = decode.id;
   const [bio, setBio] = useState("");
+  const [html, setHtml] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault(); //prevent form submission
     const instructor = { bio };
@@ -15,8 +16,7 @@ const InstructorUpdateBio = (props) => {
       .patch(`/instructor/changeInfo/${instructorId}`, instructor)
       .then((res) => {
         setBio("");
-        console.log("Info Changed", res.data);
-        window.location.reload();
+        setHtml("Email changed successfully")
       })
       .catch((error) => {
         console.error(error);
@@ -28,7 +28,8 @@ const InstructorUpdateBio = (props) => {
       <h3>Change Your Bio</h3>
       <label>Bio:</label>
       <input type="text" onChange={(e) => setBio(e.target.value)} value={bio} />
-      <Button variant="contained">Submit</Button>
+      <Button type = 'submit'variant="contained">Submit</Button>
+      <p><strong>{html}</strong></p>
     </form>
   );
 };

@@ -13,6 +13,7 @@ const CorpTraineeForm = (props) => {
 
   useEffect(() => {
     const viewRegistered = async () => {
+      console.log(corpTraineeId);
       axios
         .get(`/corptrainee/${corpTraineeId}`)
         .then((res) => {
