@@ -7,7 +7,7 @@ import { Box, Button } from "@mui/material";
 const CorpTraineeViewReports = (props) => {
   const { rateVal, currencyVal } = props;
   const params = new URLSearchParams(window.location.search);
-  const corpTraineeId = params.get("corpTraineeId");
+  const corpTraineeId = params.get("corptraineeId");
   const [corpTrainee, setCorpTrainee] = useState([]);
   const [resolvedReports, setResolvedReports] = useState([]);
   const [unResolvedReports, setUnResolvedReports] = useState([]);
