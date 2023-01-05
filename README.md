@@ -6,7 +6,7 @@ Web Development is a crucial part in anything in our era. Thus, this course crea
 provide the user with the ultimate online experience.
 
 # Badges
-![ alt text ](https://img.shields.io/badge/Node.js-8BC0D0?style=for-the-badge.svg&logo=Node.js)
+![ alt text ](https://img.shields.io/badge/Node.js-7A1FA2?style=for-the-badge.svg&logo=Node.js)
 ![ alt text ](https://img.shields.io/badge/React.js-DD4B39?style=for-the-badge.svg&logo=React)
 ![ alt text ](https://img.shields.io/badge/JWT-ECD53F?style=for-the-badge.svg&logo=JWT)
 ![ alt text ](https://img.shields.io/badge/MongoDB-00205B?style=for-the-badge.svg&logo=MongoDB)
