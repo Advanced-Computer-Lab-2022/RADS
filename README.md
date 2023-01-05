@@ -5,6 +5,10 @@ An Online Learning System web application through which individuals can attend p
 Web Development is a crucial part in anything in our era. Thus, this course created the perfect opportunity for us to explore node JS, React, CSS and JavaScript all in one. It also pushed us to challenge ourselves. We had a bad experience booking online last year so we tried to make ours as easy to use as possible. Our goal is to 
 provide the user with the ultimate online experience.
 
+# Badges
+
+![alt-text](https://img.shields.io/hackage-deps/v/jwt)
+
 # Build Status
 * Build status: success
 
