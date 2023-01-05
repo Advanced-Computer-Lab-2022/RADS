@@ -392,10 +392,10 @@ Any contributions to our code is welcomed. You can always improve the frontend f
 
 # Credits
  * Our team "RADS" did tremendous work in order to fullfill this project. Special thanks to our Scrum Master - Ahmed Khaled @ahmillect for being always there for support and for managing our team smoothly:
-  - Khaled Ayman @Khaledayman9
-  - Ali Elserafy @AliSerafy
-  - Hassan Haridy @1hassanharidy
-  - Misk Mohamed @miskmabdalla
+  - Khaled Ayman @github/Khaledayman9
+  - Ali Elserafy @Agithub/liSerafy
+  - Hassan Haridy @github/1hassanharidy
+  - Misk Mohamed @github/miskmabdalla
  * Links that helped us alot: 
   - https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE
   - https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE
