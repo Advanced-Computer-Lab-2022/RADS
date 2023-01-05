@@ -11,7 +11,6 @@ provide the user with the ultimate online experience.
 ![ alt text ](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![ alt text ](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![JSON Web Tokens Badge](https://img.shields.io/badge/JWT-000?logo=jsonwebtokens&logoColor=fff&style=for-the-badge)
-![ alt text ](https://img.shields.io/badge/JWT-ECD53F?style=for-the-badge&logo=JWT)
 ![ alt text ](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![ alt text ](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=Express)
 ![ alt text ](https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white)
