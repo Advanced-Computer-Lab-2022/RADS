@@ -22,36 +22,36 @@ provide the user with the ultimate online experience.
 
 
 # Build Status
-* Build status: success
+  * Build status: success
 
 # Code Style
 We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
 
 # Screen shots
 
-1. Login page:
+  1. Login page:
 
-![login](https://user-images.githubusercontent.com/105018459/210191665-441fd574-2933-4a4a-8858-fe0b415fa4a6.PNG)
+  ![login](https://user-images.githubusercontent.com/105018459/210191665-441fd574-2933-4a4a-8858-fe0b415fa4a6.PNG)
 
-2. Signup page:
+  2. Signup page:
 
-![signup](https://user-images.githubusercontent.com/105018459/210191686-2bdec74b-7240-419b-bda0-73fb94164874.PNG)
+  ![signup](https://user-images.githubusercontent.com/105018459/210191686-2bdec74b-7240-419b-bda0-73fb94164874.PNG)
 
-3. About page:
+  3. About page:
 
-![about](https://user-images.githubusercontent.com/105018459/210191709-f7397949-30d9-4a9c-b7c1-be5389e9ed1e.PNG)
+  ![about](https://user-images.githubusercontent.com/105018459/210191709-f7397949-30d9-4a9c-b7c1-be5389e9ed1e.PNG)
 
-4. Home page:
+  4. Home page:
 
-![Home](https://user-images.githubusercontent.com/105018459/210191828-d47f02c9-8b7c-44f7-a8a7-5f008f8eab93.PNG)
+  ![Home](https://user-images.githubusercontent.com/105018459/210191828-d47f02c9-8b7c-44f7-a8a7-5f008f8eab93.PNG)
 
-5. Instructor Lobby:
+  5. Instructor Lobby:
 
-![home2](https://user-images.githubusercontent.com/105018459/210191854-beb720fe-c051-4825-8964-e3f0d1bb6b5e.PNG)
+  ![home2](https://user-images.githubusercontent.com/105018459/210191854-beb720fe-c051-4825-8964-e3f0d1bb6b5e.PNG)
 
-6. Add course:
+  6. Add course:
 
-![addourse](https://user-images.githubusercontent.com/105018459/210191860-bd726d21-3f35-45e1-9593-201f43b79dd9.PNG)
+  ![addourse](https://user-images.githubusercontent.com/105018459/210191860-bd726d21-3f35-45e1-9593-201f43b79dd9.PNG)
 
 
 # Tech/Framework used
@@ -95,73 +95,73 @@ Our main aim was to make our website simple and easy to navigate through. We mad
 Our Project is not applicable for code examples as it is a big web application.
 
 # Installation
-* First go to Back-end folder and type the command: npm i
-* Second go to the Front-end folder and type the command: npm i
+  * First go to Back-end folder and type the command: npm i
+  * Second go to the Front-end folder and type the command: npm i
 
 # API reference
-1. Admin route:
+  1. Admin route:
 
-    * GET routes: /admin  - /admin/:id
+      * GET routes: /admin  - /admin/:id
 
-    * POST routes: /admin/addadmin  -  /admin/addctrainee  - /admin/addinstructor
+      * POST routes: /admin/addadmin  -  /admin/addctrainee  - /admin/addinstructor
 
-    * PATCH routes: /admin/editadmin/:id
-2. Trainee route: 
-  
-    * GET routes: /trainee, /trainee/:id , /trainee/getcourses/:id,
+      * PATCH routes: /admin/editadmin/:id
+  2. Trainee route: 
 
-    * POST routes: /trainee/register/:id  -  /trainee/findgrade/:id  - /trainee/findtestgrade/:id  - /trainee/forgot/:id  - /trainee/addcredit/:id   -    /trainee/checkregister/:id   -  /trainee/updatebalance/:id    -   /trainee/updateprogress/:id  -  /trainee/courseprogress/:id   -  /trainee/updateexamstatus/:id  -  /trainee/updateexamgrade/:id   -  /trainee/updateexercisesgrade/:id  -  /trainee/updateexercisesstatus/:id  -  /trainee/refund/:id  -  /trainee/checkexstatus/:id  -   /trainee/findcreditcard/:id  -   /trainee/deletecard/:id  -   /trainee/postnote/:id   -   /trainee/getnotes/:id   -   /trainee/emailpdf/:id   -   /trainee/checkcertstate/:id   -   /trainee/updatecertstate/:id   -   /trainee/createpdf
-  
-    * PATCH routes:  /trainee/password/:id
+      * GET routes: /trainee, /trainee/:id , /trainee/getcourses/:id,
 
-3. Instructor route :
-  
-    * GET routes: /instructor  -  /instructor/:id   - /instructor/add
+      * POST routes: /trainee/register/:id  -  /trainee/findgrade/:id  - /trainee/findtestgrade/:id  - /trainee/forgot/:id  - /trainee/addcredit/:id   -    /trainee/checkregister/:id   -  /trainee/updatebalance/:id    -   /trainee/updateprogress/:id  -  /trainee/courseprogress/:id   -  /trainee/updateexamstatus/:id  -  /trainee/updateexamgrade/:id   -  /trainee/updateexercisesgrade/:id  -  /trainee/updateexercisesstatus/:id  -  /trainee/refund/:id  -  /trainee/checkexstatus/:id  -   /trainee/findcreditcard/:id  -   /trainee/deletecard/:id  -   /trainee/postnote/:id   -   /trainee/getnotes/:id   -   /trainee/emailpdf/:id   -   /trainee/checkcertstate/:id   -   /trainee/updatecertstate/:id   -   /trainee/createpdf
 
-    * POST routes: /instructor/review/:id  -  /instructor/forgot/:id  - /instructor/updatebalance/:id
+      * PATCH routes:  /trainee/password/:id
 
-    * PATCH routes: /instructor/changeInfo/:id  - /instructor/password/:id  
+  3. Instructor route :
 
-    * DELETE routes: /instructor/:id
+      * GET routes: /instructor  -  /instructor/:id   - /instructor/add
 
-4. Course route: 
-  
-    * GET routes: /course -  /course/:id  - /course/find/:id  -  /course/rating/:id  -  /course/highest/views  -  /course/get/coursesubjects  -   /course/getinstructor/coursesubjects/:id
+      * POST routes: /instructor/review/:id  -  /instructor/forgot/:id  - /instructor/updatebalance/:id
 
-    * POST routes: /course/add  -  /course/:id  -   /course/review/:id   -   /course/rating/:id   -  /course/promo/:id   -  /course/max  -  /course/subset  -   /course/coursespostpromotion
+      * PATCH routes: /instructor/changeInfo/:id  - /instructor/password/:id  
 
-    * DELETE routes: /course/:id   -   /course/updatepromo/:id   -   /course/updateview/:id
+      * DELETE routes: /instructor/:id
 
-    * PATCH routes: /course/:id
+  4. Course route: 
 
-5. CorpTrainee route:
-  
-    * GET routes:/corptrainee   -  /corptrainee/:id   -   /corptrainee/getcourses/:id   -   /corptrainee/cert/getpdf
+      * GET routes: /course -  /course/:id  - /course/find/:id  -  /course/rating/:id  -  /course/highest/views  -  /course/get/coursesubjects  -   /course/getinstructor/coursesubjects/:id
 
-    * PATCH routes: /corptrainee/password/:id
+      * POST routes: /course/add  -  /course/:id  -   /course/review/:id   -   /course/rating/:id   -  /course/promo/:id   -  /course/max  -  /course/subset  -   /course/coursespostpromotion
 
-    * POST routes: /corptrainee/register/:id   -   /corptrainee/checkaccess/:id   -   /corptrainee/courseprogress/:id   -   /corptrainee/findgrade/:id  -   /corptrainee/findtestgrade/:id  -   /corptrainee/checkexstatus/:id  -   /corptrainee/checkstatus/:id  -   /corptrainee/updateexamgrade/:id  -   /corptrainee/updateexercisesgrade/:id  -   /corptrainee/updateexercisesstatus/:id  -   /corptrainee/updateprogress/:id   -   /corptrainee/updateexamstatus/:id  -   /corptrainee/postnote/:id  -   /corptrainee/getnotes/:id  -   /corptrainee/checkcertstate/:id   -  /corptrainee/updatecertstate/:id  -   /corptrainee/createpdf  -   /corptrainee/emailpdf/:id
+      * DELETE routes: /course/:id   -   /course/updatepromo/:id   -   /course/updateview/:id
 
-6. Currency route:
-  
-    * GET routes: /currency
+      * PATCH routes: /course/:id
 
-    * POST routes: /currency
+  5. CorpTrainee route:
+
+      * GET routes:/corptrainee   -  /corptrainee/:id   -   /corptrainee/getcourses/:id   -   /corptrainee/cert/getpdf
+
+      * PATCH routes: /corptrainee/password/:id
+
+      * POST routes: /corptrainee/register/:id   -   /corptrainee/checkaccess/:id   -   /corptrainee/courseprogress/:id   -   /corptrainee/findgrade/:id  -   /corptrainee/findtestgrade/:id  -   /corptrainee/checkexstatus/:id  -   /corptrainee/checkstatus/:id  -   /corptrainee/updateexamgrade/:id  -   /corptrainee/updateexercisesgrade/:id  -   /corptrainee/updateexercisesstatus/:id  -   /corptrainee/updateprogress/:id   -   /corptrainee/updateexamstatus/:id  -   /corptrainee/postnote/:id  -   /corptrainee/getnotes/:id  -   /corptrainee/checkcertstate/:id   -  /corptrainee/updatecertstate/:id  -   /corptrainee/createpdf  -   /corptrainee/emailpdf/:id
+
+  6. Currency route:
+
+      * GET routes: /currency
+
+      * POST routes: /currency
 
 
-7. Guest route:
-  
-    * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
+  7. Guest route:
 
-8. Report route:
-  
-    * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
+      * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
 
-    * PATCH route: /request/updaterequest/:id  -  /request/updaterequest/:id
+  8. Report route:
 
-    * POST route: /request/postrequest  -  /request/traineepostcomment/:id  -  /request/corptraineepostcomment/:id   - /request/instructorpostcomment/:id
+      * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
 
-  
+      * PATCH route: /request/updaterequest/:id  -  /request/updaterequest/:id
+
+      * POST route: /request/postrequest  -  /request/traineepostcomment/:id  -  /request/corptraineepostcomment/:id   - /request/instructorpostcomment/:id
+
+
 
 # Tests
   - When a trainee purchases a course, he is registered in it.
