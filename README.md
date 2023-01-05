@@ -92,7 +92,28 @@ We used the standard Javascript Coding style to improve readability and maintain
 Our main aim was to make our website simple and easy to navigate through. We made a direct User interface. We made sure that everything was authenticated and secured. The website gives feedback on every action done to make the user knows exactly what is happening without any confusion and make him satisfied.
 
 # Code Examples
-Our Project is not applicable for code examples as it is a big web application.
+
+''
+const sendPDF = (toEmail, body) => {
+    nodeoutlook.sendEmail({
+        auth: {
+            user: process.env.SENDER_EMAIL,
+            pass: process.env.SENDER_PASSWORD
+        },
+        from: process.env.SENDER_EMAIL,
+        to: toEmail,
+        subject: 'Certificate of completion',
+        text: body,
+        attachments: [{
+            filename: 'certificate.pdf',
+            path: '../backend/Controllers/Documents/certificate.pdf',
+            contentType: 'application/pdf'
+        }],
+        onError: (e) => console.log(e),
+        onSuccess: (i) => console.log(i)
+    });
+};
+''
 
 # Installation
   * First go to Back-end folder and type the command: npm i
