@@ -59,37 +59,66 @@ We used the standard Javascript Coding style to improve readability and maintain
 
 # Tech/Framework used
 
-  2. In Back-end
+  1. In Back-end
+    
     * NodeJS
+    
     * Nodemailer
+    
     * MongoDB
+    
     * Mongoose
+    
     * Express
+    
     * Bcrypt
+    
     * Body-parser
+    
     * Cors
+    
     * Dotenv
+    
     * Fs
+    
     * Html-pdf
+    
     * Https
+    
     * Jsonwebtoken
+    
     * Nodejs-nodemailer-outlook
+    
     * Nodemon
+    
     * Passport
+    
     * Passport-jwt
+    
     * Randomstring
+    
     * Validator
    
-  1. In Front-end:
+  2. In Front-end:
+    
     * ReactJS
+    
     * Material UI
+    
     * Axios
+    
     * Bcrypt
+    
     * Dateformat
+    
     * File-saver
+    
     * Jsonwebtoken
+    
     * Http
+    
     * Jspdf
+    
     * Jwt-decode
      
 # Features
