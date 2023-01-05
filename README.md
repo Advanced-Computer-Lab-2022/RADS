@@ -118,29 +118,29 @@ Our Project is not applicable for code examples as it is a big web application.
   
   * GET routes: /instructor  -  /instructor/:id   - /instructor/add
   
-  * POST routes: /instructor/review/:id, /instructor/forgot/:id , /instructor/updatebalance/:id
+  * POST routes: /instructor/review/:id  -  /instructor/forgot/:id  - /instructor/updatebalance/:id
   
-  * PATCH routes: /instructor/changeInfo/:id, /instructor/password/:id, 
+  * PATCH routes: /instructor/changeInfo/:id  - /instructor/password/:id  
   
   * DELETE routes: /instructor/:id
 
 4. Course route: 
   
-  * GET routes: /course, /course/:id, /course/find/:id, /course/rating/:id, /course/highest/views, /course/get/coursesubjects, /course/getinstructor/coursesubjects/:id, 
+  * GET routes: /course -  /course/:id  - /course/find/:id  -  /course/rating/:id  -  /course/highest/views  -  /course/get/coursesubjects  -   /course/getinstructor/coursesubjects/:id
   
-  * POST routes: /course/add, /course/:id, /course/review/:id, /course/rating/:id, /course/promo/:id, /course/max, /course/subset, /course/coursespostpromotion
+  * POST routes: /course/add  -  /course/:id  -   /course/review/:id   -   /course/rating/:id   -  /course/promo/:id   -  /course/max  -  /course/subset  -   /course/coursespostpromotion
   
-  * DELETE routes: /course/:id, /course/updatepromo/:id, /course/updateview/:id
+  * DELETE routes: /course/:id   -   /course/updatepromo/:id   -   /course/updateview/:id
   
   * PATCH routes: /course/:id
 
 5. CorpTrainee route:
   
-  * GET routes:/corptrainee, /corptrainee/:id, /corptrainee/getcourses/:id, /corptrainee/cert/getpdf
+  * GET routes:/corptrainee   -  /corptrainee/:id   -   /corptrainee/getcourses/:id   -   /corptrainee/cert/getpdf
   
   * PATCH routes: /corptrainee/password/:id
   
-  * POST routes: /corptrainee/register/:id, /corptrainee/checkaccess/:id, /corptrainee/courseprogress/:id, /corptrainee/findgrade/:id, /corptrainee/findtestgrade/:id, /corptrainee/checkexstatus/:id, /corptrainee/checkstatus/:id, /corptrainee/updateexamgrade/:id, /corptrainee/updateexercisesgrade/:id,, /corptrainee/updateexercisesstatus/:id, /corptrainee/updateprogress/:id, /corptrainee/updateexamstatus/:id, /corptrainee/postnote/:id, /corptrainee/getnotes/:id, /corptrainee/checkcertstate/:id,/corptrainee/updatecertstate/:id, /corptrainee/createpdf, /corptrainee/emailpdf/:id
+  * POST routes: /corptrainee/register/:id   -   /corptrainee/checkaccess/:id   -   /corptrainee/courseprogress/:id   -   /corptrainee/findgrade/:id  -   /corptrainee/findtestgrade/:id  -   /corptrainee/checkexstatus/:id  -   /corptrainee/checkstatus/:id  -   /corptrainee/updateexamgrade/:id  -   /corptrainee/updateexercisesgrade/:id  -   /corptrainee/updateexercisesstatus/:id  -   /corptrainee/updateprogress/:id   -   /corptrainee/updateexamstatus/:id  -   /corptrainee/postnote/:id  -   /corptrainee/getnotes/:id  -   /corptrainee/checkcertstate/:id   -  /corptrainee/updatecertstate/:id  -   /corptrainee/createpdf  -   /corptrainee/emailpdf/:id
 
 6. Currency route:
   
@@ -151,15 +151,15 @@ Our Project is not applicable for code examples as it is a big web application.
 
 7. Guest route:
   
-  * POST routes: /guest/signup, /guest/login , /guest/create/admin, /guest/create/instructor, /guest/create/corptrainee, /guest/forgotpassword, /guest/changepassword
+  * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
 
 8. Report route:
   
-  * GET route: /request/:id, /requests/refund, /requests/access, /request/getcoursereportscorp/:id,/request/getcoursereportsinst/:id, /request/getcoursereportstrainee/:id, /request/getcorptraineeunresolved/:id, /request/getcorptraineeresolved/:id,/request/gettraineeunresolved/:id,/request/gettraineeresolved/:id, /requests/allproblems
+  * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
 
-  * PATCH route: /request/updaterequest/:id, /request/updaterequest/:id
+  * PATCH route: /request/updaterequest/:id  -  /request/updaterequest/:id
 
-  * POST route: /request/postrequest, /request/traineepostcomment/:id, /request/corptraineepostcomment/:id, /request/instructorpostcomment/:id
+  * POST route: /request/postrequest  -  /request/traineepostcomment/:id  -  /request/corptraineepostcomment/:id   - /request/instructorpostcomment/:id
 
   
 
