@@ -9,7 +9,7 @@ provide the user with the ultimate online experience.
 
 
 ![ alt text ](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![ alt text ](https://img.shields.io/badge/React.js-DD4B39?style=for-the-badge.svg&logo=React)
+![ alt text ](https://img.shields.io/badge/React.js-DD4B39?style=for-the-badge&logo=React&logoColor=white)
 ![ alt text ](https://img.shields.io/badge/JWT-ECD53F?style=for-the-badge.svg&logo=JWT)
 ![ alt text ](https://img.shields.io/badge/MongoDB-00205B?style=for-the-badge.svg&logo=MongoDB)
 ![ alt text ](https://img.shields.io/badge/Express.js-000000?style=for-the-badge.svg&logo=Express)
