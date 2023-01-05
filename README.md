@@ -61,67 +61,38 @@ We used the standard Javascript Coding style to improve readability and maintain
 
 # Tech/Framework used
 
- 1. In Back-end
-   
-   * NodeJS
+1. In Back-end
+    * NodeJS
+    * Nodemailer
+    * MongoDB
+    * Mongoose
+    * Express
+    * Bcrypt
+    * Body-parser
+    * Cors
+    * Dotenv
+    * Fs
+    * Html-pdf
+    * Https
+    * Jsonwebtoken
+    * Nodejs-nodemailer-outlook
+    * Nodemon
+    * Passport
+    * Passport-jwt
+    * Randomstring
+    * Validator
 
-   * Nodemailer
-
-   * MongoDB
-
-   * Mongoose
-
-   * Express
-
-   * Bcrypt
-
-   * Body-parser
-
-   * Cors
-
-   * Dotenv
-
-   * Fs
-
-   * Html-pdf
-
-   * Https
-
-   * Jsonwebtoken
-
-   * Nodejs-nodemailer-outlook
-
-   * Nodemon
-
-   * Passport
-
-   * Passport-jwt
-
-   * Randomstring
-
-   * Validator
-
- 2. In Front-end:
-    
-   * ReactJS
-    
-   * Material UI
-    
-   * Axios
-    
-   * Bcrypt
-    
-   * Dateformat
-    
-   * File-saver
-    
-   * Jsonwebtoken
-    
-   * Http
-    
-   * Jspdf
-    
-   * Jwt-decode
+2. In Front-end:
+    * ReactJS
+    * Material UI
+    * Axios
+    * Bcrypt
+    * Dateformat
+    * File-saver
+    * Jsonwebtoken
+    * Http
+    * Jspdf
+    * Jwt-decode
      
 # Features
 Our main aim was to make our website simple and easy to navigate through. We made a direct User interface. We made sure that everything was authenticated and secured. The website gives feedback on every action done to make the user knows exactly what is happening without any confusion and make him satisfied.
