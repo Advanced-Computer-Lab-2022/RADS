@@ -7,7 +7,7 @@ provide the user with the ultimate online experience.
 
 # Badges
 ![alt-text](https://img.shields.io/badge/jwt-v3.1.2-ECD53F?style=for-the-badge&logo=JWT)
-![alt-text](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB)
+![ alt text ](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB)
 
 
 # Build Status
