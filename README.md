@@ -59,45 +59,44 @@ We used the standard Javascript Coding style to improve readability and maintain
 
 # Tech/Framework used
 
-  1. In Back-end
-    
-    * NodeJS
-    
-    * Nodemailer
-    
-    * MongoDB
-    
-    * Mongoose
-    
-    * Express
-    
-    * Bcrypt
-    
-    * Body-parser
-    
-    * Cors
-    
-    * Dotenv
-    
-    * Fs
-    
-    * Html-pdf
-    
-    * Https
-    
-    * Jsonwebtoken
-    
-    * Nodejs-nodemailer-outlook
-    
-    * Nodemon
-    
-    * Passport
-    
-    * Passport-jwt
-    
-    * Randomstring
-    
-    * Validator
+1. In Back-end
+ NodeJS
+
+ Nodemailer
+
+ MongoDB
+
+ Mongoose
+
+ Express
+
+ Bcrypt
+
+ Body-parser
+
+ Cors
+
+ Dotenv
+
+ Fs
+
+ Html-pdf
+
+ Https
+
+ Jsonwebtoken
+
+ Nodejs-nodemailer-outlook
+
+ Nodemon
+
+ Passport
+
+ Passport-jwt
+
+ Randomstring
+
+ Validator
    
   2. In Front-end:
     
