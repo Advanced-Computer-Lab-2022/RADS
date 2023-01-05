@@ -15,7 +15,7 @@ provide the user with the ultimate online experience.
 ![ alt text ](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=Express)
 ![ alt text ](https://img.shields.io/badge/MUI-FF9900?style=for-the-badge&logo=MUI)
 ![ alt text ](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
-![ alt text ](https://img.shields.io/badge/GitHub-9999FF?style=for-the-badge&logo=GitHub)
+![ alt text ](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 
 
 # Build Status
