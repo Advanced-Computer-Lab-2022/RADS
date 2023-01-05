@@ -175,6 +175,8 @@ Our Project is not applicable for code examples as it is a big web application.
 
 1- As a guest, you can 
   * view all courses, search and filter courses by price, rating or subject and view their description.
+
+
 2- As a Trainee, you can
   * view all courses
   * search and filter courses by price, rating or subject and view their description
@@ -190,6 +192,8 @@ Our Project is not applicable for code examples as it is a big web application.
   * write course notes and download them
   * view all report and their status follow up on unresolved problem
   * edit his email or password
+
+
 3- As a Corporate Trainee, you can
   * view all courses
   * search and filter courses by rating or subject and view their description
@@ -202,6 +206,8 @@ Our Project is not applicable for code examples as it is a big web application.
   * write course notes and download them
   * view all report and their status follow up on unresolved problem
   * edit his email or password
+
+
 4- As an Instructor, you can 
   * create a new course and add all it's information
   * set promotion for a specific course
@@ -211,6 +217,7 @@ Our Project is not applicable for code examples as it is a big web application.
   * edit his biography or email or password
   * search and filter courses by price, rating or subject and view their description
   * search and filter his courses by price, rating or subject and view their description
+
 5- As an Admin, you can
   * Add corporate trainees and set their usernames and passwords
   * Add instructors and set their usernames and passwords
