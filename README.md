@@ -93,7 +93,7 @@ Our main aim was to make our website simple and easy to navigate through. We mad
 
 # Code Examples
 
-''
+```
 const sendPDF = (toEmail, body) => {
     nodeoutlook.sendEmail({
         auth: {
@@ -113,7 +113,7 @@ const sendPDF = (toEmail, body) => {
         onSuccess: (i) => console.log(i)
     });
 };
-''
+```
 
 # Installation
   * First go to Back-end folder and type the command: npm i
