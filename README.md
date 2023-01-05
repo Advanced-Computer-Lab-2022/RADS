@@ -6,7 +6,7 @@ Web Development is a crucial part in anything in our era. Thus, this course crea
 provide the user with the ultimate online experience.
 
 # Badges
-![alt-text](https://img.shields.io/hackage-deps/v/jwt)
+![alt-text](https://img.shields.io/badge/jwt-text-ECD53F?style=for-the-badge&logo=Tesla)
 
 
 # Build Status
