@@ -391,9 +391,16 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
 Any contributions to our code is welcomed. You can always improve the frontend for a better UX.
 
 # Credits
-Our team "RADS" did tremendous work in order to fullfill this project. Special thanks to our Scrum Master - Ahmed Khaled for being always there for support and for managing our team smoothly. Khaled Ayman , Ali Elserafy , Hassan Haridy , Misk Mohamed also have all worked really hard to perfect this website.
-Links that helped us alot: https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE, https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE, https://www.youtube.com/watch?v=x7niho285qs&list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1&index=15&t=1337s
-,https://youtu.be/XtS14dXwvwE?list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1
+ * Our team "RADS" did tremendous work in order to fullfill this project. Special thanks to our Scrum Master - Ahmed Khaled @ahmillect for being always there for support and for managing our team smoothly:
+  - Khaled Ayman @Khaledayman9
+  - Ali Elserafy @AliSerafy
+  - Hassan Haridy @1hassanharidy
+  - Misk Mohamed @miskmabdalla
+ * Links that helped us alot: 
+  - https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE
+  - https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE
+  - https://www.youtube.com/watch?v=x7niho285qs&list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1&index=15&t=1337s
+  - https://youtu.be/XtS14dXwvwE?list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1
 
 # License
 
