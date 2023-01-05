@@ -232,7 +232,7 @@ Links that helped us alot: https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4c
 
 MIT License
 
-![ alt text ](https://img.shields.io/badge/MIT-MIT License-83B81A)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Copyright (c) [2023] [Ahmed Khaled]
 
