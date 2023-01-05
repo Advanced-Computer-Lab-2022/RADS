@@ -101,22 +101,22 @@ Our Project is not applicable for code examples as it is a big web application.
 # API reference
 1. Admin route:
   
-  * GET routes: /admin, /admin/:id
+  * GET routes: /admin  - /admin/:id
   
-  * POST routes: /admin/addadmin, /admin/addctrainee, /admin/addinstructor
+  * POST routes: /admin/addadmin  -  /admin/addctrainee  - /admin/addinstructor
   
   * PATCH routes: /admin/editadmin/:id
 2. Trainee route: 
   
   * GET routes: /trainee, /trainee/:id , /trainee/getcourses/:id,
   
-  * POST routes: /trainee/register/:id, /trainee/findgrade/:id, /trainee/findtestgrade/:id, /trainee/forgot/:id, /trainee/addcredit/:id, /trainee/checkregister/:id, /trainee/updatebalance/:id, /trainee/updateprogress/:id, /trainee/courseprogress/:id, /trainee/updateexamstatus/:id, /trainee/updateexamgrade/:id, /trainee/updateexercisesgrade/:id, /trainee/updateexercisesstatus/:id, /trainee/refund/:id, /trainee/checkexstatus/:id, /trainee/findcreditcard/:id, /trainee/deletecard/:id, /trainee/postnote/:id, /trainee/getnotes/:id, /trainee/emailpdf/:id, /trainee/checkcertstate/:id, /trainee/updatecertstate/:id, /trainee/createpdf
+  * POST routes: /trainee/register/:id  -  /trainee/findgrade/:id  - /trainee/findtestgrade/:id  - /trainee/forgot/:id  - /trainee/addcredit/:id   -    /trainee/checkregister/:id   -  /trainee/updatebalance/:id    -   /trainee/updateprogress/:id  -  /trainee/courseprogress/:id   -  /trainee/updateexamstatus/:id  -  /trainee/updateexamgrade/:id   -  /trainee/updateexercisesgrade/:id  -  /trainee/updateexercisesstatus/:id  -  /trainee/refund/:id  -  /trainee/checkexstatus/:id  -   /trainee/findcreditcard/:id  -   /trainee/deletecard/:id  -   /trainee/postnote/:id   -   /trainee/getnotes/:id   -   /trainee/emailpdf/:id   -   /trainee/checkcertstate/:id   -   /trainee/updatecertstate/:id   -   /trainee/createpdf
   
   * PATCH routes:  /trainee/password/:id
 
 3. Instructor route :
   
-  * GET routes: /instructor, /instructor/:id, /instructor/add
+  * GET routes: /instructor  -  /instructor/:id   - /instructor/add
   
   * POST routes: /instructor/review/:id, /instructor/forgot/:id , /instructor/updatebalance/:id
   
