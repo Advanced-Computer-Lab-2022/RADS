@@ -62,6 +62,7 @@ We used the standard Javascript Coding style to improve readability and maintain
 # Tech/Framework used
 
  1. In Back-end
+   
    * NodeJS
 
    * Nodemailer
@@ -100,27 +101,27 @@ We used the standard Javascript Coding style to improve readability and maintain
 
    * Validator
 
-  2. In Front-end:
+ 2. In Front-end:
     
-    * ReactJS
+   * ReactJS
     
-    * Material UI
+   * Material UI
     
-    * Axios
+   * Axios
     
-    * Bcrypt
+   * Bcrypt
     
-    * Dateformat
+   * Dateformat
     
-    * File-saver
+   * File-saver
     
-    * Jsonwebtoken
+   * Jsonwebtoken
     
-    * Http
+   * Http
     
-    * Jspdf
+   * Jspdf
     
-    * Jwt-decode
+   * Jwt-decode
      
 # Features
 Our main aim was to make our website simple and easy to navigate through. We made a direct User interface. We made sure that everything was authenticated and secured. The website gives feedback on every action done to make the user knows exactly what is happening without any confusion and make him satisfied.
