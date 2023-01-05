@@ -6,11 +6,14 @@ Web Development is a crucial part in anything in our era. Thus, this course crea
 provide the user with the ultimate online experience.
 
 # Badges
-![ alt text ](https://img.shields.io/badge/Node.js-339933?style=for-the-badge.svg&logo=Node.js)
+![ alt text ](https://img.shields.io/badge/Node.js-8BC0D0?style=for-the-badge.svg&logo=Node.js)
+![ alt text ](https://img.shields.io/badge/React.js-DD4B39?style=for-the-badge.svg&logo=React)
 ![ alt text ](https://img.shields.io/badge/JWT-ECD53F?style=for-the-badge.svg&logo=JWT)
 ![ alt text ](https://img.shields.io/badge/MongoDB-00205B?style=for-the-badge.svg&logo=MongoDB)
 ![ alt text ](https://img.shields.io/badge/Express.js-000000?style=for-the-badge.svg&logo=Express)
 ![ alt text ](https://img.shields.io/badge/MUI-FF9900?style=for-the-badge.svg&logo=MUI)
+![ alt text ](https://img.shields.io/badge/Git.js-7FE719?style=for-the-badge.svg&logo=Git)
+![ alt text ](https://img.shields.io/badge/GitHub-9999FF?style=for-the-badge.svg&logo=GitHub)
 
 
 # Build Status
