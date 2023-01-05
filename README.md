@@ -226,7 +226,7 @@ Links that helped us alot: https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4c
 # License
 
 MIT License
-
+![ alt text ](https://img.shields.io/badge/MIT-MIT License-83B81A?style=for-the-badge.svg&logo=JWT)
 Copyright (c) [2023] [Ahmed Khaled]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
