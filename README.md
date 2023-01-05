@@ -331,11 +331,14 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
 
 # Tests
   - When a trainee purchases a course, he is registered in it.
-  - Trainee can refund only below 50% progress.
-  - corptrainee cannot send access request to already enrolled courses.
-  - instructor cannot create an empty course
-  - users cannot put invalid informations such as usernames and emails.
-  - admins can follow up on reports
+  - Trainee can refund only below 50% course progress.
+  - Corporate-trainees cannot send access request to already enrolled courses.
+  - Instructor cannot create an empty course
+  - Users cannot put invalid informations such as usernames and emails.
+  - Admins can follow up on reports
+  - Trainees cannot purchase a course without a valid payment method.
+  - Instructors and trainees must accept the contract before entering the website.
+ 
 
 # How to use?
 
