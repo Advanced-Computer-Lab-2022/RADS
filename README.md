@@ -9,12 +9,12 @@ provide the user with the ultimate online experience.
 
 
 ![ alt text ](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![ alt text ](https://img.shields.io/badge/React.js-DD4B39?style=for-the-badge&logo=React&logoColor=white)
+![ alt text ](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![ alt text ](https://img.shields.io/badge/JWT-ECD53F?style=for-the-badge&logo=JWT)
 ![ alt text ](https://img.shields.io/badge/MongoDB-00205B?style=for-the-badge&logo=MongoDB)
 ![ alt text ](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=Express)
 ![ alt text ](https://img.shields.io/badge/MUI-FF9900?style=for-the-badge&logo=MUI)
-![ alt text ](https://img.shields.io/badge/Git.js-7FE719?style=for-the-badge&logo=Git)
+![ alt text ](https://img.shields.io/badge/Git-7FE719?style=for-the-badge&logo=Git)
 ![ alt text ](https://img.shields.io/badge/GitHub-9999FF?style=for-the-badge&logo=GitHub)
 
 
