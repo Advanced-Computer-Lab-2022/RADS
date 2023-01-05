@@ -94,6 +94,25 @@ Our main aim was to make our website simple and easy to navigate through. We mad
 # Code Examples
 
 ```
+const updateCertificateState = async(req, res) => {
+    const { courseId } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+        const dbResp = await Trainee.findOneAndUpdate({ "_id": id, 'courses.courseId': courseId }, { '$set': { 'courses.$.receivedCertificate': true } });
+        if (dbResp) {
+            res.status(201).json("Successfull update!!");
+        } else {
+            res.status(400).json({ message: 'Not able to update' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+```
+
+
+```
 const sendPDF = (toEmail, body) => {
     nodeoutlook.sendEmail({
         auth: {
@@ -113,6 +132,126 @@ const sendPDF = (toEmail, body) => {
         onSuccess: (i) => console.log(i)
     });
 };
+```
+
+```
+export const AddProfile = (form, setShow, setMessage) => dispatch => {
+    axios
+        .post("/api/profiles", form)
+        .then(res => {
+            setShow(true)
+            setMessage("User added with success")
+            dispatch({
+                type: ERRORS,
+                payload: {}
+            })
+            setTimeout(() => {
+                setShow(false)
+            }, 4000);
+        })
+        .catch(err => {
+            dispatch({
+                type: ERRORS,
+                payload: err.response.data
+            })
+        });
+}
+
+
+```
+
+```
+  const handlePromotion = (e) => {
+    var updatedCourseList = [...checkedCourses];
+    let current = courses.filter((item) =>
+      newKeys.some((key) =>
+        item[key]
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toString().toLowerCase())
+      )
+    );
+    if (e.target.checked) {
+      updatedCourseList = [...checkedCourses].concat(current);
+    } else {
+      console.log(updatedCourseList.length);
+      for (let i = 0; i < updatedCourseList.length; i++) {
+        if (updatedCourseList[i]["_id"] === e.target.value) {
+          console.log(updatedCourseList[i]["_id"] + " at " + i);
+          updatedCourseList.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    setCheckedCourses(updatedCourseList);
+  };
+```
+
+
+```
+ const handleSubmit = (e) => {
+    console.log(checkedCard);
+    e.preventDefault(); //prevent form submission
+    if (checkedCard === null) {
+      setNoCreditCard("You need to enter select a payment method.");
+    } else if (checkedCard === "balance" && !purchased) {
+      if (trainee.balance >= course.price) {
+        registerCourse();
+        let finalPrice = course.price * -1;
+        updateBalance(finalPrice);
+        updateInstructorBalance(-1 * finalPrice);
+        setPurchased(true);
+      } else {
+        setHtml2(`You dont have enought money in the balance!`);
+      }
+    } else if (
+      checkedCard !== "balance" &&
+      checkedCard !== null &&
+      !purchased
+    ) {
+      checkExpiryDate(checkedCard);
+    } else {
+      setHtml("You already bought the course");
+    }
+  };
+
+```
+
+
+```
+  const postComment = async () => {
+    const body = { instructorComment };
+    const response = await fetch(`/report/instructorpostcomment/${reportId}`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+    if (response.ok) {
+      window.location.reload();
+    }
+  };
+
+```
+
+```
+const performIntersection = (arr1, arr2, arr3, arr4) => {
+    const intersectionResult1 = arr1.filter((x) => arr2.indexOf(x) !== -1);
+    const intersectionResult2 = intersectionResult1.filter(
+      (x) => arr3.indexOf(x) !== -1
+    );
+    const intersectionResult3 = intersectionResult2.filter(
+      (x) => arr4.indexOf(x) !== -1
+    );
+    if (arr4.length === 0) {
+      return intersectionResult2;
+    } else {
+      return intersectionResult3;
+    }
+  };
 ```
 
 # Installation
