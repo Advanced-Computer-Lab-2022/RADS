@@ -1177,14 +1177,6 @@ SOFTWARE.
       
   4. Course route: 
 
-      * GET routes: /course -  /course/:id  - /course/find/:id  -  /course/rating/:id  -  /course/highest/views  -  /course/get/coursesubjects  -   /course/getinstructor/coursesubjects/:id
-
-      * POST routes: /course/add  -  /course/:id  -   /course/review/:id   -   /course/rating/:id   -  /course/promo/:id   -  /course/max  -  /course/subset  -   /course/coursespostpromotion
-
-      * DELETE routes: /course/:id   -   /course/updatepromo/:id   -   /course/updateview/:id
-
-      * PATCH routes: /course/:id
-
       - <details><summary>GET all courses</summary>
   
           - Description: returns all courses in the database.
