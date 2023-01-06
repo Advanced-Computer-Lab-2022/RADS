@@ -419,12 +419,14 @@ SOFTWARE.
 
   
   1. Admin route: 
-      - GET all admins.
-      - Description: returns all admins in the database.
-      - URL: ``` /admin ```
-      - Parameters: None
-      - Body: None
-      - Response: Model.Admins
+       
+      - <details><summary>GET all admins</summary>
+          - Description: returns all admins in the database.
+          - URL: ``` /admin ```
+          - Parameters: None
+          - Body: None
+          - Response: Model.Admins
+      </details>
          
       - GET a specific admin with id.
       - Description: returns a specific admin in the database.
