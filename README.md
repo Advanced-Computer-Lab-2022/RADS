@@ -430,7 +430,7 @@ SOFTWARE.
           
           - Body: None
           
-          - Response: Model.Admins
+          - Response: Models.Admins
         
       </details>
          
@@ -444,7 +444,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Admin
+          - Response: Models.Admin
       
       </details>
       
@@ -460,7 +460,7 @@ SOFTWARE.
 
           - Body: { userName, password } 
 
-          - Response: Model.Admin
+          - Response: Models.Admin
   
       </details>
       
@@ -481,7 +481,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Trainees
+          - Response: Models.Trainees
   
       </details>
       
@@ -496,7 +496,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Trainee
+          - Response: Models.Trainee
   
       </details>
       
@@ -510,7 +510,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Trainee.courses
+          - Response: Models.Trainee.courses
   
       </details>
       
@@ -799,6 +799,19 @@ SOFTWARE.
   
       </details>
       
+      - <details><summary>POST to find exercises status.</summary>
+  
+          - Description: Request to find out if a trainee solved exercises or not.
+
+          - URL:    ```/trainee/checkexstatus/:id ```
+
+          - Parameters: trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>
       
       
       - <details><summary>POST to update certificate state.</summary>
@@ -813,7 +826,21 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
-      </details>     
+      </details>    
+      
+      - <details><summary>POST to find exam status.</summary>
+  
+          - Description: Request to find out if a trainee solved exam or not.
+
+          - URL:    ```/trainee/checkstatus/:id```
+
+          - Parameters: trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>
  
       - <details><summary>POST to create a new certificate.</summary>
   
@@ -865,25 +892,337 @@ SOFTWARE.
       * PATCH routes: /course/:id
 
   5. CorpTrainee route:
+ 
+      - <details><summary>GET all corporate trainees</summary>
+  
+          - Description: returns all corporate trainees in the database.
 
-      * GET routes:/corptrainee   -  /corptrainee/:id   -   /corptrainee/getcourses/:id   -   /corptrainee/cert/getpdf
+          - URL:    ``` /corptrainee ```
 
-      * PATCH routes: /corptrainee/password/:id
+          - Parameters: None
 
-      * POST routes: /corptrainee/register/:id   -   /corptrainee/checkaccess/:id   -   /corptrainee/courseprogress/:id   -   /corptrainee/findgrade/:id  -   /corptrainee/findtestgrade/:id  -   /corptrainee/checkexstatus/:id  -   /corptrainee/checkstatus/:id  -   /corptrainee/updateexamgrade/:id  -   /corptrainee/updateexercisesgrade/:id  -   /corptrainee/updateexercisesstatus/:id  -   /corptrainee/updateprogress/:id   -   /corptrainee/updateexamstatus/:id  -   /corptrainee/postnote/:id  -   /corptrainee/getnotes/:id  -   /corptrainee/checkcertstate/:id   -  /corptrainee/updatecertstate/:id  -   /corptrainee/createpdf  -   /corptrainee/emailpdf/:id
+          - Body: None
 
-  6. Currency route:
+          - Response: Models.corpTrainees
+  
+      </details>
+      
+      
+       - <details><summary>GET a specific corporate trainee</summary>
+  
+          - Description: returns a specific corporate trainee in the database.
 
-      * GET routes: /currency
+          - URL:    ``` /corptrainee/:id ```
 
-      * POST routes: /currency
+          - Parameters:  Corporate Trainee's id "id"
+
+          - Body: None
+
+          - Response: Models.corpTrainee
+  
+      </details>
+      
+      - <details><summary>GET a corporate trainee's courses</summary>
+  
+          - Description: returns all the registered courses for a specific corporate trainee.
+
+          - URL:    ``` /corptrainee/getcourses/:id ```
+
+          - Parameters:  Corporate Trainee's id "id"
+
+          - Body: None
+
+          - Response: Models.corpTrainee.courses
+  
+      </details>
+      
+      - <details><summary>POST a course registeration</summary>
+  
+          - Description: Allow corporate trainee to register in a course.
+
+          - URL:    ``` /corptrainee/register/:id  ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId, courseGrade, courseProgress }
+
+          - Response: { course }
+  
+      </details>
+      
+      
+      - <details><summary>POST to find exercises grade.</summary>
+  
+          - Description: Allow Corporate trainee to find his last exercises grade.
+
+          - URL:    ```/corptrainee/findgrade/:id ```
+
+          - Parameters:  Corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.exercises.exercisesgrade }
+  
+      </details>
+      
+      
+      - <details><summary>POST to find exam grade.</summary>
+  
+          - Description: Allow Corporate Trainee to find his exam grade.
+
+          - URL:    ``` /corptrainee/findtestgrade/:id ```
+
+          - Parameters: Corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.exercises.examgrade }
+  
+      </details>
+      
+      - <details><summary>POST to check if corporate trainee has access to a specific course.</summary>
+  
+          - Description: Find out if a corporate trainee has access to a specific course or not.
+
+          - URL:    ```/corptrainee/checkaccess/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>     
+      
+      - <details><summary>POST to change course progress.</summary>
+  
+          - Description: Update corporate trainee's course progress.
+
+          - URL:    ```/corptrainee/updateprogress/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId, currentChapter, totalChapters }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+        
+      - <details><summary>POST to find course progress.</summary>
+  
+          - Description: Request to find out corporate trainee's current course progress.
+
+          - URL:    ```/corptrainee/courseprogress/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.courseProgress }
+  
+      </details>
+      
+      - <details><summary>POST to find exercises status.</summary>
+  
+          - Description: Request to find out if a corporate trainee solved exercises or not.
+
+          - URL:    ```/corptrainee/checkexstatus/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>
+      
+      - <details><summary>POST to find exam status.</summary>
+  
+          - Description: Request to find out if a corporate trainee solved exam or not.
+
+          - URL:    ```/corptrainee/checkstatus/:id```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>
+      
+       
+      - <details><summary>POST to change exam status.</summary>
+  
+          - Description: Update corporate trainee's exam status where he solved it or not.
+
+          - URL:    ```/corptrainee/updateexamstatus/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+      
+      
+      - <details><summary>POST to change exam grade.</summary>
+  
+          - Description: Update corporate trainee's exam grade.
+
+          - URL:    ```/corptrainee/updateexamgrade/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId, examGrade}
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+      
+      
+      - <details><summary>POST to change exercises grade.</summary>
+  
+          - Description: Update corporate trainee's exercises grade.
+
+          - URL:    ```/corptrainee/updateexercisesgrade/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId, exercisesGrade }
+
+          - Response: { "Successfull update!!" }
+      
+      </details>
+      
+      
+      - <details><summary>POST to change exercises status.</summary>
+  
+          - Description: Update exercises status whether a corporate trainee already solved the exercises or not.
+
+          - URL:    ```/corptrainee/updateexercisesstatus/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+    
+   
+      - <details><summary>POST a new course note.</summary>
+  
+          - Description: Let a corporate trainee add a new note to the list of notes for a course.
+
+          - URL:    ```/corptrainee/postnote/:id```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId, note }
+
+          - Response: { newNote }
+  
+      </details>
+      
+      
+      - <details><summary>POST to get all course notes.</summary>
+  
+          - Description: Let a corporate trainee get all course notes for a specific course.
+
+          - URL:    ``` /corptrainee/getnotes/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { notes }
+  
+      </details>
+      
+      
+      
+      - <details><summary>POST to send an email to a corporate trainee with completion certificate.</summary>
+  
+          - Description: Send a completion certificate to a corporate trainee's email.
+
+          - URL:    ``` /corptrainee/emailpdf/:id   ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { email, courseName }
+
+          - Response: { { message: "sent successfully" } }
+  
+      </details>
+      
+      
+      - <details><summary>POST to find certificate state.</summary>
+  
+          - Description: Find the certificate state of corporate trainee whether he recieved his certificate or not in a specific course.
+
+          - URL:    ``` /corptrainee/checkcertstate/:id   ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>
+      
+      
+      
+      - <details><summary>POST to update certificate state.</summary>
+  
+          - Description: Update the certificate state of corporate trainee whether he recieved his certificate or not in a specific course.
+
+          - URL:    ``` /corptrainee/updatecertstate/:id   ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>     
+ 
+      - <details><summary>POST to create a new certificate.</summary>
+  
+          - Description: Create a completion certificate for a specific course for a corporate trainee.
+
+          - URL:    ```/corptrainee/createpdf ```
+
+          - Parameters:  None
+
+          - Body: { name, courseTitle } , NOTE: name here is trainee's name. 
+
+          - Response: { res.pdfDirectory }
+  
+      </details>
+      
+      - <details><summary>GET a course's completion certificate.</summary>
+  
+          - Description: Return a completion certificate for a specific course for a corporate trainee.
+
+          - URL:    ``` /corptrainee/cert/getpdf ```
+
+          - Parameters:  None
+
+          - Body: None
+
+          - Response: { success! }
+  
+      </details>
 
 
-  7. Guest route:
+     
+
+  6. Guest route:
 
       * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
 
-  8. Report route:
+  7. Report route:
 
       * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
 
