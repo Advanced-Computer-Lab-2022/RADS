@@ -267,8 +267,19 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
 ```
 
 # Installation
-  * First go to Back-end folder and type the command: npm i
+  * Open two separate terminals.
+  * First go to Back-end folder and install all packages in the Backend folder:
+      ```
+      cd backend
+      npm i
+      ```
   * Second go to the Front-end folder and type the command: npm i
+      ```
+      cd frontend
+      npm i
+      ```
+
+   
 
 # API reference
   1. Admin route:
