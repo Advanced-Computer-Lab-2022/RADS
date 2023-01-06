@@ -164,8 +164,15 @@ provide the user with the ultimate online experience.
 
 The system serves different type of users (Admin, Instructor , Individual Trainee, Corporate Trainee)
 
-1- As a guest, you can 
-  * view all courses, search and filter courses by price, rating or subject and view their description.
+1- <details><summary>As a guest, you can</summary> 
+    
+    * view all courses, search and filter courses by price, rating or subject and view their description.
+    
+    * Signup
+    
+    * Login
+    
+</details>
 
 
 2- As a Trainee, you can
