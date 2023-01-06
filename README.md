@@ -45,12 +45,12 @@ provide the user with the ultimate online experience.
   
  
 # Code Style 📄
-    * We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
-    * The architecture for the features is MVC (Model View Controller) Learn More Here.
+  * We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
+  * The architecture for the features is MVC (Model View Controller) Learn More Here.
 
-    * We used camelCase for variables.
+  * We used camelCase for variables to be more consistent.
 
-    * Codes are formatted in VS Code using alt + shift + F.
+  * Codes are formatted in VS Code using alt + shift + F.
 
 # Screen shots 📸
 
