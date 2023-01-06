@@ -846,14 +846,91 @@ SOFTWARE.
 
   3. Instructor route :
 
-      * GET routes: /instructor  -  /instructor/:id   - /instructor/add
 
-      * POST routes: /instructor/review/:id  -  /instructor/forgot/:id  - /instructor/updatebalance/:id
+      - <details><summary>GET all instructors info</summary>
+  
+          - Description: returns all instructors in the database.
 
-      * PATCH routes: /instructor/changeInfo/:id  - /instructor/password/:id  
+          - URL:    ``` /instructor ```
 
-      * DELETE routes: /instructor/:id
+          - Parameters: None
 
+          - Body: None
+
+          - Response: { Model.Instructor }
+
+          - Authorization: Required. Bearer token of the Instructor, Admin.
+  
+      </details>
+      
+      
+       - <details><summary>GET a specific instructor</summary>
+  
+          - Description: returns a specific instructor in the database.
+
+          - URL:    ``` /instructor/:id ```
+
+          - Parameters:  Instructor's id "id"
+
+          - Body: None
+
+          - Response: { Model.Instructor }
+
+          - Authorization: Required. Bearer token of the Instructor, Trainee, Corprate Trainee.
+  
+      </details>
+      
+      - <details><summary>DELETE a specific instructor</summary>
+  
+          - Description: delete an instructor from the database.
+
+          - URL:    ```/instructor/:id ```
+
+          - Parameters:  Instructor's id "id"
+
+          - Body: None
+
+          - Response: { Model.Instructor }
+
+          - Authorization: Required. Bearer token of the Instructor, Admin.
+  
+      </details>
+      
+      - <details><summary>PATCH a specific instructor's info</summary>
+  
+          - Description: Update instructor's info in the database.
+
+          - URL:    ```/instructor/changeInfo/:id ```
+
+          - Parameters:  Instructor's id "id"
+
+          - Body: { email, bio, password, verified }
+
+          - Response: { Model.Instructor }
+
+          - Authorization: Required. Bearer token of the Instructor.
+  
+      </details>
+      
+      
+      - <details><summary>POST an instructor's review</summary>
+  
+          - Description: Create new review for an instructor in the database.
+
+          - URL:    ```/instructor/review/:id ```
+
+          - Parameters:  Id of user doing the review "id"
+
+          - Body: { iRating, iReview, traineeId, corpTraineeId }
+
+          - Response: { Model.Instructor.newReview }
+
+          - Authorization: Required. Bearer token of the Instructor, Trainee, Corprate Trainee.
+  
+      </details>
+      
+      
+      
   4. Course route: 
 
       * GET routes: /course -  /course/:id  - /course/find/:id  -  /course/rating/:id  -  /course/highest/views  -  /course/get/coursesubjects  -   /course/getinstructor/coursesubjects/:id
@@ -863,6 +940,218 @@ SOFTWARE.
       * DELETE routes: /course/:id   -   /course/updatepromo/:id   -   /course/updateview/:id
 
       * PATCH routes: /course/:id
+
+      - <details><summary>GET all courses</summary>
+  
+          - Description: returns all courses in the database.
+
+          - URL:    ``` /course ```
+
+          - Parameters: None
+
+          - Body: None
+
+          - Response: { Model.Course }
+
+          - Authorization: None
+  
+      </details>
+      
+      
+       - <details><summary>GET a specific course</summary>
+  
+          - Description: returns a specific COurse in the database.
+
+          - URL:    ``` /course/:id ```
+
+          - Parameters:  Course's id "id"
+
+          - Body: None
+
+          - Response: { Model.Course }
+          
+          - Authorization: None
+  
+      </details>
+      
+      - <details><summary>GET a single Course's rating</summary>
+  
+          - Description: returns the rating of a specific course.
+
+          - URL:    ```/course/rating/:id ```
+
+          - Parameters:  Course's id "id"
+
+          - Body: None
+
+          - Response: { Model.Instructor.courses }
+          
+          - Authorization: None
+  
+      </details>
+
+      - <details><summary>Get a subset of courses using a subset of ids</summary>
+  
+          - Description: returns all the 3 highest viewed  courses.
+
+          - URL:    ```/course/highest/views ```
+
+          - Parameters:  None
+
+          - Body: None
+
+          - Response: { Model.courses }
+          
+          - Authorization: None
+  
+      </details>
+
+      - <details><summary>GET All Course Subjects</summary>
+  
+          - Description: returns all subjects of the registered courses in the database.
+
+          - URL:    ```/course/get/coursesubjects ```
+
+          - Parameters:  None
+
+          - Body: None
+
+          - Response: { courseSubjects }
+          
+          - Authorization: None
+  
+      </details>
+
+      - <details><summary>GET a single Course's rating <summary>
+  
+          - Description: Allow Trainee to add a new credit-card.
+
+          - URL:    ```/course/rating/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: None
+
+          - Response: ```json
+          { "Course Rating is: " + currentOverallRating }```
+          
+          - Authorization: None
+  
+      </details>
+      
+      - <details><summary>POST a new Course</summary>
+  
+          - Description: create new course in the database.
+
+          - URL:    ```/course/add ```
+
+          - Parameters:  None
+
+          - Body: { courseTitle, subtitles, price, shortSummary, subject, totalHours, instructor, instructorName, courseExercises, exam, coursePreview }
+
+          - Response: ```json
+          { message: "Course added successfully", message: "Course info" + course }```
+          
+          - Authorization: None
+  
+      </details>
+          
+      - <details><summary>POST a new course's Review</summary>
+  
+          - Description: Create new review for a course in the database.
+
+          - URL:    ```/course/review/:id ```
+
+          - Parameters:  Id of user doing the review "id"
+
+          - Body: { cRating, cReview, traineeId, corpTraineeId }
+
+          - Response: { Model.course.newReview }
+          
+          - Authorization: None
+  
+      </details>
+      
+      - <details><summary>POST to check if registered in course.</summary>
+  
+          - Description: Find out if a trainee is enrolled in a course or not.
+
+          - URL:    ```/course/promo/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+          
+          - Authorization: None
+  
+      </details>
+      
+      - <details><summary>POST to change balance.</summary>
+  
+          - Description: Update trainee's balance.
+
+          - URL:    ```/course/max ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { balanceValue }
+
+          - Response: { "Successfull update!!" }
+          
+          - Authorization: None
+  
+      </details>
+          
+      
+      - <details><summary>POST to change course progress.</summary>
+  
+          - Description: Update trainee's course progress.
+
+          - URL:    ```/course/subset ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId, currentChapter, totalChapters }
+
+          - Response: { "Successfull update!!" }
+          
+          - Authorization: None
+  
+      </details>
+        
+      - <details><summary>POST to find course progress.</summary>
+  
+          - Description: Request to find out trainee's current course progress.
+
+          - URL:    ```/course/coursespostpromotion ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.courseProgress }
+          
+          - Authorization: None
+  
+      </details>
+
+      - <details><summary>PATCH a course's info</summary>
+  
+          - Description: Update a course's info in the database.
+
+          - URL:    ```/course/:id ```
+
+          - Parameters:  Course's id "id"
+
+          - Body: { courseId }
+
+          - Response:  { Model.course }
+          
+          - Authorization: None
+  
+      </details>
 
   5. CorpTrainee route:
 
