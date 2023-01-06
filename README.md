@@ -572,7 +572,7 @@ SOFTWARE.
 
 
 
-# API reference 📋
+# API Reference 📋
    
 
   
