@@ -456,7 +456,7 @@ SOFTWARE.
 
           - URL:    ``` /admin/editadmin/:id ```
 
-          - Parameters: Admin's id "id",
+          - Parameters: Admin's id "id"
 
           - Body: { userName, password } 
 
@@ -471,11 +471,378 @@ SOFTWARE.
 
   2. Trainee route: 
 
-      * GET routes: /trainee, /trainee/:id , /trainee/getcourses/:id,
+      - <details><summary>GET all trainees</summary>
+  
+          - Description: returns all trainees in the database.
 
-      * POST routes: /trainee/register/:id  -  /trainee/findgrade/:id  - /trainee/findtestgrade/:id  - /trainee/forgot/:id  - /trainee/addcredit/:id   -    /trainee/checkregister/:id   -  /trainee/updatebalance/:id    -   /trainee/updateprogress/:id  -  /trainee/courseprogress/:id   -  /trainee/updateexamstatus/:id  -  /trainee/updateexamgrade/:id   -  /trainee/updateexercisesgrade/:id  -  /trainee/updateexercisesstatus/:id  -  /trainee/refund/:id  -  /trainee/checkexstatus/:id  -   /trainee/findcreditcard/:id  -   /trainee/deletecard/:id  -   /trainee/postnote/:id   -   /trainee/getnotes/:id   -   /trainee/emailpdf/:id   -   /trainee/checkcertstate/:id   -   /trainee/updatecertstate/:id   -   /trainee/createpdf
+          - URL:    ``` /trainee ```
 
-      * PATCH routes:  /trainee/password/:id
+          - Parameters: None
+
+          - Body: None
+
+          - Response: Model.Trainees
+  
+      </details>
+      
+      
+       - <details><summary>GET a specific trainee</summary>
+  
+          - Description: returns a specific trainee in the database.
+
+          - URL:    ``` /trainee/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: None
+
+          - Response: Model.Trainee
+  
+      </details>
+      
+      - <details><summary>GET a trainee's courses</summary>
+  
+          - Description: returns all the registered courses for a specific trainee.
+
+          - URL:    ```/trainee/getcourses/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: None
+
+          - Response: Model.Trainee.courses
+  
+      </details>
+      
+      - <details><summary>POST a course registeration</summary>
+  
+          - Description: Allow Trainee to register in a course.
+
+          - URL:    ```/trainee/register/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId, courseGrade, courseProgress }
+
+          - Response: { course }
+  
+      </details>
+      
+      
+      - <details><summary>POST to find exercises grade.</summary>
+  
+          - Description: Allow Trainee to find his last exercises grade.
+
+          - URL:    ```/trainee/findgrade/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.exercises.exercisesgrade }
+  
+      </details>
+      
+      
+      - <details><summary>POST to find exam grade.</summary>
+  
+          - Description: Allow Trainee to find his exam grade.
+
+          - URL:    ```/trainee/findtestgrade/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.exercises.examgrade }
+  
+      </details>
+      
+      - <details><summary>POST a new credit-card.</summary>
+  
+          - Description: Allow Trainee to add a new credit-card.
+
+          - URL:    ```/trainee/addcredit/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { cardName, cardNumber, cardExpiryDate, cardCVV }
+
+          - Response: { newCreditCard }
+  
+      </details>
+      
+      - <details><summary>POST to check if registered in course.</summary>
+  
+          - Description: Find out if a trainee is enrolled in a course or not.
+
+          - URL:    ```/trainee/checkregister/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>
+      
+      - <details><summary>POST to change balance.</summary>
+  
+          - Description: Update trainee's balance.
+
+          - URL:    ```/trainee/updatebalance/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { balanceValue }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+          
+      
+      - <details><summary>POST to change course progress.</summary>
+  
+          - Description: Update trainee's course progress.
+
+          - URL:    ```/trainee/updateprogress/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId, currentChapter, totalChapters }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+        
+      - <details><summary>POST to find course progress.</summary>
+  
+          - Description: Request to find out trainee's current course progress.
+
+          - URL:    ```/trainee/courseprogress/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.courseProgress }
+  
+      </details>
+      
+         
+      - <details><summary>POST to change exam status.</summary>
+  
+          - Description: Update trainee's exam status where he solved it or not.
+
+          - URL:    ```/trainee/updateexamstatus/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+      
+      
+      - <details><summary>POST to change exam grade.</summary>
+  
+          - Description: Update trainee's exam grade.
+
+          - URL:    ```/trainee/updateexamgrade/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId, examGrade}
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+      
+      
+      - <details><summary>POST to change exercises grade.</summary>
+  
+          - Description: Update trainee's exercises grade.
+
+          - URL:    ```/trainee/updateexercisesgrade/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId, exercisesGrade }
+
+          - Response: { "Successfull update!!" }
+      
+      </details>
+      
+      
+      - <details><summary>POST to change exercises status.</summary>
+  
+          - Description: Update exercises status whether a trainee already solved the exercises or not.
+
+          - URL:    ```/trainee/updateexercisesstatus/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>
+      
+      
+      
+      - <details><summary>POST to refund a course.</summary>
+  
+          - Description: Remove a course from a trainee's registered courses and return the money to his balance.
+
+          - URL:    ```/trainee/refund/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { { message: "refund done successfully!" } }
+  
+      </details>
+      
+      - <details><summary>POST to find a specific credit card.</summary>
+  
+          - Description: Find a specific credit-card from a trainee's credit-card list.
+
+          - URL:    ```/trainee/findcreditcard/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { creditCardId }
+
+          - Response: { creditCard }
+  
+      </details>
+      
+      
+      - <details><summary>POST to delete a specific credit card.</summary>
+  
+          - Description: Delete a specific credit-card from a trainee's credit-card list.
+
+          - URL:    ```/trainee/deletecard/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { creditCardId }
+
+          - Response: { { message: "credit card removed done successfully!" } }
+  
+      </details>
+      
+      
+      
+      
+      - <details><summary>POST a new course note.</summary>
+  
+          - Description: Let a trainee add a new note to the list of notes for a course.
+
+          - URL:    ```/trainee/postnote/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId, note }
+
+          - Response: { newNote }
+  
+      </details>
+      
+      
+      
+      
+      - <details><summary>POST to get all course notes.</summary>
+  
+          - Description: Let a trainee get all course notes for a specific course.
+
+          - URL:    ``` /trainee/getnotes/:id ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { notes }
+  
+      </details>
+      
+      
+      
+      - <details><summary>POST to send an email to a trainee with completion certificate.</summary>
+  
+          - Description: Send a completion certificate to a trainee's email.
+
+          - URL:    ``` /trainee/emailpdf/:id   ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { email, courseName }
+
+          - Response: { { message: "sent successfully" } }
+  
+      </details>
+      
+      
+      - <details><summary>POST to find certificate state.</summary>
+  
+          - Description: Find the certificate state of trainee whether he recieved his certificate or not in a specific course.
+
+          - URL:    ``` /trainee/checkcertstate/:id   ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+      </details>
+      
+      
+      
+      - <details><summary>POST to update certificate state.</summary>
+  
+          - Description: Update the certificate state of trainee whether he recieved his certificate or not in a specific course.
+
+          - URL:    ``` /trainee/updatecertstate/:id   ```
+
+          - Parameters:  Trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+      </details>     
+ 
+      - <details><summary>POST to create a new certificate.</summary>
+  
+          - Description: Create a completion certificate for a specific course for a trainee.
+
+          - URL:    ``` /trainee/createpdf ```
+
+          - Parameters:  None
+
+          - Body: { name, courseTitle } , NOTE: name here is trainee's name. 
+
+          - Response: { res.pdfDirectory }
+  
+      </details>
+      
+      - <details><summary>GET a course's completion certificate.</summary>
+  
+          - Description: Return a completion certificate for a specific course for a trainee.
+
+          - URL:    ``` /trainee/cert/getpdf ```
+
+          - Parameters:  None
+
+          - Body: None
+
+          - Response: { success! }
+  
+      </details>
+     
 
   3. Instructor route :
 
