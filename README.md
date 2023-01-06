@@ -415,109 +415,34 @@ SOFTWARE.
 
 
 # API reference
+   
+
+  
   1. Admin route: 
       - GET all admins.
-      ``` /admin ```
-       
-      - <details><summary>Response</summary>
-               
-  
-            [
-              {
-                  "_id": "63b420f8ba5e7ff12fcf133a",
-  
-                  "firstName": "Nada",
-  
-                  "lastName": "Ibrahim",
-  
-                  "userName": "nibrahim123",
-  
-                  "gender": "female",
-  
-                  "email": "nada.abdelfattah123@guc.edu.eg",
-  
-                  "password": "$2b$10$NlvVT7CzTB2UombM6QIzdurh4E7ajLfr4Lau0nHhQ/rFvhQQU8TMC",
-  
-                  "role": "ADMIN",
-  
-                  "requests": [],
-  
-                  "createdAt": "2023-01-03T12:35:04.492Z",
-  
-                  "updatedAt": "2023-01-03T12:35:04.492Z",
-  
-                  "__v": 0
-              },
-  
-              {
-                  "_id": "63b090287eccc0d015db94c6",
-  
-                  "firstName": "Khaled",
-  
-                  "lastName": "Eissaa",
-  
-                  "userName": "khaledeissa",
-  
-                  "gender": "male",
-  
-                  "email": "khaled.eissa9@gmail.com",
-  
-                  "password": "$2b$10$rDsq24yWuQ/ZGU3sqcg7c.5RDQQwJDoJd4Oois6SyYcWYax4aprte",
-  
-                  "role": "ADMIN",
-  
-                  "requests": [],
-  
-                  "createdAt": "2022-12-31T19:40:24.655Z",
-  
-                  "updatedAt": "2022-12-31T19:40:24.655Z",
-  
-                  "__v": 0
-              },
-  
-              {
-                  "_id": "6397ad53f08df17ce092b041",
-  
-                  "firstName": "Ahmed",
-  
-                  "lastName": "Khaled",
-  
-                  "userName": "ahmillect1",
-  
-                  "gender": "male",
-  
-                  "password": "$2b$10$FN0OLNuZ87E4MCMJXtE45ubh57KSe6docWbae5GAAlZirL1mZt1q6",
-  
-                  "role": "ADMIN",
-  
-                  "createdAt": "2022-12-12T22:38:11.885Z",
-  
-                  "updatedAt": "2022-12-12T22:38:11.885Z",
-  
-                  "__v": 0,
-  
-                  "email": "ahmedkhaled01923@gmail.com",
-  
-                  "requests": []
-              }
-  
-          ]
-  
-  
-      </details>
-
+      - Description: returns all admins in the database.
+      - URL: ``` /admin ```
+      - Parameters: None
+      - Body: None
+      - Response: Model.Admins
+         
+      - GET a specific admin with id.
+      - Description: returns a specific admin in the database.
+      - URL: ``` /admin/:id ```
+      - Parameters: Admin's id "id"
+      - Body: None
+      - Response: Model.Admins
+ 
+      - PATCH a specific admin with id.
+      - Description: updates a specific admin in the database.
+      - URL:    ``` /admin/editadmin/:id ```
+      - Parameters: Admin's id "id",
+      - Body: { userName, password } 
+      - Response: Model.Admins
       
-      
-      
-      * GET a specific admin with id.
-      ``` /admin/:id ```
-
-      
-      * POST a new instructor.
-      ``` /admin/addinstructor ```
-      
-      * PATCH admin's information
-      ``` /admin/editadmin/:id ```
+    
+ 
+   
 
 
   2. Trainee route: 
