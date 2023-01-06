@@ -345,17 +345,7 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
       ```
 
 
-# Getting started
-  * To run the website, you need to open two separate terminals.
-  * In the first terminal, change directory to the backend folder:
-      ```bash
-      cd backend && node App.js
-      ```
-  * In the second terminal, change directory to the frontend folder:
-      ```bash
-      cd frontend && npm start
-      ```
-  * This makes the server side run on port 8000 & and client side run on port 3000    
+ 
    
 
 # Tests
@@ -372,7 +362,7 @@ Also, the tests can be done using Postman on any route
 
 To run backend 
 ```bash
-cd backend && node app.js
+cd backend && node App.js
 ```
 To run frontend
 ```bash
