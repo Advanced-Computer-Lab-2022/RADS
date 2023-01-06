@@ -420,7 +420,9 @@ SOFTWARE.
       ``` /admin ```
        
       - <details><summary>Response</summary>
-                [
+               
+  
+            [
               {
                   "_id": "63b420f8ba5e7ff12fcf133a",
   
@@ -500,6 +502,8 @@ SOFTWARE.
               }
   
           ]
+  
+  
       </details>
 
       
