@@ -413,7 +413,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+- <details><summary>Detail 1</summary>
 
+     - Detail 1.1
+     - Detail 1.2
+
+- <details><summary>Detail 2</summary>
+
+     - Detail 2.1
+     - Detail 2.2
+
+</details>
+</details>
 
 # API reference
   1. Admin route: 
@@ -422,12 +433,7 @@ SOFTWARE.
       
       * GET a specific admin with id.
       ``` /admin/:id ```
-      
-      * POST a new Admin.
-      ``` /admin/addadmin ```
-      
-      * POST a new corporate trainee.
-      ``` /admin/addctrainee ```
+
       
       * POST a new instructor.
       ``` /admin/addinstructor ```
