@@ -268,17 +268,31 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
 
 # Installation
   * Open two separate terminals.
-  * First go to Back-end folder and install all packages in the Backend folder:
+  * In the first terminal, go to Back-end folder and install all packages in the Backend folder:
       ```
       cd backend
       npm i
       ```
-  * Second go to the Front-end folder and type the command: npm i
+  * In the second terminal, go to the Front-end folder and type the command: npm i
       ```
       cd frontend
       npm i
       ```
 
+
+# Getting started
+  * To run the website, you need to open two separate terminals.
+  * In the first terminal, change directory to the backend folder:
+      ```
+      cd backend
+      node App.js
+      ```
+  * In the second terminal, change directory to the frontend folder:
+      ```
+      cd frontend
+      npm start
+      ```
+  * This makes the server side run on port 8000 & and client side run on port 3000    
    
 
 # API reference
