@@ -100,8 +100,66 @@ We used the standard Javascript Coding style to improve readability and maintain
     * Jspdf
     * Jwt-decode
      
+
 # Features
-Our main aim was to make our website simple and easy to navigate through. We made a direct User interface. We made sure that everything was authenticated and secured. The website gives feedback on every action done to make the user knows exactly what is happening without any confusion and make him satisfied.
+
+The system serves different type of users (Admin, Instructor , Individual Trainee, Corporate Trainee)
+
+1- As a guest, you can 
+  * view all courses, search and filter courses by price, rating or subject and view their description.
+
+
+2- As a Trainee, you can
+  * view all courses
+  * search and filter courses by price, rating or subject and view their description
+  * purchase courses
+  * view course videos
+  * solve exercises
+  * request refund for course
+  * solve exam exercises
+  * report a problem whether it is technical, financial or other.
+  * rate a courses and instructors
+  * view their balance
+  * add/remove credit cards 
+  * write course notes and download them
+  * view all report and their status follow up on unresolved problem
+  * edit his email or password
+
+
+3- As a Corporate Trainee, you can
+  * view all courses
+  * search and filter courses by rating or subject and view their description
+  * request to access a course
+  * view course videos
+  * solve exercises
+  * solve exam exercises
+  * report a problem whether it is technical, financial or other.
+  * rate a courses and instructors
+  * write course notes and download them
+  * view all report and their status follow up on unresolved problem
+  * edit his email or password
+
+
+4- As an Instructor, you can 
+  * create a new course and add all it's information
+  * set promotion for a specific course
+  * view all his ratings and reviews
+  * report a problem whether it is technical, financial or other
+  * view all report and their status follow up on unresolved problem
+  * edit his biography or email or password
+  * search and filter courses by price, rating or subject and view their description
+  * search and filter his courses by price, rating or subject and view their description
+
+
+5- As an Admin, you can
+  * Add corporate trainees and set their usernames and passwords
+  * Add instructors and set their usernames and passwords
+  * view reported problems and can add comments and set report status
+  * grant access to refund requests by trainees
+  * grant access to course requests by corporate trainees
+  * set promotion for one or more than one course
+  * Add another admin and set their usernames and passwords
+
 
 # Code Examples
 
@@ -308,59 +366,16 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
 
 # How to use?
 
-1- As a guest, you can 
-  * view all courses, search and filter courses by price, rating or subject and view their description.
+To run backend 
+```bash
+cd backend && node app.js
+```
+To run frontend
+```bash
+cd frontend && npm run start
+```
+the backend server and frontend will be running on the specified ports on your env files.
 
-
-2- As a Trainee, you can
-  * view all courses
-  * search and filter courses by price, rating or subject and view their description
-  * purchase courses
-  * view course videos
-  * solve exercises
-  * request refund for course
-  * solve exam exercises
-  * report a problem whether it is technical, financial or other.
-  * rate a courses and instructors
-  * view their balance
-  * add/remove credit cards 
-  * write course notes and download them
-  * view all report and their status follow up on unresolved problem
-  * edit his email or password
-
-
-3- As a Corporate Trainee, you can
-  * view all courses
-  * search and filter courses by rating or subject and view their description
-  * request to access a course
-  * view course videos
-  * solve exercises
-  * solve exam exercises
-  * report a problem whether it is technical, financial or other.
-  * rate a courses and instructors
-  * write course notes and download them
-  * view all report and their status follow up on unresolved problem
-  * edit his email or password
-
-
-4- As an Instructor, you can 
-  * create a new course and add all it's information
-  * set promotion for a specific course
-  * view all his ratings and reviews
-  * report a problem whether it is technical, financial or other
-  * view all report and their status follow up on unresolved problem
-  * edit his biography or email or password
-  * search and filter courses by price, rating or subject and view their description
-  * search and filter his courses by price, rating or subject and view their description
-
-5- As an Admin, you can
-  * Add corporate trainees and set their usernames and passwords
-  * Add instructors and set their usernames and passwords
-  * view reported problems and can add comments and set report status
-  * grant access to refund requests by trainees
-  * grant access to course requests by corporate trainees
-  * set promotion for one or more than one course
-  * Add another admin and set their usernames and passwords
 
 # Contribute
 Any contributions to our code is welcomed. You can always improve the frontend for a better UX.
