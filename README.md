@@ -1402,13 +1402,433 @@ SOFTWARE.
      
 
   6. Guest route:
+  
+      - <details><summary>POST a signup.</summary>
+  
+          - Description: Create a new trainee in the database with the hashed password and his information.
 
-      * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
+          - URL:    ``` /guest/signup ```
 
+          - Parameters:  None
+
+          - Body: {userName, firstName, lastName, email, gender, role, password, confirm}
+
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a Login.</summary>
+  
+          - Description: Login in the website as a trainee or instructor or admin or corporate trainee.
+
+          - URL:    ```  /guest/login  ```
+
+          - Parameters:  None
+
+          - Body: { userName, password }
+
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new Admin.</summary>
+  
+          - Description: Create a new admin.
+
+          - URL:    ```  /guest/create/admin  ```
+
+          - Parameters:  None
+
+          - Body: { firstName, lastName,userName,email,role,gender,password,confirm }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new instructor.</summary>
+  
+          - Description: Create a new instructor.
+
+          - URL:    ``` /guest/create/instructor  ```
+
+          - Parameters:  None
+
+          - Body: { firstName, lastName,userName,country,phoneNumber,address,email,role,gender,bio,password,confirm }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new corporate trainee.</summary>
+  
+          - Description: Create a new corporate trainee.
+
+          - URL:    ``` /guest/create/corptrainee  ```
+
+          - Parameters:  None
+
+          - Body: { firstName, lastName,userName,country,phoneNumber,address,email,role,gender,password,confirm }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a forget password request.</summary>
+  
+          - Description: Send an email to a user's email to change password.
+
+          - URL:    ``` /guest/forgotpassword  ```
+
+          - Parameters:  None
+
+          - Body: { email }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new password.</summary>
+  
+          - Description: Change the password to a new password for any type of user.
+
+          - URL:    ``` /guest/changepassword  ```
+
+          - Parameters:  None
+
+          - Body: { id,password }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      
   7. Report route:
+  
+      - <details><summary>GET a specific report.</summary>
+  
+          - Description: Find a specific report using a report ID.
 
-      * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
+          - URL:    ``` /report/request/:id  ```
 
-      * PATCH route: /request/updaterequest/:id  -  /request/updaterequest/:id
+          - Parameters:  report's id "id"
 
-      * POST route: /request/postrequest  -  /request/traineepostcomment/:id  -  /request/corptraineepostcomment/:id   - /request/instructorpostcomment/:id
+          - Body: None
+    
+          - Response: { Models.report }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET refund reports.</summary>
+  
+          - Description: GET all refund reports.
+
+          - URL:    ``` /report/requests/refund  ```
+
+          - Parameters:  None
+
+          - Body: None
+    
+          - Response: { Models.refundReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET access reports.</summary>
+  
+          - Description: GET all access reports.
+
+          - URL:    ``` /report/requests/access  ```
+
+          - Parameters:  None
+
+          - Body: None
+    
+          - Response: { Models.accessReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET reported course problems for a corporate trainee.</summary>
+  
+          - Description: GET all reported course problems for a corporate trainee.
+
+          - URL:    ``` /report/request/getcoursereportscorp/:id  ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.reportedProblems }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET reported course problems for an instructor.</summary>
+  
+          - Description: GET all reported course problems for an instructor.
+
+          - URL:    ``` /report/request/getcoursereportsinst/:id  ```
+
+          - Parameters:  instructor's id "id"
+
+          - Body: None
+    
+          - Response: { Models.reportedProblems }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET reported course problems for a trainee.</summary>
+  
+          - Description: GET all reported course problems for a trainee.
+
+          - URL:    ``` /report/request/getcoursereportstrainee/:id  ```
+
+          - Parameters:  trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.reportedProblems }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      - <details><summary>GET unresolved reports for corporate trainee.</summary>
+  
+          - Description: GET all unresolved reports for a specific corporate trainee.
+
+          - URL:    ``` /report/request/getcorptraineeunresolved/:id  ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.unresolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET resolved reports for corporate trainee.</summary>
+  
+          - Description: GET all resolved reports for a specific corporate trainee.
+
+          - URL:    ``` /report/request/getcorptraineeresolved/:id  ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.resolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+            - <details><summary>GET unresolved reports for trainee.</summary>
+  
+          - Description: GET all unresolved reports for a specific trainee.
+
+          - URL:    ``` /report/request/gettraineeunresolved/:id  ```
+
+          - Parameters: trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.unresolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET resolved reports for trainee.</summary>
+  
+          - Description: GET all resolved reports for a specific trainee.
+
+          - URL:    ``` /report/request/gettraineeresolved/:id  ```
+
+          - Parameters: trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.resolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      </details>
+      
+      
+            - <details><summary>GET unresolved reports for instructor.</summary>
+  
+          - Description: GET all unresolved reports for a specific instructor.
+
+          - URL:    ``` /report/request/getinstructorunresolved/:id  ```
+
+          - Parameters: instructor's id "id"
+
+          - Body: None
+    
+          - Response: { Models.unresolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET resolved reports for instructor.</summary>
+  
+          - Description: GET all resolved reports for a specific instructor.
+
+          - URL:    ``` /report/request/getinstructorresolved/:id  ```
+
+          - Parameters: instructor's id "id"
+
+          - Body: None
+    
+          - Response: { Models.resolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET all reports.</summary>
+  
+          - Description: GET all reports whether resolved or unresolved.
+
+          - URL:    ``` /report/requests/allproblems  ```
+
+          - Parameters: None.
+
+          - Body: None
+    
+          - Response: { Models.reports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>PATCH a specific report.</summary>
+  
+          - Description: Find and update a specific report.
+
+          - URL:    ``` /report/request/updaterequest/:id  ```
+
+          - Parameters: report's id "id".
+
+          - Body: { courseProgress, refundAmount, requestType, reportStatus, adminComment}
+    
+          - Response: { Models.report }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>DELETE a specific report.</summary>
+  
+          - Description: Find and delete a specific report.
+
+          - URL:    ``` /report/request/deleterequest/:id  ```
+
+          - Parameters: report's id "id".
+
+          - Body: None
+    
+          - Response: { Models.report }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new report.</summary>
+  
+          - Description: Create a new report with all necessary fields.
+
+          - URL:    ``` /report/request/postrequest  ```
+
+          - Parameters: None
+
+          - Body: { traineeId, corpTraineeId, instructorId, courseId, courseProgress, refundAmount, requestType, reportStatus, adminComment }
+    
+          - Response: { Models.report._id }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      - <details><summary>POST a new comment as a trainee.</summary>
+  
+          - Description: Add a new comment to the list of comments in a specific problem by a trainee.
+
+          - URL:    ``` /report/request/traineepostcomment/:id  ```
+
+          - Parameters: report's id "id"
+
+          - Body: { traineeComment }
+    
+          - Response: { newComment }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      - <details><summary>POST a new comment as a corporate trainee.</summary>
+  
+          - Description: Add a new comment to the list of comments in a specific problem by a corporate trainee.
+
+          - URL:    ``` /report/request/corptraineepostcomment/:id  ```
+
+          - Parameters: report's id "id"
+
+          - Body: { corpTraineeComment }
+    
+          - Response: { newComment }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new comment as a instructor.</summary>
+  
+          - Description: Add a new comment to the list of comments in a specific problem by a instructor.
+
+          - URL:    ``` /report/request/instructorpostcomment/:id  ```
+
+          - Parameters: report's id "id"
+
+          - Body: { instructorComment }
+    
+          - Response: { newComment }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
