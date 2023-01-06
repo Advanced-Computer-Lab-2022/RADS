@@ -78,6 +78,17 @@ provide the user with the ultimate online experience.
   6. Add course:
 
   ![addourse](https://user-images.githubusercontent.com/105018459/210191860-bd726d21-3f35-45e1-9593-201f43b79dd9.PNG)
+  
+  7. Report Page:
+  
+  ![adminreport](https://user-images.githubusercontent.com/105018459/211056024-4dfa8255-76bd-4dbc-9230-0df242158a14.PNG)
+
+  8. Payment Page for Trainee:
+  
+  ![PAYMENT](https://user-images.githubusercontent.com/105018459/211056118-96233766-6f16-48d4-ba00-2e1c9f04266d.png)
+
+  
+
 
 
 # Tech/Framework used 🖥️
