@@ -1115,7 +1115,7 @@ SOFTWARE.
   
       </details>
 
-      - <details><summary>GET a single Course's rating <summary>
+      - <details><summary>GET a single Course's rating </summary>
   
           - Description: Allow Trainee to add a new credit-card.
 
