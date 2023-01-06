@@ -295,71 +295,6 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
   * This makes the server side run on port 8000 & and client side run on port 3000    
    
 
-# API reference
-  1. Admin route:
-
-      * GET routes: /admin  - /admin/:id
-
-      * POST routes: /admin/addadmin  -  /admin/addctrainee  - /admin/addinstructor
-
-      * PATCH routes: /admin/editadmin/:id
-  2. Trainee route: 
-
-      * GET routes: /trainee, /trainee/:id , /trainee/getcourses/:id,
-
-      * POST routes: /trainee/register/:id  -  /trainee/findgrade/:id  - /trainee/findtestgrade/:id  - /trainee/forgot/:id  - /trainee/addcredit/:id   -    /trainee/checkregister/:id   -  /trainee/updatebalance/:id    -   /trainee/updateprogress/:id  -  /trainee/courseprogress/:id   -  /trainee/updateexamstatus/:id  -  /trainee/updateexamgrade/:id   -  /trainee/updateexercisesgrade/:id  -  /trainee/updateexercisesstatus/:id  -  /trainee/refund/:id  -  /trainee/checkexstatus/:id  -   /trainee/findcreditcard/:id  -   /trainee/deletecard/:id  -   /trainee/postnote/:id   -   /trainee/getnotes/:id   -   /trainee/emailpdf/:id   -   /trainee/checkcertstate/:id   -   /trainee/updatecertstate/:id   -   /trainee/createpdf
-
-      * PATCH routes:  /trainee/password/:id
-
-  3. Instructor route :
-
-      * GET routes: /instructor  -  /instructor/:id   - /instructor/add
-
-      * POST routes: /instructor/review/:id  -  /instructor/forgot/:id  - /instructor/updatebalance/:id
-
-      * PATCH routes: /instructor/changeInfo/:id  - /instructor/password/:id  
-
-      * DELETE routes: /instructor/:id
-
-  4. Course route: 
-
-      * GET routes: /course -  /course/:id  - /course/find/:id  -  /course/rating/:id  -  /course/highest/views  -  /course/get/coursesubjects  -   /course/getinstructor/coursesubjects/:id
-
-      * POST routes: /course/add  -  /course/:id  -   /course/review/:id   -   /course/rating/:id   -  /course/promo/:id   -  /course/max  -  /course/subset  -   /course/coursespostpromotion
-
-      * DELETE routes: /course/:id   -   /course/updatepromo/:id   -   /course/updateview/:id
-
-      * PATCH routes: /course/:id
-
-  5. CorpTrainee route:
-
-      * GET routes:/corptrainee   -  /corptrainee/:id   -   /corptrainee/getcourses/:id   -   /corptrainee/cert/getpdf
-
-      * PATCH routes: /corptrainee/password/:id
-
-      * POST routes: /corptrainee/register/:id   -   /corptrainee/checkaccess/:id   -   /corptrainee/courseprogress/:id   -   /corptrainee/findgrade/:id  -   /corptrainee/findtestgrade/:id  -   /corptrainee/checkexstatus/:id  -   /corptrainee/checkstatus/:id  -   /corptrainee/updateexamgrade/:id  -   /corptrainee/updateexercisesgrade/:id  -   /corptrainee/updateexercisesstatus/:id  -   /corptrainee/updateprogress/:id   -   /corptrainee/updateexamstatus/:id  -   /corptrainee/postnote/:id  -   /corptrainee/getnotes/:id  -   /corptrainee/checkcertstate/:id   -  /corptrainee/updatecertstate/:id  -   /corptrainee/createpdf  -   /corptrainee/emailpdf/:id
-
-  6. Currency route:
-
-      * GET routes: /currency
-
-      * POST routes: /currency
-
-
-  7. Guest route:
-
-      * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
-
-  8. Report route:
-
-      * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
-
-      * PATCH route: /request/updaterequest/:id  -  /request/updaterequest/:id
-
-      * POST route: /request/postrequest  -  /request/traineepostcomment/:id  -  /request/corptraineepostcomment/:id   - /request/instructorpostcomment/:id
-
-
-
 # Tests
   - When a trainee purchases a course, he is registered in it.
   - Trainee can refund only below 50% course progress.
@@ -467,3 +402,82 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+
+
+# API reference
+  1. Admin route: 
+      * GET all admins.
+      ``` /admin ```
+      
+      * GET a specific admin with id.
+      ``` /admin/:id ```
+      
+      * POST a new Admin.
+      ``` /admin/addadmin ```
+      
+      * POST a new corporate trainee.
+      ``` /admin/addctrainee ```
+      
+      * POST a new instructor.
+      ``` /admin/addinstructor ```
+      
+      * PATCH admin's information
+      ``` /admin/editadmin/:id ```
+       
+      
+  2. Trainee route: 
+
+      * GET routes: /trainee, /trainee/:id , /trainee/getcourses/:id,
+
+      * POST routes: /trainee/register/:id  -  /trainee/findgrade/:id  - /trainee/findtestgrade/:id  - /trainee/forgot/:id  - /trainee/addcredit/:id   -    /trainee/checkregister/:id   -  /trainee/updatebalance/:id    -   /trainee/updateprogress/:id  -  /trainee/courseprogress/:id   -  /trainee/updateexamstatus/:id  -  /trainee/updateexamgrade/:id   -  /trainee/updateexercisesgrade/:id  -  /trainee/updateexercisesstatus/:id  -  /trainee/refund/:id  -  /trainee/checkexstatus/:id  -   /trainee/findcreditcard/:id  -   /trainee/deletecard/:id  -   /trainee/postnote/:id   -   /trainee/getnotes/:id   -   /trainee/emailpdf/:id   -   /trainee/checkcertstate/:id   -   /trainee/updatecertstate/:id   -   /trainee/createpdf
+
+      * PATCH routes:  /trainee/password/:id
+
+  3. Instructor route :
+
+      * GET routes: /instructor  -  /instructor/:id   - /instructor/add
+
+      * POST routes: /instructor/review/:id  -  /instructor/forgot/:id  - /instructor/updatebalance/:id
+
+      * PATCH routes: /instructor/changeInfo/:id  - /instructor/password/:id  
+
+      * DELETE routes: /instructor/:id
+
+  4. Course route: 
+
+      * GET routes: /course -  /course/:id  - /course/find/:id  -  /course/rating/:id  -  /course/highest/views  -  /course/get/coursesubjects  -   /course/getinstructor/coursesubjects/:id
+
+      * POST routes: /course/add  -  /course/:id  -   /course/review/:id   -   /course/rating/:id   -  /course/promo/:id   -  /course/max  -  /course/subset  -   /course/coursespostpromotion
+
+      * DELETE routes: /course/:id   -   /course/updatepromo/:id   -   /course/updateview/:id
+
+      * PATCH routes: /course/:id
+
+  5. CorpTrainee route:
+
+      * GET routes:/corptrainee   -  /corptrainee/:id   -   /corptrainee/getcourses/:id   -   /corptrainee/cert/getpdf
+
+      * PATCH routes: /corptrainee/password/:id
+
+      * POST routes: /corptrainee/register/:id   -   /corptrainee/checkaccess/:id   -   /corptrainee/courseprogress/:id   -   /corptrainee/findgrade/:id  -   /corptrainee/findtestgrade/:id  -   /corptrainee/checkexstatus/:id  -   /corptrainee/checkstatus/:id  -   /corptrainee/updateexamgrade/:id  -   /corptrainee/updateexercisesgrade/:id  -   /corptrainee/updateexercisesstatus/:id  -   /corptrainee/updateprogress/:id   -   /corptrainee/updateexamstatus/:id  -   /corptrainee/postnote/:id  -   /corptrainee/getnotes/:id  -   /corptrainee/checkcertstate/:id   -  /corptrainee/updatecertstate/:id  -   /corptrainee/createpdf  -   /corptrainee/emailpdf/:id
+
+  6. Currency route:
+
+      * GET routes: /currency
+
+      * POST routes: /currency
+
+
+  7. Guest route:
+
+      * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
+
+  8. Report route:
+
+      * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
+
+      * PATCH route: /request/updaterequest/:id  -  /request/updaterequest/:id
+
+      * POST route: /request/postrequest  -  /request/traineepostcomment/:id  -  /request/corptraineepostcomment/:id   - /request/instructorpostcomment/:id
