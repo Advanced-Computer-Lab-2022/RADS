@@ -93,7 +93,7 @@ provide the user with the ultimate online experience.
 
 # Tech/Framework used 🖥️
 
-1. In Back-end
+1. <details><summary>In Back-end</summary> 
     * NodeJS
     * Nodemailer
     * MongoDB
@@ -113,8 +113,9 @@ provide the user with the ultimate online experience.
     * Passport-jwt
     * Randomstring
     * Validator
+</details>
 
-2. In Front-end:
+2. <details><summary>In Front-end</summary> 
     * ReactJS
     * Material UI
     * Axios
@@ -125,7 +126,8 @@ provide the user with the ultimate online experience.
     * Http
     * Jspdf
     * Jwt-decode
-     
+</details>
+
 
 # Features 🌟
 
