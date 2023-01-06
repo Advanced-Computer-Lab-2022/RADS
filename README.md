@@ -436,15 +436,15 @@ SOFTWARE.
          
       - <details><summary>GET a specific admin with id</summary>
       
-      - Description: returns a specific admin in the database.
-      
-      - URL:  ``` /admin/:id ```
-      
-      - Parameters: Admin's id "id"
-      
-      - Body: None
-      
-      - Response: Model.Admin
+          - Description: returns a specific admin in the database.
+
+          - URL:  ``` /admin/:id ```
+
+          - Parameters: Admin's id "id"
+
+          - Body: None
+
+          - Response: Model.Admin
       
       </details>
       
@@ -452,15 +452,15 @@ SOFTWARE.
       
       - <details><summary>PATCH a specific admin with id</summary>
   
-      - Description: updates a specific admin in the database.
-  
-      - URL:    ``` /admin/editadmin/:id ```
-  
-      - Parameters: Admin's id "id",
-  
-      - Body: { userName, password } 
-  
-      - Response: Model.Admin
+          - Description: updates a specific admin in the database.
+
+          - URL:    ``` /admin/editadmin/:id ```
+
+          - Parameters: Admin's id "id",
+
+          - Body: { userName, password } 
+
+          - Response: Model.Admin
   
       </details>
       
