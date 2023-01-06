@@ -431,6 +431,8 @@ SOFTWARE.
           - Body: None
           
           - Response: Models.Admins
+          
+          - Authorization: Required. Bearer token of the Admin.
         
       </details>
          
@@ -445,6 +447,8 @@ SOFTWARE.
           - Body: None
 
           - Response: Models.Admin
+          
+          - Authorization: Required. Bearer token of the Admin.
       
       </details>
       
@@ -461,6 +465,8 @@ SOFTWARE.
           - Body: { userName, password } 
 
           - Response: Models.Admin
+          
+          - Authorization: Required. Bearer token of the Admin.
   
       </details>
       
@@ -483,6 +489,8 @@ SOFTWARE.
 
           - Response: Models.Trainees
   
+          - Authorization: Required. Bearer token of the Admin or Trainee.
+  
       </details>
       
       
@@ -498,6 +506,8 @@ SOFTWARE.
 
           - Response: Models.Trainee
   
+          - Authorization: Required. Bearer token of the Admin or Trainee.
+  
       </details>
       
       - <details><summary>GET a trainee's courses</summary>
@@ -511,6 +521,8 @@ SOFTWARE.
           - Body: None
 
           - Response: Models.Trainee.courses
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -526,6 +538,8 @@ SOFTWARE.
 
           - Response: { course }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -540,6 +554,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { course.exercises.exercisesgrade }
+          
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -556,6 +572,8 @@ SOFTWARE.
 
           - Response: { course.exercises.examgrade }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       - <details><summary>POST a new credit-card.</summary>
@@ -569,6 +587,8 @@ SOFTWARE.
           - Body: { cardName, cardNumber, cardExpiryDate, cardCVV }
 
           - Response: { newCreditCard }
+          
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -584,6 +604,8 @@ SOFTWARE.
 
           - Response: { true } or { false }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       - <details><summary>POST to change balance.</summary>
@@ -597,6 +619,8 @@ SOFTWARE.
           - Body: { balanceValue }
 
           - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
           
@@ -612,6 +636,8 @@ SOFTWARE.
           - Body: { courseId, currentChapter, totalChapters }
 
           - Response: { "Successfull update!!" }
+    
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
         
@@ -626,6 +652,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { course.courseProgress }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -642,6 +670,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -656,6 +686,8 @@ SOFTWARE.
           - Body: { courseId, examGrade}
 
           - Response: { "Successfull update!!" }
+      
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -671,6 +703,8 @@ SOFTWARE.
           - Body: { courseId, exercisesGrade }
 
           - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Trainee.
       
       </details>
       
@@ -686,6 +720,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -703,6 +739,8 @@ SOFTWARE.
 
           - Response: { { message: "refund done successfully!" } }
   
+          - Authorization: Required. Bearer token of the Admin or Trainee.
+  
       </details>
       
       - <details><summary>POST to find a specific credit card.</summary>
@@ -716,6 +754,8 @@ SOFTWARE.
           - Body: { creditCardId }
 
           - Response: { creditCard }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -731,6 +771,8 @@ SOFTWARE.
           - Body: { creditCardId }
 
           - Response: { { message: "credit card removed done successfully!" } }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -749,6 +791,8 @@ SOFTWARE.
 
           - Response: { newNote }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -766,6 +810,8 @@ SOFTWARE.
 
           - Response: { notes }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -782,6 +828,8 @@ SOFTWARE.
 
           - Response: { { message: "sent successfully" } }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -797,6 +845,8 @@ SOFTWARE.
 
           - Response: { true } or { false }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       - <details><summary>POST to find exercises status.</summary>
@@ -810,6 +860,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { true } or { false }
+          
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -826,6 +878,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>    
       
       - <details><summary>POST to find exam status.</summary>
@@ -839,6 +893,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
  
@@ -854,6 +910,8 @@ SOFTWARE.
 
           - Response: { res.pdfDirectory }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       - <details><summary>GET a course's completion certificate.</summary>
@@ -867,6 +925,8 @@ SOFTWARE.
           - Body: None
 
           - Response: { success! }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
      
@@ -905,6 +965,8 @@ SOFTWARE.
 
           - Response: Models.corpTrainees
   
+          - Authorization: Required. Bearer token of the Admin or Corporate Trainee.
+  
       </details>
       
       
@@ -920,6 +982,8 @@ SOFTWARE.
 
           - Response: Models.corpTrainee
   
+          - Authorization: Required. Bearer token of the Admin or Corporate Trainee.
+  
       </details>
       
       - <details><summary>GET a corporate trainee's courses</summary>
@@ -934,6 +998,8 @@ SOFTWARE.
 
           - Response: Models.corpTrainee.courses
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       - <details><summary>POST a course registeration</summary>
@@ -947,6 +1013,8 @@ SOFTWARE.
           - Body: { courseId, courseGrade, courseProgress }
 
           - Response: { course }
+  
+          - Authorization: Required. Bearer token of the Admin or Corporate Trainee.
   
       </details>
       
@@ -963,6 +1031,8 @@ SOFTWARE.
 
           - Response: { course.exercises.exercisesgrade }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       
@@ -978,6 +1048,8 @@ SOFTWARE.
 
           - Response: { course.exercises.examgrade }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       - <details><summary>POST to check if corporate trainee has access to a specific course.</summary>
@@ -991,6 +1063,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
   
       </details>     
       
@@ -1006,6 +1080,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
         
       - <details><summary>POST to find course progress.</summary>
@@ -1019,6 +1095,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { course.courseProgress }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
   
       </details>
       
@@ -1034,6 +1112,8 @@ SOFTWARE.
 
           - Response: { true } or { false }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       - <details><summary>POST to find exam status.</summary>
@@ -1047,6 +1127,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
   
       </details>
       
@@ -1063,6 +1145,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       
@@ -1078,6 +1162,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       
@@ -1092,6 +1178,8 @@ SOFTWARE.
           - Body: { courseId, exercisesGrade }
 
           - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
       
       </details>
       
@@ -1108,6 +1196,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
     
    
@@ -1123,6 +1213,8 @@ SOFTWARE.
 
           - Response: { newNote }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       
@@ -1137,6 +1229,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { notes }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
   
       </details>
       
@@ -1154,6 +1248,8 @@ SOFTWARE.
 
           - Response: { { message: "sent successfully" } }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       
@@ -1168,6 +1264,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
   
       </details>
       
@@ -1185,6 +1283,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>     
  
       - <details><summary>POST to create a new certificate.</summary>
@@ -1199,6 +1299,8 @@ SOFTWARE.
 
           - Response: { res.pdfDirectory }
   
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
       </details>
       
       - <details><summary>GET a course's completion certificate.</summary>
@@ -1212,6 +1314,8 @@ SOFTWARE.
           - Body: None
 
           - Response: { success! }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
   
       </details>
 
