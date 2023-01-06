@@ -14,7 +14,7 @@ This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is 
 -   Software development tools and techniques
 -   Software development process
 -   Software Testing
--   latest backend and frontend technologies
+-   Latest backend and frontend technologies
 
 Web Development is a crucial part in anything in our era. Thus, this course created the perfect opportunity for us to explore node JS, React, CSS and JavaScript all in one. It also pushed us to challenge ourselves. Our goal is to 
 provide the user with the ultimate online experience.
