@@ -1,13 +1,10 @@
-# RADS
-An Online Learning System web application through which individuals can attend pre-recorded courses online, This application is implemented using the MERN stack technique.
-
-
+# RADS :space_invader:
+An Online Learning web-based system through which individuals can attend and learn pre-recorded courses online. This application was implemented using the MERN stack.
 <!-- ![](https://github.com/Advanced-Computer-Lab-2022/RADS/blob/main/Demo.gif) -->
-
 <img src="https://github.com/Advanced-Computer-Lab-2022/RADS/blob/main/Demo.gif" width="100%" height = "100%">
 
 # Motivation 💪
-This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is a project-based course that aims to teach students
+This project was developed for the GUC's `CSEN704 Advanced Computer Lab`. The lab is a project-based course that aims to teach students:
 
 -   Scrum and Agile methodologies
 -   Software development best practices
@@ -16,12 +13,9 @@ This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is 
 -   Software Testing
 -   Latest backend and frontend technologies
 
-Web Development is a crucial part in anything in our era. Thus, this course created the perfect opportunity for us to explore node JS, React, CSS and JavaScript all in one. It also pushed us to challenge ourselves. Our goal is to 
-provide the user with the ultimate online experience.
+And since Web Development is a crucial part in our current era, this course gave us the perfect opportunity to explore Node.js, React, CSS and JavaScript all in one go. It also pushed us to challenge ourselves since our main goal from the start was to provide the user with the ultimate online experience.
 
 # Badges 
-
-
 ![ alt text ](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![ alt text ](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![JSON Web Tokens Badge](https://img.shields.io/badge/JWT-000?logo=jsonwebtokens&logoColor=fff&style=for-the-badge)
@@ -34,25 +28,22 @@ provide the user with the ultimate online experience.
 ![ alt text ](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white)
 ![ alt text ](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=Jest&logoColor=white)
 
-
-
 # Build Status 🔨
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
   
-  * All requirements are filled, more testing is required to ensure the best service and UX.
-  * This project is currently in development.
-  * Unit tests will be added.
-  * Feedback and error handling for better UI/UX.
-  
+  * All user requirements are met and fulfilled, but more testing is neede to ensure the best service and UX.
+  * This project is currently a work-in-progress.
+  * Unit tests will be added in the next roll-out.
+  * Feedback and error handling is currently in development for a better UI/UX experience.
  
 # Code Style 📄
-  * We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
+  * We used the standardised JavaScript coding style conventions to improve the overall readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used naming conventions for local variables. We named the local variables using camelCase lettering starting with small letter.
   
   * The architecture for the features is MVC (Model View Controller).
 
   * We used camelCase for variables to be more consistent.
 
-  * Codes are formatted in VS Code using alt + shift + F.
+  * Codes are formatted in VS Code using the `Alt + Shift + F` command.
 
 # Screen shots 📸
 
@@ -88,11 +79,8 @@ provide the user with the ultimate online experience.
   
   ![PAYMENT](https://user-images.githubusercontent.com/105018459/211056118-96233766-6f16-48d4-ba00-2e1c9f04266d.png)
 
-  
 
-
-
-# Tech/Framework used 🖥️
+# Tech/Framework Used 🖥️
 
 1. <details><summary>In Back-end</summary> 
     
@@ -163,9 +151,9 @@ provide the user with the ultimate online experience.
 
 # Features 🌟
 
-The system serves different type of users (Admin, Instructor , Individual Trainee, Corporate Trainee)
+The system serves different type of users (Admins, Instructors, Individual Trainees and Corporate Trainees)
 
-1. <details><summary>As a guest, you can</summary> 
+1. <details><summary>As a Guest, you can</summary> 
     
     * View all courses, search and filter courses by price, rating or subject and view their description.
     
@@ -493,90 +481,18 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
 
 # Installation 📩
   * Open two separate terminals.
-  * In the first terminal, go to Back-end folder and install all packages in the Backend folder:
+  * In the first terminal, go to the Backend folder and type the command: `npm i`
       ```bash
       cd backend && npm i
       ```
-  * In the second terminal, go to the Front-end folder and type the command: npm i
+  * In the second terminal, go to the Frontend folder and type the command: `npm i`
       ```bash
       cd frontend && npm i
       ```
-
-
- 
-   
-
-# Tests 🧪
-
-The testing is done using `jest`. To run the tests, run the following command
-
-```bash
-> npm run test
-```
-
-Also, the tests can be done using Postman on any route
-
-# How to use? 📁
-
-To run backend 
-```bash
-cd backend && node App.js
-```
-To run frontend
-```bash
-cd frontend && npm run start
-```
-the backend server and frontend will be running on the specified ports on your env files.
-
-
-# Contribute 🙌
-Any contributions to our code is welcomed. You can always improve the frontend for a better UX.
-
-# Credits 🎉
- * Our team "RADS" did tremendous work in order to fullfill this project. Special thanks to our Scrum Master - Ahmed Khaled [@Ahmed Khaled](https://www.github.com/ahmillect) for being always there for support and for managing our team smoothly:
-    - Khaled Ayman [@Khaled Ayman](https://www.github.com/Khaledayman9)
-    - Ali Elserafy [@Ali Serafy](https://www.github.com/AliSerafy)
-    - Hassan Haridy [@Hassan Haridy](https://www.github.com/1hassanharidy)
-    - Misk Mohamed [@Misk Abdullah](https://www.github.com/miskmabdalla)
- * Links that helped us alot: 
-    - [MERN Stack Crash Course Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE)
-    - [MERN stack authentication + profile](https://www.youtube.com/playlist?list=PLr_bWRQ_9ePVfQwf0LorPwTlOZSBoPGIu)
-    - [Search Bar in React Tutorial - Cool Search Filter Tutorial](https://www.youtube.com/watch?v=x7niho285qs&list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1&index=16&t=1337s)
-    - [React: Add/Remove Input Fields Dynamically on button click](https://youtu.be/XtS14dXwvwE?list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1)
-    - [MERN Auth Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT)
-
-# License ⚖️
-
-MIT License
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-Copyright (c) [2023] [Ahmed Khaled]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
-
+      
+      
 # API Reference 📋
    
-
-  
   1. Admin route: 
        
       - <details><summary>GET all admins</summary>
@@ -2239,3 +2155,68 @@ SOFTWARE.
       </details>
       
       
+# Tests 🧪
+
+Testing was done using `jest`. To run the tests, run the following command:
+
+```bash
+> npm run test
+```
+
+Also, tests can be done using Postman on any route.
+
+
+# How to use? 📁
+
+To run backend 
+```bash
+cd backend && node App.js
+```
+To run frontend
+```bash
+cd frontend && npm run start
+```
+*The backend server and frontend will be running on the specified ports in your .env file.
+
+
+# Contribute 🙌
+Any contributions to our code is welcomed. You can always improve the frontend for a better UX.
+
+# Credits 🎉
+ * Our team "RADS" did a tremendous work in order to fullfill this project on time. Special thanks to our Scrum Master, Ahmed Khaled [@Ahmed Khaled](https://www.github.com/ahmillect), for being always there for support and for managing our team smoothly:
+    - Khaled Ayman [@Khaled Ayman](https://www.github.com/Khaledayman9)
+    - Ali Elserafy [@Ali Serafy](https://www.github.com/AliSerafy)
+    - Hassan Haridy [@Hassan Haridy](https://www.github.com/1hassanharidy)
+    - Misk Mohamed [@Misk Abdullah](https://www.github.com/miskmabdalla)
+ * Links that helped us alot: 
+    - [MERN Stack Crash Course Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE)
+    - [MERN stack authentication + profile](https://www.youtube.com/playlist?list=PLr_bWRQ_9ePVfQwf0LorPwTlOZSBoPGIu)
+    - [Search Bar in React Tutorial - Cool Search Filter Tutorial](https://www.youtube.com/watch?v=x7niho285qs&list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1&index=16&t=1337s)
+    - [React: Add/Remove Input Fields Dynamically on button click](https://youtu.be/XtS14dXwvwE?list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1)
+    - [MERN Auth Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT)
+
+# License ⚖️
+
+MIT License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Copyright (c) [2023] [Ahmed Khaled]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
