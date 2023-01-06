@@ -166,66 +166,137 @@ The system serves different type of users (Admin, Instructor , Individual Traine
 
 1. <details><summary>As a guest, you can</summary> 
     
-    * view all courses, search and filter courses by price, rating or subject and view their description.
+    * View all courses, search and filter courses by price, rating or subject and view their description.
     
-    * Signup
+    * Signup.
     
-    * Login
+    * Login.
     
+    * Request forget password email to recover password.
 </details>
 
 
-2- As a Trainee, you can
-  * view all courses
-  * search and filter courses by price, rating or subject and view their description
-  * purchase courses
-  * view course videos
-  * solve exercises
-  * request refund for course
-  * solve exam exercises
-  * report a problem whether it is technical, financial or other.
-  * rate a courses and instructors
-  * view their balance
-  * add/remove credit cards 
-  * write course notes and download them
-  * view all report and their status follow up on unresolved problem
-  * edit his email or password
+2- <details><summary>As a Trainee, you can</summary> 
+    
+    * View all courses.
+  
+    * Search and filter courses by price, rating or subject and view their description.
+  
+    * Purchase courses.
+  
+    * View course videos.
+  
+    * Solve exercises.
+  
+    * Request refund for course.
+  
+    * Solve exam exercises.
+  
+    * Report a problem whether it is technical, financial or other.
+  
+    * Rate courses and instructors.
+    
+    * View their balance.
+  
+    * Add/remove credit cards.
+  
+    * Download a completion certificate when completing a course.
+  
+    * Write course notes and download them.
+  
+    * View all reports and their status.
+  
+    * Edit his email or password.
+  
+    * Follow up on unresolved issue.
+    
+    * View his profile.
+  
+</details>  
 
 
-3- As a Corporate Trainee, you can
-  * view all courses
-  * search and filter courses by rating or subject and view their description
-  * request to access a course
-  * view course videos
-  * solve exercises
-  * solve exam exercises
-  * report a problem whether it is technical, financial or other.
-  * rate a courses and instructors
-  * write course notes and download them
-  * view all report and their status follow up on unresolved problem
-  * edit his email or password
+3- <details><summary>As a Corporate Trainee, you can </summary>  
+    
+    * View all courses.
+  
+    * Search and filter courses by rating or subject and view their description.
+    
+    * Request to access a course.
+  
+    * View course videos.
+  
+    * Solve exercises.
+  
+    * Solve exam exercises.
+  
+    * Report a problem whether it is technical, financial or other.
+  
+    * Rate a courses and instructors.
+  
+    * Write course notes and download them.
+  
+    * Download a completion certificate when completing a course.
+  
+    * View all reports and their status.
+  
+    * Edit his email or password.
+  
+    * Follow up on unresolved issue.
+  
+    * View his profile.
+  
+</details>  
+
+4- <details><summary>As an Instructor, you can  </summary>
+  
+    * Create a new course and add all it's information.
+  
+    * Set promotion for a specific course.
+  
+    * View all his/her ratings and reviews.
+  
+    * View all ratings and reviews about his/her courses. 
+  
+    * Report a problem whether it is technical, financial or other.
+  
+    * View all reports and their status.
+  
+    * Edit his biography or email or password.
+  
+    * Search and filter courses by price, rating or subject and view their description.
+  
+    * Search and filter his courses by price, rating or subject and view their description.
+  
+    * Follow up on unresolved issue.
+  
+    * View his profile.
+  
+    * Receive a monthly income whenever someone enrolls in one of his/her courses.
+  
+</details>
 
 
-4- As an Instructor, you can 
-  * create a new course and add all it's information
-  * set promotion for a specific course
-  * view all his ratings and reviews
-  * report a problem whether it is technical, financial or other
-  * view all report and their status follow up on unresolved problem
-  * edit his biography or email or password
-  * search and filter courses by price, rating or subject and view their description
-  * search and filter his courses by price, rating or subject and view their description
-
-
-5- As an Admin, you can
-  * Add corporate trainees and set their usernames and passwords
-  * Add instructors and set their usernames and passwords
-  * view reported problems and can add comments and set report status
-  * grant access to refund requests by trainees
-  * grant access to course requests by corporate trainees
-  * set promotion for one or more than one course
-  * Add another admin and set their usernames and passwords
-
+5- <details><summary>As an Admin, you can </summary> 
+    
+    * Add corporate trainees and set their usernames and passwords.
+  
+    * Add instructors and set their usernames and passwords.
+  
+    * View reported problems and can add comments and set report status.
+  
+    * Grant access to refund requests by trainees.
+  
+    * Grant access to course requests by corporate trainees.
+  
+    * Set promotion for one or more than one course.
+  
+    * Add another admin and set their usernames and passwords.
+  
+    * View follow ups on unresolved issues.
+  
+    * Search and filter courses by price, rating or subject and view their description.
+  
+</details>
 
 # Code Examples 💽
 
