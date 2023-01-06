@@ -1649,7 +1649,7 @@ SOFTWARE.
       </details>
       
       
-            - <details><summary>GET unresolved reports for trainee.</summary>
+      - <details><summary>GET unresolved reports for trainee.</summary>
   
           - Description: GET all unresolved reports for a specific trainee.
 
@@ -1681,11 +1681,9 @@ SOFTWARE.
   
       </details>
       
-      
-      </details>
-      
-      
-            - <details><summary>GET unresolved reports for instructor.</summary>
+ 
+     
+      - <details><summary>GET unresolved reports for instructor.</summary>
   
           - Description: GET all unresolved reports for a specific instructor.
 
