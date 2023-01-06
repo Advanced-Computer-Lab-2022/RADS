@@ -43,7 +43,7 @@ provide the user with the ultimate online experience.
   * Unit tests will be added.
   * Feedback and error handling for better UI/UX.
   
-
+ 
 # Code Style 📄
     * We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
     * The architecture for the features is MVC (Model View Controller) Learn More Here.
@@ -363,7 +363,7 @@ The testing is done using `jest`. To run the tests, run the following command
 
 Also, the tests can be done using Postman on any route
 
-# How to use?
+# How to use? 📁
 
 To run backend 
 ```bash
@@ -376,10 +376,10 @@ cd frontend && npm run start
 the backend server and frontend will be running on the specified ports on your env files.
 
 
-# Contribute
+# Contribute 🙌
 Any contributions to our code is welcomed. You can always improve the frontend for a better UX.
 
-# Credits
+# Credits 🎉
  * Our team "RADS" did tremendous work in order to fullfill this project. Special thanks to our Scrum Master - Ahmed Khaled [@Ahmed Khaled](https://www.github.com/ahmillect) for being always there for support and for managing our team smoothly:
     - Khaled Ayman [@Khaled Ayman](https://www.github.com/Khaledayman9)
     - Ali Elserafy [@Ali Serafy](https://www.github.com/AliSerafy)
@@ -391,7 +391,7 @@ Any contributions to our code is welcomed. You can always improve the frontend f
     - https://www.youtube.com/watch?v=x7niho285qs&list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1&index=15&t=1337s
     - https://youtu.be/XtS14dXwvwE?list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1
 
-# License
+# License 🪪
 
 MIT License
 
@@ -419,7 +419,7 @@ SOFTWARE.
 
 
 
-# API reference
+# API reference 📋
    
 
   
