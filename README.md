@@ -413,23 +413,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-- <details><summary>Detail 1</summary>
-
-     - Detail 1.1
-     - Detail 1.2
-
-- <details><summary>Detail 2</summary>
-
-     - Detail 2.1
-     - Detail 2.2
-
-</details>
-</details>
 
 # API reference
   1. Admin route: 
       * GET all admins.
       ``` /admin ```
+       
+<details><summary>Response</summary>
+
+   
+</details>
+
+      
+      
       
       * GET a specific admin with id.
       ``` /admin/:id ```
@@ -440,8 +436,8 @@ SOFTWARE.
       
       * PATCH admin's information
       ``` /admin/editadmin/:id ```
-       
-      
+
+
   2. Trainee route: 
 
       * GET routes: /trainee, /trainee/:id , /trainee/getcourses/:id,
