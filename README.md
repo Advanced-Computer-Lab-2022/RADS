@@ -350,7 +350,7 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
   };
 ```
 
-```
+```html
  <Box className="card-border">
             <Box className='wallet-div'>
                 <Button
