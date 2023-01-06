@@ -6,7 +6,7 @@ An Online Learning System web application through which individuals can attend p
 
 <img src="https://github.com/Advanced-Computer-Lab-2022/RADS/blob/main/Demo.gif" width="100%" height = "100%">
 
-# Motivation
+# Motivation 💪
 This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is a project-based course that aims to teach students
 
 -   Scrum and Agile methodologies
@@ -19,7 +19,7 @@ This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is 
 Web Development is a crucial part in anything in our era. Thus, this course created the perfect opportunity for us to explore node JS, React, CSS and JavaScript all in one. It also pushed us to challenge ourselves. Our goal is to 
 provide the user with the ultimate online experience.
 
-# Badges
+# Badges 
 
 
 ![ alt text ](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
@@ -32,10 +32,11 @@ provide the user with the ultimate online experience.
 ![ alt text ](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 ![ alt text ](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
 ![ alt text ](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white)
+![ alt text ](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=Jest&logoColor=white)
 
 
 
-# Build Status
+# Build Status 🔨
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
   
   * All requirements are filled, more testing is required to ensure the best service and UX.
@@ -43,11 +44,16 @@ provide the user with the ultimate online experience.
   * Unit tests will be added.
   * Feedback and error handling for better UI/UX.
   
+ 
+# Code Style 📄
+  * We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
+  * The architecture for the features is MVC (Model View Controller) Learn More Here.
 
-# Code Style
-We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
+  * We used camelCase for variables to be more consistent.
 
-# Screen shots
+  * Codes are formatted in VS Code using alt + shift + F.
+
+# Screen shots 📸
 
   1. Login page:
 
@@ -74,7 +80,7 @@ We used the standard Javascript Coding style to improve readability and maintain
   ![addourse](https://user-images.githubusercontent.com/105018459/210191860-bd726d21-3f35-45e1-9593-201f43b79dd9.PNG)
 
 
-# Tech/Framework used
+# Tech/Framework used 🖥️
 
 1. In Back-end
     * NodeJS
@@ -110,7 +116,7 @@ We used the standard Javascript Coding style to improve readability and maintain
     * Jwt-decode
      
 
-# Features
+# Features 🌟
 
 The system serves different type of users (Admin, Instructor , Individual Trainee, Corporate Trainee)
 
@@ -170,7 +176,7 @@ The system serves different type of users (Admin, Instructor , Individual Traine
   * Add another admin and set their usernames and passwords
 
 
-# Code Examples
+# Code Examples 💽
 
 ```javascript
 const updateCertificateState = async(req, res) => {
@@ -333,7 +339,7 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
   };
 ```
 
-# Installation
+# Installation 📩
   * Open two separate terminals.
   * In the first terminal, go to Back-end folder and install all packages in the Backend folder:
       ```bash
@@ -348,7 +354,7 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
  
    
 
-# Tests
+# Tests 🧪
 
 The testing is done using `jest`. To run the tests, run the following command
 
@@ -358,7 +364,7 @@ The testing is done using `jest`. To run the tests, run the following command
 
 Also, the tests can be done using Postman on any route
 
-# How to use?
+# How to use? 📁
 
 To run backend 
 ```bash
@@ -371,10 +377,10 @@ cd frontend && npm run start
 the backend server and frontend will be running on the specified ports on your env files.
 
 
-# Contribute
+# Contribute 🙌
 Any contributions to our code is welcomed. You can always improve the frontend for a better UX.
 
-# Credits
+# Credits 🎉
  * Our team "RADS" did tremendous work in order to fullfill this project. Special thanks to our Scrum Master - Ahmed Khaled [@Ahmed Khaled](https://www.github.com/ahmillect) for being always there for support and for managing our team smoothly:
     - Khaled Ayman [@Khaled Ayman](https://www.github.com/Khaledayman9)
     - Ali Elserafy [@Ali Serafy](https://www.github.com/AliSerafy)
@@ -386,7 +392,7 @@ Any contributions to our code is welcomed. You can always improve the frontend f
     - https://www.youtube.com/watch?v=x7niho285qs&list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1&index=15&t=1337s
     - https://youtu.be/XtS14dXwvwE?list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1
 
-# License
+# License ⚖️
 
 MIT License
 
@@ -414,7 +420,7 @@ SOFTWARE.
 
 
 
-# API reference
+# API reference 📋
    
 
   
@@ -430,7 +436,9 @@ SOFTWARE.
           
           - Body: None
           
-          - Response: Model.Admins
+          - Response: Models.Admins
+          
+          - Authorization: Required. Bearer token of the Admin.
         
       </details>
          
@@ -444,7 +452,9 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Admin
+          - Response: Models.Admin
+          
+          - Authorization: Required. Bearer token of the Admin.
       
       </details>
       
@@ -460,7 +470,9 @@ SOFTWARE.
 
           - Body: { userName, password } 
 
-          - Response: Model.Admin
+          - Response: Models.Admin
+          
+          - Authorization: Required. Bearer token of the Admin.
   
       </details>
       
@@ -481,7 +493,9 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Trainees
+          - Response: Models.Trainees
+  
+          - Authorization: Required. Bearer token of the Admin or Trainee.
   
       </details>
       
@@ -496,7 +510,9 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Trainee
+          - Response: Models.Trainee
+  
+          - Authorization: Required. Bearer token of the Admin or Trainee.
   
       </details>
       
@@ -510,7 +526,9 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: Model.Trainee.courses
+          - Response: Models.Trainee.courses
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -526,6 +544,8 @@ SOFTWARE.
 
           - Response: { course }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -540,6 +560,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { course.exercises.exercisesgrade }
+          
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -556,6 +578,8 @@ SOFTWARE.
 
           - Response: { course.exercises.examgrade }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       - <details><summary>POST a new credit-card.</summary>
@@ -569,6 +593,8 @@ SOFTWARE.
           - Body: { cardName, cardNumber, cardExpiryDate, cardCVV }
 
           - Response: { newCreditCard }
+          
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -584,6 +610,8 @@ SOFTWARE.
 
           - Response: { true } or { false }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       - <details><summary>POST to change balance.</summary>
@@ -597,6 +625,8 @@ SOFTWARE.
           - Body: { balanceValue }
 
           - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
           
@@ -612,6 +642,8 @@ SOFTWARE.
           - Body: { courseId, currentChapter, totalChapters }
 
           - Response: { "Successfull update!!" }
+    
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
         
@@ -626,6 +658,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { course.courseProgress }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -642,6 +676,8 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -656,6 +692,8 @@ SOFTWARE.
           - Body: { courseId, examGrade}
 
           - Response: { "Successfull update!!" }
+      
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -671,6 +709,8 @@ SOFTWARE.
           - Body: { courseId, exercisesGrade }
 
           - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Trainee.
       
       </details>
       
@@ -686,6 +726,8 @@ SOFTWARE.
           - Body: { courseId }
 
           - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -703,6 +745,8 @@ SOFTWARE.
 
           - Response: { { message: "refund done successfully!" } }
   
+          - Authorization: Required. Bearer token of the Admin or Trainee.
+  
       </details>
       
       - <details><summary>POST to find a specific credit card.</summary>
@@ -716,6 +760,8 @@ SOFTWARE.
           - Body: { creditCardId }
 
           - Response: { creditCard }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -731,6 +777,8 @@ SOFTWARE.
           - Body: { creditCardId }
 
           - Response: { { message: "credit card removed done successfully!" } }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -749,6 +797,8 @@ SOFTWARE.
 
           - Response: { newNote }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -766,6 +816,8 @@ SOFTWARE.
 
           - Response: { notes }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -782,6 +834,8 @@ SOFTWARE.
 
           - Response: { { message: "sent successfully" } }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
       
@@ -797,8 +851,25 @@ SOFTWARE.
 
           - Response: { true } or { false }
   
+          - Authorization: Required. Bearer token of the Trainee.
+  
       </details>
       
+      - <details><summary>POST to find exercises status.</summary>
+  
+          - Description: Request to find out if a trainee solved exercises or not.
+
+          - URL:    ```/trainee/checkexstatus/:id ```
+
+          - Parameters: trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+          
+          - Authorization: Required. Bearer token of the Trainee.
+  
+      </details>
       
       
       - <details><summary>POST to update certificate state.</summary>
@@ -813,7 +884,25 @@ SOFTWARE.
 
           - Response: { "Successfull update!!" }
   
-      </details>     
+          - Authorization: Required. Bearer token of the Trainee.
+  
+      </details>    
+      
+      - <details><summary>POST to find exam status.</summary>
+  
+          - Description: Request to find out if a trainee solved exam or not.
+
+          - URL:    ```/trainee/checkstatus/:id```
+
+          - Parameters: trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Trainee.
+  
+      </details>
  
       - <details><summary>POST to create a new certificate.</summary>
   
@@ -826,6 +915,8 @@ SOFTWARE.
           - Body: { name, courseTitle } , NOTE: name here is trainee's name. 
 
           - Response: { res.pdfDirectory }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
       
@@ -840,6 +931,8 @@ SOFTWARE.
           - Body: None
 
           - Response: { success! }
+  
+          - Authorization: Required. Bearer token of the Trainee.
   
       </details>
      
@@ -1154,25 +1247,381 @@ SOFTWARE.
       </details>
 
   5. CorpTrainee route:
+ 
+      - <details><summary>GET all corporate trainees</summary>
+  
+          - Description: returns all corporate trainees in the database.
 
-      * GET routes:/corptrainee   -  /corptrainee/:id   -   /corptrainee/getcourses/:id   -   /corptrainee/cert/getpdf
+          - URL:    ``` /corptrainee ```
 
-      * PATCH routes: /corptrainee/password/:id
+          - Parameters: None
 
-      * POST routes: /corptrainee/register/:id   -   /corptrainee/checkaccess/:id   -   /corptrainee/courseprogress/:id   -   /corptrainee/findgrade/:id  -   /corptrainee/findtestgrade/:id  -   /corptrainee/checkexstatus/:id  -   /corptrainee/checkstatus/:id  -   /corptrainee/updateexamgrade/:id  -   /corptrainee/updateexercisesgrade/:id  -   /corptrainee/updateexercisesstatus/:id  -   /corptrainee/updateprogress/:id   -   /corptrainee/updateexamstatus/:id  -   /corptrainee/postnote/:id  -   /corptrainee/getnotes/:id  -   /corptrainee/checkcertstate/:id   -  /corptrainee/updatecertstate/:id  -   /corptrainee/createpdf  -   /corptrainee/emailpdf/:id
+          - Body: None
 
-  6. Currency route:
+          - Response: Models.corpTrainees
+  
+          - Authorization: Required. Bearer token of the Admin or Corporate Trainee.
+  
+      </details>
+      
+      
+       - <details><summary>GET a specific corporate trainee</summary>
+  
+          - Description: returns a specific corporate trainee in the database.
 
-      * GET routes: /currency
+          - URL:    ``` /corptrainee/:id ```
 
-      * POST routes: /currency
+          - Parameters:  Corporate Trainee's id "id"
+
+          - Body: None
+
+          - Response: Models.corpTrainee
+  
+          - Authorization: Required. Bearer token of the Admin or Corporate Trainee.
+  
+      </details>
+      
+      - <details><summary>GET a corporate trainee's courses</summary>
+  
+          - Description: returns all the registered courses for a specific corporate trainee.
+
+          - URL:    ``` /corptrainee/getcourses/:id ```
+
+          - Parameters:  Corporate Trainee's id "id"
+
+          - Body: None
+
+          - Response: Models.corpTrainee.courses
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      - <details><summary>POST a course registeration</summary>
+  
+          - Description: Allow corporate trainee to register in a course.
+
+          - URL:    ``` /corptrainee/register/:id  ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId, courseGrade, courseProgress }
+
+          - Response: { course }
+  
+          - Authorization: Required. Bearer token of the Admin or Corporate Trainee.
+  
+      </details>
+      
+      
+      - <details><summary>POST to find exercises grade.</summary>
+  
+          - Description: Allow Corporate trainee to find his last exercises grade.
+
+          - URL:    ```/corptrainee/findgrade/:id ```
+
+          - Parameters:  Corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.exercises.exercisesgrade }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      
+      - <details><summary>POST to find exam grade.</summary>
+  
+          - Description: Allow Corporate Trainee to find his exam grade.
+
+          - URL:    ``` /corptrainee/findtestgrade/:id ```
+
+          - Parameters: Corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.exercises.examgrade }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      - <details><summary>POST to check if corporate trainee has access to a specific course.</summary>
+  
+          - Description: Find out if a corporate trainee has access to a specific course or not.
+
+          - URL:    ```/corptrainee/checkaccess/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>     
+      
+      - <details><summary>POST to change course progress.</summary>
+  
+          - Description: Update corporate trainee's course progress.
+
+          - URL:    ```/corptrainee/updateprogress/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId, currentChapter, totalChapters }
+
+          - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+        
+      - <details><summary>POST to find course progress.</summary>
+  
+          - Description: Request to find out corporate trainee's current course progress.
+
+          - URL:    ```/corptrainee/courseprogress/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { course.courseProgress }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      - <details><summary>POST to find exercises status.</summary>
+  
+          - Description: Request to find out if a corporate trainee solved exercises or not.
+
+          - URL:    ```/corptrainee/checkexstatus/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      - <details><summary>POST to find exam status.</summary>
+  
+          - Description: Request to find out if a corporate trainee solved exam or not.
+
+          - URL:    ```/corptrainee/checkstatus/:id```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+       
+      - <details><summary>POST to change exam status.</summary>
+  
+          - Description: Update corporate trainee's exam status where he solved it or not.
+
+          - URL:    ```/corptrainee/updateexamstatus/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      
+      - <details><summary>POST to change exam grade.</summary>
+  
+          - Description: Update corporate trainee's exam grade.
+
+          - URL:    ```/corptrainee/updateexamgrade/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId, examGrade}
+
+          - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      
+      - <details><summary>POST to change exercises grade.</summary>
+  
+          - Description: Update corporate trainee's exercises grade.
+
+          - URL:    ```/corptrainee/updateexercisesgrade/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId, exercisesGrade }
+
+          - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+      
+      </details>
+      
+      
+      - <details><summary>POST to change exercises status.</summary>
+  
+          - Description: Update exercises status whether a corporate trainee already solved the exercises or not.
+
+          - URL:    ```/corptrainee/updateexercisesstatus/:id ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+    
+   
+      - <details><summary>POST a new course note.</summary>
+  
+          - Description: Let a corporate trainee add a new note to the list of notes for a course.
+
+          - URL:    ```/corptrainee/postnote/:id```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId, note }
+
+          - Response: { newNote }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      
+      - <details><summary>POST to get all course notes.</summary>
+  
+          - Description: Let a corporate trainee get all course notes for a specific course.
+
+          - URL:    ``` /corptrainee/getnotes/:id ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { notes }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      
+      
+      - <details><summary>POST to send an email to a corporate trainee with completion certificate.</summary>
+  
+          - Description: Send a completion certificate to a corporate trainee's email.
+
+          - URL:    ``` /corptrainee/emailpdf/:id   ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { email, courseName }
+
+          - Response: { { message: "sent successfully" } }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      
+      - <details><summary>POST to find certificate state.</summary>
+  
+          - Description: Find the certificate state of corporate trainee whether he recieved his certificate or not in a specific course.
+
+          - URL:    ``` /corptrainee/checkcertstate/:id   ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { true } or { false }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      
+      
+      - <details><summary>POST to update certificate state.</summary>
+  
+          - Description: Update the certificate state of corporate trainee whether he recieved his certificate or not in a specific course.
+
+          - URL:    ``` /corptrainee/updatecertstate/:id   ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: { courseId }
+
+          - Response: { "Successfull update!!" }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>     
+ 
+      - <details><summary>POST to create a new certificate.</summary>
+  
+          - Description: Create a completion certificate for a specific course for a corporate trainee.
+
+          - URL:    ```/corptrainee/createpdf ```
+
+          - Parameters:  None
+
+          - Body: { name, courseTitle } , NOTE: name here is trainee's name. 
+
+          - Response: { res.pdfDirectory }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
+      
+      - <details><summary>GET a course's completion certificate.</summary>
+  
+          - Description: Return a completion certificate for a specific course for a corporate trainee.
+
+          - URL:    ``` /corptrainee/cert/getpdf ```
+
+          - Parameters:  None
+
+          - Body: None
+
+          - Response: { success! }
+  
+          - Authorization: Required. Bearer token of the Corporate Trainee.
+  
+      </details>
 
 
-  7. Guest route:
+     
+
+  6. Guest route:
 
       * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
 
-  8. Report route:
+  7. Report route:
 
       * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
 
