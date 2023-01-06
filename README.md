@@ -1437,7 +1437,7 @@ SOFTWARE.
   
       </details>
 
-  5. CorpTrainee route:
+  5. Corporate Trainee route:
  
       - <details><summary>GET all corporate trainees</summary>
   
