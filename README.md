@@ -6,7 +6,7 @@ An Online Learning System web application through which individuals can attend p
 
 <img src="https://github.com/Advanced-Computer-Lab-2022/RADS/blob/main/Demo.gif" width="100%" height = "100%">
 
-# Motivation
+# Motivation 💪
 This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is a project-based course that aims to teach students
 
 -   Scrum and Agile methodologies
@@ -19,7 +19,7 @@ This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is 
 Web Development is a crucial part in anything in our era. Thus, this course created the perfect opportunity for us to explore node JS, React, CSS and JavaScript all in one. It also pushed us to challenge ourselves. Our goal is to 
 provide the user with the ultimate online experience.
 
-# Badges
+# Badges 
 
 
 ![ alt text ](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
@@ -35,7 +35,7 @@ provide the user with the ultimate online experience.
 
 
 
-# Build Status
+# Build Status 🔨
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
   
   * All requirements are filled, more testing is required to ensure the best service and UX.
@@ -44,10 +44,15 @@ provide the user with the ultimate online experience.
   * Feedback and error handling for better UI/UX.
   
 
-# Code Style
-We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
+# Code Style 📄
+    * We used the standard Javascript Coding style to improve readability and maintainability of our code. Moreover, this gives a uniform appearance to the code and makes it as clean and easy to read as possible. A semicolon is present after each statement. All functions are declared above the code that uses them. We also used a naming conventions for local variables. We named the local variables using camel case lettering starting with small letter.
+    * The architecture for the features is MVC (Model View Controller) Learn More Here.
 
-# Screen shots
+    * We used camelCase for variables.
+
+    * Codes are formatted in VS Code using alt + shift + F.
+
+# Screen shots 📸
 
   1. Login page:
 
@@ -74,7 +79,7 @@ We used the standard Javascript Coding style to improve readability and maintain
   ![addourse](https://user-images.githubusercontent.com/105018459/210191860-bd726d21-3f35-45e1-9593-201f43b79dd9.PNG)
 
 
-# Tech/Framework used
+# Tech/Framework used 🖥️
 
 1. In Back-end
     * NodeJS
@@ -110,7 +115,7 @@ We used the standard Javascript Coding style to improve readability and maintain
     * Jwt-decode
      
 
-# Features
+# Features 🌟
 
 The system serves different type of users (Admin, Instructor , Individual Trainee, Corporate Trainee)
 
@@ -170,7 +175,7 @@ The system serves different type of users (Admin, Instructor , Individual Traine
   * Add another admin and set their usernames and passwords
 
 
-# Code Examples
+# Code Examples 💽
 
 ```javascript
 const updateCertificateState = async(req, res) => {
@@ -333,7 +338,7 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
   };
 ```
 
-# Installation
+# Installation 📩
   * Open two separate terminals.
   * In the first terminal, go to Back-end folder and install all packages in the Backend folder:
       ```bash
@@ -348,7 +353,7 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
  
    
 
-# Tests
+# Tests 🧪
 
 The testing is done using `jest`. To run the tests, run the following command
 
