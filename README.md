@@ -950,7 +950,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: { Model.Instructor }
+          - Response: { Models.Instructor }
 
           - Authorization: Required. Bearer token of the Instructor, Admin.
   
@@ -967,7 +967,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: { Model.Instructor }
+          - Response: { Models.Instructor }
 
           - Authorization: Required. Bearer token of the Instructor, Trainee, Corprate Trainee.
   
@@ -983,7 +983,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: { Model.Instructor }
+          - Response: { Models.Instructor }
 
           - Authorization: Required. Bearer token of the Instructor, Admin.
   
@@ -999,7 +999,7 @@ SOFTWARE.
 
           - Body: { email, bio, password, verified }
 
-          - Response: { Model.Instructor }
+          - Response: { Models.Instructor }
 
           - Authorization: Required. Bearer token of the Instructor.
   
@@ -1016,7 +1016,7 @@ SOFTWARE.
 
           - Body: { iRating, iReview, traineeId, corpTraineeId }
 
-          - Response: { Model.Instructor.newReview }
+          - Response: { Models.Instructor.newReview }
 
           - Authorization: Required. Bearer token of the Instructor, Trainee, Corprate Trainee.
   
@@ -1044,7 +1044,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: { Model.Course }
+          - Response: { Models.Course }
 
           - Authorization: None
   
@@ -1061,7 +1061,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: { Model.Course }
+          - Response: { Models.Course }
           
           - Authorization: None
   
@@ -1077,7 +1077,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: { Model.Instructor.courses }
+          - Response: { Models.Instructor.courses }
           
           - Authorization: None
   
@@ -1093,7 +1093,7 @@ SOFTWARE.
 
           - Body: None
 
-          - Response: { Model.courses }
+          - Response: { Models.courses }
           
           - Authorization: None
   
@@ -1131,6 +1131,39 @@ SOFTWARE.
           - Authorization: None
   
       </details>
+
+      - <details><summary>GET max price</summary>
+  
+          - Description: return the most expensive course in the database.
+
+          - URL:    ```/course/max ```
+
+          - Parameters:  None
+
+          - Body: None
+
+          - Response: { Models.course[0].price }
+          
+          - Authorization: None
+  
+      </details>
+          
+      
+      - <details><summary>GET Some courses</summary>
+  
+          - Description: return all info of some courses.
+
+          - URL:    ```/course/subset ```
+
+          - Parameters:  None
+
+          - Body: { ids }
+
+          - Response: { courses }
+          
+          - Authorization: None
+  
+      </details>
       
       - <details><summary>POST a new Course</summary>
   
@@ -1159,72 +1192,55 @@ SOFTWARE.
 
           - Body: { cRating, cReview, traineeId, corpTraineeId }
 
-          - Response: { Model.course.newReview }
+          - Response: { Models.course.newReview }
           
           - Authorization: None
   
       </details>
       
-      - <details><summary>POST to check if registered in course.</summary>
+      - <details><summary>POST Course's Promotion</summary>
   
-          - Description: Find out if a trainee is enrolled in a course or not.
+          - Description: Create a promotion on a course in the database.
 
           - URL:    ```/course/promo/:id ```
 
-          - Parameters:  Trainee's id "id"
+          - Parameters:  Course's id "id"
 
-          - Body: { courseId }
+          - Body: { promotionStartDate, promotionEndDate, promotionRate }
 
-          - Response: { true } or { false }
-          
-          - Authorization: None
-  
-      </details>
-      
-      - <details><summary>POST to change balance.</summary>
-  
-          - Description: Update trainee's balance.
-
-          - URL:    ```/course/max ```
-
-          - Parameters:  Trainee's id "id"
-
-          - Body: { balanceValue }
-
-          - Response: { "Successfull update!!" }
-          
-          - Authorization: None
-  
-      </details>
-          
-      
-      - <details><summary>POST to change course progress.</summary>
-  
-          - Description: Update trainee's course progress.
-
-          - URL:    ```/course/subset ```
-
-          - Parameters:  Trainee's id "id"
-
-          - Body: { courseId, currentChapter, totalChapters }
-
-          - Response: { "Successfull update!!" }
+          - Response: { message: "updated successfully!" }
           
           - Authorization: None
   
       </details>
         
-      - <details><summary>POST to find course progress.</summary>
+      - <details><summary>POST Promo on several courses</summary>
   
-          - Description: Request to find out trainee's current course progress.
+          - Description: Request to add promotions on several courses.
 
           - URL:    ```/course/coursespostpromotion ```
 
-          - Parameters:  Trainee's id "id"
+          - Parameters:  None
+
+          - Body: { ids, promotionStartDate, promotionEndDate, promotionRate }
+
+          - Response: {  message: "Promotion Added successfully."  }
+          
+          - Authorization: None
+  
+      </details>
+
+      - <details><summary>DELETE a course's info</summary>
+  
+          - Description: Delete a course's info from the database.
+
+          - URL:    ```/course/:id ```
+
+          - Parameters:  Course's id "id"
 
           - Body: { courseId }
 
-          - Response: { course.courseProgress }
+          - Response:  { Models.course }
           
           - Authorization: None
   
@@ -1240,7 +1256,39 @@ SOFTWARE.
 
           - Body: { courseId }
 
-          - Response:  { Model.course }
+          - Response:  { Models.course }
+          
+          - Authorization: None
+  
+      </details>
+
+      - <details><summary>PATCH a course's promotion</summary>
+  
+          - Description: Update a promotion on a course in the database.
+
+          - URL:    ```/course/updatepromo/:id ```
+
+          - Parameters:  Course's id "id"
+
+          - Body: None
+
+          - Response:  { message: "rate updated succesfully", message: "course info" + course }
+          
+          - Authorization: None
+  
+      </details>
+
+      - <details><summary>PATCH the views for a course</summary>
+  
+          - Description: Update the views for a course in the database.
+
+          - URL:    ```/course/updateview/:id```
+
+          - Parameters:  Course's id "id"
+
+          - Body: None
+
+          - Response:  { Models.course }
           
           - Authorization: None
   
