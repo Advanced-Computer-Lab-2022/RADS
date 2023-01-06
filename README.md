@@ -94,38 +94,69 @@ provide the user with the ultimate online experience.
 # Tech/Framework used 🖥️
 
 1. <details><summary>In Back-end</summary> 
+    
     * NodeJS
+    
     * Nodemailer
+    
     * MongoDB
+    
     * Mongoose
+  
     * Express
+  
     * Bcrypt
+  
     * Body-parser
+  
     * Cors
+  
     * Dotenv
+  
     * Fs
+  
     * Html-pdf
+    
     * Https
+  
     * Jsonwebtoken
+  
     * Nodejs-nodemailer-outlook
+  
     * Nodemon
+  
     * Passport
+  
     * Passport-jwt
+  
     * Randomstring
+  
     * Validator
+  
 </details>
 
 2. <details><summary>In Front-end</summary> 
+  
     * ReactJS
+  
     * Material UI
+  
     * Axios
+  
     * Bcrypt
+  
     * Dateformat
+  
     * File-saver
+  
     * Jsonwebtoken
+  
     * Http
+
     * Jspdf
+    
     * Jwt-decode
+  
 </details>
 
 
