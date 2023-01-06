@@ -176,7 +176,7 @@ The system serves different type of users (Admin, Instructor , Individual Traine
 </details>
 
 
-2- <details><summary>As a Trainee, you can</summary> 
+2. <details><summary>As a Trainee, you can</summary> 
     
     * View all courses.
   
@@ -215,7 +215,7 @@ The system serves different type of users (Admin, Instructor , Individual Traine
 </details>  
 
 
-3- <details><summary>As a Corporate Trainee, you can </summary>  
+3. <details><summary>As a Corporate Trainee, you can </summary>  
     
     * View all courses.
   
@@ -247,7 +247,7 @@ The system serves different type of users (Admin, Instructor , Individual Traine
   
 </details>  
 
-4- <details><summary>As an Instructor, you can  </summary>
+4. <details><summary>As an Instructor, you can  </summary>
   
     * Create a new course and add all it's information.
   
@@ -276,7 +276,7 @@ The system serves different type of users (Admin, Instructor , Individual Traine
 </details>
 
 
-5- <details><summary>As an Admin, you can </summary> 
+5. <details><summary>As an Admin, you can </summary> 
     
     * Add corporate trainees and set their usernames and passwords.
   
