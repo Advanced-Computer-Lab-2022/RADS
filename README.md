@@ -350,6 +350,35 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
   };
 ```
 
+```
+ <Box className="card-border">
+            <Box className='wallet-div'>
+                <Button
+          variant="contained" onClick={handleClick}> <Wallet sx={{marginRight:"2px"}}/>Wallet</Button>
+                <p>{balanceHtml}</p>
+            </Box>
+            <h4>The information of course: {course.courseTitle} </h4>
+            <Box><CheckRegistered /></Box>
+
+            <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true} />
+            <Box><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
+                <Box>
+                    <p>{subtitle.subTitle}</p>
+                    <p>Description:{subtitle.description}</p>
+                    <p>Total Hours of the Chapter: {subtitle.hours}</p>
+                </Box>
+            ))}</Box>
+            <p><strong>Price: </strong>{Math.ceil(course.price * rateVal)}{" "}{currencyVal}</p>
+            <p><strong>Instructor of the course: </strong>{instructorName}</p>
+            <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
+            <Box><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
+                <Box>
+                    <p>Question: {exercise.question}</p>
+                </Box>
+            ))}</Box>
+        </Box>
+```
+
 # Installation 📩
   * Open two separate terminals.
   * In the first terminal, go to Back-end folder and install all packages in the Backend folder:
