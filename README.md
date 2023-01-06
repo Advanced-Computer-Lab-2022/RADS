@@ -7,7 +7,16 @@ An Online Learning System web application through which individuals can attend p
 <img src="https://github.com/Advanced-Computer-Lab-2022/RADS/blob/main/Demo.gif" width="100%" height = "100%">
 
 # Motivation
-Web Development is a crucial part in anything in our era. Thus, this course created the perfect opportunity for us to explore node JS, React, CSS and JavaScript all in one. It also pushed us to challenge ourselves. We had a bad experience booking online last year so we tried to make ours as easy to use as possible. Our goal is to 
+This project was created for The GUC `CSEN704 Advanced Computer lab` The lab is a project-based course that aims to teach students
+
+-   Scrum and Agile methodologies
+-   Software development best practices
+-   Software development tools and techniques
+-   Software development process
+-   Software Testing
+-   latest backend and frontend technologies
+
+Web Development is a crucial part in anything in our era. Thus, this course created the perfect opportunity for us to explore node JS, React, CSS and JavaScript all in one. It also pushed us to challenge ourselves. Our goal is to 
 provide the user with the ultimate online experience.
 
 # Badges
@@ -163,7 +172,7 @@ The system serves different type of users (Admin, Instructor , Individual Traine
 
 # Code Examples
 
-```
+```javascript
 const updateCertificateState = async(req, res) => {
     const { courseId } = req.body;
     try {
@@ -182,7 +191,7 @@ const updateCertificateState = async(req, res) => {
 ```
 
 
-```
+```javascript
 const sendPDF = (toEmail, body) => {
     nodeoutlook.sendEmail({
         auth: {
@@ -204,7 +213,7 @@ const sendPDF = (toEmail, body) => {
 };
 ```
 
-```
+```javascript
 export const AddProfile = (form, setShow, setMessage) => dispatch => {
     axios
         .post("/api/profiles", form)
@@ -230,7 +239,7 @@ export const AddProfile = (form, setShow, setMessage) => dispatch => {
 
 ```
 
-```
+```javascript
   const handlePromotion = (e) => {
     var updatedCourseList = [...checkedCourses];
     let current = courses.filter((item) =>
@@ -258,7 +267,7 @@ export const AddProfile = (form, setShow, setMessage) => dispatch => {
 ```
 
 
-```
+```javascript
  const handleSubmit = (e) => {
     console.log(checkedCard);
     e.preventDefault(); //prevent form submission
@@ -288,7 +297,7 @@ export const AddProfile = (form, setShow, setMessage) => dispatch => {
 ```
 
 
-```
+```javascript
   const postComment = async () => {
     const body = { instructorComment };
     const response = await fetch(`/report/instructorpostcomment/${reportId}`, {
@@ -307,7 +316,7 @@ export const AddProfile = (form, setShow, setMessage) => dispatch => {
 
 ```
 
-```
+```javascript
 const performIntersection = (arr1, arr2, arr3, arr4) => {
     const intersectionResult1 = arr1.filter((x) => arr2.indexOf(x) !== -1);
     const intersectionResult2 = intersectionResult1.filter(
@@ -327,42 +336,37 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
 # Installation
   * Open two separate terminals.
   * In the first terminal, go to Back-end folder and install all packages in the Backend folder:
-      ```
-      cd backend
-      npm i
+      ```bash
+      cd backend && npm i
       ```
   * In the second terminal, go to the Front-end folder and type the command: npm i
-      ```
-      cd frontend
-      npm i
+      ```bash
+      cd frontend && npm i
       ```
 
 
 # Getting started
   * To run the website, you need to open two separate terminals.
   * In the first terminal, change directory to the backend folder:
-      ```
-      cd backend
-      node App.js
+      ```bash
+      cd backend && node App.js
       ```
   * In the second terminal, change directory to the frontend folder:
-      ```
-      cd frontend
-      npm start
+      ```bash
+      cd frontend && npm start
       ```
   * This makes the server side run on port 8000 & and client side run on port 3000    
    
 
 # Tests
-  - When a trainee purchases a course, he is registered in it.
-  - Trainee can refund only below 50% course progress.
-  - Corporate-trainees cannot send access request to already enrolled courses.
-  - Instructor cannot create an empty course
-  - Users cannot put invalid informations such as usernames and emails.
-  - Admins can follow up on reports
-  - Trainees cannot purchase a course without a valid payment method.
-  - Instructors and trainees must accept the contract before entering the website.
- 
+
+The testing is done using `jest`. To run the tests, run the following command
+
+```bash
+> npm run test
+```
+
+Also, the tests can be done using Postman on any route
 
 # How to use?
 
