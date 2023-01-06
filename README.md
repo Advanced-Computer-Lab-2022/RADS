@@ -392,7 +392,7 @@ Any contributions to our code is welcomed. You can always improve the frontend f
     - https://www.youtube.com/watch?v=x7niho285qs&list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1&index=15&t=1337s
     - https://youtu.be/XtS14dXwvwE?list=PLs8AFNosNo41M5IvL5TdewlCzyOUrhDc1
 
-# License 🪪
+# License ⚖️
 
 MIT License
 
