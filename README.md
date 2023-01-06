@@ -78,103 +78,225 @@ provide the user with the ultimate online experience.
   6. Add course:
 
   ![addourse](https://user-images.githubusercontent.com/105018459/210191860-bd726d21-3f35-45e1-9593-201f43b79dd9.PNG)
+  
+  7. Report Page:
+  
+  ![adminreport](https://user-images.githubusercontent.com/105018459/211056024-4dfa8255-76bd-4dbc-9230-0df242158a14.PNG)
+
+  8. Payment Page for Trainee:
+  
+  ![PAYMENT](https://user-images.githubusercontent.com/105018459/211056118-96233766-6f16-48d4-ba00-2e1c9f04266d.png)
+
+  
+
 
 
 # Tech/Framework used 🖥️
 
-1. In Back-end
+1. <details><summary>In Back-end</summary> 
+    
     * NodeJS
+    
     * Nodemailer
+    
     * MongoDB
+    
     * Mongoose
+  
     * Express
+  
     * Bcrypt
+  
     * Body-parser
+  
     * Cors
+  
     * Dotenv
+  
     * Fs
+  
     * Html-pdf
+    
     * Https
+  
     * Jsonwebtoken
+  
     * Nodejs-nodemailer-outlook
+  
     * Nodemon
+  
     * Passport
+  
     * Passport-jwt
+  
     * Randomstring
+  
     * Validator
+  
+</details>
 
-2. In Front-end:
+2. <details><summary>In Front-end</summary> 
+  
     * ReactJS
+  
     * Material UI
+  
     * Axios
+  
     * Bcrypt
+  
     * Dateformat
+  
     * File-saver
+  
     * Jsonwebtoken
+  
     * Http
+
     * Jspdf
+    
     * Jwt-decode
-     
+  
+</details>
+
 
 # Features 🌟
 
 The system serves different type of users (Admin, Instructor , Individual Trainee, Corporate Trainee)
 
-1- As a guest, you can 
-  * view all courses, search and filter courses by price, rating or subject and view their description.
+1. <details><summary>As a guest, you can</summary> 
+    
+    * View all courses, search and filter courses by price, rating or subject and view their description.
+    
+    * Signup.
+    
+    * Login.
+    
+    * Request forget password email to recover password.
+</details>
 
 
-2- As a Trainee, you can
-  * view all courses
-  * search and filter courses by price, rating or subject and view their description
-  * purchase courses
-  * view course videos
-  * solve exercises
-  * request refund for course
-  * solve exam exercises
-  * report a problem whether it is technical, financial or other.
-  * rate a courses and instructors
-  * view their balance
-  * add/remove credit cards 
-  * write course notes and download them
-  * view all report and their status follow up on unresolved problem
-  * edit his email or password
+2. <details><summary>As a Trainee, you can</summary> 
+    
+    * View all courses.
+  
+    * Search and filter courses by price, rating or subject and view their description.
+  
+    * Purchase courses.
+  
+    * View course videos.
+  
+    * Solve exercises.
+  
+    * Request refund for course.
+  
+    * Solve exam exercises.
+  
+    * Report a problem whether it is technical, financial or other.
+  
+    * Rate courses and instructors.
+    
+    * View their balance.
+  
+    * Add/remove credit cards.
+  
+    * Download a completion certificate when completing a course.
+  
+    * Write course notes and download them.
+  
+    * View all reports and their status.
+  
+    * Edit his email or password.
+  
+    * Follow up on unresolved issue.
+    
+    * View his profile.
+  
+</details>  
 
 
-3- As a Corporate Trainee, you can
-  * view all courses
-  * search and filter courses by rating or subject and view their description
-  * request to access a course
-  * view course videos
-  * solve exercises
-  * solve exam exercises
-  * report a problem whether it is technical, financial or other.
-  * rate a courses and instructors
-  * write course notes and download them
-  * view all report and their status follow up on unresolved problem
-  * edit his email or password
+3. <details><summary>As a Corporate Trainee, you can </summary>  
+    
+    * View all courses.
+  
+    * Search and filter courses by rating or subject and view their description.
+    
+    * Request to access a course.
+  
+    * View course videos.
+  
+    * Solve exercises.
+  
+    * Solve exam exercises.
+  
+    * Report a problem whether it is technical, financial or other.
+  
+    * Rate a courses and instructors.
+  
+    * Write course notes and download them.
+  
+    * Download a completion certificate when completing a course.
+  
+    * View all reports and their status.
+  
+    * Edit his email or password.
+  
+    * Follow up on unresolved issue.
+  
+    * View his profile.
+  
+</details>  
+
+4. <details><summary>As an Instructor, you can  </summary>
+  
+    * Create a new course and add all it's information.
+  
+    * Set promotion for a specific course.
+  
+    * View all his/her ratings and reviews.
+  
+    * View all ratings and reviews about his/her courses. 
+  
+    * Report a problem whether it is technical, financial or other.
+  
+    * View all reports and their status.
+  
+    * Edit his biography or email or password.
+  
+    * Search and filter courses by price, rating or subject and view their description.
+  
+    * Search and filter his courses by price, rating or subject and view their description.
+  
+    * Follow up on unresolved issue.
+  
+    * View his profile.
+  
+    * Receive a monthly income whenever someone enrolls in one of his/her courses.
+  
+</details>
 
 
-4- As an Instructor, you can 
-  * create a new course and add all it's information
-  * set promotion for a specific course
-  * view all his ratings and reviews
-  * report a problem whether it is technical, financial or other
-  * view all report and their status follow up on unresolved problem
-  * edit his biography or email or password
-  * search and filter courses by price, rating or subject and view their description
-  * search and filter his courses by price, rating or subject and view their description
-
-
-5- As an Admin, you can
-  * Add corporate trainees and set their usernames and passwords
-  * Add instructors and set their usernames and passwords
-  * view reported problems and can add comments and set report status
-  * grant access to refund requests by trainees
-  * grant access to course requests by corporate trainees
-  * set promotion for one or more than one course
-  * Add another admin and set their usernames and passwords
-
+5. <details><summary>As an Admin, you can </summary> 
+    
+    * Add corporate trainees and set their usernames and passwords.
+  
+    * Add instructors and set their usernames and passwords.
+  
+    * View reported problems and can add comments and set report status.
+  
+    * Grant access to refund requests by trainees.
+  
+    * Grant access to course requests by corporate trainees.
+  
+    * Set promotion for one or more than one course.
+  
+    * Add another admin and set their usernames and passwords.
+  
+    * View follow ups on unresolved issues.
+  
+    * Search and filter courses by price, rating or subject and view their description.
+  
+</details>
 
 # Code Examples 💽
 
@@ -337,6 +459,35 @@ const performIntersection = (arr1, arr2, arr3, arr4) => {
       return intersectionResult3;
     }
   };
+```
+
+```html
+ <Box className="card-border">
+            <Box className='wallet-div'>
+                <Button
+          variant="contained" onClick={handleClick}> <Wallet sx={{marginRight:"2px"}}/>Wallet</Button>
+                <p>{balanceHtml}</p>
+            </Box>
+            <h4>The information of course: {course.courseTitle} </h4>
+            <Box><CheckRegistered /></Box>
+
+            <ReactPlayer sandbox="allow-presentation" loop={false} className='react-player' url={course.coursePreview} width='20%' height='100%' controls={true} />
+            <Box><strong>Course Subtitles: </strong> {course.subtitles && course.subtitles.map((subtitle) => (
+                <Box>
+                    <p>{subtitle.subTitle}</p>
+                    <p>Description:{subtitle.description}</p>
+                    <p>Total Hours of the Chapter: {subtitle.hours}</p>
+                </Box>
+            ))}</Box>
+            <p><strong>Price: </strong>{Math.ceil(course.price * rateVal)}{" "}{currencyVal}</p>
+            <p><strong>Instructor of the course: </strong>{instructorName}</p>
+            <p><strong>Total Hours of the course: </strong>{course.totalHours} Hours</p>
+            <Box><strong>Course Exercises: </strong> {course.courseExercises && course.courseExercises.map((exercise) => (
+                <Box>
+                    <p>Question: {exercise.question}</p>
+                </Box>
+            ))}</Box>
+        </Box>
 ```
 
 # Installation 📩
@@ -1666,13 +1817,431 @@ SOFTWARE.
      
 
   6. Guest route:
+  
+      - <details><summary>POST a signup.</summary>
+  
+          - Description: Create a new trainee in the database with the hashed password and his information.
 
-      * POST routes: /guest/signup  -  /guest/login  -   /guest/create/admin  -  /guest/create/instructor  -  /guest/create/corptrainee  -  /guest/forgotpassword  -   /guest/changepassword
+          - URL:    ``` /guest/signup ```
 
+          - Parameters:  None
+
+          - Body: {userName, firstName, lastName, email, gender, role, password, confirm}
+
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a Login.</summary>
+  
+          - Description: Login in the website as a trainee or instructor or admin or corporate trainee.
+
+          - URL:    ```  /guest/login  ```
+
+          - Parameters:  None
+
+          - Body: { userName, password }
+
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new Admin.</summary>
+  
+          - Description: Create a new admin.
+
+          - URL:    ```  /guest/create/admin  ```
+
+          - Parameters:  None
+
+          - Body: { firstName, lastName,userName,email,role,gender,password,confirm }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new instructor.</summary>
+  
+          - Description: Create a new instructor.
+
+          - URL:    ``` /guest/create/instructor  ```
+
+          - Parameters:  None
+
+          - Body: { firstName, lastName,userName,country,phoneNumber,address,email,role,gender,bio,password,confirm }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new corporate trainee.</summary>
+  
+          - Description: Create a new corporate trainee.
+
+          - URL:    ``` /guest/create/corptrainee  ```
+
+          - Parameters:  None
+
+          - Body: { firstName, lastName,userName,country,phoneNumber,address,email,role,gender,password,confirm }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a forget password request.</summary>
+  
+          - Description: Send an email to a user's email to change password.
+
+          - URL:    ``` /guest/forgotpassword  ```
+
+          - Parameters:  None
+
+          - Body: { email }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new password.</summary>
+  
+          - Description: Change the password to a new password for any type of user.
+
+          - URL:    ``` /guest/changepassword  ```
+
+          - Parameters:  None
+
+          - Body: { id,password }
+    
+          - Response: { success }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      
   7. Report route:
+  
+      - <details><summary>GET a specific report.</summary>
+  
+          - Description: Find a specific report using a report ID.
 
-      * GET route: /request/:id  -  /requests/refund  -  /requests/access -   /request/getcoursereportscorp/:id   -  /request/getcoursereportsinst/:id   -   /request/getcoursereportstrainee/:id   -   /request/getcorptraineeunresolved/:id  -   /request/getcorptraineeresolved/:id   -  /request/gettraineeunresolved/:id -  -  /request/gettraineeresolved/:id  -   /requests/allproblems
+          - URL:    ``` /report/request/:id  ```
 
-      * PATCH route: /request/updaterequest/:id  -  /request/updaterequest/:id
+          - Parameters:  report's id "id"
 
-      * POST route: /request/postrequest  -  /request/traineepostcomment/:id  -  /request/corptraineepostcomment/:id   - /request/instructorpostcomment/:id
+          - Body: None
+    
+          - Response: { Models.report }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET refund reports.</summary>
+  
+          - Description: GET all refund reports.
+
+          - URL:    ``` /report/requests/refund  ```
+
+          - Parameters:  None
+
+          - Body: None
+    
+          - Response: { Models.refundReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET access reports.</summary>
+  
+          - Description: GET all access reports.
+
+          - URL:    ``` /report/requests/access  ```
+
+          - Parameters:  None
+
+          - Body: None
+    
+          - Response: { Models.accessReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET reported course problems for a corporate trainee.</summary>
+  
+          - Description: GET all reported course problems for a corporate trainee.
+
+          - URL:    ``` /report/request/getcoursereportscorp/:id  ```
+
+          - Parameters:  corporate trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.reportedProblems }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET reported course problems for an instructor.</summary>
+  
+          - Description: GET all reported course problems for an instructor.
+
+          - URL:    ``` /report/request/getcoursereportsinst/:id  ```
+
+          - Parameters:  instructor's id "id"
+
+          - Body: None
+    
+          - Response: { Models.reportedProblems }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET reported course problems for a trainee.</summary>
+  
+          - Description: GET all reported course problems for a trainee.
+
+          - URL:    ``` /report/request/getcoursereportstrainee/:id  ```
+
+          - Parameters:  trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.reportedProblems }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      - <details><summary>GET unresolved reports for corporate trainee.</summary>
+  
+          - Description: GET all unresolved reports for a specific corporate trainee.
+
+          - URL:    ``` /report/request/getcorptraineeunresolved/:id  ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.unresolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET resolved reports for corporate trainee.</summary>
+  
+          - Description: GET all resolved reports for a specific corporate trainee.
+
+          - URL:    ``` /report/request/getcorptraineeresolved/:id  ```
+
+          - Parameters: corporate trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.resolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      - <details><summary>GET unresolved reports for trainee.</summary>
+  
+          - Description: GET all unresolved reports for a specific trainee.
+
+          - URL:    ``` /report/request/gettraineeunresolved/:id  ```
+
+          - Parameters: trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.unresolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET resolved reports for trainee.</summary>
+  
+          - Description: GET all resolved reports for a specific trainee.
+
+          - URL:    ``` /report/request/gettraineeresolved/:id  ```
+
+          - Parameters: trainee's id "id"
+
+          - Body: None
+    
+          - Response: { Models.resolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+ 
+     
+      - <details><summary>GET unresolved reports for instructor.</summary>
+  
+          - Description: GET all unresolved reports for a specific instructor.
+
+          - URL:    ``` /report/request/getinstructorunresolved/:id  ```
+
+          - Parameters: instructor's id "id"
+
+          - Body: None
+    
+          - Response: { Models.unresolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET resolved reports for instructor.</summary>
+  
+          - Description: GET all resolved reports for a specific instructor.
+
+          - URL:    ``` /report/request/getinstructorresolved/:id  ```
+
+          - Parameters: instructor's id "id"
+
+          - Body: None
+    
+          - Response: { Models.resolvedReports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>GET all reports.</summary>
+  
+          - Description: GET all reports whether resolved or unresolved.
+
+          - URL:    ``` /report/requests/allproblems  ```
+
+          - Parameters: None.
+
+          - Body: None
+    
+          - Response: { Models.reports }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>PATCH a specific report.</summary>
+  
+          - Description: Find and update a specific report.
+
+          - URL:    ``` /report/request/updaterequest/:id  ```
+
+          - Parameters: report's id "id".
+
+          - Body: { courseProgress, refundAmount, requestType, reportStatus, adminComment}
+    
+          - Response: { Models.report }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>DELETE a specific report.</summary>
+  
+          - Description: Find and delete a specific report.
+
+          - URL:    ``` /report/request/deleterequest/:id  ```
+
+          - Parameters: report's id "id".
+
+          - Body: None
+    
+          - Response: { Models.report }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new report.</summary>
+  
+          - Description: Create a new report with all necessary fields.
+
+          - URL:    ``` /report/request/postrequest  ```
+
+          - Parameters: None
+
+          - Body: { traineeId, corpTraineeId, instructorId, courseId, courseProgress, refundAmount, requestType, reportStatus, adminComment }
+    
+          - Response: { Models.report._id }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      - <details><summary>POST a new comment as a trainee.</summary>
+  
+          - Description: Add a new comment to the list of comments in a specific problem by a trainee.
+
+          - URL:    ``` /report/request/traineepostcomment/:id  ```
+
+          - Parameters: report's id "id"
+
+          - Body: { traineeComment }
+    
+          - Response: { newComment }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
+      - <details><summary>POST a new comment as a corporate trainee.</summary>
+  
+          - Description: Add a new comment to the list of comments in a specific problem by a corporate trainee.
+
+          - URL:    ``` /report/request/corptraineepostcomment/:id  ```
+
+          - Parameters: report's id "id"
+
+          - Body: { corpTraineeComment }
+    
+          - Response: { newComment }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      - <details><summary>POST a new comment as a instructor.</summary>
+  
+          - Description: Add a new comment to the list of comments in a specific problem by a instructor.
+
+          - URL:    ``` /report/request/instructorpostcomment/:id  ```
+
+          - Parameters: report's id "id"
+
+          - Body: { instructorComment }
+    
+          - Response: { newComment }
+  
+          - Authorization: None.
+  
+      </details>
+      
+      
