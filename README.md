@@ -31,7 +31,7 @@ And since Web Development is a crucial part in our current era, this course gave
 # Build Status 🔨
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
   
-  * All user requirements are met and fulfilled, but more testing is neede to ensure the best service and UX.
+  * All user requirements are met and fulfilled, but more testing is needed to ensure the best service and UX.
   * This project is currently a work-in-progress.
   * Unit tests will be added in the next roll-out.
   * Feedback and error handling is currently in development for a better UI/UX experience.
